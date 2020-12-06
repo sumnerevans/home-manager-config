@@ -1,8 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ./git.nix
+    ./programs
+    ./email.nix
   ];
-
-  programs.home-manager.enable = true;
 }

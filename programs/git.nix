@@ -1,7 +1,9 @@
 { pkgs, ... }: let
-  offlinemsmtp = pkgs.callPackage ./pkgs/offlinemsmtp.nix {};
+  offlinemsmtp = pkgs.callPackage ../pkgs/offlinemsmtp.nix {};
 in
 {
+  home.packages = with pkgs.gitAndTools; [ hub lab ];
+
   programs.git = {
     enable = true;
 
@@ -9,7 +11,12 @@ in
     userName = "Sumner Evans";
 
     attributes = [ "*.pdf diff=pdf" ];
-    delta.enable = true;
+    delta = {
+      enable = true;
+      options = {
+        features = "side-by-side";
+      };
+    };
 
     signing = {
       key = "8904527AB50022FD";
@@ -20,6 +27,7 @@ in
       core.editor = "${pkgs.neovim}/bin/nvim";
       pull.rebase = false;
       tag.gpgsign = true;
+      diff.colorMoved = "default";
 
       sendemail = {
         annotate = "yes";
@@ -29,21 +37,16 @@ in
     };
 
     ignores = [
-
-      "virtualenv"
-      ".ropeproject"
-      ".style.yapf"
-      "*.vim-template:*"
-      ".stylelintrc"
-      "ctrlp-root"
-      ".rooter_root"
       "*.orig"
-      ".mypy_cache"
       "*_BACKUP_*"
       "*_BASE_*"
       "*_LOCAL_*"
       "*_REMOTE_*"
       ".ccls-cache"
+      ".mypy_cache"
+      ".rooter_root"
+      ".ropeproject"
+      ".stylelintrc"
     ];
   };
 }
