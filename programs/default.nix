@@ -3,6 +3,7 @@
     ./alacritty.nix
     # TODO firefox
     ./git.nix
+    ./i3status-rust.nix
   ];
 
   programs.bat.enable = true;
@@ -25,4 +26,6 @@
   programs.home-manager.enable = true;
 
   programs.htop.enable = true;
+
+  programs.jq.enable = true;
 }
