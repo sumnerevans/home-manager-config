@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   imports = [
     ./alacritty.nix
-    # TODO firefox
     ./git.nix
     ./i3status-rust.nix
   ];
@@ -17,6 +16,8 @@
   };
 
   programs.feh.enable = true;
+
+  # TODO firefox
 
   programs.fzf = { enable = true; enableZshIntegration = true; };
 
