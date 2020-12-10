@@ -1,4 +1,8 @@
 { pkgs, ... }: {
+  imports = [
+    ./offlinemsmtp.nix
+  ];
+
   services.blueman-applet.enable = true;
 
   # TODO clipmenu

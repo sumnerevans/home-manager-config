@@ -34,6 +34,14 @@
   # TODO: mbsync
 
   programs.mpv.enable = true;
+  programs.mpv.config = {
+    force-window = "yes";
+    gpu-context = "wayland";
+    hwdec = "auto-safe";
+    profile = "gpu-hq";
+    vo = "gpu";
+    ytdl-format = "bestvideo+bestaudio";
+  };
 
   # TODO offlinemsmtp
 
