@@ -1,8 +1,17 @@
-{ pkgs, ... }: {
+{ pkgs, ... }: with pkgs; let
+  offlinemsmtp = callPackage ../pkgs/offlinemsmtp.nix {};
+in
+{
   imports = [
     ./alacritty.nix
     ./git.nix
     ./i3status-rust.nix
+  ];
+
+  home.packages = [
+    gimp
+    ocamlPackages.utop
+    offlinemsmtp
   ];
 
   programs.bat.enable = true;
@@ -43,8 +52,6 @@
     ytdl-format = "bestvideo+bestaudio";
   };
 
-  # TODO offlinemsmtp
-
   # TODO neomutt
 
   # TODO neovim
@@ -57,7 +64,6 @@
   # TODO offlineimap
 
   programs.opam = { enable = true; enableZshIntegration = true; };
-  home.packages = with pkgs.ocamlPackages; [ utop ];
 
   programs.password-store.enable = true;
 

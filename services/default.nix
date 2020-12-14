@@ -5,7 +5,8 @@
 
   services.blueman-applet.enable = true;
 
-  # TODO clipmenu
+  # TODO clipmenu if on X11
+  # services.clipmenu.enable = true;
 
   # TODO dunst on i3
 
