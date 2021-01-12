@@ -10,8 +10,11 @@ in
 
   home.packages = [
     gimp
+    gnome3.networkmanagerapplet
     ocamlPackages.utop
     offlinemsmtp
+    streamlink
+    youtube-dl
   ];
 
   programs.bat.enable = true;
@@ -72,9 +75,6 @@ in
   # TODO rofi
 
   # TODO ssh
-
-  # TODO texlive
-  # programs.texlive.enable = true;
 
   # TODO: tmux
 

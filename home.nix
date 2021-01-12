@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ./programs
@@ -7,4 +7,6 @@
   ];
 
   qt = { enable = true; platformTheme = "gtk"; };
+
+  nixpkgs.overlays = [];
 }

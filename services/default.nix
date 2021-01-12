@@ -7,18 +7,35 @@
 
   # TODO clipmenu if on X11
   # services.clipmenu.enable = true;
+  # home.sessionVariables = {
+  #   CM_HISTLENGTH = "20";
+  #   CM_LAUNCHER = "rofi";
+  # };
 
   # TODO dunst on i3
 
-  # TODO gammastep/redshift/wlsunset
+  # TODO use redshift when on i3
+  services.gammastep = {
+    enable = true;
+    provider = "geoclue2";
+    tray = true;
+
+    brightness = {
+      day = "1";
+      night = "0.9";
+    };
+
+    temperature = {
+      day = 5500;
+      night = 4000;
+    };
+  };
 
   # TODO getmail?
 
   # TODO gnome-keyring
 
   # TODO gpg-agent
-
-  # TODO imapnotify?
 
   # TODO kanshi for sway?
 
