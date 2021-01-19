@@ -11,6 +11,7 @@ in
   home.packages = [
     gimp
     gnome3.networkmanagerapplet
+    gnome3.gnome-power-manager
     ocamlPackages.utop
     offlinemsmtp
     streamlink
