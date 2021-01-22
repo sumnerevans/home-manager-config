@@ -9,9 +9,10 @@ in
   ];
 
   home.packages = [
+    delta
     gimp
-    gnome3.networkmanagerapplet
     gnome3.gnome-power-manager
+    gnome3.networkmanagerapplet
     ocamlPackages.utop
     offlinemsmtp
     streamlink
