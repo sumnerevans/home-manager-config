@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 {
   imports = [
+    ./email
     ./programs
-    ./email.nix
     ./services
   ];
 
