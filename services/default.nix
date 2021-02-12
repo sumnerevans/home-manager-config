@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ./offlinemsmtp.nix
+    ./wallpaper.nix
   ];
 
   services.blueman-applet.enable = true;
