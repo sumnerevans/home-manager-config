@@ -22,11 +22,6 @@
     provider = "geoclue2";
     tray = true;
 
-    brightness = {
-      day = "1";
-      night = "0.9";
-    };
-
     temperature = {
       day = 5500;
       night = 4000;
