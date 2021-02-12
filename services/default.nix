@@ -2,6 +2,7 @@
   imports = [
     ./mailnotify.nix
     ./offlinemsmtp.nix
+    ./vdirsyncer.nix
     ./wallpaper.nix
     ./writeping.nix
   ];
