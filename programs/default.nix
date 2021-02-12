@@ -1,5 +1,6 @@
 { pkgs, ... }: with pkgs; let
   offlinemsmtp = callPackage ../pkgs/offlinemsmtp.nix {};
+  sublime-music = callPackage ../pkgs/sublime-music.nix {};
 in
 {
   imports = [
@@ -17,6 +18,13 @@ in
     offlinemsmtp
     streamlink
     youtube-dl
+
+    (
+      sublime-music.override {
+        chromecastSupport = true;
+        serverSupport = true;
+      }
+    )
   ];
 
   programs.bat.enable = true;
