@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   imports = [
+    ./mailnotify.nix
     ./offlinemsmtp.nix
     ./wallpaper.nix
     ./writeping.nix
