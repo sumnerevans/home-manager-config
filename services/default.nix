@@ -2,6 +2,7 @@
   imports = [
     ./offlinemsmtp.nix
     ./wallpaper.nix
+    ./writeping.nix
   ];
 
   services.blueman-applet.enable = true;

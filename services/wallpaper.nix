@@ -21,7 +21,7 @@
     Unit = { Description = "Set the wallpaper"; };
 
     Timer = {
-      OnCalendar = "*:0/10";
+      OnCalendar = "*:0/10"; # Every 10 minutes
       Unit = "wallpaper.service";
     };
 
