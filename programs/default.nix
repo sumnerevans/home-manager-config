@@ -53,8 +53,6 @@ in
 
   # TODO mako
 
-  # TODO: mbsync
-
   programs.mpv.enable = true;
   programs.mpv.config = {
     force-window = "yes";

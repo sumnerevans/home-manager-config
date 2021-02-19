@@ -6,17 +6,13 @@ in
 
   programs.git = {
     enable = true;
+    package = pkgs.gitAndTools.gitFull;
 
     userEmail = "me@sumnerevans.com";
     userName = "Sumner Evans";
 
     attributes = [ "*.pdf diff=pdf" ];
-    delta = {
-      enable = true;
-      options = {
-        features = "side-by-side";
-      };
-    };
+    delta.enable = true;
 
     signing = {
       key = "8904527AB50022FD";
