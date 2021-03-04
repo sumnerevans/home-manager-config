@@ -7,6 +7,7 @@ in
     ./alacritty.nix
     ./git.nix
     ./i3status-rust.nix
+    ./newsboat.nix
   ];
 
   home.packages = [
@@ -15,7 +16,6 @@ in
     gnome3.gnome-power-manager
     gnome3.networkmanagerapplet
     fbida
-    newsboat
     ocamlPackages.utop
     offlinemsmtp
     sqlitebrowser
