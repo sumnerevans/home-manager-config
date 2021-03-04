@@ -14,8 +14,11 @@ in
     gimp
     gnome3.gnome-power-manager
     gnome3.networkmanagerapplet
+    fbida
+    newsboat
     ocamlPackages.utop
     offlinemsmtp
+    sqlitebrowser
     streamlink
     youtube-dl
 
