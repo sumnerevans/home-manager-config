@@ -1,6 +1,13 @@
 { pkgs, ... }: with pkgs; let
+  menucalc = callPackage ../pkgs/menucalc.nix {};
   offlinemsmtp = callPackage ../pkgs/offlinemsmtp.nix {};
-  sublime-music = callPackage ../pkgs/sublime-music.nix {};
+  python-csmdirsearch = callPackage ../pkgs/python-csmdirsearch.nix {};
+  python-gitlab = callPackage ../pkgs/python-gitlab.nix {};
+  sublime-music = callPackage ../pkgs/sublime-music.nix {
+    chromecastSupport = true;
+    serverSupport = true;
+  };
+  tracktime = callPackage ../pkgs/tracktime.nix {};
 in
 {
   imports = [
@@ -11,21 +18,74 @@ in
   ];
 
   home.packages = [
+    # Shell Utilities
     delta
+    fd
+    file
+    fortune
+    fslint
+    ripgrep
+    rmlint
+    tokei
+    tracktime
+    tree
+    trickle
+    unzip
+    watchexec
+    wget
+    zip
+
+    # Communication
+    discord
+    element-desktop
+
+    # Multimedia
+    fbida
     gimp
+    imagemagick
+    inkscape
+    sublime-music
+
+    # Configuration GUIs
     gnome3.gnome-power-manager
     gnome3.networkmanagerapplet
-    fbida
-    ocamlPackages.utop
-    offlinemsmtp
+
+    # Python
+    (
+      python38.withPackages (
+        ps: with ps; [
+          dateutil
+          fuzzywuzzy
+          html2text
+          i3ipc
+          icalendar
+          pip
+          pycairo
+          pygobject3
+          pynvim
+          python-csmdirsearch
+          python-gitlab
+          python-Levenshtein
+          pytz
+          vobject
+          watchdog
+        ]
+      )
+    )
+
+    elinks
+    menucalc
     sqlitebrowser
     streamlink
+    w3m
     youtube-dl
 
     (
-      sublime-music.override {
-        chromecastSupport = true;
-        serverSupport = true;
+      xfce.thunar.override {
+        thunarPlugins = [
+          xfce.thunar-archive-plugin
+          xfce.thunar-volman
+        ];
       }
     )
   ];
