@@ -2,7 +2,7 @@
   programs.mbsync.enable = true;
 
   services.mbsync = let
-    checkNetworkAndAlreadyRunningScript = pkgs.writeShellScript "cknetpgrep" ''
+    checkNetworkOrAlreadyRunningScript = pkgs.writeShellScript "cknetpgrep" ''
       # Check that the network is up.
       ${pkgs.iputils}/bin/ping -c 1 8.8.8.8
       if [[ "$?" != "0" ]]; then
@@ -18,7 +18,7 @@
     '';
   in {
     enable = true;
-    preExec = "${checkNetworkAndAlreadyRunningScript}";
+    preExec = "${checkNetworkOrAlreadyRunningScript}";
     frequency = "*:0/15";
   };
 }

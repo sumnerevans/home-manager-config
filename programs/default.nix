@@ -37,12 +37,14 @@ in
     khal
     libnotify
     light
+    lsof
     mkpasswd
     neofetch
     nodejs
     nox
     openssl
     pavucontrol
+    pciutils
     playerctl
     ranger
     restic
@@ -171,8 +173,6 @@ in
 
   programs.obs-studio.enable = true;
   programs.obs-studio.plugins = with pkgs; [ obs-wlrobs obs-v4l2sink ];
-
-  # TODO offlineimap
 
   programs.opam = { enable = true; enableZshIntegration = true; };
 
