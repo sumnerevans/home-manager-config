@@ -20,24 +20,45 @@ in
 
   home.packages = [
     # Shell Utilities
+    aspell
+    aspellDicts.en
+    bitwarden-cli
+    chezmoi
     delta
+    dfeet
     fd
+    ffmpeg-full
     file
     fortune
     fslint
+    iftop
+    kbdlight
+    khal
+    libnotify
+    light
     mkpasswd
     neofetch
+    nox
+    openssl
+    pavucontrol
+    playerctl
+    ranger
+    restic
     ripgrep
     rmlint
+    screen
+    screenfetch
     tokei
     tracktime
     tree
     trickle
     unzip
+    usbutils
+    vdirsyncer
     watchexec
     wget
-    zip
     youtube-dl
+    zip
 
     # Communication
     discord
@@ -48,8 +69,11 @@ in
     # Multimedia
     fbida
     gimp
+    guvcview
     imagemagick
     inkscape
+    kdenlive
+    libreoffice-fresh
     spotify
     steam
     streamlink
@@ -60,8 +84,11 @@ in
     gnome3.networkmanagerapplet
 
     # GUI Tools
+    baobab
+    bitwarden
     menucalc
     sqlitebrowser
+    wireshark
     write_stylus
     xournal
 
