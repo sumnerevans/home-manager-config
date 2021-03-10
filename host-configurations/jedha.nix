@@ -1,0 +1,3 @@
+{ ... }: {
+  xorg.enable = true;
+}

@@ -6,7 +6,7 @@
       font.size = 11.5;
 
       # Colors (One Dark)
-      # https=//github.com/eendroroy/alacritty-theme/blob/master/themes/one_dark.yaml
+      # https://github.com/eendroroy/alacritty-theme/blob/master/themes/one_dark.yaml
       colors = {
         # Default colors
         primary = {

@@ -1,0 +1,3 @@
+{ ... }: {
+  wayland.enable = true;
+}

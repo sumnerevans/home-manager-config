@@ -153,8 +153,6 @@ in
 
   programs.jq.enable = true;
 
-  # TODO mako
-
   programs.mpv.enable = true;
   programs.mpv.config = {
     force-window = "yes";
@@ -179,8 +177,6 @@ in
   programs.password-store.enable = true;
 
   # TODO qutebrowser
-
-  # TODO rofi
 
   # TODO ssh
 

@@ -8,4 +8,9 @@ in
     elinks
     w3m
   ];
+
+  home.sessionVariables = {
+    # Enable touchscreen in Firefox
+    MOZ_USE_XINPUT2 = "1";
+  };
 }

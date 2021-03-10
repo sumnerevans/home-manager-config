@@ -1,9 +1,9 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   imports = [
     ./email
     ./programs
     ./services
+    ./host-config.nix
   ];
 
   qt = { enable = true; platformTheme = "gtk"; };
