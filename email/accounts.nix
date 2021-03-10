@@ -1,8 +1,12 @@
-{ pkgs, ... }: let
-  mkAccount = config: {
+{ config, pkgs, ... }: let
+  mkAccount = name: accountConfig: {
     realName = "Sumner Evans";
-    userName = config.address;
-    passwordCommand = "${pkgs.pass}/bin/pass ${config.address}";
+    userName = accountConfig.address;
+    passwordCommand = "${pkgs.pass}/bin/pass Mail/${accountConfig.address}";
+
+    folders = {
+      inbox = "INBOX";
+    };
 
     gpg = {
       encryptByDefault = true;
@@ -13,8 +17,8 @@
     imapnotify = {
       enable = true;
       boxes = [ "INBOX" ];
-      onNotify = "${pkgs.libnotify}/bin/notify-send 'detected new mail'";
-      onNotifyPost = ''${pkgs.libnotify}/bin/notify-send "New mail post";'';
+      onNotify = "${pkgs.isync}/bin/mbsync ${name}:%s";
+      onNotifyPost = "${pkgs.libnotify}/bin/notify-send 'New mail in ${name}:%s'";
     };
 
     mbsync = {
@@ -22,93 +26,48 @@
       create = "both";
       remove = "both";
     };
-  } // config;
+  } // accountConfig;
 
-  mkMigaduAccount = config: {
+  mkMigaduAccount = name: accountConfig: {
     imap.host = "imap.migadu.com";
     smtp.host = "smtp.migadu.com";
-  } // (mkAccount config);
+  } // (mkAccount name accountConfig);
 in
 {
-  # TODO look into astroid
+  accounts.email.maildirBasePath = "${config.home.homeDirectory}/Mail";
   accounts.email.accounts = {
-    Personal = mkMigaduAccount {
+    Personal = mkMigaduAccount "Personal" {
       address = "me@sumnerevans.com";
       aliases = [ "alerts@sumnerevans.com" "resume@sumnerevans.com" ];
       primary = true;
     };
 
-    Gmail = mkAccount {
+    Gmail = mkAccount "Gmail" {
       address = "sumner.evans98@gmail.com";
       flavor = "gmail.com";
     };
 
-    Mines = mkAccount {
+    Mines = mkAccount "Mines" {
       address = "jonathanevans@mymail.mines.edu";
       flavor = "gmail.com";
+      passwordCommand = "${pkgs.pass}/bin/pass Mail/Offlineimap/Mines";
     };
 
-    Admin = mkMigaduAccount {
+    Admin = mkMigaduAccount "Admin" {
       address = "admin@sumnerevans.com";
       aliases = [ "abuse@sumnerevans.com" "hostmaster@sumnerevans.com" "postmaster@sumnerevans.com" ];
     };
 
-    Comments = mkMigaduAccount {
+    Comments = mkMigaduAccount "Comments" {
       address = "comments@sumnerevans.com";
     };
 
-    Inquiries = mkMigaduAccount {
+    Inquiries = mkMigaduAccount "Inquiries" {
       address = "inquiries@sumnerevans.com";
     };
 
-    Junk = mkMigaduAccount {
+    Junk = mkMigaduAccount "Junk" {
       address = "junk@sumnerevans.com";
     };
-  };
-
-  # services.imapnotify.enable = true;
-
-  # mbsync
-  programs.mbsync.groups = {};
-  systemd.user.services.mbsync = let
-    pingCmd = "/run/wrappers/bin/ping";
-    pgrepCmd = "${pkgs.procps}/bin/pgrep";
-    mbsyncCmd = "${pkgs.isync}/bin/mbsync";
-    mbsyncScript = pkgs.writeShellScript "mbsync" ''
-      # Check that the network is up.
-      ${pingCmd} -c 1 8.8.8.8
-      if [[ "$?" != "0" ]]; then
-          echo "Couldn't contact the network. Exiting..."
-          exit 1
-      fi
-
-      # Chcek to see if we are already syncing.
-      pid=$(${pgrepCmd} mbsync)
-      if ${pgrepCmd} mbsync &>/dev/null; then
-          echo "Process $pid already running. Exiting..." >&2
-          exit 1
-      fi
-
-      ${mbsyncCmd} -aV 2>&1 | tee ~/tmp/mbsync.log
-    '';
-  in
-    {
-      Unit = { Description = "mbsync mailbox synchronization"; };
-
-      Service = {
-        Type = "oneshot";
-        ExecStart = "${mbsyncScript}";
-      };
-    };
-
-  systemd.user.timers.mbsync = {
-    Unit = { Description = "mbsync mailbox synchronization"; };
-
-    Timer = {
-      OnCalendar = "*:0/5";
-      Unit = "mbsync.service";
-    };
-
-    Install = { WantedBy = [ "timers.target" ]; };
   };
 }

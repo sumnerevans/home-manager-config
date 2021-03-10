@@ -12,6 +12,7 @@ in
 {
   imports = [
     ./alacritty.nix
+    ./browsers.nix
     ./git.nix
     ./i3status-rust.nix
     ./newsboat.nix
@@ -24,6 +25,8 @@ in
     file
     fortune
     fslint
+    mkpasswd
+    neofetch
     ripgrep
     rmlint
     tokei
@@ -34,21 +37,33 @@ in
     watchexec
     wget
     zip
+    youtube-dl
 
     # Communication
     discord
     element-desktop
+    mumble
+    offlinemsmtp
 
     # Multimedia
     fbida
     gimp
     imagemagick
     inkscape
+    spotify
+    steam
+    streamlink
     sublime-music
 
     # Configuration GUIs
     gnome3.gnome-power-manager
     gnome3.networkmanagerapplet
+
+    # GUI Tools
+    menucalc
+    sqlitebrowser
+    write_stylus
+    xournal
 
     # Python
     (
@@ -72,13 +87,6 @@ in
         ]
       )
     )
-
-    elinks
-    menucalc
-    sqlitebrowser
-    streamlink
-    w3m
-    youtube-dl
 
     (
       xfce.thunar.override {

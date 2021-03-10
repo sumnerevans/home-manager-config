@@ -1,6 +1,5 @@
 { pkgs, ... }: {
   imports = [
-    ./mailnotify.nix
     ./offlinemsmtp.nix
     ./vdirsyncer.nix
     ./wallpaper.nix
@@ -39,8 +38,6 @@
   # TODO kanshi for sway?
 
   services.kdeconnect = { enable = true; indicator = true; };
-
-  # TODO mbsync
 
   services.network-manager-applet.enable = true;
 
