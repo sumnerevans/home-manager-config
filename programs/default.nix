@@ -49,7 +49,6 @@ in
     ranger
     restic
     ripgrep
-    rmlint
     screen
     screenfetch
     tokei
@@ -69,6 +68,7 @@ in
     element-desktop
     mumble
     offlinemsmtp
+    zoom-us
 
     # Multimedia
     fbida

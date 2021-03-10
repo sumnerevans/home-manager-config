@@ -7,7 +7,7 @@
     if [[ $? != 0 ]]; then
         echo "fail" > ~/tmp/rolling_ping
     else
-        cat ~/tmp/rolling_ping | grep "fail"
+        ${pkgs.coreutils}/bin/cat ~/tmp/rolling_ping | ${pkgs.gnugrep}/bin/grep "fail"
         [[ $? == 0 ]] && rm ~/tmp/rolling_ping
         ping=$(echo $ping | \
           ${pkgs.gnugrep}/bin/grep 'rtt' | \

@@ -29,7 +29,7 @@ in
       fade = true;
       fadeDelta = 5;
 
-      inactiveOpacity = 0.8;
+      inactiveOpacity = "0.8";
       opacityRule = [
         "100:class_g = 'obs'"
         "100:class_g = 'i3lock'"
@@ -45,7 +45,30 @@ in
         "_GTK_FRAME_EXTENTS@:c"
       ];
 
-      extraOptions = lib.toConf {
+      extraOptions = let
+        # Basically a tinkered lib.generators.mkKeyValueDefault
+        # It either serializes a top-level definition "key: { values };"
+        # or an expression "key = { values };"
+        mkAttrsString = top:
+          mapAttrsToList (k: v:
+            let sep = if (top && isAttrs v) then ":" else "=";
+            in "${escape [ sep ] k}${sep}${mkValueString v};");
+
+        # This serializes a Nix expression to the libconfig format.
+        mkValueString = v:
+               if types.bool.check  v then boolToString v
+          else if types.int.check   v then toString v
+          else if types.float.check v then toString v
+          else if types.str.check   v then "\"${escape [ "\"" ] v}\""
+          else if builtins.isList   v then "[ ${concatMapStringsSep " , " mkValueString v} ]"
+          else if types.attrs.check v then "{ ${concatStringsSep " " (mkAttrsString false v) } }"
+          else throw ''
+                       invalid expression used in option services.picom.settings:
+                       ${v}
+                     '';
+
+        toConf = attrs: concatStringsSep "\n" (mkAttrsString true attrs);
+      in toConf {
         wintypes = {
           tooltip = { shadow = true; opacity = 0.9; focus = true; full-shadow = false; };
           dock = { shadow = false; };

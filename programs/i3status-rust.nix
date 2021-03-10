@@ -5,6 +5,11 @@
       description = "Enable stuff that only applies to laptops";
       default = false;
     };
+    networking.interfaces = mkOption {
+      type = types.listOf types.str;
+      description = "A list of the network interfaces on the machine";
+      default = [];
+    };
   };
 
   config = {
@@ -74,21 +79,23 @@
               command = ''printf "P: %s" $(~/bin/parse-rolling-ping.sh)'';
               interval = 1;
             }
-
-            {
-              block = "net";
-              device = "wlp0s20f3";
-              ip = true;
-              speed_down = false;
-              graph_down = false;
-              speed_up = false;
-              graph_up = false;
-              interval = 5;
-              hide_missing = true;
-              hide_inactive = true;
-            }
+          ] ++ (
             # TODO: include the second "net" block if on a computer with two net blocks.
-
+            map (
+              dev: {
+                block = "net";
+                device = dev;
+                ip = true;
+                speed_down = false;
+                graph_down = false;
+                speed_up = false;
+                graph_up = false;
+                interval = 5;
+                hide_missing = true;
+                hide_inactive = true;
+              }
+            ) config.networking.interfaces
+          ) ++ [
             {
               block = "sound";
               step_width = 2;
