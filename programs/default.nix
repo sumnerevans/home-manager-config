@@ -16,6 +16,7 @@ in
     ./git.nix
     ./i3status-rust.nix
     ./newsboat.nix
+    ./tmux.nix
   ];
 
   home.packages = [
@@ -38,6 +39,7 @@ in
     light
     mkpasswd
     neofetch
+    nodejs
     nox
     openssl
     pavucontrol
