@@ -29,7 +29,7 @@ in
   };
 
   systemd.user.timers.vdirsyncer = {
-    Unit.Description = "Download the icsSubscriptions and import using khal.";
+    Unit.Description = "Synchronize Calendar and Contacts";
 
     Timer = {
       OnCalendar = "*:0/15"; # Every 15 minutes

@@ -15,6 +15,7 @@ in
     ./browsers.nix
     ./git.nix
     ./i3status-rust.nix
+    ./neovim.nix
     ./newsboat.nix
     ./tmux.nix
     ./zsh
