@@ -4,6 +4,7 @@
     enableCompletion = true;
     initExtra = ''
       # add custom completion scripts
+      # TODO: get this working
       fpath+=(~/.zsh/completion)
 
       # Auto-Correction

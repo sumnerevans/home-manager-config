@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }: let
   # TODO use lib.mkMerge
+  # TODO move signature stuff over
   mkAccount =
     { config
     , name
@@ -46,7 +47,7 @@
           ${neomuttExtraConfig}
         '' + (
           lib.strings.optionalString (alternates != [])
-            "alternates '^${lib.strings.concatStringsSep "|" alternates}$'"
+            "alternates '^${lib.concatStringsSep "|" alternates}$'"
         );
       };
     } // config;

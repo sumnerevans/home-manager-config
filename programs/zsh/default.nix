@@ -3,6 +3,7 @@
     ./aliases.nix
     ./completion.nix
     ./dir-hashes.nix
+    ./functions.nix
     ./plugins.nix
   ];
 
@@ -65,48 +66,50 @@
         fi
       '';
 
-      initExtra = ''
-        ${builtins.readFile ./functions.zsh}
-        ${builtins.readFile ./key-widgets.zsh}
-        ${builtins.readFile ./prompt.zsh}
+      initExtra = let
+        tput = "${pkgs.ncurses}/bin/tput";
+      in
+        ''
+          ${builtins.readFile ./key-widgets.zsh}
+          ${builtins.readFile ./prompt.zsh}
 
-        # Colors
-        autoload colors zsh/terminfo
-        colors
-        ${strings.optionalString config.isLinux "eval $(dircolors -b)"}
-        ${strings.optionalString config.isMacOS "export CLICOLOR=1"}
+          # Colors
+          autoload colors zsh/terminfo
+          colors
+          ${strings.optionalString config.isLinux "eval $(dircolors -b)"}
+          ${strings.optionalString config.isMacOS "export CLICOLOR=1"}
 
-        setopt appendhistory
-        setopt extendedglob
-        setopt autopushd
+          setopt appendhistory
+          setopt extendedglob
+          setopt autopushd
+          setopt nobeep  # Don't beep ever
 
-        # Don't beep ever
-        setopt nobeep
+          # Set up the ssh-agent if necesarry
+          if [[ ! -S ~/.ssh/ssh_auth_sock  ]]; then
+              eval `${pkgs.openssh}/bin/ssh-agent`
+              ${pkgs.coreutils}/bin/ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+          fi
+          export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+          ${pkgs.openssh}/bin/ssh-add -l | \
+            ${pkgs.gnugrep}/bin/grep "The agent has no identities" && \
+            ${pkgs.openssh}/bin/ssh-add
 
-        # Set up the ssh-agent if necesarry
-        if [[ ! -S ~/.ssh/ssh_auth_sock  ]]; then
-            eval `ssh-agent`
-            ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
-        fi
-        export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-        ssh-add -l | grep "The agent has no identities" && ssh-add
+          echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
 
-        echo "$(tput bold)======================================================================$(tput sgr 0)"
+          # Show my calendar
+          ${pkgs.khal}/bin/khal calendar
 
-        # Show my calendar
-        ${pkgs.khal}/bin/khal calendar
+          # Notify me if I haven't written in my journal for the day.
+          if [[ ! -f ${config.home.homeDirectory}/Documents/journal/$(${pkgs.coreutils}/bin/date +%Y-%m-%d).rst ]]; then
+              echo "\n$(${tput} bold)Make sure to write in your journal today.$(${tput} sgr 0)"
+              echo
+          fi
 
-        # Notify me if I haven't written in my journal for the day.
-        if [[ ! -f ${config.home.homeDirectory}/Documents/journal/$(date +%Y-%m-%d).rst ]]; then
-            echo "\n$(tput bold)Make sure to write in your journal today.$(tput sgr 0)"
-            echo
-        fi
+          # Show a quote
+          ${pkgs.fortune}/bin/fortune ${config.home.homeDirectory}/.mutt/quotes
 
-        # Show a quote
-        ${pkgs.fortune}/bin/fortune ${config.home.homeDirectory}/.mutt/quotes
-
-        echo "$(tput bold)======================================================================$(tput sgr 0)"
-      '';
+          echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
+        '';
     };
 
     home.sessionPath = [
