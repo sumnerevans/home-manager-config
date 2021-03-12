@@ -1,4 +1,4 @@
-{ pkgs, ... }: with pkgs; let
+{ config, pkgs, ... }: with pkgs; let
   offlinemsmtp = callPackage ../pkgs/offlinemsmtp.nix {};
 in
 {
@@ -11,7 +11,8 @@ in
     Service = {
       ExecStart = ''
         ${offlinemsmtp}/bin/offlinemsmtp --daemon \
-          --send-mail-file /home/sumner/tmp/offlinemsmtp-sendmail
+          --send-mail-file ${config.home.homeDirectory}/tmp/offlinemsmtp-sendmail \
+          --file ${config.xdg.configHome}/msmtp/config
       '';
       Restart = "always";
       RestartSec = 5;

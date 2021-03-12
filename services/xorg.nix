@@ -11,7 +11,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    # TODO clipmenu if on X11
     services.clipmenu.enable = true;
     home.sessionVariables = {
       CM_HISTLENGTH = "20";

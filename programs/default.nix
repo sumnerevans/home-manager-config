@@ -163,8 +163,6 @@ in
     ytdl-format = "bestvideo+bestaudio";
   };
 
-  # TODO neomutt
-
   # TODO neovim
 
   programs.noti.enable = true;
