@@ -1,4 +1,6 @@
 { config, lib, pkgs, ... }: with lib; let
+  editor = "${pkgs.neovim}/bin/nvim";
+  terminal = "${pkgs.alacritty}/bin/alacritty";
   waylandCfg = config.wayland;
   xorgCfg = config.xorg;
 in
@@ -10,6 +12,12 @@ in
       rofi-pass
       screenkey
     ];
+
+    home.sessionVariables = {
+      VISUAL = "${editor}";
+      EDITOR = "${editor}";
+      TERMINAL = "${terminal}";
+    };
 
     gtk = {
       enable = true;

@@ -1,0 +1,118 @@
+{ config, lib, pkgs, ... }: with lib; {
+  imports = [
+    ./aliases.nix
+    ./completion.nix
+    ./dir-hashes.nix
+    ./plugins.nix
+  ];
+
+  options = {
+    isLinux = mkOption {
+      type = types.bool;
+      description = "Set to true if on a Linux machine.";
+      default = true;
+    };
+    isMacOS = mkOption {
+      type = types.bool;
+      description = "Set to true if on a macOS machine.";
+      default = false;
+    };
+  };
+
+  config = {
+    programs.zsh = {
+      enable = true;
+      defaultKeymap = "viins";
+
+      localVariables = {
+        OFFICE = "libreoffice";
+        VIDEOVIEWER = "mpv";
+        WINE = "wine";
+      };
+
+      sessionVariables = {
+        # Make Rust blow up verbosely
+        RUST_BACKTRACE = 1;
+
+        # Pipenv
+        PIPENV_MAX_DEPTH = 10000; # basically infinite
+        PIPENV_VENV_IN_PROJECT = 1; # store the virtual environment in .venv in the project directory
+      };
+
+      history = {
+        expireDuplicatesFirst = true;
+        extended = true;
+        path = "${config.home.homeDirectory}/.histfile";
+      };
+
+      initExtraFirst = ''
+        # If inside of an SSH session, run tmux.
+        if [[ -n $SSH_CONNECTION ]]; then
+            if command -v tmux &> /dev/null &&
+                    [ -n "$PS1" ] &&
+                    [[ ! "$TERM" =~ screen ]] &&
+                    [[ ! "$TERM" =~ tmux ]] &&
+                    [ -z "$TMUX" ]; then
+                exec tmux && exit
+            fi
+        fi
+
+        # If tmux, use screen-256color as TERM
+        if [ -z "''${TMUX+x}" ]; then
+            export TERM=xterm-256color
+        else
+            export TERM=screen-256color
+        fi
+      '';
+
+      initExtra = ''
+        ${builtins.readFile ./functions.zsh}
+        ${builtins.readFile ./key-widgets.zsh}
+        ${builtins.readFile ./prompt.zsh}
+
+        # Colors
+        autoload colors zsh/terminfo
+        colors
+        ${strings.optionalString config.isLinux "eval $(dircolors -b)"}
+        ${strings.optionalString config.isMacOS "export CLICOLOR=1"}
+
+        setopt appendhistory
+        setopt extendedglob
+        setopt autopushd
+
+        # Don't beep ever
+        setopt nobeep
+
+        # Set up the ssh-agent if necesarry
+        if [[ ! -S ~/.ssh/ssh_auth_sock  ]]; then
+            eval `ssh-agent`
+            ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+        fi
+        export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+        ssh-add -l | grep "The agent has no identities" && ssh-add
+
+        echo "$(tput bold)======================================================================$(tput sgr 0)"
+
+        # Show my calendar
+        ${pkgs.khal}/bin/khal calendar
+
+        # Notify me if I haven't written in my journal for the day.
+        if [[ ! -f ${config.home.homeDirectory}/Documents/journal/$(date +%Y-%m-%d).rst ]]; then
+            echo "\n$(tput bold)Make sure to write in your journal today.$(tput sgr 0)"
+            echo
+        fi
+
+        # Show a quote
+        ${pkgs.fortune}/bin/fortune ${config.home.homeDirectory}/.mutt/quotes
+
+        echo "$(tput bold)======================================================================$(tput sgr 0)"
+      '';
+    };
+
+    home.sessionPath = [
+      "${config.home.homeDirectory}/.local/bin"
+      "${config.home.homeDirectory}/.cargo/bin"
+      "${config.home.homeDirectory}/go/bin"
+    ];
+  };
+}

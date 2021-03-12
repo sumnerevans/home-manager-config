@@ -17,6 +17,7 @@ in
     ./i3status-rust.nix
     ./newsboat.nix
     ./tmux.nix
+    ./zsh
   ];
 
   home.packages = [
@@ -35,6 +36,7 @@ in
     iftop
     kbdlight
     khal
+    libarchive
     libnotify
     light
     lsof
@@ -143,7 +145,11 @@ in
 
   # TODO firefox
 
-  programs.fzf = { enable = true; enableZshIntegration = true; };
+  programs.fzf = {
+    enable = true;
+    defaultCommand = "fd --type f --hidden --follow --exclude .git";
+    enableZshIntegration = true;
+  };
 
   programs.gpg.enable = true;
 
@@ -183,6 +189,4 @@ in
   programs.vscode.enable = true;
 
   programs.zathura.enable = true;
-
-  # TODO zsh
 }
