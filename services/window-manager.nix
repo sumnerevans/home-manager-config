@@ -19,6 +19,23 @@ in
       TERMINAL = "${terminal}";
     };
 
+    services = let
+      redshiftGammastepCfg = {
+        enable = true;
+        provider = "geoclue2";
+        tray = true;
+
+        temperature = {
+          day = 5500;
+          night = 4000;
+        };
+      };
+    in
+      {
+        gammastep = mkIf waylandCfg.enable redshiftGammastepCfg;
+        redshift = mkIf xorgCfg.enable redshiftGammastepCfg;
+      };
+
     gtk = {
       enable = true;
       iconTheme = {

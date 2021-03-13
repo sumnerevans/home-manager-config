@@ -11,17 +11,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    services.gammastep = {
-      enable = true;
-      provider = "geoclue2";
-      tray = true;
-
-      temperature = {
-        day = 5500;
-        night = 4000;
-      };
-    };
-
     home.sessionVariables = {
       GTK_THEME = "Arc-Dark";
       MOZ_ENABLE_WAYLAND = "1";
