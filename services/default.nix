@@ -3,10 +3,8 @@
     ./offlinemsmtp.nix
     ./vdirsyncer.nix
     ./wallpaper.nix
-    ./wayland.nix
-    ./window-manager.nix
+    ./window-manager
     ./writeping.nix
-    ./xorg.nix
   ];
 
   services.blueman-applet.enable = true;

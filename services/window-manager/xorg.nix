@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }: with lib; let
   cfg = config.xorg;
+  common = import ./common.nix { inherit config lib pkgs; };
 in
 {
   options = {
@@ -11,6 +12,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    xsession.windowManager.i3 = mkMerge [ common.i3SwayConfig ];
+
     services.clipmenu.enable = true;
     home.sessionVariables = {
       CM_HISTLENGTH = "20";
@@ -21,6 +24,8 @@ in
     #   package = pkgs.capitaine-cursors;
     #   name = "Capitaine";
     # };
+
+    services.redshift = common.redshiftGammastepCfg;
 
     services.dunst = {
       enable = true;
@@ -46,7 +51,7 @@ in
           line_height = 3;
           format = "<b>%s</b>\\n%b\\n%p";
         };
-      };
+      } // common.notificationColorConfig;
     };
 
     services.picom = {

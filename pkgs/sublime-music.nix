@@ -1,22 +1,28 @@
-{ fetchFromGitLab, lib, python3Packages, gobject-introspection, gtk3, pango, wrapGAppsHook
+{ fetchFromGitLab
+, gobject-introspection
+, gtk3
+, lib
+, networkmanager
+, python3
+, pango
+, python
+, python3Packages
+, wrapGAppsHook
 
 , chromecastSupport ? true
 , serverSupport ? true
 , keyringSupport ? true
-, notifySupport ? true, libnotify
-, networkSupport ? true, networkmanager
+, notifySupport ? true
+, libnotify
+, networkSupport ? true
 }:
-
 python3Packages.buildPythonApplication rec {
-  pname = "sublime-music";
+  pname = "sublime_music";
   version = "0.11.11";
 
-  # src = /home/sumner/projects/sublime-music/sublime-music;
-  src = fetchFromGitLab {
-    owner = "sublime-music";
-    repo = pname;
-    rev = "v${version}";
-    sha256 = "1147szdkvwvxslsby9scv1i8r4p5rj1if95f06y7q3l6n3zyg15g";
+  src = python3.pkgs.fetchPypi {
+    inherit pname version;
+    sha256 = "0h5fhsl7zcvdrgawa0p118jzjs5ws1rlwbwv05klvdhzzrx2xwrs";
   };
 
   nativeBuildInputs = [
@@ -29,8 +35,8 @@ python3Packages.buildPythonApplication rec {
     gtk3
     pango
   ]
-   ++ lib.optional notifySupport libnotify
-   ++ lib.optional networkSupport networkmanager
+  ++ lib.optional notifySupport libnotify
+  ++ lib.optional networkSupport networkmanager
   ;
 
   propagatedBuildInputs = with python3Packages; [
@@ -41,14 +47,14 @@ python3Packages.buildPythonApplication rec {
     mpv
     peewee
     pygobject3
-    python-Levenshtein
     python-dateutil
+    python-Levenshtein
     requests
     semver
   ]
-   ++ lib.optional chromecastSupport PyChromecast
-   ++ lib.optional keyringSupport keyring
-   ++ lib.optional serverSupport bottle
+  ++ lib.optional chromecastSupport PyChromecast
+  ++ lib.optional keyringSupport keyring
+  ++ lib.optional serverSupport bottle
   ;
 
   # hook for gobject-introspection doesn't like strictDeps
