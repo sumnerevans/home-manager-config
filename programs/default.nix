@@ -63,6 +63,7 @@ in
     vdirsyncer
     watchexec
     wget
+    xdg_utils
     youtube-dl
     zip
 

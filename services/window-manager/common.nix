@@ -54,6 +54,7 @@
       enable = true;
       config = rec {
         inherit fonts;
+        focus.forceWrapping = true;
         gaps.inner = gapSize;
         modifier = config.windowManager.modKey;
         terminal = config.home.sessionVariables.TERMINAL;
@@ -117,11 +118,17 @@
           F4 = "exec ${menucalc}/bin/= -- -lines 3"; # menu-calc
           F3 = "exec ${pkgs.rofi-pass}/bin/rofi-pass -- -i";
 
-          # MOVEMENT
+          # FOCUS
           "${modifier}+${left}" = "focus left";
           "${modifier}+${down}" = "focus down";
           "${modifier}+${up}" = "focus up";
           "${modifier}+${right}" = "focus right";
+
+          # MOVEMENT
+          "${modifier}+Shift+${left}" = "move left";
+          "${modifier}+Shift+${down}" = "move down";
+          "${modifier}+Shift+${up}" = "move up";
+          "${modifier}+Shift+${right}" = "move right";
 
           # SPLIT IN HORIZONTAL/VERTICAL ORIENTATION
           "${modifier}+semicolon" = "split h";

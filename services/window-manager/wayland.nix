@@ -2,6 +2,7 @@
   cfg = config.wayland;
   common = import ./common.nix { inherit config lib pkgs; };
   clipmanHistpath = ''--histpath="${config.xdg.cacheHome}/clipman.json"'';
+  clipmanCmd = "${pkgs.clipman}/bin/clipman";
 in
 {
   options = {
@@ -22,13 +23,13 @@ in
     wayland.windowManager.sway = mkMerge [
       common.i3SwayConfig
       {
+        wrapperFeatures.gtk = true;
         config.startup = let
           wlpaste = "${pkgs.wl-clipboard}/bin/wl-paste";
-          clipman = "${pkgs.clipman}/bin/clipman";
         in
           [
-            { command = "${wlpaste} -t text --watch ${clipman} store ${clipmanHistpath}"; }
-            { command = "${wlpaste} -p -t text --watch ${clipman} store -P ${clipmanHistpath}"; }
+            { command = "${wlpaste} -t text --watch ${clipmanCmd} store ${clipmanHistpath}"; }
+            { command = "${wlpaste} -p -t text --watch ${clipmanCmd} store -P ${clipmanHistpath}"; }
             { command = "${pkgs.mako}/bin/mako"; }
           ];
 
@@ -51,7 +52,7 @@ in
         in
           {
             # Popup Clipboard Manager
-            "${modifier}+c" = "exec ${pkgs.clipman}/bin/clipman pick -t rofi ${clipmanHistpath}";
+            "${modifier}+c" = "exec ${clipmanCmd} pick -t rofi ${clipmanHistpath}";
 
             # Lock screen
             "${modifier}+Shift+x" = "exec ${swaylockCmd}";
@@ -76,6 +77,13 @@ in
 
     home.packages = with pkgs; [
       clipman
+      glib
+      grim
+      slurp
+      v4l-utils
+      wf-recorder
+      wl-clipboard # clipboard management
+      # TODO use wofi?
     ];
 
     # Gammastep
