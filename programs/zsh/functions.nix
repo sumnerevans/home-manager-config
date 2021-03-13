@@ -29,7 +29,7 @@
       # Run right before the prompt.
       precmd = ''
         # If the cd just happend...
-        if [[ "${chpwd_just_happened}" == "1" ]]; then
+        if [[ "''$${chpwd_just_happened}" == "1" ]]; then
             # Automatically list directory contents.
             ${ls} --color -Fa
 
