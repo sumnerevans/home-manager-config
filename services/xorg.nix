@@ -22,9 +22,53 @@ in
     #   name = "Capitaine";
     # };
 
-    # TODO dunst on i3
+    services.dunst = {
+      enable = true;
+      iconTheme = {
+        name = "hicolor";
+        package = pkgs.paper-icon-theme;
+        size = "32x32";
+      };
+      settings = {
+        global = {
+          geometry = "350x50-15+45";
+          transparency = 10;
+          padding = 6;
+          horizontal_padding = 6;
+          frame_color = "#8EC07C";
+          corner_radius = 5;
+          sort = false;
+          idle_threshold = 30;
+          show_age_threshold = 20;
 
-    # TODO use redshift when on i3
+          # Text
+          font = "Iosevka Term 11";
+          line_height = 3;
+          format = "<b>%s</b>\\n%b\\n%p";
+        };
+
+        urgency_low = {
+          frame_color = "#3B7C87";
+          foreground = "#3B7C87";
+          background = "#191311";
+          timeout = 4;
+        };
+
+        urgency_normal = {
+          frame_color = "#5B8234";
+          foreground = "#5B8234";
+          background = "#191311";
+          timeout = 6;
+        };
+
+        urgency_critical = {
+          frame_color = "#B7472A";
+          foreground = "#B7472A";
+          background = "#191311";
+          timeout = 8;
+        };
+      };
+    };
 
     services.picom = {
       enable = true;
