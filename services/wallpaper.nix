@@ -66,12 +66,13 @@
         f1="${dir}/${name}_$wp_num.jpeg"
       else
         # Composite the picture.
-        composite -dissolve $wp_transition_level \
-                  -gravity Center \
-                  "${dir}/${name}_$wp_next.jpeg" \
-                  "${dir}/${name}_$wp_num.jpeg" \
-                  -alpha Set \
-                  ${tmpWallpaper}
+        ${pkgs.imagemagick}/bin/composite \
+            -dissolve $wp_transition_level \
+            -gravity Center \
+            "${dir}/${name}_$wp_next.jpeg" \
+            "${dir}/${name}_$wp_num.jpeg" \
+            -alpha Set \
+            ${tmpWallpaper}
         f1=${tmpWallpaper}
       fi
       ${doSetWallpaperScriptPart}

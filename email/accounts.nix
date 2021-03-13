@@ -143,11 +143,5 @@ in
       color = "green";
       config.address = "inquiries@sumnerevans.com";
     };
-
-    Junk = mkMigaduAccount {
-      name = "Junk";
-      color = "green";
-      config.address = "junk@sumnerevans.com";
-    };
   };
 }
