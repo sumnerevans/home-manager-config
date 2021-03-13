@@ -84,7 +84,8 @@ in
     spotify
     steam
     streamlink
-    sublime-music
+    # TODO FIX
+    # sublime-music
 
     # Configuration GUIs
     gnome3.gnome-power-manager

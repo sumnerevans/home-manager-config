@@ -27,7 +27,7 @@
 
   services.network-manager-applet.enable = true;
 
-  # TODO syncthing
+  services.syncthing.enable = true;
 
   services.udiskie.enable = true;
 

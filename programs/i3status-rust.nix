@@ -105,12 +105,14 @@
               format = "%F %R:%S";
               interval = 1;
             }
-            {
-              block = "battery";
-              interval = 30;
-              format = "{percentage}% {time}";
-              device = "BAT0";
-            }
+            (
+              mkIf config.laptop.enable {
+                block = "battery";
+                interval = 30;
+                format = "{percentage}% {time}";
+                device = "BAT0";
+              }
+            )
 
             # TODO need to figure out how to do this for Sway
             (
