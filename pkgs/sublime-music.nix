@@ -16,7 +16,7 @@ python3Packages.buildPythonApplication rec {
     owner = "sublime-music";
     repo = pname;
     rev = "v${version}";
-    sha256 = "1g78gmiywg07kaywfc9q0yab2bzxs936vb3157ni1z0flbmcwrry";
+    sha256 = "1147szdkvwvxslsby9scv1i8r4p5rj1if95f06y7q3l6n3zyg15g";
   };
 
   nativeBuildInputs = [
