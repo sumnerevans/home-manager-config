@@ -32,24 +32,6 @@ in
       groupBy = "app-name,summary";
       sort = "-priority";
       width = 400;
-
-      # Colors
-      backgroundColor = "#191311CC";
-      borderColor = "#5B8234";
-      textColor = "#5B8234";
-
-      extraConfig = ''
-        [urgency=low]
-        border-color=#777777
-        text-color=#777777
-        default-timeout=4000
-
-        [urgency=high]
-        border-color=#B7472A
-        text-color=#B7472A
-        background-color=#191311CC
-        default-timeout=12000
-      '';
     };
 
     # wayland.windowManager.sway.enable = true;
