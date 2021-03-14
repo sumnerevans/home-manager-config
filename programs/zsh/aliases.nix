@@ -40,7 +40,6 @@ in
       quotesfile = "chezmoi edit -a ~/.mutt/quotes && strfile -r ~/.mutt/quotes";
       reload = ". ~/.zshrc && echo 'ZSH Config Reloaded from ~/.zshrc'";
       sshconf = "vim ~/.ssh/config";
-      swayconf = "chezmoi edit -a ~/.config/sway/config";
       vimrc = "realvim ~/.vim/vimrc";
       vimshort = "chezmoi edit -a ~/.vim/shortcuts";
       xresources = "chezmoi edit -a ~/.Xresources && xrdb -load ~/.Xresources && echo '~/Xresources reloaded'";

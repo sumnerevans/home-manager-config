@@ -173,14 +173,14 @@
 
         modes = {
           "${resizeStr}" = {
-            "${left}" = "resize shrink width 10 px";
-            "${down}" = "resize grow height 10 px";
-            "${up}" = "resize shrink height 10 px";
-            "${right}" = "resize grow width 10 px";
-            "Left" = "resize shrink width 10 px";
-            "Down" = "resize grow height 10 px";
-            "Up" = "resize shrink height 10 px";
-            "Right" = "resize grow width 10 px";
+            "${left}" = "resize shrink width 10 px or 10 ppt";
+            "${down}" = "resize grow height 10 px or 10 ppt";
+            "${up}" = "resize shrink height 10 px or 10 ppt";
+            "${right}" = "resize grow width 10 px or 10 ppt";
+            "Left" = "resize shrink width 10 px or 10 ppt";
+            "Down" = "resize grow height 10 px or 10 ppt";
+            "Up" = "resize shrink height 10 px or 10 ppt";
+            "Right" = "resize grow width 10 px or 10 ppt";
             "Escape" = "mode default";
             "Return" = "mode default";
             "${modifier}+r" = "mode default";
