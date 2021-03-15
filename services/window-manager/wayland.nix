@@ -52,7 +52,7 @@ in
         in
           {
             # Popup Clipboard Manager
-            "${modifier}+c" = "exec ${clipmanCmd} pick -t rofi ${clipmanHistpath}";
+            "${modifier}+c" = "exec ${clipmanCmd} pick -t ${pkgs.rofi}/bin/rofi ${clipmanHistpath}";
 
             # Lock screen
             "${modifier}+Shift+x" = "exec ${swaylockCmd}";
@@ -62,7 +62,7 @@ in
 
             # Screenshots
             "${modifier}+shift+c" = ''exec ${grim} -g "$(${slurp})" ${screenshotOutfile}'';
-            "${modifier}+shift+ctrl+c" = "exec ${grim} ${screenshotOutfile}";
+            Print = "exec ${grim} ${screenshotOutfile}";
           };
 
         extraConfig = ''

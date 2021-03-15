@@ -21,8 +21,6 @@ in
   config = mkIf (waylandCfg.enable || xorgCfg.enable) {
     home.packages = with pkgs; [
       brightnessctl
-      rofi
-      rofi-pass
       screenkey
     ];
 

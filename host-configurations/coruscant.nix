@@ -1,5 +1,6 @@
 { ... }: {
   xorg.enable = true;
+  xorg.remapEscToCaps = false;
   networking.interfaces = [ "enp37s0" "wlp35s0" ];
   programs.i3status-rust.extraBlocks = [
     {

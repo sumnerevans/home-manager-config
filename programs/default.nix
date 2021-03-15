@@ -17,6 +17,7 @@ in
     ./i3status-rust.nix
     ./neovim.nix
     ./newsboat.nix
+    ./rofi.nix
     ./tmux.nix
     ./zsh
   ];

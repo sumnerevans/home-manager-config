@@ -1,37 +1,44 @@
 { config, lib, pkgs, ... }: with lib; let
   cfg = config.xorg;
   common = import ./common.nix { inherit config lib pkgs; };
+
+  modifier = config.windowManager.modKey;
+  tmpdir = "${config.home.homeDirectory}/tmp";
+  mvTmp = "${pkgs.coreutils}/bin/mv $f ${tmpdir}";
+  scrotCmd = "${pkgs.scrot}/bin/scrot '%Y-%m-%d-%T.png'";
+  i3lockcmd = "${pkgs.i3lock-fancy}/bin/i3lock-fancy --font Iosevka -- ${scrotCmd} -z";
 in
 {
-  options = {
-    xorg.enable = mkOption {
+  options.xorg = {
+    enable = mkOption {
       type = types.bool;
       description = "Enable Xorg stack";
       default = false;
     };
-    xorg.extrai3wmConfig = mkOption {
+    extrai3wmConfig = mkOption {
       type = types.attrsOf types.anything;
       description = "Extra config for i3wm";
       default = {};
     };
+    remapEscToCaps = mkOption {
+      type = types.bool;
+      description = "Remap the physical escape key to Caps Lock";
+      default = true;
+    };
   };
 
   config = mkIf cfg.enable {
-    xsession.windowManager.i3 = mkMerge [
-      common.i3SwayConfig
-      {
-        config.startup = [
-          { command = "${config.home.homeDirectory}/bin/display-configuration.sh"; }
-          { command = "systemctl --user import-environment; systemctl --user start graphical-session.target"; }
-        ];
+    xsession = {
+      enable = true;
 
-        config.keybindings = let
-          modifier = config.windowManager.modKey;
-          scrot = "${pkgs.scrot}/bin/scrot";
-          i3lockcmd = "${pkgs.i3lock-fancy}/bin/i3lock-fancy --font Iosevka -- ${scrot} -z";
-          tmpdir = "${config.home.homeDirectory}/tmp";
-        in
-          {
+      windowManager.i3 = mkMerge [
+        common.i3SwayConfig
+        {
+          config.startup = [
+            { command = "${config.home.homeDirectory}/bin/display-configuration.sh"; }
+          ];
+
+          config.keybindings = {
             # Popup Clipboard Manager
             "${modifier}+c" = "exec ${pkgs.clipmenu}/bin/clipmenu";
 
@@ -39,16 +46,28 @@ in
             "${modifier}+Shift+x" = "exec ${config.home.homeDirectory}/bin/fuzzy_lock_sleep.sh";
 
             # exit i3wm (logs you out of your session)
-            "${modifier}+Shift+e" = "exec ${pkgs.i3-gaps}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'";
+            "${modifier}+Shift+e" = ''exec "${pkgs.i3-gaps}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"'';
 
             # Screenshots
-            "${modifier}+shift+c" = "${scrot} -s '%Y-%m-%d-%T.png' -e 'mv $f ${tmpdir} && xclip -selection clipboard -i ${tmpdir}/$f -t image/png'";
-            "${modifier}+shift+ctrl+c" = "exec ${scrot}";
-            "${modifier}+shift+f" = "exec ${pkgs.flameshot}/bin/flameshot gui -p ${tmpdir}";
+            "${modifier}+shift+ctrl+c" = ''exec "${scrotCmd} -e '${mvTmp}'"'';
+            "${modifier}+shift+c" = ''exec "${pkgs.flameshot}/bin/flameshot gui -p ${tmpdir}"'';
+            "${modifier}+shift+f" = ''exec "${pkgs.flameshot}/bin/flameshot gui -p ${tmpdir}"'';
+            Print = ''exec "${scrotCmd} -e '${mvTmp}'"'';
           };
-      }
-      cfg.extrai3wmConfig
-    ];
+        }
+        cfg.extrai3wmConfig
+      ];
+
+      pointerCursor = {
+        package = pkgs.capitaine-cursors;
+        name = "Capitaine";
+        size = 16;
+      };
+    };
+
+    xresources.extraConfig = ''
+      Xft.dpi: 100
+    '';
 
     services.clipmenu.enable = true;
     home.sessionVariables = {
@@ -56,10 +75,17 @@ in
       CM_LAUNCHER = "rofi";
     };
 
-    # xsession.pointerCursor = {
-    #   package = pkgs.capitaine-cursors;
-    #   name = "Capitaine";
-    # };
+    home.packages = with pkgs; [
+      dunst
+      flameshot
+      i3lock
+      lxappearance
+      scrot
+      xclip
+      xorg.xbacklight
+      xorg.xdpyinfo
+      xorg.xprop
+    ];
 
     services.redshift = common.redshiftGammastepCfg;
 
@@ -100,8 +126,9 @@ in
 
       inactiveOpacity = "0.8";
       opacityRule = [
-        "100:class_g = 'obs'"
-        "100:class_g = 'i3lock'"
+        "100:class_g *= 'obs'"
+        "100:class_g *= 'i3lock'"
+        "100:class_g ?= 'rofi'"
       ];
 
       shadow = true;
@@ -114,5 +141,31 @@ in
         "_GTK_FRAME_EXTENTS@:c"
       ];
     };
+
+    systemd.user.services = let
+      xmodmapConfig = pkgs.writeText "Xmodmap.conf" ''
+        ! Reverse scrolling
+        ! pointer = 1 2 3 5 4 6 7 8 9 10 11 12
+        keycode 9 = Caps_Lock Caps_Lock Caps_Lock
+      '';
+      startupServices = {
+        xbanish = "${pkgs.xbanish}/bin/xbanish";
+      } // (
+        optionalAttrs cfg.remapEscToCaps {
+          xmodmap = "${pkgs.xorg.xmodmap}/bin/xmodmap ${xmodmapConfig}";
+        }
+      );
+    in
+      mapAttrs (
+        name: value: {
+          Unit = {
+            Description = "Run ${name} on startup.";
+            PartOf = [ "graphical-session.target" ];
+          };
+          Service.ExecStart = value;
+          Service.Restart = "always";
+          Install.WantedBy = [ "graphical-session.target" ];
+        }
+      ) startupServices;
   };
 }

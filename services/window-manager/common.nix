@@ -61,7 +61,6 @@
         assigns = {
           # Browsers
           "${elemAt workspaces 0}" = [
-            { class = "Pale moon"; }
             { class = "Firefox"; }
           ];
 
@@ -69,8 +68,6 @@
           "${(elemAt extraWorkspaces 0).name}" = [
             { class = "discord"; }
             { class = "Element"; }
-            { class = "HexChat"; }
-            { class = "quassel"; }
             { class = "Slack"; }
             { class = "Telegram"; }
             { title = "Mutt"; }
@@ -158,6 +155,17 @@
           # VOLUME KEYS
           XF86AudioLowerVolume = "exec amixer set Master playback 2%-";
           XF86AudioRaiseVolume = "exec amixer set Master playback 2%+";
+          XF86AudioMute = "exec amixer set Master toggle";
+
+          # MEDIA CONTROLS
+          XF86AudioPrev = "exec playerctl previous";
+          XF86AudioPlay = "exec playerctl play-pause";
+          XF86AudioStop = "exec playerctl stop";
+          XF86AudioNext = "exec playerctl next";
+
+          # SCREEN BRIGHTNESS CONTROLS
+          XF86MonBrightnessDown = mkIf config.laptop.enable "exec brightnessctl s 5%-";
+          XF86MonBrightnessUp = mkIf config.laptop.enable "exec brightnessctl s +5%";
         };
 
         keycodebindings = listToAttrs (

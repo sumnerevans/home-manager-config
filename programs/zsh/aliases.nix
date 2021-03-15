@@ -33,7 +33,6 @@ in
       gst = "git stash";
 
       # Config
-      i3conf = "chezmoi edit -a ~/.config/i3/config";
       muttrc = "chezmoi edit -a ~/.mutt/muttrc && chezmoi apply";
       nvimrc = "chezmoi edit -a ~/.config/nvim/init.vim";
       projectlist = "vim ~st/projectlist && projectsync";
