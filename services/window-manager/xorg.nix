@@ -22,6 +22,7 @@ in
       {
         config.startup = [
           { command = "${config.home.homeDirectory}/bin/display-configuration.sh"; }
+          { command = "systemctl --user import-environment; systemctl --user start graphical-session.target"; }
         ];
 
         config.keybindings = let
