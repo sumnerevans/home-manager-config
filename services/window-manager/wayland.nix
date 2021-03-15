@@ -11,7 +11,6 @@ in
       description = "Enable the wayland stack";
       default = false;
     };
-
     wayland.extraSwayConfig = mkOption {
       type = types.attrsOf types.anything;
       description = "Extra config for Sway";
@@ -24,6 +23,7 @@ in
       common.i3SwayConfig
       {
         wrapperFeatures.gtk = true;
+        config.focus.forceWrapping = true;
         config.startup = let
           wlpaste = "${pkgs.wl-clipboard}/bin/wl-paste";
         in
@@ -64,6 +64,12 @@ in
             "${modifier}+shift+c" = ''exec ${grim} -g "$(${slurp})" ${screenshotOutfile}'';
             "${modifier}+shift+ctrl+c" = "exec ${grim} ${screenshotOutfile}";
           };
+
+        extraConfig = ''
+          seat * hide_cursor 2000
+          # TODO REMOVE
+          # vim ft=i3config
+        '';
       }
       cfg.extraSwayConfig
     ];

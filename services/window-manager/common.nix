@@ -46,7 +46,7 @@
     down = "j";
     up = "k";
     right = "l";
-    fonts = [ "Iosevka" "FontAwesome 12" ];
+    fonts = [ "Iosevka" "FontAwesome 10" ];
 
     menucalc = pkgs.callPackage ../../pkgs/menucalc.nix {};
   in
@@ -54,7 +54,6 @@
       enable = true;
       config = rec {
         inherit fonts;
-        focus.forceWrapping = true;
         gaps.inner = gapSize;
         modifier = config.windowManager.modKey;
         terminal = config.home.sessionVariables.TERMINAL;
@@ -205,10 +204,5 @@
           hideEdgeBorders = "both";
         };
       };
-      extraConfig = ''
-        seat * hide_cursor 2000
-        # TODO REMOVE
-        # vim ft=i3config
-      '';
     };
 }
