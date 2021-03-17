@@ -194,19 +194,6 @@
           };
         };
 
-        startup = let
-          gsettings = "${pkgs.glib}/bin/gsettings";
-          gnomeSchema = "org.gnome.desktop.interface";
-        in
-          [
-            { command = "${config.home.homeDirectory}/bin/inactive-windows-transparency.py"; }
-
-            # GTK
-            { command = "${gsettings} set ${gnomeSchema} gtk-theme 'Arc-Dark'"; always = true; }
-            { command = "${gsettings} set ${gnomeSchema} icon-theme 'Arc'"; always = true; }
-            { command = "${gsettings} set ${gnomeSchema} cursor-theme 'breeze_cursors'"; always = true; }
-          ];
-
         window = {
           border = 0;
           hideEdgeBorders = "both";

@@ -1,11 +1,13 @@
-{ ... }: rec {
+{ lib, ... }: with lib; rec {
   wayland.enable = true;
   laptop.enable = true;
   networking.interfaces = [ "wlp0s20f3" ];
   windowManager.modKey = "Mod1"; # use Alt as modifier on mustafar
 
+  programs.alacritty.settings.font.size = 11;
+
   wayland.extraSwayConfig.config = {
-    # Scale to 1.75 instead of 2.
+    # Scale to 1.8 instead of 2.
     output.eDP-1.scale = "1.75";
     input = {
       "*" = {

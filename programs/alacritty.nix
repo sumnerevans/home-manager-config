@@ -1,9 +1,9 @@
-{ ... }: {
+{ lib, ... }: {
   programs.alacritty = {
     enable = true;
     settings = {
       window.title = "Terminal";
-      font.size = 10;
+      font.size = lib.mkDefault 10;
 
       # Colors (One Dark)
       # https://github.com/eendroroy/alacritty-theme/blob/master/themes/one_dark.yaml

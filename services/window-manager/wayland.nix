@@ -26,11 +26,21 @@ in
         config.focus.forceWrapping = true;
         config.startup = let
           wlpaste = "${pkgs.wl-clipboard}/bin/wl-paste";
+          gsettings = "${pkgs.glib}/bin/gsettings";
+          gnomeSchema = "org.gnome.desktop.interface";
         in
           [
+            # Clipboard Manager
             { command = "${wlpaste} -t text --watch ${clipmanCmd} store ${clipmanHistpath}"; }
             { command = "${wlpaste} -p -t text --watch ${clipmanCmd} store -P ${clipmanHistpath}"; }
-            { command = "${pkgs.mako}/bin/mako"; }
+
+            # Window transparency
+            { command = "${config.home.homeDirectory}/bin/inactive-windows-transparency.py"; }
+
+            # GTK
+            { command = "${gsettings} set ${gnomeSchema} gtk-theme 'Arc-Dark'"; always = true; }
+            { command = "${gsettings} set ${gnomeSchema} icon-theme 'Arc'"; always = true; }
+            { command = "${gsettings} set ${gnomeSchema} cursor-theme 'breeze_cursors'"; always = true; }
           ];
 
         config.keybindings = let
@@ -52,7 +62,7 @@ in
         in
           {
             # Popup Clipboard Manager
-            "${modifier}+c" = "exec ${clipmanCmd} pick -t ${pkgs.rofi}/bin/rofi ${clipmanHistpath}";
+            "${modifier}+c" = "exec ${clipmanCmd} pick -t rofi ${clipmanHistpath}";
 
             # Lock screen
             "${modifier}+Shift+x" = "exec ${swaylockCmd}";
@@ -109,7 +119,7 @@ in
       extraConfig = generators.toINI {} (
         mapAttrs' (
           name: val: nameValuePair
-            (builtins.replaceStrings [ "_" ] [ "=" ] name)
+            (builtins.replaceStrings [ "_" "critical" ] [ "=" "high" ] name)
             (
               mapAttrs' (
                 k: v:
