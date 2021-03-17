@@ -40,7 +40,8 @@ in
             # GTK
             { command = "${gsettings} set ${gnomeSchema} gtk-theme 'Arc-Dark'"; always = true; }
             { command = "${gsettings} set ${gnomeSchema} icon-theme 'Arc'"; always = true; }
-            { command = "${gsettings} set ${gnomeSchema} cursor-theme 'breeze_cursors'"; always = true; }
+            { command = "${gsettings} set ${gnomeSchema} cursor-theme 'capitaine-cursors'"; always = true; }
+            { command = "${gsettings} set ${gnomeSchema} cursor-size 24"; always = true; }
           ];
 
         config.keybindings = let
@@ -77,8 +78,7 @@ in
 
         extraConfig = ''
           seat * hide_cursor 2000
-          # TODO REMOVE
-          # vim ft=i3config
+          seat * xcursor_theme capitaine-cursors 24
         '';
       }
       cfg.extraSwayConfig
@@ -99,6 +99,7 @@ in
       v4l-utils
       wf-recorder
       wl-clipboard # clipboard management
+      capitaine-cursors
       # TODO use wofi?
     ];
 

@@ -8,7 +8,7 @@ in
   programs.zsh.dirHashes = {
     df = "${home}/.local/share/chezmoi";
     dl = "${home}/Downloads";
-    pass = "${home}/.password-store";
+    pass = "${home}/.local/share/password-store";
     pics = "${home}/Pictures";
     st = "${home}/Syncthing";
     scratch = "${home}/scratch";
