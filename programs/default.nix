@@ -173,8 +173,6 @@ in
     ytdl-format = "bestvideo+bestaudio";
   };
 
-  # TODO neovim
-
   programs.noti.enable = true;
 
   programs.obs-studio.enable = true;
