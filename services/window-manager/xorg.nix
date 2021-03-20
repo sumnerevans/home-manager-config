@@ -76,7 +76,6 @@ in
     };
 
     home.packages = with pkgs; [
-      dunst
       flameshot
       i3lock
       lxappearance
@@ -108,6 +107,7 @@ in
           show_age_threshold = 20;
           show_indicators = false;
           transparency = 10;
+          word_wrap = true;
 
           # Text
           font = "Iosevka 10";
