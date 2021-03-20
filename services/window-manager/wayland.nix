@@ -116,6 +116,9 @@ in
       groupBy = "app-name,summary";
       sort = "-priority";
       width = 400;
+      backgroundColor = common.notificationColorConfig.urgency_normal.background + "CC";
+      borderColor = common.notificationColorConfig.urgency_normal.frame_color;
+      textColor = common.notificationColorConfig.urgency_normal.foreground;
 
       extraConfig = generators.toINI {} (
         mapAttrs' (
