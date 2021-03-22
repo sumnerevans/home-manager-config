@@ -58,7 +58,7 @@ in
             "--fade-in 0.5"
           ];
           grim = "${pkgs.grim}/bin/grim";
-          slurp = "${pkgs.slurp}/bin/slupr";
+          slurp = "${pkgs.slurp}/bin/slurp";
           screenshotOutfile = "${config.home.homeDirectory}/tmp/$(${pkgs.coreutils}/bin/date +%Y-%m-%d-%T).png";
         in
           {
