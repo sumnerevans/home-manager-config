@@ -14,7 +14,7 @@ in
     ];
     macros = [
       {
-        action = "!${config.home.homeDirectory}/bin/mailfetch.sh^M";
+        action = "!${bindir}/mailfetch.sh^M";
         key = "<F5>";
         map = "index";
       }

@@ -1,4 +1,5 @@
 { config, lib, pkgs, ... }: let
+  signatures = import ./signatures.nix { inherit pkgs lib; };
   # TODO use lib.mkMerge
   # TODO move signature stuff over
   mkAccount =
@@ -9,6 +10,7 @@
     , alternates ? []
     , msmtpExtraConfig ? {}
     , neomuttExtraConfig ? ""
+    , ...
     }: {
       realName = "Sumner Evans";
       userName = config.address;
@@ -60,7 +62,7 @@ in
 {
   accounts.email.maildirBasePath = "${config.home.homeDirectory}/Mail";
   accounts.email.accounts = {
-    Personal = mkMigaduAccount {
+    Personal = mkMigaduAccount rec {
       name = "Personal";
       color = "green";
       config = {
@@ -68,8 +70,15 @@ in
         aliases = [ "alerts@sumnerevans.com" "resume@sumnerevans.com" ];
         primary = true;
       };
+      signatureLines = ''
+        Sumner Evans
+        Software Engineer at The Trade Desk
+        2 Chronicles 7:14
+
+        https://sumnerevans.com | +1 (720) 459-1501 | GPG: B50022FD
+      '';
       neomuttExtraConfig = ''
-        set signature="python3 ~/.mutt/signatures/personal|";
+        set signature="${signatures.mkSignatureScript signatureLines}|"
       '';
     };
 
