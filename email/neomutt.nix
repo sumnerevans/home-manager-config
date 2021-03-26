@@ -63,6 +63,7 @@ in
       mark_old = "no";
       pager_index_lines = "10";
       pager_context = "3";
+      pager_stop = "yes";
       sort_aux = "reverse-last-date-received";
       sort_re = "yes";
       tmpdir = "${config.home.homeDirectory}/tmp";
@@ -73,6 +74,14 @@ in
       source ${config.home.homeDirectory}/.mutt/mailboxes
       set query_command="${bindir}/contact_query %s"
       set display_filter="${bindir}/mutt-display-filter.py"
+
+      # Use return to open message because I'm not a savage
+      unbind index <return>
+      bind index <return> display-message
+
+      # Use N to toggle new
+      unbind index N
+      bind index N toggle-new
 
       bind index,pager \Cp sidebar-prev # Move the highlight to the previous mailbox
       bind index,pager \Cn sidebar-next # Move the highlight to the next mailbox
@@ -125,6 +134,18 @@ in
       # Sidebar
       color sidebar_highlight white           color8
       color sidebar_new       cyan            black
+
+      # Patch syntax highlighting
+      color   normal  white           default
+      color   body    brightwhite     default         ^(diff).*
+      color   body    white           default         ^[\-\-\-].*
+      color   body    white           default         ^[\+\+\+].*
+      color   body    green           default         ^[\+].*
+      color   body    red             default         ^[\-].*
+      color   body    brightblue      default         [@@].*
+      color   body    white           default         ^(\s).*
+      color   body    brightwhite     default         ^(Signed-off-by).*
+      color   body    brightwhite     default         ^(Cc)
     '';
   };
 }
