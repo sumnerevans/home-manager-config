@@ -28,6 +28,11 @@
           home = config.home.homeDirectory;
           homeTmp = "${config.home.homeDirectory}/tmp";
           nmcli = "${pkgs.networkmanager}/bin/nmcli";
+          parseRollingPingScript = pkgs.writeShellScriptBin "parse-rolling-ping" ''
+            ${cu}/cat ${homeTmp}/rolling_ping | ${pkgs.gnugrep}/bin/grep "fail" > /dev/null
+            [[ $? == 0 ]] && printf "∞" && exit 0
+            printf "%0.3f" $(cat ${homeTmp}/rolling_ping | ${pkgs.jq}/bin/jq -s add/length)
+          '';
         in
           {
             icons = "awesome";
@@ -88,7 +93,7 @@
                   {
                     # Ping time
                     block = "custom";
-                    command = ''printf "P: %s" $(${home}/bin/parse-rolling-ping.sh)'';
+                    command = ''printf "P: %s" $(${parseRollingPingScript}/bin/parse-rolling-ping)'';
                     interval = 1;
                     priority = 70;
                   }
