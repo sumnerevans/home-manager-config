@@ -63,6 +63,10 @@ in
         name = "Capitaine";
         size = 16;
       };
+
+      profileExtra = ''
+        systemctl --user import-environment
+      '';
     };
 
     xresources.extraConfig = ''
