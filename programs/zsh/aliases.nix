@@ -33,10 +33,9 @@ in
       gst = "git stash";
 
       # Config
-      muttrc = "chezmoi edit -a ~/.mutt/muttrc && chezmoi apply";
       nvimrc = "chezmoi edit -a ~/.config/nvim/init.vim";
       projectlist = "vim ~st/projectlist && projectsync";
-      quotesfile = "chezmoi edit -a ~/.mutt/quotes && strfile -r ~/.mutt/quotes";
+      quotesfile = "vim ${config.xdg.configHome}/nixpkgs/email/quotes";
       reload = ". ~/.zshrc && echo 'ZSH Config Reloaded from ~/.zshrc'";
       sshconf = "vim ~/.ssh/config";
       vimrc = "realvim ~/.vim/vimrc";
@@ -46,7 +45,7 @@ in
       # Other aliases
       antioffice = "libreoffice --headless --convert-to pdf";
       feh = "feh -.";
-      getquote = "fortune ~/.mutt/quotes";
+      getquote = "fortune ${config.xdg.dataHome}/fortune/quotes";
       grep = "grep --color -n";
       hostdir = "python -m http.server";
       iftop = "sudo iftop -i any";

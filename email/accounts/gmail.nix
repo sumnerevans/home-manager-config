@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: with lib; let
+{ config, pkgs, lib, ... }: with lib; let
   accountConfig = {
     address = "sumner.evans98@gmail.com";
     name = "Gmail";
@@ -15,7 +15,7 @@
     '';
   };
 
-  helper = import ./account-config-helper.nix { inherit pkgs lib; };
+  helper = import ./account-config-helper.nix { inherit config pkgs lib; };
 in
 {
   accounts.email.accounts.Gmail = mkMerge [

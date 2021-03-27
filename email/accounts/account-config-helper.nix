@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: with lib; rec {
+{ config, pkgs, lib, ... }: with lib; rec {
   # Create a signature script that gets a quote.
   # TODO: fix the path to quotesfile
   mkSignatureScript = signatureLines: pkgs.writeScript "signature" ''
@@ -8,7 +8,7 @@
     ${concatMapStringsSep "\n" (l: ''print("${l}")'') (splitString "\n" signatureLines)}
 
     # Quote
-    quotes_cmd = ["${pkgs.fortune}/bin/fortune", "/home/sumner/.mutt/quotes"]
+    quotes_cmd = ["${pkgs.fortune}/bin/fortune", "${config.xdg.dataHome}/fortune/quotes"]
     quote = ""
     # Not sure why, but sometimes fortune returns an empty fortune.
     while len(quote) == 0:

@@ -159,6 +159,7 @@ in
   programs.gpg.enable = true;
 
   programs.home-manager.enable = true;
+  programs.home-manager.path = "$HOME/projects/home-manager";
 
   programs.htop.enable = true;
 

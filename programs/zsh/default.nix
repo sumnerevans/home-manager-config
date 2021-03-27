@@ -106,7 +106,7 @@
           fi
 
           # Show a quote
-          ${pkgs.fortune}/bin/fortune ${config.home.homeDirectory}/.mutt/quotes
+          ${pkgs.fortune}/bin/fortune ${config.xdg.dataHome}/fortune/quotes
 
           echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
         '';
