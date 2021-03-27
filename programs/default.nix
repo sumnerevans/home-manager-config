@@ -26,6 +26,7 @@ in
     # Shell Utilities
     aspell
     aspellDicts.en
+    bind
     bitwarden-cli
     chezmoi
     delta

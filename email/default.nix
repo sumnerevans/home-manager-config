@@ -1,6 +1,6 @@
 { pkgs, ... }: with pkgs; {
   imports = [
-    ./accounts.nix
+    ./accounts
     ./mailcap.nix
     ./mbsync.nix
     ./neomutt.nix

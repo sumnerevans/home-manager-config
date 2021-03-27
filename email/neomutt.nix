@@ -49,6 +49,7 @@ in
       enable = true;
       width = 40;
       format = "%B%?F? [%F]?%* %?N?%N/?%S";
+      shortPath = false;
     };
 
     settings = {
