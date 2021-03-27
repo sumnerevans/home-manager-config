@@ -37,6 +37,6 @@ in
       Unit = "writeping.service";
     };
 
-    Install = { WantedBy = [ "timers.target" ]; };
+    Install.WantedBy = [ "timers.target" ];
   };
 }

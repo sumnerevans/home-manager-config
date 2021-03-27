@@ -174,7 +174,7 @@
           # Move to workspace
           ++ (imap1 (i: { name, keycode }: { name = "${modifier}+Shift+${toString keycode}"; value = ''move container to workspace "${name}"''; }) extraWorkspaces)
         ) // {
-          "${modifier}+34" = "exec ${config.home.homeDirectory}/bin/mutt_helper.sh"; # Launch mutt
+          "${modifier}+34" = "exec ${config.home.homeDirectory}/bin/mutt_helper"; # Launch mutt
           "${modifier}+35" = "exec ${pkgs.element-desktop}/bin/element-desktop"; # Launch Element
         };
 

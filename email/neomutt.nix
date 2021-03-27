@@ -6,6 +6,14 @@ in
   # Add old mutt as well for now.
   home.packages = [ pkgs.mutt ];
 
+  home.file."bin/mutt_helper" = {
+    text = ''
+      #!/usr/bin/env sh
+      ${config.home.sessionVariables.TERMINAL} -t Mutt -e neomutt "$@"
+    '';
+    executable = true;
+  };
+
   programs.neomutt = {
     enable = true;
     vimKeys = true;
