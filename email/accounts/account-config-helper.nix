@@ -64,6 +64,7 @@
   signatureConfig = { signatureLines, ... }: {
     neomutt.extraConfig = ''
       set signature="${mkSignatureScript signatureLines}|"
+      set folder="${config.accounts.email.maildirBasePath}"
     '';
   };
 }
