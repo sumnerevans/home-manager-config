@@ -4,6 +4,7 @@
     ./mailcap.nix
     ./mbsync.nix
     ./neomutt.nix
+    ./offlinemsmtp.nix
   ];
 
   services.imapnotify.enable = true;

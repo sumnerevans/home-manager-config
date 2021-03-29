@@ -17,7 +17,7 @@
     };
   };
 
-  config = {
+  config = mkIf (config.wayland.enable || config.xorg.enable) {
     programs.i3status-rust = {
       enable = true;
 

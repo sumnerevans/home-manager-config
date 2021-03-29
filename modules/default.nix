@@ -1,0 +1,19 @@
+{
+  imports = [
+    ./alacritty.nix
+    ./browsers.nix
+    ./calendar
+    ./email
+    ./git.nix
+    ./gpg.nix
+    ./neovim.nix
+    ./newsboat.nix
+    ./scripts
+    ./syncthing.nix
+    ./tmux.nix
+    ./udiskie.nix
+    ./window-manager
+    ./xdg.nix
+    ./zsh
+  ];
+}

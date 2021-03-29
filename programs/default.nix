@@ -10,19 +10,6 @@
   tracktime = callPackage ../pkgs/tracktime.nix {};
 in
 {
-  imports = [
-    ./alacritty.nix
-    ./browsers.nix
-    ./git.nix
-    ./i3status-rust.nix
-    ./neovim.nix
-    ./newsboat.nix
-    ./projectsync.nix
-    ./rofi.nix
-    ./tmux.nix
-    ./zsh
-  ];
-
   home.packages = [
     # Shell Utilities
     aspell
@@ -143,17 +130,13 @@ in
   programs.direnv = {
     enable = true;
     enableNixDirenvIntegration = true;
-    enableZshIntegration = true;
   };
 
   programs.feh.enable = true;
 
-  # TODO firefox
-
   programs.fzf = {
     enable = true;
     defaultCommand = "fd --type f --hidden --follow --exclude .git";
-    enableZshIntegration = true;
   };
 
   programs.gpg.enable = true;
@@ -180,7 +163,7 @@ in
   programs.obs-studio.enable = true;
   programs.obs-studio.plugins = with pkgs; [ obs-wlrobs obs-v4l2sink ];
 
-  programs.opam = { enable = true; enableZshIntegration = true; };
+  programs.opam.enable = true;
 
   programs.password-store.enable = true;
 

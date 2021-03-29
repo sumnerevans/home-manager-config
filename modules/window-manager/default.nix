@@ -6,7 +6,11 @@
 in
 {
   imports = [
+    ./i3status-rust.nix
+    ./rofi.nix
+    ./wallpaper.nix
     ./wayland.nix
+    ./writeping.nix
     ./xorg.nix
   ];
 
@@ -48,5 +52,15 @@ in
         gtk-toolbar-icon-size = "GTK_ICON_SIZE_LARGE_TOOLBAR";
       };
     };
+
+    qt = {
+      enable = true;
+      platformTheme = "gtk";
+    };
+
+    # Enable GUI services
+    services.blueman-applet.enable = true;
+    services.kdeconnect = { enable = true; indicator = true; };
+    services.network-manager-applet.enable = true;
   };
 }

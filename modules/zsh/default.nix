@@ -112,6 +112,10 @@
         '';
     };
 
+    programs.direnv.enableZshIntegration = true;
+    programs.fzf.enableZshIntegration = true;
+    programs.opam.enableZshIntegration = true;
+
     home.sessionPath = [
       "${config.home.homeDirectory}/.local/bin"
       "${config.home.homeDirectory}/.cargo/bin"

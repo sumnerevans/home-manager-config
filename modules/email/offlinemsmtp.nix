@@ -1,5 +1,5 @@
 { config, pkgs, ... }: with pkgs; let
-  offlinemsmtp = callPackage ../pkgs/offlinemsmtp.nix {};
+  offlinemsmtp = callPackage ../../pkgs/offlinemsmtp.nix {};
 in
 {
   systemd.user.services.offlinemsmtp = {
