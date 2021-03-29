@@ -1,22 +1,23 @@
-{ pkgs, ... }: let
+{ config, pkgs, ... }: let
+  rollingPingFile = "${config.home.homeDirectory}/tmp/rolling_ping";
   writepingScript = pkgs.writeShellScript "writeping" ''
-    ${pkgs.coreutils}/bin/touch ~/tmp/rolling_ping
+    ${pkgs.coreutils}/bin/touch ${rollingPingFile}
 
     # Append the new ping time.
     ping=$(/run/wrappers/bin/ping -c 1 -W 1 8.8.8.8)
     if [[ $? != 0 ]]; then
-        echo "fail" > ~/tmp/rolling_ping
+        echo "fail" > ${rollingPingFile}
     else
-        ${pkgs.coreutils}/bin/cat ~/tmp/rolling_ping | ${pkgs.gnugrep}/bin/grep "fail"
-        [[ $? == 0 ]] && rm ~/tmp/rolling_ping
+        ${pkgs.coreutils}/bin/cat ${rollingPingFile} | ${pkgs.gnugrep}/bin/grep "fail"
+        [[ $? == 0 ]] && rm ${rollingPingFile}
         ping=$(echo $ping | \
           ${pkgs.gnugrep}/bin/grep 'rtt' | \
           ${pkgs.coreutils}/bin/cut -d '/' -f 5)
-        echo $ping >> ~/tmp/rolling_ping
+        echo $ping >> ${rollingPingFile}
     fi
 
     # Only keep the last 10 values.
-    echo "$(${pkgs.coreutils}/bin/tail ~/tmp/rolling_ping)" > ~/tmp/rolling_ping
+    echo "$(${pkgs.coreutils}/bin/tail ${rollingPingFile})" > ${rollingPingFile}
   '';
 in
 {

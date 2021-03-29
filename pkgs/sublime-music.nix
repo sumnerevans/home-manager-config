@@ -1,33 +1,27 @@
-{ fetchFromGitLab
-, gobject-introspection
-, gtk3
-, lib
-, networkmanager
-, python3
-, pango
-, python
-, python3Packages
-, wrapGAppsHook
+{ fetchFromGitLab, lib, pkgs, python3Packages, gobject-introspection, gtk3, pango, wrapGAppsHook
 
-, chromecastSupport ? true
-, serverSupport ? true
+, chromecastSupport ? false
+, serverSupport ? false
 , keyringSupport ? true
-, notifySupport ? true
-, libnotify
-, networkSupport ? true
+, notifySupport ? true, libnotify
+, networkSupport ? true, networkmanager
 }:
-python3Packages.buildPythonApplication rec {
-  pname = "sublime_music";
-  version = "0.11.11";
 
-  src = python3.pkgs.fetchPypi {
-    inherit pname version;
-    sha256 = "0h5fhsl7zcvdrgawa0p118jzjs5ws1rlwbwv05klvdhzzrx2xwrs";
+python3Packages.buildPythonApplication rec {
+  pname = "sublime-music";
+  version = "0.11.10";
+  format = "pyproject";
+
+  src = fetchFromGitLab {
+    owner = "sublime-music";
+    repo = pname;
+    rev = "v${version}";
+    sha256 = "1g78gmiywg07kaywfc9q0yab2bzxs936vb3157ni1z0flbmcwrry";
   };
 
   nativeBuildInputs = [
     gobject-introspection
-    python3Packages.setuptools
+    python3Packages.poetry
     wrapGAppsHook
   ];
 
@@ -35,8 +29,8 @@ python3Packages.buildPythonApplication rec {
     gtk3
     pango
   ]
-  ++ lib.optional notifySupport libnotify
-  ++ lib.optional networkSupport networkmanager
+   ++ lib.optional notifySupport libnotify
+   ++ lib.optional networkSupport networkmanager
   ;
 
   propagatedBuildInputs = with python3Packages; [
@@ -52,14 +46,18 @@ python3Packages.buildPythonApplication rec {
     requests
     semver
   ]
-  ++ lib.optional chromecastSupport PyChromecast
-  ++ lib.optional keyringSupport keyring
-  ++ lib.optional serverSupport bottle
+   ++ lib.optional chromecastSupport PyChromecast
+   ++ lib.optional keyringSupport keyring
+   ++ lib.optional serverSupport bottle
   ;
 
   # hook for gobject-introspection doesn't like strictDeps
   # https://github.com/NixOS/nixpkgs/issues/56943
   strictDeps = false;
+
+  # no tests
+  doCheck = false;
+  pythonImportsCheck = [ "sublime_music" ];
 
   postInstall = ''
     install -Dm444 sublime-music.desktop      -t $out/share/applications
@@ -75,6 +73,6 @@ python3Packages.buildPythonApplication rec {
     description = "GTK3 Subsonic/Airsonic client";
     homepage = "https://sublimemusic.app/";
     license = licenses.gpl3Plus;
-    maintainers = with maintainers; [ albakham ];
+    maintainers = with maintainers; [ albakham sumnerevans ];
   };
 }

@@ -17,6 +17,7 @@ in
     ./i3status-rust.nix
     ./neovim.nix
     ./newsboat.nix
+    ./projectsync.nix
     ./rofi.nix
     ./tmux.nix
     ./zsh
@@ -87,8 +88,7 @@ in
     spotify
     steam
     streamlink
-    # TODO FIX
-    # sublime-music
+    sublime-music
 
     # Configuration GUIs
     gnome3.gnome-power-manager

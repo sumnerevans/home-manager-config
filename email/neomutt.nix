@@ -1,11 +1,9 @@
-{ config, pkgs, ... }: let
+{ config, pkgs, ... }: with pkgs; let
   aliasfile = "${config.home.homeDirectory}/.mutt/aliases";
   bindir = "${config.home.homeDirectory}/bin";
+  mutt-display-filter = pkgs.writeScriptBin "mdf" (builtins.readFile ./bin/mutt-display-filter.py);
 in
 {
-  # Add old mutt as well for now.
-  home.packages = [ pkgs.mutt ];
-
   home.file."bin/mutt_helper" = {
     text = ''
       #!/usr/bin/env sh
@@ -22,7 +20,7 @@ in
     ];
     macros = [
       {
-        action = "!${bindir}/mailfetch.sh^M";
+        action = "!systemctl --user start mbsync &^M";
         key = "<F5>";
         map = "index";
       }
@@ -82,7 +80,7 @@ in
       source ${aliasfile}
       source ${config.home.homeDirectory}/.mutt/mailboxes
       set query_command="${bindir}/contact_query %s"
-      set display_filter="${bindir}/mutt-display-filter.py"
+      set display_filter="${mutt-display-filter}/bin/mdf"
 
       # Use return to open message because I'm not a savage
       unbind index <return>
