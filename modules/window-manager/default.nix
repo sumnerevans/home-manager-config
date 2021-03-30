@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }: with lib; let
   editor = "${pkgs.neovim}/bin/nvim";
+  menucalc = pkgs.callPackage ../../pkgs/menucalc.nix {};
   terminal = "${pkgs.alacritty}/bin/alacritty";
   waylandCfg = config.wayland;
   xorgCfg = config.xorg;
@@ -25,6 +26,7 @@ in
   config = mkIf (waylandCfg.enable || xorgCfg.enable) {
     home.packages = with pkgs; [
       brightnessctl
+      menucalc
       screenkey
     ];
 

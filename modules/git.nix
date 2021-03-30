@@ -1,4 +1,4 @@
-{ pkgs, ... }: let
+{ lib, pkgs, ... }: let
   offlinemsmtp = pkgs.callPackage ../pkgs/offlinemsmtp.nix {};
 in
 {
@@ -45,4 +45,15 @@ in
       ".stylelintrc"
     ];
   };
+
+  home.file.".python-gitlab.cfg".text = ''
+    [global]
+    default = gitlab
+    ssl_verify = true
+    timeout = 5
+
+    [gitlab]
+    url = https://gitlab.com
+    private_token = ${lib.removeSuffix "\n" (builtins.readFile ../secrets/gitlab-api-key)}
+  '';
 }

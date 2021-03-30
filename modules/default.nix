@@ -3,14 +3,17 @@
     ./alacritty.nix
     ./browsers.nix
     ./calendar
+    ./communication.nix
+    ./devtools.nix
     ./email
     ./git.nix
     ./gpg.nix
-    ./neovim.nix
+    ./neovim
     ./newsboat.nix
     ./scripts
     ./syncthing.nix
     ./tmux.nix
+    ./tracktime.nix
     ./udiskie.nix
     ./window-manager
     ./xdg.nix

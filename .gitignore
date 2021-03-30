@@ -1,2 +1,4 @@
 .direnv
+.secrets_password_file
 host-config.nix
+secrets/

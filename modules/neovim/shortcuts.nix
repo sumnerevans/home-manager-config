@@ -113,7 +113,4 @@ in
 
     ${concatMapStringsSep "\n\n" mkAuGroup groups}
   '';
-
-  # TODO use programs.neovim
-  home.packages = [ pkgs.neovim ];
 }

@@ -1,4 +1,5 @@
 { lib, config, pkgs, ... }: {
+  home.packages = [ pkgs.khal ];
   xdg.configFile."khal/config".text = ''
     [calendars]
 

@@ -7,6 +7,7 @@
   '';
 in
 {
+  home.packages = [ pkgs.vdirsyncer ];
   systemd.user.services.vdirsyncer = {
     Unit.Description = "Synchronize Calendar and Contacts";
 
@@ -26,4 +27,38 @@ in
 
     Install = { WantedBy = [ "timers.target" ]; };
   };
+
+  xdg.configFile."vdirsyncer/config".text = let
+    typeToFileExt = type: if type == "contacts" then ".vcf" else ".ics";
+    typeToRemoteType = type: if type == "contacts" then "carddav" else "caldav";
+    mkPair = { name, metadata ? [ "displayname" ] }: ''
+      [pair xandikos_${name}]
+      a = "xandikos_${name}_local"
+      b = "xandikos_${name}_remote"
+      collections = ["from a", "from b"]
+      metadata = [${concatMapStringsSep ", " (x: ''"${x}"'') metadata}]
+
+      [storage xandikos_${name}_local]
+      type = "filesystem"
+      path = "${config.xdg.dataHome}/vdirsyncer/${name}/"
+      fileext = "${typeToFileExt name}"
+
+      [storage xandikos_${name}_remote]
+      type = "${typeToRemoteType name}"
+      url = "https://dav.sumnerevans.com/"
+      username = "sumner"
+      password.fetch = ["command", "${pkgs.pass}/bin/pass", "Xandikos"]
+    '';
+  in
+    ''
+      [general]
+      # A folder where vdirsyncer can store some metadata about each pair.
+      status_path = "${config.xdg.dataHome}/vdirsyncer/status/"
+
+      # Contacts
+      ${mkPair { name = "contacts"; }}
+
+      # Calendar
+      ${mkPair { name = "calendars"; metadata = [ "displayname" "color" ]; }}
+    '';
 }

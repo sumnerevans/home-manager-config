@@ -1,6 +1,10 @@
-{ config, pkgs, ... }: with pkgs; {
+{ config, pkgs, ... }: with pkgs; let
+  quotesPath = "${config.xdg.dataHome}/fortune/quotes";
+in
+{
   imports = [
     ./accounts
+    ./contact-query.nix
     ./mailcap.nix
     ./mbsync.nix
     ./neomutt.nix
@@ -10,13 +14,10 @@
   services.imapnotify.enable = true;
   programs.msmtp.enable = true;
 
-  home.file = let
-    path = "${config.xdg.dataHome}/fortune/quotes";
-  in
-    rec {
-      "${path}" = {
-        source = ./quotes;
-        onChange = "${pkgs.fortune}/bin/strfile -r ${path}";
-      };
+  home.file = {
+    "${quotesPath}" = {
+      source = ./quotes;
+      onChange = "${pkgs.fortune}/bin/strfile -r ${quotesPath}";
     };
+  };
 }

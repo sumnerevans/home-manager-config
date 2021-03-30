@@ -1,6 +1,7 @@
-{ config, pkgs, lib, ... }: with lib; rec {
+{ config, pkgs, lib, ... }: with lib; let
+  offlinemsmtp = pkgs.callPackage ../../../pkgs/offlinemsmtp.nix {};
+
   # Create a signature script that gets a quote.
-  # TODO: fix the path to quotesfile
   mkSignatureScript = signatureLines: pkgs.writeScript "signature" ''
     #!${pkgs.python3}/bin/python
     import subprocess
@@ -15,7 +16,8 @@
         quote = subprocess.check_output(quotes_cmd).decode("utf-8").strip()
     print(quote)
   '';
-
+in
+{
   # Common configuration
   commonConfig = { address, name, color ? "", ... }: {
     inherit address;
@@ -34,7 +36,7 @@
 
     neomutt = {
       enable = true;
-      sendMailCommand = "offlinemsmtp -a ${name}";
+      sendMailCommand = "${offlinemsmtp}/bin/offlinemsmtp -a ${name}";
       extraConfig = mkIf (color != "") "color status ${color} default";
     };
 

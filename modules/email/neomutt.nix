@@ -79,7 +79,6 @@ in
     extraConfig = ''
       source ${aliasfile}
       source ${config.home.homeDirectory}/.mutt/mailboxes
-      set query_command="${bindir}/contact_query %s"
       set display_filter="${mutt-display-filter}/bin/mdf"
 
       # Use return to open message because I'm not a savage
