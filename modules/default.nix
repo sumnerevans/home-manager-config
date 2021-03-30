@@ -12,6 +12,7 @@
     ./neovim
     ./newsboat.nix
     ./scripts
+    ./symlinks.nix
     ./syncthing.nix
     ./tmux.nix
     ./tracktime.nix

@@ -1,5 +1,5 @@
 { config, pkgs, ... }: with pkgs; let
-  aliasfile = "${config.home.homeDirectory}/.mutt/aliases";
+  aliasfile = "${config.xdg.configHome}/neomutt/aliases";
   bindir = "${config.home.homeDirectory}/bin";
   mutt-display-filter = pkgs.writeScriptBin "mdf" (builtins.readFile ./bin/mutt-display-filter.py);
 in
@@ -78,7 +78,7 @@ in
 
     extraConfig = ''
       source ${aliasfile}
-      source ${config.home.homeDirectory}/.mutt/mailboxes
+      source ${config.xdg.configHome}/neomutt/mailboxes
       set display_filter="${mutt-display-filter}/bin/mdf"
 
       # Use return to open message because I'm not a savage
