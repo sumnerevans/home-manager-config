@@ -59,12 +59,12 @@ in
           html2text
           i3ipc
           icalendar
+          pillow
           pip
           pycairo
           pygobject3
           pynvim
           python-csmdirsearch
-          python-gitlab
           python-Levenshtein
           pytz
           tabulate

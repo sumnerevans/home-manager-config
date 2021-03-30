@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }: with lib; let
   cfg = config.xorg;
   common = import ./common.nix { inherit config lib pkgs; };
+  fuzzy-lock = import ./fuzzy-lock.nix { inherit config lib pkgs; };
 
   modifier = config.windowManager.modKey;
   tmpdir = "${config.home.homeDirectory}/tmp";
@@ -43,7 +44,7 @@ in
             "${modifier}+c" = "exec ${pkgs.clipmenu}/bin/clipmenu";
 
             # Lock screen
-            "${modifier}+Shift+x" = "exec ${config.home.homeDirectory}/bin/fuzzy_lock_sleep.sh";
+            "${modifier}+Shift+x" = "exec ${fuzzy-lock}/bin/fuzzy-lock";
 
             # exit i3wm (logs you out of your session)
             "${modifier}+Shift+e" = ''exec "${pkgs.i3-gaps}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"'';

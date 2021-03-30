@@ -3,6 +3,18 @@
   common = import ./common.nix { inherit config lib pkgs; };
   clipmanHistpath = ''--histpath="${config.xdg.cacheHome}/clipman.json"'';
   clipmanCmd = "${pkgs.clipman}/bin/clipman";
+  swaylockCmd = concatStringsSep " " [
+    "${pkgs.swaylock-effects}/bin/swaylock"
+    "--daemonize"
+    "--screenshots"
+    "--clock"
+    "--indicator"
+    "--indicator-radius 100"
+    "--indicator-thickness 7"
+    "--effect-blur 7x5"
+    "--effect-vignette 0.7:0.7"
+    "--fade-in 0.5"
+  ];
 in
 {
   options = {
@@ -28,6 +40,8 @@ in
           wlpaste = "${pkgs.wl-clipboard}/bin/wl-paste";
           gsettings = "${pkgs.glib}/bin/gsettings";
           gnomeSchema = "org.gnome.desktop.interface";
+          inactive-windows-transparency = pkgs.writeScriptBin "inactive-windows-transparency"
+            (builtins.readFile ./bin/inactive-windows-transparency.py);
         in
           [
             # Clipboard Manager
@@ -35,7 +49,19 @@ in
             { command = "${wlpaste} -p -t text --watch ${clipmanCmd} store -P ${clipmanHistpath}"; }
 
             # Window transparency
-            { command = "${config.home.homeDirectory}/bin/inactive-windows-transparency.py"; }
+            { command = "${inactive-windows-transparency}/bin/inactive-windows-transparency"; }
+
+            # Lock screen & DPMS
+            {
+              command = ''
+                swayidle -w \
+                    timeout 300 'if pgrep -x swaylock; then ${swaylockCmd}; fi' \
+                    timeout 360 '${pkgs.sway}/bin/swaymsg "output * dpms off"' \
+                         resume '${pkgs.sway}/bin/swaymsg "output * dpms on"' \
+                   before-sleep '${pkgs.playerctl}/bin/playerctl pause' \
+                   before-sleep 'if pgrep -x swaylock; then ${swaylockCmd}; fi'
+              '';
+            }
 
             # GTK
             { command = "${gsettings} set ${gnomeSchema} gtk-theme 'Arc-Dark'"; always = true; }
@@ -46,17 +72,6 @@ in
 
         config.keybindings = let
           modifier = config.windowManager.modKey;
-          swaylockCmd = concatStringsSep " " [
-            "${pkgs.swaylock-effects}/bin/swaylock"
-            "--screenshots"
-            "--clock"
-            "--indicator"
-            "--indicator-radius 100"
-            "--indicator-thickness 7"
-            "--effect-blur 7x5"
-            "--effect-vignette 0.7:0.7"
-            "--fade-in 0.5"
-          ];
           grim = "${pkgs.grim}/bin/grim";
           slurp = "${pkgs.slurp}/bin/slurp";
           screenshotOutfile = "${config.home.homeDirectory}/tmp/$(${pkgs.coreutils}/bin/date +%Y-%m-%d-%T).png";

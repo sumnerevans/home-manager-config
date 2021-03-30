@@ -8,6 +8,7 @@
     ./email
     ./git.nix
     ./gpg.nix
+    ./multimedia.nix
     ./neovim
     ./newsboat.nix
     ./scripts
