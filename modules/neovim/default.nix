@@ -30,12 +30,16 @@
     extraPackages = with pkgs; [
       bat
       ccls
+      clang
       ripgrep
       rnix-lsp
+      texlab
     ];
 
     extraPython3Packages = (
       ps: with ps; [
+        black
+        flake8
         pynvim
         python-language-server
       ]

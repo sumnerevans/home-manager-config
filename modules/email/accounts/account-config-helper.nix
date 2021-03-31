@@ -1,5 +1,5 @@
 { config, pkgs, lib, ... }: with lib; let
-  offlinemsmtp = pkgs.callPackage ../../../pkgs/offlinemsmtp.nix {};
+  offlinemsmtp = pkgs.callPackage ../../../pkgs/offlinemsmtp.nix { };
 
   # Create a signature script that gets a quote.
   mkSignatureScript = signatureLines: pkgs.writeScript "signature" ''
@@ -37,7 +37,14 @@ in
     neomutt = {
       enable = true;
       sendMailCommand = "${offlinemsmtp}/bin/offlinemsmtp -a ${name}";
-      extraConfig = mkIf (color != "") "color status ${color} default";
+
+
+      extraConfig = concatStringsSep "\n" (
+        [
+          ''set folder="${config.accounts.email.maildirBasePath}"''
+        ]
+        ++ (optional (color != "") "color status ${color} default")
+      );
     };
 
     folders.inbox = "INBOX";
@@ -66,7 +73,6 @@ in
   signatureConfig = { signatureLines, ... }: {
     neomutt.extraConfig = ''
       set signature="${mkSignatureScript signatureLines}|"
-      set folder="${config.accounts.email.maildirBasePath}"
     '';
   };
 }
