@@ -13,7 +13,7 @@ in
     home.symlinks = mkOption {
       type = types.attrsOf (types.str);
       description = "A list of symlinks to create.";
-      default = {};
+      default = { };
     };
   };
 

@@ -55,10 +55,6 @@
         " Go to symbol in (document|project)
         nmap <silent> S :CocList symbols<CR>
 
-        " Remap for format (selected region|document)
-        xmap <C-S-F> <Plug>(coc-format-selected)
-        nmap <C-S-F> <Plug>(coc-format)
-
         " CoC Explorer
         function! CocExploreCwd()
             let cwd = substitute(execute(":pwd"), '\n', "", "")

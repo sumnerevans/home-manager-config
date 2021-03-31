@@ -1,7 +1,7 @@
 { lib, pkgs, ... }: with lib; with pkgs; let
   passCmd = "${pass}/bin/pass";
-  tracktime = callPackage ../pkgs/tracktime.nix {};
-  yamlFormat = pkgs.formats.yaml {};
+  tracktime = callPackage ../pkgs/tracktime.nix { };
+  yamlFormat = pkgs.formats.yaml { };
 in
 {
   home.packages = [ tracktime ];

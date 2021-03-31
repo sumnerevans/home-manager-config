@@ -1,6 +1,7 @@
 { pkgs, ... }: {
-  programs.neovim.plugins = [
-    {
+  programs.neovim = {
+    extraPackages = [ pkgs.nixpkgs-fmt ];
+    plugins = [{
       plugin = pkgs.vimPlugins.ale;
       config = ''
         let g:ale_disable_lsp = 1
@@ -14,7 +15,15 @@
         let g:ale_sign_error = '✖'              " Consistent sign column with Language Client
         let g:ale_sign_warning = '⚠'
         let g:ale_sign_info = '➤'
+
+        let g:ale_fixers = {
+          \   'nix': ['nixpkgs-fmt'],
+          \}
+
+        " Remap for format (selected region|document)
+        xmap <C-S-F> <Plug>(ale_fix)
+        nmap <C-S-F> <Plug>(ale_fix)
       '';
-    }
-  ];
+    }];
+  };
 }
