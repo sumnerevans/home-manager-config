@@ -18,13 +18,13 @@ in
       config = ''
         let g:rainbow_active = 1
         let g:rainbow_conf = {
-                    \   'separately': {
-                    \       'nerdtree': 0,
-                    \       'tex': {
-                    \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
-                    \       },
-                    \   }
-                    \}
+            \   'separately': {
+            \       'nerdtree': 0,
+            \       'tex': {
+            \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+            \       },
+            \   }
+            \}
       '';
     }
   ];

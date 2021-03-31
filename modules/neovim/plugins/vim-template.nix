@@ -1,5 +1,5 @@
 # Sublime Text-like search
-{ pkgs, ... }: let
+{ config, pkgs, ... }: let
   vim-template = pkgs.vimUtils.buildVimPluginFrom2Nix rec {
     pname = "vim-template";
     version = "0.0.1";
@@ -19,9 +19,8 @@ in
       config = ''
         let g:templates_no_builtin_templates = 1
         let g:templates_directory = [
-                    \'~/.vim/vim-templates',
-                    \'~/.config/nvim/templates',
-                    \]
+            \'${config.xdg.configHome}/nvim/templates',
+            \]
       '';
     }
   ];
