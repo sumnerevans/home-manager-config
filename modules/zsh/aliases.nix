@@ -70,7 +70,6 @@ in
 
       # Use nvim by default if it exists
       realvim = "command vim";
-      vim = "nvim";
     };
 
     initExtra = ''

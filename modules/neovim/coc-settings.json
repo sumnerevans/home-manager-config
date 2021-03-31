@@ -1,0 +1,79 @@
+{
+  "diagnostic.displayByAle": true,
+  "coc.preferences.jumpCommand": "tab drop",
+  "explorer.keyMappings.global": {
+    "<cr>": [
+      "expandable?",
+      [
+        "expanded?",
+        "collapse",
+        "expand"
+      ],
+      "open"
+    ]
+  },
+  "coc.preferences.rootPatterns": [
+    ".rooter_root",
+    ".git",
+    ".hg",
+    ".projections.json"
+  ],
+  "explorer.file.showHiddenFiles": true,
+  "explorer.git.icon.status.added": "✚",
+  "explorer.git.icon.status.deleted": "✖",
+  "explorer.git.icon.status.renamed": "➜",
+  "explorer.git.icon.status.copied": "➜",
+  "explorer.git.icon.status.unmerged": "═",
+  "explorer.git.icon.status.untracked": "?",
+  "explorer.git.icon.status.ignored": "☒",
+  "explorer.git.icon.status.mixed": "✹",
+  "explorer.git.icon.status.modified": "✹",
+  "explorer.icon.enableNerdfont": true,
+  "explorer.git.showIgnored": true,
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": [
+        "c",
+        "cpp",
+        "cuda",
+        "objc",
+        "objcpp"
+      ],
+      "rootPatterns": [
+        ".ccls-root",
+        "compile_commands.json",
+        ".vim/",
+        ".git/"
+      ],
+      "initializationOptions": {
+        "cache": {
+          "directory": ".ccls-cache"
+        }
+      }
+    },
+    "nix": {
+      "command": "rnix-lsp",
+      "filetypes": [
+        "nix"
+      ]
+    },
+    "racket": {
+      "command": "racket",
+      "args": [
+        "--lib",
+        "racket-langserver"
+      ],
+      "filetypes": [
+        "racket"
+      ]
+    },
+    "vala": {
+      "command": "vala-language-server",
+      "filetypes": [
+        "vala",
+        "genie"
+      ]
+    }
+  }
+}

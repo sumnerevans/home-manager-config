@@ -103,8 +103,7 @@
   ];
 in
 {
-  home.file."${config.xdg.configHome}/nvim/shortcuts".text = ''
-    " vim: ft=vim
+  programs.neovim.extraConfig = ''
     inoremap ;g (<>)
 
     " Navigating with guides

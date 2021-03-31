@@ -53,13 +53,14 @@ in
 
             # Lock screen & DPMS
             {
+              # TODO add keyboard on kohaku
               command = ''
                 swayidle -w \
-                    timeout 300 'if pgrep -x swaylock; then ${swaylockCmd}; fi' \
+                    timeout 300 '${swaylockCmd}' \
                     timeout 360 '${pkgs.sway}/bin/swaymsg "output * dpms off"' \
                          resume '${pkgs.sway}/bin/swaymsg "output * dpms on"' \
                    before-sleep '${pkgs.playerctl}/bin/playerctl pause' \
-                   before-sleep 'if pgrep -x swaylock; then ${swaylockCmd}; fi'
+                   before-sleep '${swaylockCmd}'
               '';
             }
 

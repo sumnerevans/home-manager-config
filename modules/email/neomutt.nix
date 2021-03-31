@@ -1,7 +1,10 @@
 { config, pkgs, ... }: with pkgs; let
   aliasfile = "${config.xdg.configHome}/neomutt/aliases";
+  mailboxfile = "${config.xdg.configHome}/neomutt/mailboxes";
   bindir = "${config.home.homeDirectory}/bin";
   mutt-display-filter = pkgs.writeScriptBin "mdf" (builtins.readFile ./bin/mutt-display-filter.py);
+
+  syncthingdir = "${config.home.homeDirectory}/Syncthing";
 in
 {
   home.file."bin/mutt_helper" = {
@@ -11,6 +14,9 @@ in
     '';
     executable = true;
   };
+
+  home.symlinks."${aliasfile}" = "${syncthingdir}/.config/neomutt/aliases";
+  home.symlinks."${mailboxfile}" = "${syncthingdir}/.config/neomutt/mailboxes";
 
   programs.neomutt = {
     enable = true;
@@ -78,7 +84,7 @@ in
 
     extraConfig = ''
       source ${aliasfile}
-      source ${config.xdg.configHome}/neomutt/mailboxes
+      source ${mailboxfile}
       set display_filter="${mutt-display-filter}/bin/mdf"
 
       # Use return to open message because I'm not a savage

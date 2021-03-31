@@ -1,10 +1,56 @@
-{ config, pkgs, lib, ... }: with lib; let
-in
-{
+# Cool other configs to look at
+# - http://www.lukesmith.xyz/conf/.vimrc
+# - https://github.com/thoughtstream/Damian-Conway-s-Vim-Setup
+# - https://github.com/jschomay/.vim/blob/master/vimrc
+# - https://github.com/jhgarner/DotFiles
+#
+# Dependencies
+# - bat
+# - fzf
+# - python-neovim
+# - ripgrep
+# - wmctrl
+# - probably others
+
+{ config, pkgs, lib, ... }: with lib; {
   imports = [
+    ./clipboard.nix
+    ./plugins
     ./shortcuts.nix
+    ./theme.nix
   ];
 
-  # TODO use programs.neovim
-  home.packages = [ pkgs.neovim ];
+  programs.neovim = {
+    enable = true;
+    extraConfig = concatMapStringsSep "\n\n" builtins.readFile [
+      ./init.vim
+      ./filetype-specific-configs.vim
+    ];
+
+    extraPackages = with pkgs; [
+      bat
+      ccls
+      ripgrep
+      rnix-lsp
+    ];
+
+    extraPython3Packages = (
+      ps: with ps; [
+        pynvim
+        python-language-server
+      ]
+    );
+
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+
+    withNodeJs = true;
+    withPython3 = true;
+    withRuby = true;
+  };
+
+  home.symlinks."${config.xdg.configHome}/nvim/spell/en.utf-8.add" = "${config.home.homeDirectory}/Syncthing/.config/nvim/spell/en.utf-8.add";
+
+  xdg.configFile."nvim/coc-settings.json".source = ./coc-settings.json;
 }

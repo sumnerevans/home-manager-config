@@ -12,6 +12,7 @@
     ./neovim
     ./newsboat.nix
     ./scripts
+    ./ssh.nix
     ./symlinks.nix
     ./syncthing.nix
     ./tmux.nix

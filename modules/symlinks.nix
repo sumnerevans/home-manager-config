@@ -1,30 +1,24 @@
 { config, lib, pkgs, ... }: with lib; let
   cu = "${pkgs.coreutils}/bin";
-  homedir = "${config.home.homeDirectory}";
-  configdir = "${config.xdg.configHome}";
-  syncthing = "${homedir}/Syncthing";
-  symlinks = [
-    {
-      target = "${syncthing}/.ssh/config";
-      destination = "${homedir}/.ssh/config";
-    }
-    {
-      target = "${syncthing}/.config/neomutt/aliases";
-      destination = "${homedir}/.config/neomutt/aliases";
-    }
-    {
-      target = "${syncthing}/.config/neomutt/mailboxes";
-      destination = "${homedir}/.config/neomutt/mailboxes";
-    }
-  ];
+  cfg = config.home.symlinks;
 
-  toSymlinkCmd = { target, destination }: ''
+  toSymlinkCmd = destination: target: ''
     $DRY_RUN_CMD ${cu}/mkdir -p $(${cu}/dirname ${destination})
     $DRY_RUN_CMD ${cu}/ln -sf $VERBOSE_ARG \
       ${target} ${destination}
   '';
 in
 {
-  home.activation.symlinks = hm.dag.entryAfter [ "writeBoundary" ]
-    (concatMapStringsSep "\n" toSymlinkCmd symlinks);
+  options = {
+    home.symlinks = mkOption {
+      type = types.attrsOf (types.str);
+      description = "A list of symlinks to create.";
+      default = {};
+    };
+  };
+
+  config = {
+    home.activation.symlinks = hm.dag.entryAfter [ "writeBoundary" ]
+      (concatStringsSep "\n" (mapAttrsToList toSymlinkCmd cfg));
+  };
 }
