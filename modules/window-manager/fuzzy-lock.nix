@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: with pkgs; let
   pgrep = "${procps}/bin/pgrep";
   sleep = "${coreutils}/bin/sleep";
-  ffmpegFilters = concatStringsSep "," [
+  ffmpegFilters = lib.concatStringsSep "," [
     "noise=alls=10"
     "scale=iw*.25:-1"
     "gblur=sigma=5"
