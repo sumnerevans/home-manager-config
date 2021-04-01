@@ -38,7 +38,6 @@ in
       enable = true;
       sendMailCommand = "${offlinemsmtp}/bin/offlinemsmtp -a ${name}";
 
-
       extraConfig = concatStringsSep "\n" (
         [
           ''set folder="${config.accounts.email.maildirBasePath}"''

@@ -16,7 +16,13 @@
     address = "inquiries@sumnerevans.com";
     color = "green";
   };
-  
+
+  bookMyTimeAdmin = {
+    name = "BMT-Admin";
+    address = "admin@bookmyti.me";
+    color = "green";
+  };
+
   helper = import ./account-config-helper.nix { inherit config pkgs lib; };
 in
 {
@@ -40,6 +46,11 @@ in
 
     Inquiries = mkMerge [
       (helper.commonConfig inquiriesConfig)
+      helper.migaduConfig
+    ];
+
+    BMT-Admin = mkMerge [
+      (helper.commonConfig bookMyTimeAdmin)
       helper.migaduConfig
     ];
   };

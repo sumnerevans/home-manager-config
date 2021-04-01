@@ -66,7 +66,9 @@ in
 
     settings = {
       alias_file = aliasfile;
+      confirmappend = "no";
       edit_headers = "yes";
+      fast_reply = "yes";
       folder = "${config.home.homeDirectory}/Mail";
       imap_check_subscribed = "yes";
       include = "yes";
@@ -74,12 +76,14 @@ in
       mail_check_stats = "yes";
       mailcap_path = "${config.xdg.configHome}/neomutt/mailcap";
       mark_old = "no";
-      pager_index_lines = "10";
+      markers = "no";
       pager_context = "3";
+      pager_index_lines = "10";
       pager_stop = "yes";
       sort_aux = "reverse-last-date-received";
       sort_re = "yes";
       tmpdir = "${config.home.homeDirectory}/tmp";
+      wrap = "100";
     };
 
     extraConfig = ''
