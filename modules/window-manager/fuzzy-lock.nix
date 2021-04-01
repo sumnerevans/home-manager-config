@@ -7,6 +7,7 @@
     "gblur=sigma=5"
     "scale=iw*4:-1:flags=neighbor"
   ];
+  imageFile = "${config.home.homeDirectory}/tmp/wallpaper.png";
   fuzzy-lock = pkgs.writeShellScriptBin "fuzzy-lock" ''
     ${pgrep} i3lock && exit
 
@@ -17,9 +18,9 @@
 
     ${ffmpeg-full}/bin/ffmpeg -y -loglevel 0 \
       -s "$resolution" -f x11grab -i $DISPLAY -vframes 1 \
-      -vf "${ffmpegFilters}" $IMAGE_FILE
+      -vf "${ffmpegFilters}" ${imageFile}
 
-    ${i3lock}/bin/i3lock -ei $IMAGE_FILE -c 000000
+    ${i3lock}/bin/i3lock -ei ${imageFile} -c 000000
 
     # Turn off the display after a time
     off_sec=60
