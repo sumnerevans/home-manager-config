@@ -26,7 +26,7 @@ in
     wayland.extraSwayConfig = mkOption {
       type = types.attrsOf types.anything;
       description = "Extra config for Sway";
-      default = {};
+      default = { };
     };
   };
 
@@ -36,13 +36,14 @@ in
       {
         wrapperFeatures.gtk = true;
         config.focus.forceWrapping = true;
-        config.startup = let
-          wlpaste = "${pkgs.wl-clipboard}/bin/wl-paste";
-          gsettings = "${pkgs.glib}/bin/gsettings";
-          gnomeSchema = "org.gnome.desktop.interface";
-          inactive-windows-transparency = pkgs.writeScriptBin "inactive-windows-transparency"
-            (builtins.readFile ./bin/inactive-windows-transparency.py);
-        in
+        config.startup =
+          let
+            wlpaste = "${pkgs.wl-clipboard}/bin/wl-paste";
+            gsettings = "${pkgs.glib}/bin/gsettings";
+            gnomeSchema = "org.gnome.desktop.interface";
+            inactive-windows-transparency = pkgs.writeScriptBin "inactive-windows-transparency"
+              (builtins.readFile ./bin/inactive-windows-transparency.py);
+          in
           [
             # Clipboard Manager
             { command = "${wlpaste} -t text --watch ${clipmanCmd} store ${clipmanHistpath}"; }
@@ -71,12 +72,13 @@ in
             { command = "${gsettings} set ${gnomeSchema} cursor-size 24"; always = true; }
           ];
 
-        config.keybindings = let
-          modifier = config.windowManager.modKey;
-          grim = "${pkgs.grim}/bin/grim";
-          slurp = "${pkgs.slurp}/bin/slurp";
-          screenshotOutfile = "${config.home.homeDirectory}/tmp/$(${pkgs.coreutils}/bin/date +%Y-%m-%d-%T).png";
-        in
+        config.keybindings =
+          let
+            modifier = config.windowManager.modKey;
+            grim = "${pkgs.grim}/bin/grim";
+            slurp = "${pkgs.slurp}/bin/slurp";
+            screenshotOutfile = "${config.home.homeDirectory}/tmp/$(${pkgs.coreutils}/bin/date +%Y-%m-%d-%T).png";
+          in
           {
             # Popup Clipboard Manager
             "${modifier}+c" = "exec ${clipmanCmd} pick -t rofi ${clipmanHistpath}";
@@ -103,6 +105,7 @@ in
     home.sessionVariables = {
       GTK_THEME = "Arc-Dark";
       MOZ_ENABLE_WAYLAND = "1";
+      MOZ_DBUS_REMOTE = "1";
       XDG_CURRENT_DESKTOP = "sway";
       XDG_SESSION_TYPE = "wayland";
     };
@@ -136,29 +139,33 @@ in
       borderColor = common.notificationColorConfig.urgency_normal.frame_color;
       textColor = common.notificationColorConfig.urgency_normal.foreground;
 
-      extraConfig = generators.toINI {} (
-        mapAttrs' (
-          name: val: nameValuePair
-            (builtins.replaceStrings [ "_" "critical" ] [ "=" "high" ] name)
-            (
-              mapAttrs' (
-                k: v:
-                  nameValuePair
-                    (
-                      if k == "timeout" then "default-timeout"
-                      else if k == "frame_color" then "border-color"
-                      else if k == "foreground" then "text-color"
-                      else if k == "background" then "background-color"
-                      else k
-                    )
-                    (
-                      if k == "timeout" then v * 1000
-                      else if k == "background" then v + "CC"
-                      else v
-                    )
-              ) val
-            )
-        ) common.notificationColorConfig
+      extraConfig = generators.toINI { } (
+        mapAttrs'
+          (
+            name: val: nameValuePair
+              (builtins.replaceStrings [ "_" "critical" ] [ "=" "high" ] name)
+              (
+                mapAttrs'
+                  (
+                    k: v:
+                      nameValuePair
+                        (
+                          if k == "timeout" then "default-timeout"
+                          else if k == "frame_color" then "border-color"
+                          else if k == "foreground" then "text-color"
+                          else if k == "background" then "background-color"
+                          else k
+                        )
+                        (
+                          if k == "timeout" then v * 1000
+                          else if k == "background" then v + "CC"
+                          else v
+                        )
+                  )
+                  val
+              )
+          )
+          common.notificationColorConfig
       );
     };
   };
