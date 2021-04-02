@@ -29,7 +29,6 @@
 
     extraPackages = with pkgs; [
       bat
-      ccls
       clang
       ripgrep
       rnix-lsp

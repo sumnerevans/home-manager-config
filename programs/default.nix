@@ -64,8 +64,9 @@ in
           pycairo
           pygobject3
           pynvim
-          python-csmdirsearch
           python-Levenshtein
+          python-csmdirsearch
+          python-gitlab
           pytz
           tabulate
           vobject

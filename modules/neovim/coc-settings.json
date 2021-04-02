@@ -1,6 +1,5 @@
 {
   "diagnostic.displayByAle": true,
-  "coc.preferences.jumpCommand": "tab drop",
   "explorer.keyMappings.global": {
     "<cr>": [
       "expandable?",
@@ -31,27 +30,6 @@
   "explorer.icon.enableNerdfont": true,
   "explorer.git.showIgnored": true,
   "languageserver": {
-    "ccls": {
-      "command": "ccls",
-      "filetypes": [
-        "c",
-        "cpp",
-        "cuda",
-        "objc",
-        "objcpp"
-      ],
-      "rootPatterns": [
-        ".ccls-root",
-        "compile_commands.json",
-        ".vim/",
-        ".git/"
-      ],
-      "initializationOptions": {
-        "cache": {
-          "directory": ".ccls-cache"
-        }
-      }
-    },
     "nix": {
       "command": "rnix-lsp",
       "filetypes": [
