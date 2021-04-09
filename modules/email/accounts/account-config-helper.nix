@@ -41,6 +41,7 @@ in
       extraConfig = concatStringsSep "\n" (
         [
           ''set folder="${config.accounts.email.maildirBasePath}"''
+          ''set pgp_default_key = "B50022FD"''
         ]
         ++ (optional (color != "") "color status ${color} default")
       );

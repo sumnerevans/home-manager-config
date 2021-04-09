@@ -91,7 +91,6 @@ in
   programs.fzf.defaultCommand = "fd --type f --hidden --follow --exclude .git";
 
   programs.home-manager.enable = true;
-  programs.home-manager.path = "$HOME/projects/home-manager";
 
   programs.htop.enable = true;
 

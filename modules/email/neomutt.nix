@@ -22,38 +22,42 @@ in
     enable = true;
     vimKeys = true;
     binds = [
-      { action = "complete-query"; key = "<Tab>"; map = "editor"; }
+      { action = "complete-query"; key = "<Tab>"; map = [ "editor" ]; }
+      { action = "sidebar-prev"; key = "\\Cp"; map = [ "index" "pager" ]; }
+      { action = "sidebar-next"; key = "\\Cn"; map = [ "index" "pager" ]; }
+      { action = "sidebar-open"; key = "\\Co"; map = [ "index" "pager" ]; }
+
     ];
     macros = [
       {
         action = "!systemctl --user start mbsync &^M";
         key = "<F5>";
-        map = "index";
+        map = [ "index" ];
       }
       {
         action = "<change-folder>${config.accounts.email.accounts.Personal.maildir.absPath}/INBOX<enter>";
         key = "P";
-        map = "index";
+        map = [ "index" ];
       }
       {
         action = "<change-folder>${config.accounts.email.accounts.Mines.maildir.absPath}/INBOX<enter>";
         key = "M";
-        map = "index";
+        map = [ "index" ];
       }
       {
         action = "<change-folder>${config.accounts.email.accounts.Gmail.maildir.absPath}/INBOX<enter>";
         key = "A";
-        map = "index";
+        map = [ "index" ];
       }
       {
         action = "<change-folder>?<change-dir><home>^K=<enter><tab>";
         key = "c";
-        map = "index";
+        map = [ "index" ];
       }
       {
         action = "<save-message>?<tab>";
         key = "s";
-        map = "index";
+        map = [ "index" ];
       }
     ];
 
@@ -98,10 +102,6 @@ in
       # Use N to toggle new
       unbind index N
       bind index N toggle-new
-
-      bind index,pager \Cp sidebar-prev # Move the highlight to the previous mailbox
-      bind index,pager \Cn sidebar-next # Move the highlight to the next mailbox
-      bind index,pager \Co sidebar-open # Open the highlighted mailbox
 
       # Status Bar
       set status_chars  = " *%A"

@@ -95,7 +95,7 @@ in
           };
 
         extraConfig = ''
-          seat * hide_cursor 2000
+          seat * hide_cursor when-typing enable
           seat * xcursor_theme capitaine-cursors 24
         '';
       }
