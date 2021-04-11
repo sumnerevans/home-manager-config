@@ -94,10 +94,10 @@ in
             Print = "exec ${grim} ${screenshotOutfile}";
           };
 
-        extraConfig = ''
-          seat * hide_cursor when-typing enable
-          seat * xcursor_theme capitaine-cursors 24
-        '';
+        config.seat."*" = {
+          hide_cursor = "when-typing enable";
+          xcursor_theme = "capitaine-cursors 24";
+        };
       }
       cfg.extraSwayConfig
     ];
