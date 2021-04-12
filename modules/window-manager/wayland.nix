@@ -46,8 +46,11 @@ in
           in
           [
             # Clipboard Manager
-            { command = "${wlpaste} -t text --watch ${clipmanCmd} store ${clipmanHistpath}"; }
-            { command = "${wlpaste} -p -t text --watch ${clipmanCmd} store -P ${clipmanHistpath}"; }
+            { command = "${wlpaste} -t text --watch ${clipmanCmd} store --max-items=10000 ${clipmanHistpath}"; }
+            { command = "${wlpaste} -p -t text --watch ${clipmanCmd} store -P --max-items=10000 ${clipmanHistpath}"; }
+
+            # Ensure mako runs
+            { command = "${pkgs.mako}/bin/mako"; }
 
             # Window transparency
             { command = "${inactive-windows-transparency}/bin/inactive-windows-transparency"; }

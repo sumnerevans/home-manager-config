@@ -1,6 +1,6 @@
 { pkgs, ... }: with pkgs; let
-  python-csmdirsearch = callPackage ../pkgs/python-csmdirsearch.nix {};
-  python-gitlab = callPackage ../pkgs/python-gitlab.nix {};
+  python-csmdirsearch = callPackage ../pkgs/python-csmdirsearch.nix { };
+  python-gitlab = callPackage ../pkgs/python-gitlab.nix { };
 in
 {
   home.packages = [
