@@ -23,10 +23,10 @@ in
     vimKeys = true;
     binds = [
       { action = "complete-query"; key = "<Tab>"; map = [ "editor" ]; }
+      { action = "group-reply"; key = "R"; map = [ "index" "pager" ]; }
       { action = "sidebar-prev"; key = "\\Cp"; map = [ "index" "pager" ]; }
       { action = "sidebar-next"; key = "\\Cn"; map = [ "index" "pager" ]; }
       { action = "sidebar-open"; key = "\\Co"; map = [ "index" "pager" ]; }
-
     ];
     macros = [
       {
