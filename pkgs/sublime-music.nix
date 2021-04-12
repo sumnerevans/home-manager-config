@@ -1,5 +1,12 @@
-{ fetchFromGitLab, lib, pkgs, python3Packages, gobject-introspection, gtk3, pango, wrapGAppsHook
-
+{ fetchFromGitLab
+, lib
+, pkgs
+, python3Packages
+, gobject-introspection
+, gtk3
+, pango
+, wrapGAppsHook
+, xvfb_run
 , chromecastSupport ? false
 , serverSupport ? false
 , keyringSupport ? true
@@ -9,14 +16,14 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "sublime-music";
-  version = "0.11.10";
+  version = "0.11.11";
   format = "pyproject";
 
   src = fetchFromGitLab {
     owner = "sublime-music";
     repo = pname;
     rev = "v${version}";
-    sha256 = "1g78gmiywg07kaywfc9q0yab2bzxs936vb3157ni1z0flbmcwrry";
+    sha256 = "sha256-r4Tn/7CGDny8Aa4kF4PM5ZKMYthMJ7801X3zPdvXh4Q=";
   };
 
   nativeBuildInputs = [
@@ -38,11 +45,17 @@ python3Packages.buildPythonApplication rec {
     dataclasses-json
     deepdiff
     fuzzywuzzy
-    mpv
+    (mpv.overrideAttrs (old: {
+      postPatch = ''
+        substituteInPlace mpv.py \
+          --replace "sofile = ctypes.util.find_library('mpv')" \
+                    'sofile = "${pkgs.mpv}/lib/libmpv${pkgs.stdenv.targetPlatform.extensions.sharedLibrary}"'
+      '';
+    }))
     peewee
     pygobject3
-    python-dateutil
     python-Levenshtein
+    python-dateutil
     requests
     semver
   ]
@@ -55,9 +68,12 @@ python3Packages.buildPythonApplication rec {
   # https://github.com/NixOS/nixpkgs/issues/56943
   strictDeps = false;
 
-  # no tests
-  doCheck = false;
-  pythonImportsCheck = [ "sublime_music" ];
+  # Use the test suite provided by the upstream project.
+  checkInputs = with python3Packages; [
+    pytest
+    pytest-cov
+  ];
+  checkPhase = "${xvfb_run}/bin/xvfb-run pytest";
 
   postInstall = ''
     install -Dm444 sublime-music.desktop      -t $out/share/applications
