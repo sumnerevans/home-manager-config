@@ -3,6 +3,7 @@ let
   aleFixers = {
     c = [ [ "clang-format" pkgs.clang ] ];
     cpp = [ [ "clang-format" pkgs.clang ] ];
+    go = [ [ "gofmt" pkgs.go ] [ "goimports" pkgs.goimports ] ];
     nix = [ [ "nixpkgs-fmt" pkgs.nixpkgs-fmt ] ];
     python = [ [ "black" pkgs.black ] ];
   };
