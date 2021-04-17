@@ -21,9 +21,10 @@ in
 
     extraConfig = {
       core.editor = "${pkgs.neovim}/bin/nvim";
+      diff.colorMoved = "default";
+      init.defaultBranch = "master";
       pull.rebase = false;
       tag.gpgsign = true;
-      diff.colorMoved = "default";
 
       sendemail = {
         annotate = "yes";
