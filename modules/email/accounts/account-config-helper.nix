@@ -61,7 +61,6 @@ in
       enable = true;
       boxes = [ "INBOX" ];
       onNotify = "${pkgs.isync}/bin/mbsync ${name}:%s";
-      onNotifyPost = "${pkgs.libnotify}/bin/notify-send 'New mail in ${name}:%s'";
     };
   };
 

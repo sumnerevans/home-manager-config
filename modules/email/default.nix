@@ -6,6 +6,7 @@ in
     ./accounts
     ./contact-query.nix
     ./mailcap.nix
+    ./mailnotify.nix
     ./mbsync.nix
     ./neomutt.nix
     ./offlinemsmtp.nix
