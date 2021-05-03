@@ -29,6 +29,7 @@ in
     # Projects
     proj = proj;
     aoc = "${proj}/advent-of-code";
+    hm = "${proj}/home-manager";
     hspc = "${proj}/acm/hspc-problems";
     infra = "${proj}/infrastructure";
     kattis = "${home}/projects/kattis";
