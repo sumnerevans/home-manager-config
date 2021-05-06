@@ -59,6 +59,7 @@
       { url = "https://jakevossen.libsyn.com/rss"; }
       { url = "https://emersion.fr/blog/rss.xml"; }
       { url = "https://www.joelonsoftware.com/feed/"; }
+      { url = "https://weekly.nixos.org/feeds/all.rss.xml"; }
     ];
   };
 }

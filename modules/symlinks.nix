@@ -17,6 +17,8 @@ in
     };
   };
 
+  # TODO Convert to config.lib.file.mkOutOfStoreSymlink ./path/to/file/to/link;
+  # https://github.com/nix-community/home-manager/issues/257#issuecomment-831300021
   config = {
     home.activation.symlinks = hm.dag.entryAfter [ "writeBoundary" ]
       (concatStringsSep "\n" (mapAttrsToList toSymlinkCmd cfg));
