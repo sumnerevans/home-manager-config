@@ -48,7 +48,7 @@
       up = "k";
       right = "l";
       fonts = {
-        names = [ "Iosevka" "FontAwesome" ];
+        names = [ "FontAwesome" "Iosevka" ];
         size = 10.0;
       };
 
