@@ -7,7 +7,7 @@ let
     nix = [ [ "nixpkgs-fmt" pkgs.nixpkgs-fmt ] ];
     python = [ [ "black" pkgs.black ] ];
   };
-  aleLinters = { c = [ ]; cpp = [ ]; };
+  aleLinters = { c = [ ]; cpp = [ ]; python = [ ]; };
   mapListForLang = lang: l: "'${lang}': [${concatMapStringsSep ", " (f: "'${elemAt f 0}'") l}]";
 in
 {

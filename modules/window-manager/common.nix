@@ -33,23 +33,27 @@
     };
   };
 
-  i3SwayConfig = let
-    resizeStr = "  ";
-    gapSize = 6;
-    workspaces = [ "1: " "2" "3" "4" "5" "6" "7" "8" "9" "10" ];
-    extraWorkspaces = [
-      { name = "11: "; keycode = 20; }
-      { name = "12: "; keycode = 21; }
-    ];
+  i3SwayConfig =
+    let
+      resizeStr = "  ";
+      gapSize = 6;
+      workspaces = [ "1: " "2" "3" "4" "5" "6" "7" "8" "9" "10" ];
+      extraWorkspaces = [
+        { name = "11: "; keycode = 20; }
+        { name = "12: "; keycode = 21; }
+      ];
 
-    left = "h";
-    down = "j";
-    up = "k";
-    right = "l";
-    fonts = [ "Iosevka" "FontAwesome 10" ];
+      left = "h";
+      down = "j";
+      up = "k";
+      right = "l";
+      fonts = {
+        names = [ "Iosevka" "FontAwesome" ];
+        size = 10.0;
+      };
 
-    menucalc = pkgs.callPackage ../../pkgs/menucalc.nix {};
-  in
+      menucalc = pkgs.callPackage ../../pkgs/menucalc.nix { };
+    in
     {
       enable = true;
       config = rec {
@@ -96,12 +100,13 @@
           { title = "Firefox - Sharing Indicator"; }
         ];
 
-        keybindings = listToAttrs (
-          # Switch to workspace
-          (imap1 (i: name: { name = "${modifier}+${toString (mod i 10)}"; value = ''workspace "${name}"''; }) workspaces)
-          # Move to workspace
-          ++ (imap1 (i: name: { name = "${modifier}+Shift+${toString (mod i 10)}"; value = ''move container to workspace "${name}"''; }) workspaces)
-        ) // {
+        keybindings = listToAttrs
+          (
+            # Switch to workspace
+            (imap1 (i: name: { name = "${modifier}+${toString (mod i 10)}"; value = ''workspace "${name}"''; }) workspaces)
+              # Move to workspace
+              ++ (imap1 (i: name: { name = "${modifier}+Shift+${toString (mod i 10)}"; value = ''move container to workspace "${name}"''; }) workspaces)
+          ) // {
           "${modifier}+Return" = "exec ${terminal}";
           "${modifier}+Shift+q" = "kill";
 
@@ -168,12 +173,13 @@
           XF86MonBrightnessUp = mkIf config.laptop.enable "exec brightnessctl s +5%";
         };
 
-        keycodebindings = listToAttrs (
-          # Switch to workspace
-          (imap1 (i: { name, keycode }: { name = "${modifier}+${toString keycode}"; value = ''workspace "${name}"''; }) extraWorkspaces)
-          # Move to workspace
-          ++ (imap1 (i: { name, keycode }: { name = "${modifier}+Shift+${toString keycode}"; value = ''move container to workspace "${name}"''; }) extraWorkspaces)
-        ) // {
+        keycodebindings = listToAttrs
+          (
+            # Switch to workspace
+            (imap1 (i: { name, keycode }: { name = "${modifier}+${toString keycode}"; value = ''workspace "${name}"''; }) extraWorkspaces)
+              # Move to workspace
+              ++ (imap1 (i: { name, keycode }: { name = "${modifier}+Shift+${toString keycode}"; value = ''move container to workspace "${name}"''; }) extraWorkspaces)
+          ) // {
           "${modifier}+34" = "exec ${config.home.homeDirectory}/bin/mutt_helper"; # Launch mutt
           "${modifier}+35" = "exec ${pkgs.element-desktop}/bin/element-desktop"; # Launch Element
         };
