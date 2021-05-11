@@ -49,9 +49,6 @@ in
             { command = "${wlpaste} -t text --watch ${clipmanCmd} store --max-items=10000 ${clipmanHistpath}"; }
             { command = "${wlpaste} -p -t text --watch ${clipmanCmd} store -P --max-items=10000 ${clipmanHistpath}"; }
 
-            # Ensure mako runs
-            { command = "${pkgs.mako}/bin/mako"; }
-
             # Window transparency
             { command = "${inactive-windows-transparency}/bin/inactive-windows-transparency"; }
 
@@ -67,6 +64,11 @@ in
                    before-sleep '${swaylockCmd}'
               '';
             }
+
+            # Make all the pinentry stuff work
+            # See: https://github.com/NixOS/nixpkgs/issues/119445#issuecomment-820507505
+            # and: https://github.com/NixOS/nixpkgs/issues/57602#issuecomment-820512097
+            { command = "dbus-update-activation-environment WAYLAND_DISPLAY"; }
 
             # GTK
             { command = "${gsettings} set ${gnomeSchema} gtk-theme 'Arc-Dark'"; always = true; }
