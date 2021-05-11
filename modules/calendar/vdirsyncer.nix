@@ -36,6 +36,7 @@ in
       a = "xandikos_${name}_local"
       b = "xandikos_${name}_remote"
       collections = ["from a", "from b"]
+      conflict_resolution = "b wins"
       metadata = [${concatMapStringsSep ", " (x: ''"${x}"'') metadata}]
 
       [storage xandikos_${name}_local]
