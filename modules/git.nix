@@ -29,7 +29,7 @@ in
       sendemail = {
         annotate = "yes";
         smtpserver = "${offlinemsmtp}/bin/offlinemsmtp";
-        smtpserveroption = [ "-a" "personal" "--" ];
+        smtpserveroption = [ "-a" "Personal" "--" ];
       };
     };
 
