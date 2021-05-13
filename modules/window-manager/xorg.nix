@@ -11,19 +11,15 @@
 in
 {
   options.xorg = {
-    enable = mkOption {
-      type = types.bool;
-      description = "Enable Xorg stack";
-      default = false;
-    };
+    enable = mkEnableOption "the Xorg stack";
     extrai3wmConfig = mkOption {
       type = types.attrsOf types.anything;
       description = "Extra config for i3wm";
-      default = {};
+      default = { };
     };
     remapEscToCaps = mkOption {
       type = types.bool;
-      description = "Remap the physical escape key to Caps Lock";
+      description = "Remap the physical escape key to Caps Lock.";
       default = true;
     };
   };
@@ -147,30 +143,33 @@ in
       ];
     };
 
-    systemd.user.services = let
-      xmodmapConfig = pkgs.writeText "Xmodmap.conf" ''
-        ! Reverse scrolling
-        ! pointer = 1 2 3 5 4 6 7 8 9 10 11 12
-        keycode 9 = Caps_Lock Caps_Lock Caps_Lock
-      '';
-      startupServices = {
-        xbanish = "${pkgs.xbanish}/bin/xbanish";
-      } // (
-        optionalAttrs cfg.remapEscToCaps {
-          xmodmap = "${pkgs.xorg.xmodmap}/bin/xmodmap ${xmodmapConfig}";
-        }
-      );
-    in
-      mapAttrs (
-        name: value: {
-          Unit = {
-            Description = "Run ${name} on startup.";
-            PartOf = [ "graphical-session.target" ];
-          };
-          Service.ExecStart = value;
-          Service.Restart = "always";
-          Install.WantedBy = [ "graphical-session.target" ];
-        }
-      ) startupServices;
+    systemd.user.services =
+      let
+        xmodmapConfig = pkgs.writeText "Xmodmap.conf" ''
+          ! Reverse scrolling
+          ! pointer = 1 2 3 5 4 6 7 8 9 10 11 12
+          keycode 9 = Caps_Lock Caps_Lock Caps_Lock
+        '';
+        startupServices = {
+          xbanish = "${pkgs.xbanish}/bin/xbanish";
+        } // (
+          optionalAttrs cfg.remapEscToCaps {
+            xmodmap = "${pkgs.xorg.xmodmap}/bin/xmodmap ${xmodmapConfig}";
+          }
+        );
+      in
+      mapAttrs
+        (
+          name: value: {
+            Unit = {
+              Description = "Run ${name} on startup.";
+              PartOf = [ "graphical-session.target" ];
+            };
+            Service.ExecStart = value;
+            Service.Restart = "always";
+            Install.WantedBy = [ "graphical-session.target" ];
+          }
+        )
+        startupServices;
   };
 }

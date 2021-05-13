@@ -1,19 +1,15 @@
 { config, lib, pkgs, ... }: with lib; {
   options = {
-    laptop.enable = mkOption {
-      type = types.bool;
-      description = "Enable stuff that only applies to laptops";
-      default = false;
-    };
+    laptop.enable = mkEnableOption "configuration that only applies to laptops";
     networking.interfaces = mkOption {
       type = types.listOf types.str;
       description = "A list of the network interfaces on the machine";
-      default = [];
+      default = [ ];
     };
     programs.i3status-rust.extraBlocks = mkOption {
       type = types.listOf (types.attrsOf types.anything);
       description = "A list of extra blocks to add.";
-      default = [];
+      default = [ ];
     };
   };
 
@@ -22,18 +18,19 @@
       enable = true;
 
       bars = {
-        top = let
-          cu = "${pkgs.coreutils}/bin";
-          dunstctl = "${pkgs.dunst}/bin/dunstctl";
-          home = config.home.homeDirectory;
-          homeTmp = "${config.home.homeDirectory}/tmp";
-          nmcli = "${pkgs.networkmanager}/bin/nmcli";
-          parseRollingPingScript = pkgs.writeShellScriptBin "parse-rolling-ping" ''
-            ${cu}/cat ${homeTmp}/rolling_ping | ${pkgs.gnugrep}/bin/grep "fail" > /dev/null
-            [[ $? == 0 ]] && printf "∞" && exit 0
-            printf "%0.3f" $(cat ${homeTmp}/rolling_ping | ${pkgs.jq}/bin/jq -s add/length)
-          '';
-        in
+        top =
+          let
+            cu = "${pkgs.coreutils}/bin";
+            dunstctl = "${pkgs.dunst}/bin/dunstctl";
+            home = config.home.homeDirectory;
+            homeTmp = "${config.home.homeDirectory}/tmp";
+            nmcli = "${pkgs.networkmanager}/bin/nmcli";
+            parseRollingPingScript = pkgs.writeShellScriptBin "parse-rolling-ping" ''
+              ${cu}/cat ${homeTmp}/rolling_ping | ${pkgs.gnugrep}/bin/grep "fail" > /dev/null
+              [[ $? == 0 ]] && printf "∞" && exit 0
+              printf "%0.3f" $(cat ${homeTmp}/rolling_ping | ${pkgs.jq}/bin/jq -s add/length)
+            '';
+          in
           {
             icons = "awesome";
             theme = "slick";
@@ -110,21 +107,23 @@
                   }
                 ] ++ (
                   # Include a "net" block for each of the network interfaces.
-                  imap0 (
-                    i: dev: {
-                      block = "net";
-                      device = dev;
-                      ip = true;
-                      speed_down = false;
-                      graph_down = false;
-                      speed_up = false;
-                      graph_up = false;
-                      interval = 5;
-                      hide_missing = true;
-                      hide_inactive = true;
-                      priority = 80 + i;
-                    }
-                  ) config.networking.interfaces
+                  imap0
+                    (
+                      i: dev: {
+                        block = "net";
+                        device = dev;
+                        ip = true;
+                        speed_down = false;
+                        graph_down = false;
+                        speed_up = false;
+                        graph_up = false;
+                        interval = 5;
+                        hide_missing = true;
+                        hide_inactive = true;
+                        priority = 80 + i;
+                      }
+                    )
+                    config.networking.interfaces
                 ) ++ (
                   optionals config.laptop.enable [
                     {

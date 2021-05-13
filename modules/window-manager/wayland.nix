@@ -18,11 +18,7 @@
 in
 {
   options = {
-    wayland.enable = mkOption {
-      type = types.bool;
-      description = "Enable the wayland stack";
-      default = false;
-    };
+    wayland.enable = mkEnableOption "the Wayland stack";
     wayland.extraSwayConfig = mkOption {
       type = types.attrsOf types.anything;
       description = "Extra config for Sway";

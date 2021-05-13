@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: with lib; let
   editor = "${pkgs.neovim}/bin/nvim";
-  menucalc = pkgs.callPackage ../../pkgs/menucalc.nix {};
+  menucalc = pkgs.callPackage ../../pkgs/menucalc.nix { };
   terminal = "${pkgs.alacritty}/bin/alacritty";
   waylandCfg = config.wayland;
   xorgCfg = config.xorg;

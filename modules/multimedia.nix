@@ -6,11 +6,7 @@
   cfg = config.gaming;
 in
 {
-  options.gaming.enable = mkOption {
-    type = types.bool;
-    default = false;
-    description = "Enable devtools";
-  };
+  options.gaming.enable = mkEnableOption "gaming programs";
 
   config = {
     home.packages = [

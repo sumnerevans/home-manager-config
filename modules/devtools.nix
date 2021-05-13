@@ -1,13 +1,9 @@
 { config, lib, pkgs, ... }: with lib; let
-  tomlFormat = pkgs.formats.toml {};
+  tomlFormat = pkgs.formats.toml { };
 in
 {
   options = {
-    devTools.enable = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable devtools";
-    };
+    devTools.enable = mkEnableOption "developer tools and applications";
   };
 
   config = mkIf config.devTools.enable {

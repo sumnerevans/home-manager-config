@@ -8,16 +8,8 @@
   ];
 
   options = {
-    isLinux = mkOption {
-      type = types.bool;
-      description = "Set to true if on a Linux machine.";
-      default = true;
-    };
-    isMacOS = mkOption {
-      type = types.bool;
-      description = "Set to true if on a macOS machine.";
-      default = false;
-    };
+    isLinux = mkEnableOption "Linux support" // { default = true; };
+    isMacOS = mkEnableOption "macOS support";
   };
 
   config = {
@@ -66,9 +58,10 @@
         fi
       '';
 
-      initExtra = let
-        tput = "${pkgs.ncurses}/bin/tput";
-      in
+      initExtra =
+        let
+          tput = "${pkgs.ncurses}/bin/tput";
+        in
         ''
           ${builtins.readFile ./key-widgets.zsh}
           ${builtins.readFile ./prompt.zsh}
