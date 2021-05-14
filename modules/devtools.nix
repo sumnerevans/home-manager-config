@@ -3,7 +3,9 @@
 in
 {
   options = {
-    devTools.enable = mkEnableOption "developer tools and applications";
+    devTools.enable = mkEnableOption "developer tools and applications" // {
+      default = true;
+    };
   };
 
   config = mkIf config.devTools.enable {
