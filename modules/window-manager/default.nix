@@ -28,6 +28,7 @@ in
       brightnessctl
       menucalc
       screenkey
+      wmctrl
     ];
 
     home.sessionVariables = {
@@ -44,7 +45,37 @@ in
       };
 
       theme = {
-        package = pkgs.arc-theme;
+        # Waiting for one of the fllowing PRs to be merged:
+        # https://github.com/NixOS/nixpkgs/pull/122086
+        # https://github.com/NixOS/nixpkgs/pull/122103
+        package = pkgs.arc-theme.overrideAttrs (old: rec {
+          pname = "arc-theme";
+          version = "20210412";
+
+          src = pkgs.fetchFromGitHub {
+            owner = "jnsh";
+            repo = pname;
+            rev = version;
+            sha256 = "BNJirtBtdWsIzQfsJsZzg1zFbJEzZPq1j2qZ+1QjRH8=";
+            fetchSubmodules = false;
+          };
+
+          nativeBuildInputs = with pkgs; [
+            meson
+            ninja
+            pkg-config
+            sassc
+            optipng
+            inkscape
+            gtk3
+            cinnamon.cinnamon-common
+            gnome.gnome-shell
+          ];
+
+          postInstall = ''
+            install -Dm644 -t $out/share/doc/${pname} $src/AUTHORS $src/*.md
+          '';
+        });
         name = "Arc-Dark";
       };
 
