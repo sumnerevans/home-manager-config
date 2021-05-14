@@ -64,8 +64,8 @@
                   }
                   {
                     block = "memory";
-                    format_mem = "{Mug}GiB";
-                    format_swap = "{SUg}GiB";
+                    format_mem = "{mem_used;G}GiB";
+                    format_swap = "{swap_used;G}GiB";
                     warning_mem = 90;
                     warning_swap = 90;
                     critical_mem = 95;
@@ -107,17 +107,14 @@
                   }
                 ] ++ (
                   # Include a "net" block for each of the network interfaces.
+                  # TODO look into using the networkmanager block here instead
                   imap0
                     (
                       i: dev: {
                         block = "net";
                         device = dev;
-                        ip = true;
-                        speed_down = false;
-                        graph_down = false;
-                        speed_up = false;
-                        graph_up = false;
                         interval = 5;
+                        format = "{ip}";
                         hide_missing = true;
                         hide_inactive = true;
                         priority = 80 + i;
