@@ -12,6 +12,7 @@ in
     home.packages = with pkgs; [
       # Shell Utilities
       delta
+      gh
       watchexec
     ] ++ (
       # GUI Tools

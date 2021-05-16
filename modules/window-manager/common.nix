@@ -64,12 +64,12 @@
 
         assigns = {
           # Browsers
-          "${elemAt workspaces 0}" = [
+          ${elemAt workspaces 0} = [
             { class = "Firefox"; }
           ];
 
           # Chat Clients
-          "${(elemAt extraWorkspaces 0).name}" = [
+          ${(elemAt extraWorkspaces 0).name} = [
             { class = "discord"; }
             { class = "Element"; }
             { class = "Slack"; }
@@ -78,7 +78,7 @@
           ];
 
           # Music
-          "${(elemAt extraWorkspaces 1).name}" = [
+          ${(elemAt extraWorkspaces 1).name} = [
             { class = "sublime-music"; }
           ];
         };
@@ -99,6 +99,8 @@
           { instance = "pinentry"; }
           { title = "Firefox - Sharing Indicator"; }
         ];
+
+        defaultWorkspace = ''workspace "${elemAt workspaces 0}"'';
 
         keybindings = listToAttrs
           (
