@@ -26,12 +26,14 @@ in
     tea = "${home}/school/teaching";
     aca = "${home}/school/teaching/aca";
 
+    # NixOS config
+    cfg = "/etc/nixos";
+
     # Projects
     proj = proj;
     aoc = "${proj}/advent-of-code";
     hm = "${proj}/home-manager";
     hspc = "${proj}/acm/hspc-problems";
-    infra = "${proj}/infrastructure";
     kattis = "${home}/projects/kattis";
     res = "${proj}/resume";
     sub = "${proj}/sublime-music/sublime-music";
