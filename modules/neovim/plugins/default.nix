@@ -7,11 +7,13 @@
 
     # UI Chrome
     ./fzf-vim.nix
+    ./nerdtree.nix
     ./vim-airline.nix
     ./vim-togglelist.nix
 
     # Editor
     ./rainbow.nix
+    ./supertab.nix
     ./vim-commentary.nix
     ./vim-signify.nix
     ./vim-template.nix
@@ -22,7 +24,7 @@
 
     # Language Support
     ./ale.nix
-    ./coc.nix
+    # ./coc.nix
     ./vim-markdown-composer.nix
   ];
 
