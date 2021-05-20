@@ -33,14 +33,11 @@ in
       gst = "git stash";
 
       # Config
-      nvimrc = "chezmoi edit -a ~/.config/nvim/init.vim";
       projectlist = "vim ~st/projectlist && projectsync";
       quotesfile = "vim ${config.xdg.configHome}/nixpkgs/modules/email/quotes";
       reload = ". ~/.zshrc && echo 'ZSH Config Reloaded from ~/.zshrc'";
       sshconf = "vim ~/.ssh/config";
       vimrc = "realvim ~/.vim/vimrc";
-      vimshort = "chezmoi edit -a ~/.vim/shortcuts";
-      xresources = "chezmoi edit -a ~/.Xresources && xrdb -load ~/.Xresources && echo '~/Xresources reloaded'";
 
       # Other aliases
       antioffice = "libreoffice --headless --convert-to pdf";
