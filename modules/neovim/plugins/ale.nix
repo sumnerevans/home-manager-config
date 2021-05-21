@@ -9,17 +9,15 @@ let
     rust = [ [ "rustfmt" pkgs.rustfmt ] ];
   };
   aleLinters = {
-    python = [
-      [ "pyls" pkgs.python-language-server ]
-    ];
+    python = [ [ "pyls" pkgs.python-language-server ] ];
+    rust = [ [ "analyzer" [ pkgs.rust-analyzer pkgs.rustc ] ] ];
   };
   mapListForLang = lang: l: "'${lang}': [${concatMapStringsSep ", " (f: "'${elemAt f 0}'") l}]";
+  extractPackages = mapAttrsToList (lang: x: map (f: elemAt f 1) x);
 in
 {
   programs.neovim = {
-    extraPackages =
-      flatten (mapAttrsToList (l: fixers: map (f: elemAt f 1) fixers) aleFixers)
-      ++ flatten (mapAttrsToList (l: linters: map (f: elemAt f 1) linters) aleLinters);
+    extraPackages = (flatten (map extractPackages [ aleFixers aleLinters ]));
 
     plugins = [{
       plugin = pkgs.vimPlugins.ale;
@@ -28,10 +26,6 @@ in
         let g:ale_set_loclist = 0               " Limit the size of the ALE output to 5 lines
         let g:ale_set_quickfix = 1              " Limit the size of the ALE output to 5 lines
         let g:ale_list_window_size = 5          " Limit the size of the ALE output to 5 lines
-
-        " Completion
-        let g:ale_completion_enabled = 1        " Enable completion
-        set completeopt=menu,menuone,preview,noselect,noinsert
 
         let g:ale_sign_error = '✖'              " Consistent sign column with Language Client
         let g:ale_sign_warning = '⚠'
