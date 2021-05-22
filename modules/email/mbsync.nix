@@ -19,6 +19,6 @@
   in {
     enable = true;
     preExec = "${checkNetworkOrAlreadyRunningScript}";
-    frequency = "*:0/15";
+    frequency = "*:0/10";
   };
 }
