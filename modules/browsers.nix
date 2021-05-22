@@ -1,4 +1,5 @@
-{ pkgs, ... }: let
+{ pkgs, ... }:
+let
   chromeCommandLineArgs = "-high-dpi-support=0 -force-device-scale-factor=1";
 in
 {
@@ -12,6 +13,7 @@ in
   home.sessionVariables = {
     # Enable touchscreen in Firefox
     MOZ_USE_XINPUT2 = "1";
+    MOZ_DBUS_REMOTE = "1";
   };
 
   programs.chromium.enable = true;
