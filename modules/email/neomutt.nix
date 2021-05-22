@@ -10,7 +10,14 @@ in
   home.file."bin/mutt_helper" = {
     text = ''
       #!/usr/bin/env sh
-      ${config.home.sessionVariables.TERMINAL} -t Mutt -e neomutt "$@"
+      set -xe
+      if [[ $# == 0 ]]; then
+        ${config.home.sessionVariables.TERMINAL} -t Mutt -e \
+          zsh -c "export FOR_MUTT_HELPER=1 && source ${config.home.homeDirectory}/.zshrc && neomutt"
+      else
+        ${config.home.sessionVariables.TERMINAL} -t Mutt -e \
+          zsh -c "export FOR_MUTT_HELPER=1 && source ${config.home.homeDirectory}/.zshrc && neomutt \"$@\""
+      fi
     '';
     executable = true;
   };

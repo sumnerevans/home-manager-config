@@ -63,45 +63,49 @@
           tput = "${pkgs.ncurses}/bin/tput";
         in
         ''
-          ${builtins.readFile ./key-widgets.zsh}
-          ${builtins.readFile ./prompt.zsh}
+          if [[ $FOR_MUTT_HELPER != 1 ]]; then
 
-          # Colors
-          autoload colors zsh/terminfo
-          colors
-          ${strings.optionalString config.isLinux "eval $(dircolors -b)"}
-          ${strings.optionalString config.isMacOS "export CLICOLOR=1"}
+            ${builtins.readFile ./key-widgets.zsh}
+            ${builtins.readFile ./prompt.zsh}
 
-          setopt appendhistory
-          setopt extendedglob
-          setopt autopushd
-          setopt nobeep  # Don't beep ever
+            # Colors
+            autoload colors zsh/terminfo
+            colors
+            ${strings.optionalString config.isLinux "eval $(dircolors -b)"}
+            ${strings.optionalString config.isMacOS "export CLICOLOR=1"}
 
-          # Set up the ssh-agent if necesarry
-          if [[ ! -S ~/.ssh/ssh_auth_sock  ]]; then
-              eval `${pkgs.openssh}/bin/ssh-agent`
-              ${pkgs.coreutils}/bin/ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+            setopt appendhistory
+            setopt extendedglob
+            setopt autopushd
+            setopt nobeep  # Don't beep ever
+
+            # Set up the ssh-agent if necesarry
+            if [[ ! -S ~/.ssh/ssh_auth_sock  ]]; then
+                eval `${pkgs.openssh}/bin/ssh-agent`
+                ${pkgs.coreutils}/bin/ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+            fi
+            export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+            ${pkgs.openssh}/bin/ssh-add -l | \
+              ${pkgs.gnugrep}/bin/grep "The agent has no identities" && \
+              ${pkgs.openssh}/bin/ssh-add
+
+            echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
+
+            # Show my calendar
+            ${pkgs.khal}/bin/khal calendar
+
+            # Notify me if I haven't written in my journal for the day.
+            if [[ ! -f ${config.home.homeDirectory}/Documents/journal/$(${pkgs.coreutils}/bin/date +%Y-%m-%d).rst ]]; then
+                echo "\n$(${tput} bold)Make sure to write in your journal today.$(${tput} sgr 0)"
+                echo
+            fi
+
+            # Show a quote
+            ${pkgs.fortune}/bin/fortune ${config.xdg.dataHome}/fortune/quotes
+
+            echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
+
           fi
-          export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-          ${pkgs.openssh}/bin/ssh-add -l | \
-            ${pkgs.gnugrep}/bin/grep "The agent has no identities" && \
-            ${pkgs.openssh}/bin/ssh-add
-
-          echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
-
-          # Show my calendar
-          ${pkgs.khal}/bin/khal calendar
-
-          # Notify me if I haven't written in my journal for the day.
-          if [[ ! -f ${config.home.homeDirectory}/Documents/journal/$(${pkgs.coreutils}/bin/date +%Y-%m-%d).rst ]]; then
-              echo "\n$(${tput} bold)Make sure to write in your journal today.$(${tput} sgr 0)"
-              echo
-          fi
-
-          # Show a quote
-          ${pkgs.fortune}/bin/fortune ${config.xdg.dataHome}/fortune/quotes
-
-          echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
         '';
     };
 
