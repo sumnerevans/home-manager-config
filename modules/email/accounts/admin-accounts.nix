@@ -23,6 +23,12 @@
     color = "green";
   };
 
+  nevarroAdmin = {
+    name = "Nevarro-Admin";
+    address = "admin@nevarro.space";
+    color = "green";
+  };
+
   helper = import ./account-config-helper.nix { inherit config pkgs lib; };
 in
 {
@@ -51,6 +57,11 @@ in
 
     BMT-Admin = mkMerge [
       (helper.commonConfig bookMyTimeAdmin)
+      helper.migaduConfig
+    ];
+
+    Nevarro-Admin= mkMerge [
+      (helper.commonConfig nevarroAdmin)
       helper.migaduConfig
     ];
   };
