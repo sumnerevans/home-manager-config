@@ -25,6 +25,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    dconf.enable = false;
     xsession = {
       enable = true;
 
