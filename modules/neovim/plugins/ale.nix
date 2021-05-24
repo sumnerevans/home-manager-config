@@ -9,6 +9,7 @@ let
     rust = [ [ "rustfmt" pkgs.rustfmt ] ];
   };
   aleLinters = {
+    go = [ [ "gopls" pkgs.gopls ] ];
     python = [ [ "pyls" pkgs.python-language-server ] ];
     rust = [ [ "analyzer" [ pkgs.rust-analyzer pkgs.rustc ] ] ];
   };
