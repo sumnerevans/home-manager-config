@@ -10,7 +10,10 @@ let
   };
   aleLinters = {
     go = [ [ "gopls" pkgs.gopls ] ];
-    python = [ [ "pyls" pkgs.python-language-server ] ];
+    python = [
+      [ "pyright" pkgs.pyright ]
+      [ "flake8" pkgs.python3Packages.flake8 ]
+    ];
     rust = [ [ "analyzer" [ pkgs.rust-analyzer pkgs.rustc ] ] ];
   };
   mapListForLang = lang: l: "'${lang}': [${concatMapStringsSep ", " (f: "'${elemAt f 0}'") l}]";
@@ -19,6 +22,11 @@ in
 {
   programs.neovim = {
     extraPackages = (flatten (map extractPackages [ aleFixers aleLinters ]));
+
+    extraConfig = ''
+      let g:ale_set_balloons = 1
+      let g:ale_hover_to_floating_preview = 1
+    '';
 
     plugins = [{
       plugin = pkgs.vimPlugins.ale;
@@ -46,6 +54,7 @@ in
 
         " Hover and rename
         " TODO figure out how to make this work
+        nnoremap <silent> K <Plug>(ale_hover)
 
         " Get fancy symbols for all of the different completion types.
         let g:ale_completion_symbols = {

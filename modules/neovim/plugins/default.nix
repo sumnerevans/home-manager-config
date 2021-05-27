@@ -7,15 +7,16 @@
 
     # UI Chrome
     ./fzf-vim.nix
-    ./nerdtree.nix
+    # ./nerdtree.nix
     ./vim-airline.nix
     ./vim-togglelist.nix
 
     # Editor
-    ./deoplete.nix
+    # ./deoplete.nix
     ./rainbow.nix
-    ./supertab.nix
+    # ./supertab.nix
     ./vim-commentary.nix
+    ./vim-multiple-cursors.nix
     ./vim-signify.nix
     ./vim-template.nix
 
@@ -24,8 +25,8 @@
     ./vim-tmux-navigator.nix
 
     # Language Support
-    ./ale.nix
-    # ./coc.nix
+    # ./ale.nix
+    ./coc.nix
     ./vim-markdown-composer.nix
   ];
 
@@ -37,7 +38,6 @@
     # Editor
     auto-pairs
     vim-closetag
-    vim-multiple-cursors
     vim-surround
 
     # Language Support

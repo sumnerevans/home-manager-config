@@ -1,5 +1,4 @@
 {
-  "diagnostic.displayByAle": true,
   "explorer.keyMappings.global": {
     "<cr>": [
       "expandable?",
