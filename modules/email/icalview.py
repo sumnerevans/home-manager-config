@@ -16,8 +16,11 @@ for event in calendar.walk('vevent'):
 
     attendees = None
     if 'ATTENDEE' in event:
-        attendees = ',\n               '.join(
-            [a[7:] for a in event.decoded('ATTENDEE')])
+        if type(event.decoded('ATTENDEE')) == list:
+            attendees = ',\n               '.join(
+                [a[7:] for a in event.decoded('ATTENDEE')])
+        else:
+            attendees = event.decoded('ATTENDEE')[7:]
 
     description = event.get('DESCRIPTION') or ''
     description = html2text.html2text(description)
