@@ -64,8 +64,8 @@
                   }
                   {
                     block = "memory";
-                    format_mem = "{mem_used;G}GiB";
-                    format_swap = "{swap_used;G}GiB";
+                    format_mem = "{mem_used;G}";
+                    format_swap = "{swap_used;G}";
                     warning_mem = 90;
                     warning_swap = 90;
                     critical_mem = 95;
