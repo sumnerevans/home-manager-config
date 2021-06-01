@@ -1,7 +1,7 @@
 { lib, pkgs, ... }: with lib; with pkgs; let
   passCmd = "${pass}/bin/pass";
-  tracktime = callPackage ../pkgs/tracktime.nix { };
-  yamlFormat = pkgs.formats.yaml { };
+  tracktime = callPackage ../pkgs/tracktime.nix {};
+  yamlFormat = pkgs.formats.yaml {};
 in
 {
   home.packages = [ tracktime ];
@@ -29,10 +29,11 @@ in
     tableformat = "fancy_grid";
 
     project_rates = {
-      "CSCI 406" = 40;
       "CSCI 400" = 40;
-      "teaching/aca" = 40;
+      "CSCI 406" = 40;
       "Grading 101" = 15;
+      "teaching/aca" = 40;
+      "~sumner/linkedin-matrix-bridge" = 50;
     };
 
     customer_rates = {
@@ -40,20 +41,25 @@ in
     };
 
     customer_addresses = {
-      TTD = ''
-        42 N. Chestnut St
-        Ventura, CA 93001
-        United States of America
+      Beeper = ''
+        207 High Street
+        Palo Alto, CA 94301
       '';
       "Tracy Camp" = ''
         Computer Sceince Department
         Colorado School of Mines
       '';
+      TTD = ''
+        42 N. Chestnut St
+        Ventura, CA 93001
+        United States of America
+      '';
     };
 
     customer_aliases = {
-      TTD = "The Trade Desk";
+      Beeper = "Beeper Inc.";
       "Tracy Camp" = "Dr. Tracy Camp";
+      TTD = "The Trade Desk";
     };
 
     external_synchroniser_files = {
