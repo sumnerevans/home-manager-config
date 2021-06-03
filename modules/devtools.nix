@@ -12,7 +12,6 @@ in
     home.packages = with pkgs; [
       # Shell Utilities
       delta
-      gh
       watchexec
     ] ++ (
       # GUI Tools
@@ -26,6 +25,8 @@ in
     # Enable developer programs
     programs.direnv.enable = true;
     programs.direnv.enableNixDirenvIntegration = true;
+    programs.gh.enable = true;
+    programs.gh.gitProtocol = "ssh";
     programs.jq.enable = true;
     programs.opam.enable = true;
     programs.vscode.enable = true;

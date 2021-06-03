@@ -44,6 +44,9 @@ in
       ".rooter_root"
       ".ropeproject"
       ".stylelintrc"
+      ".venv"
+      "__pycache__"
+      ".direnv"
     ];
   };
 
