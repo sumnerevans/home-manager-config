@@ -8,6 +8,11 @@ in
 
   xdg.configFile."tracktime/tracktimerc".source = yamlFormat.generate "tracktimerc" {
     fullname = "Sumner Evans";
+    github = {
+      access_token = "${passCmd} VCS/GitHub-tracktime-access-token|";
+      username = "sumnerevans";
+    };
+
     gitlab = {
       api_root = "https://gitlab.com/api/v4/";
       api_key = "${passCmd} VCS/GitLab-API-Key|";
@@ -35,7 +40,7 @@ in
       "CSCI 406" = 40;
       "Grading 101" = 15;
       "teaching/aca" = 40;
-      "~sumner/linkedin-matrix-bridge" = 50;
+      "mautrix-linkedin" = 50;
     };
 
     customer_rates = {

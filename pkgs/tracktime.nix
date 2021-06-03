@@ -1,7 +1,12 @@
 { lib, pkgs }: with pkgs;
 python38Packages.buildPythonApplication rec {
   pname = "tracktime";
-  version = "0.9.19";
+  version = "unstable-2021-06-03";
+  format = "pyproject";
+
+  nativeBuildInputs = [
+    python3Packages.poetry
+  ];
 
   propagatedBuildInputs = with python38Packages; [
     argcomplete
@@ -18,9 +23,11 @@ python38Packages.buildPythonApplication rec {
 
   doCheck = false;
 
-  src = python38.pkgs.fetchPypi {
-    inherit pname version;
-    sha256 = "sha256-iHshWTPTIX4ztC2EQeWJ/fb/8I1f5q/eNA6JE4IwlKo=";
+  src = fetchFromSourcehut {
+    owner = "~sumner";
+    repo = pname;
+    rev = "0aee0686b11d3f202a0dbabe03650da47ec22b06";
+    sha256 = "sha256-WL8qSL6KQeF1BDs+Ul8l24ZiSPzfRaOLz7EzJAZRM5k=";
   };
 
   meta = with lib; {
