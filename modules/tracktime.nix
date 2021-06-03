@@ -28,6 +28,8 @@ in
     sync_time = true;
     tableformat = "fancy_grid";
 
+    day_worked_min_threshold = 60;
+
     project_rates = {
       "CSCI 400" = 40;
       "CSCI 406" = 40;
