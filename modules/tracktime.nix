@@ -39,12 +39,12 @@ in
       "CSCI 400" = 40;
       "CSCI 406" = 40;
       "Grading 101" = 15;
-      "teaching/aca" = 40;
-      "mautrix-linkedin" = 50;
+      "teaching/aca" = 22;
+      "linkedin-matrix" = 50;
     };
 
     customer_rates = {
-      TTD = 50;
+      TTD = 51.92;
     };
 
     customer_addresses = {

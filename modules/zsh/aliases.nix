@@ -61,7 +61,7 @@ in
       soviet = "amixer set Master on 50% && mpv --quiet -vo caca 'https://www.youtube.com/watch?v=U06jlgpMtQs'";
       tar = "${pkgs.libarchive}/bin/bsdtar";
       tt-tea = "tt start -p teaching/aca";
-      tt-li = "tt start -t gh -p 'mautrix-linkedin' -c Beeper";
+      tt-li = "tt start -t gh -p 'linkedin-matrix' -c Beeper";
       wdir = "watch --color -n .5 'ls -lha --color=always'";
       xelatex = "xelatex -shell-escape";
       zathura = pdfviewer;
