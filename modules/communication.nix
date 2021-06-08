@@ -30,13 +30,14 @@
     )
   ];
 
-  home.packages = optionals
-    (config.wayland.enable || config.xorg.enable)
+  home.packages = optionals (config.wayland.enable || config.xorg.enable)
     [
       discord
       element-desktop
       fractal
       mumble
+      neochat
+      nheko
       zoom-us
     ];
 }
