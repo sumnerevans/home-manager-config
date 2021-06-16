@@ -94,12 +94,13 @@ in
       sort_aux = "reverse-last-date-received";
       sort_re = "yes";
       tmpdir = "${config.home.homeDirectory}/tmp";
-      wrap = "100";
     };
 
     extraConfig = ''
       source ${aliasfile}
       source ${mailboxfile}
+
+      set allow_ansi
       set display_filter="${mutt-display-filter}/bin/mdf"
 
       # Use return to open message because I'm not a savage
@@ -157,18 +158,6 @@ in
       # Sidebar
       color sidebar_highlight white           color8
       color sidebar_new       cyan            black
-
-      # Patch syntax highlighting
-      color   normal  white           default
-      color   body    brightwhite     default         ^(diff).*
-      color   body    white           default         ^[\-\-\-].*
-      color   body    white           default         ^[\+\+\+].*
-      color   body    green           default         ^[\+].*
-      color   body    red             default         ^[\-].*
-      color   body    brightblue      default         [@@].*
-      color   body    white           default         ^(\s).*
-      color   body    brightwhite     default         ^(Signed-off-by).*
-      color   body    brightwhite     default         ^(Cc)
     '';
   };
 }
