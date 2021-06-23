@@ -130,6 +130,10 @@ in
       # TODO use wofi?
     ];
 
+    programs.mpv.config = {
+      gpu-context = "wayland";
+    };
+
     # Gammastep
     services.gammastep = common.redshiftGammastepCfg;
 

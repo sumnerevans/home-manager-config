@@ -36,7 +36,6 @@ in
     programs.mpv.enable = true;
     programs.mpv.config = {
       force-window = "yes";
-      gpu-context = "wayland";
       hwdec = "auto-safe";
       profile = "gpu-hq";
       vo = "gpu";
