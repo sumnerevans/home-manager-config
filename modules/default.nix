@@ -6,6 +6,7 @@
     ./communication.nix
     ./devtools.nix
     ./email
+    ./fzf.nix
     ./git.nix
     ./gpg.nix
     ./multimedia.nix

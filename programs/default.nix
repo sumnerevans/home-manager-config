@@ -87,14 +87,6 @@ in
 
   programs.bat.enable = true;
 
-  programs.fzf.enable = true;
-  programs.fzf.defaultCommand = ''
-    fd --type f --hidden --follow \
-      --no-ignore \
-      --ignore-file=${config.xdg.configFile."git/ignore".target} \
-      --exclude .git
-  '';
-
   programs.home-manager.enable = true;
 
   programs.htop.enable = true;
