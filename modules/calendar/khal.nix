@@ -1,4 +1,14 @@
 { lib, config, pkgs, ... }: {
+  nixpkgs.overlays = [
+    (
+      self: super: {
+        khal = super.khal.overridePythonAttrs (
+          old: rec { doCheck = false; }
+        );
+      }
+    )
+  ];
+
   home.packages = [ pkgs.khal ];
   xdg.configFile."khal/config".text = ''
     [calendars]
