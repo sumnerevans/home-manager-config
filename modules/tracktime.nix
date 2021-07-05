@@ -40,10 +40,10 @@ in
       "CSCI 406" = 40;
       "Grading 101" = 15;
       "teaching/aca" = 22;
-      "linkedin-matrix" = 50;
     };
 
     customer_rates = {
+      Beeper = 50.0;
       TTD = 51.92;
     };
 
