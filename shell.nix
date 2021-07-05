@@ -2,6 +2,7 @@
 mkShell {
   propagatedBuildInputs = [
     black
+    git-crypt
     rnix-lsp
   ];
 }
