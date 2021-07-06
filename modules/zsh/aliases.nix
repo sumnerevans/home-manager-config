@@ -58,7 +58,7 @@ in
       pwd = "pwd && pwd -P";
       sbcl = "rlwrap sbcl";
       screen = "screen -DR";
-      soviet = "amixer set Master on 50% && mpv --quiet -vo caca 'https://www.youtube.com/watch?v=U06jlgpMtQs'";
+      soviet = "${pkgs.alsa-utils}/bin/amixer set Master on 50% && mpv --quiet -vo caca 'https://www.youtube.com/watch?v=U06jlgpMtQs'";
       tar = "${pkgs.libarchive}/bin/bsdtar";
       tt-beeper = "tt start -c Beeper";
       tt-tea = "tt start -p teaching/aca";

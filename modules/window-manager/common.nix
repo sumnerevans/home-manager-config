@@ -160,9 +160,9 @@
           "${modifier}+Shift+F3" = "gaps inner all set ${toString gapSize}";
 
           # VOLUME KEYS
-          XF86AudioLowerVolume = "exec amixer set Master playback 2%-";
-          XF86AudioRaiseVolume = "exec amixer set Master playback 2%+";
-          XF86AudioMute = "exec amixer set Master toggle";
+          XF86AudioLowerVolume = "exec ${pkgs.alsa-utils}/bin/amixer set Master playback 2%-";
+          XF86AudioRaiseVolume = "exec ${pkgs.alsa-utils}/bin/amixer set Master playback 2%+";
+          XF86AudioMute = "exec ${pkgs.alsa-utils}/bin/amixer set Master toggle";
 
           # MEDIA CONTROLS
           XF86AudioPrev = "exec playerctl previous";
