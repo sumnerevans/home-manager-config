@@ -25,8 +25,6 @@ in
     # Enable developer programs
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;
-    programs.gh.enable = true;
-    programs.gh.gitProtocol = "ssh";
     programs.jq.enable = true;
     programs.opam.enable = true;
     programs.vscode.enable = true;

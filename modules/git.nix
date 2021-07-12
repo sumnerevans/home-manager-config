@@ -2,7 +2,7 @@
   offlinemsmtp = pkgs.callPackage ../pkgs/offlinemsmtp.nix {};
 in
 {
-  home.packages = with pkgs.gitAndTools; [ hub lab ];
+  home.packages = with pkgs.gitAndTools; [ gh hub lab ];
 
   programs.git = {
     enable = true;
