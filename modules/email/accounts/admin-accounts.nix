@@ -17,6 +17,12 @@
     color = "green";
   };
 
+  junkConfig = {
+    name = "Junk";
+    address = "junk@sumnerevans.com";
+    color = "red";
+  };
+
   bookMyTimeAdmin = {
     name = "BMT-Admin";
     address = "admin@bookmyti.me";
@@ -52,6 +58,11 @@ in
 
     Inquiries = mkMerge [
       (helper.commonConfig inquiriesConfig)
+      helper.migaduConfig
+    ];
+
+    Junk = mkMerge [
+      (helper.commonConfig junkConfig)
       helper.migaduConfig
     ];
 

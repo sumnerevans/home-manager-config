@@ -1,24 +1,18 @@
 { config, pkgs, lib, ... }: with lib; let
   accountConfig = {
-    address = "sumner.evans98@gmail.com";
-    name = "Gmail";
-    color = "yellow";
+    address = "sumner@beeper.com";
+    name = "Work";
+    color = "blue";
     signatureLines = ''
-      Sumner Evans
-      Software Engineer at Beeper
-      2 Chronicles 7:14
-
+      Sumner Evans | Software Engineer at Beeper
       https://sumnerevans.com | +1 (720) 459-1501 | GPG: B50022FD
-
-      Note, this is not my main email, please update your contact information
-      for me to my new email: me@sumnerevans.com.
     '';
   };
 
   helper = import ./account-config-helper.nix { inherit config pkgs lib; };
 in
 {
-  accounts.email.accounts.Gmail = mkMerge [
+  accounts.email.accounts.Work = mkMerge [
     (helper.commonConfig accountConfig)
     (helper.imapnotifyConfig accountConfig)
     (helper.signatureConfig accountConfig)

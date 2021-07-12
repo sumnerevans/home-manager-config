@@ -7,7 +7,7 @@
       Jonathan Sumner Evans           Instructor: CSCI 564
       https://sumnerevans.com         CS@Mines Alumnus
       +1 (720) 459-1501               M.S. Computer Science
-      GPG: B50022FD                   Software Engineer @ The Trade Desk
+      GPG: B50022FD                   Software Engineer @ Beeper
     '';
   };
 
