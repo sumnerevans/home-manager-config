@@ -61,8 +61,10 @@ in
       soviet = "${pkgs.pamixer}/bin/pamixer --set-volume 50 && mpv --quiet -vo caca 'https://www.youtube.com/watch?v=U06jlgpMtQs'";
       tar = "${pkgs.libarchive}/bin/bsdtar";
       tt-beeper = "tt start -c Beeper";
+      tt-element = "tt start -c Beeper 'Element catchup'";
       tt-tea = "tt start -p teaching/aca";
       tt-li = "tt start -t gh -p 'linkedin-matrix' -c Beeper";
+      tt-standup = "tt start -c Beeper 'Standup'";
       wdir = "watch --color -n .5 'ls -lha --color=always'";
       xelatex = "xelatex -shell-escape";
       zathura = pdfviewer;
