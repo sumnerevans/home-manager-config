@@ -1,8 +1,8 @@
 { lib, config, pkgs, ... }: with lib; let
   # ICS import settings
   icsSubscriptions = [
-    { uri = "https://lug.mines.edu/schedule/ical.ics"; importTo = "LUG"; }
     { uri = "https://acm.mines.edu/schedule/ical.ics"; importTo = "ACM"; }
+    { uri = "https://lug.mines.edu/schedule/ical.ics"; importTo = "LUG"; }
   ];
 
   icsImportCurl = { uri, importTo }:

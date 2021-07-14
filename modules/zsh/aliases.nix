@@ -63,7 +63,7 @@ in
       tt-beeper = "tt start -c Beeper";
       tt-element = "tt start -c Beeper 'Element catchup'";
       tt-tea = "tt start -p teaching/aca";
-      tt-li = "tt start -t gh -p 'linkedin-matrix' -c Beeper";
+      tt-li = "tt start -t gl -p 'beeper/linkedin-matrix' -c Beeper";
       tt-standup = "tt start -c Beeper 'Standup'";
       wdir = "watch --color -n .5 'ls -lha --color=always'";
       xelatex = "xelatex -shell-escape";
