@@ -1287,3 +1287,7 @@ IM Eric Rosen: yeah, it's really bad.
 It's never a blunder; it's a dynamic sacrifice.
     -- WGM Nemo "Nemsko" Zhou
 %
+There's a million things that can go wrong, and none of them are "I can't write
+a 'for' loop fast enough".
+    -- Michael Dominic (Referring to GitHub Copilot, Coder Radio 422)
+%
