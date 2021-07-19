@@ -130,7 +130,7 @@
                     {
                       block = "battery";
                       interval = 30;
-                      format = "{percentage}% {time}";
+                      format = "{percentage} {time}";
                       device = "BAT0";
                       priority = 110;
                     }
