@@ -40,7 +40,6 @@
         black
         flake8
         pynvim
-        python-language-server
       ]
     );
 

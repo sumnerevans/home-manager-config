@@ -12,6 +12,7 @@
     ./vim-togglelist.nix
 
     # Editor
+    ./blamer.nix
     # ./deoplete.nix
     ./rainbow.nix
     # ./supertab.nix
