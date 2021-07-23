@@ -1,5 +1,5 @@
 { lib, pkgs }: with pkgs;
-python38Packages.buildPythonApplication rec {
+python3Packages.buildPythonApplication rec {
   pname = "tracktime";
   version = "0.9.20";
   format = "pyproject";
@@ -8,7 +8,7 @@ python38Packages.buildPythonApplication rec {
     python3Packages.poetry
   ];
 
-  propagatedBuildInputs = with python38Packages; [
+  propagatedBuildInputs = with python3Packages; [
     argcomplete
     chromedriver
     docutils

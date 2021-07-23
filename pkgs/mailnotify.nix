@@ -14,7 +14,7 @@ python3Packages.buildPythonApplication rec {
     libnotify
   ];
 
-  propagatedBuildInputs = with python38Packages; [
+  propagatedBuildInputs = with python3Packages; [
     bleach
     pygobject3
     watchdog

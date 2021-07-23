@@ -52,7 +52,7 @@ in
 
     # Python
     (
-      python38.withPackages (
+      python3.withPackages (
         ps: with ps; [
           dateutil
           fuzzywuzzy

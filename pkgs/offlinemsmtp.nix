@@ -1,11 +1,11 @@
 { lib, pkgs }: with pkgs;
-python38Packages.buildPythonApplication rec {
+python3Packages.buildPythonApplication rec {
   pname = "offlinemsmtp";
   version = "0.3.8";
 
   nativeBuildInputs = [
     gobject-introspection
-    python38Packages.setuptools
+    python3Packages.setuptools
     wrapGAppsHook
   ];
 
@@ -13,7 +13,7 @@ python38Packages.buildPythonApplication rec {
     libnotify
   ];
 
-  propagatedBuildInputs = with python38Packages; [
+  propagatedBuildInputs = with python3Packages; [
     msmtp
     pass
     pygobject3
@@ -26,7 +26,7 @@ python38Packages.buildPythonApplication rec {
   # https://github.com/NixOS/nixpkgs/issues/56943
   strictDeps = false;
 
-  src = python38.pkgs.fetchPypi {
+  src = python3.pkgs.fetchPypi {
     inherit pname version;
     sha256 = "86a3747e51d61e08679532f24625d08f36de1084f0a6c1cec07675e6c4975b1a";
   };
