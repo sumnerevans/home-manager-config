@@ -15,6 +15,7 @@
               \ 'coc-explorer',
               \ 'coc-go',
               \ 'coc-html',
+              \ 'coc-java',
               \ 'coc-json',
               \ 'coc-lists',
               \ 'coc-marketplace',

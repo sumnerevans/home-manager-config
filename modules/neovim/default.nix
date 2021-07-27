@@ -30,6 +30,7 @@
     extraPackages = with pkgs; [
       bat
       clang
+      openjdk11_headless
       ripgrep
       rnix-lsp
       texlab

@@ -1,5 +1,5 @@
 { config, lib, pkgs, ... }: with lib; let
-  tomlFormat = pkgs.formats.toml { };
+  tomlFormat = pkgs.formats.toml {};
 in
 {
   options = {
@@ -16,7 +16,10 @@ in
     ] ++ (
       # GUI Tools
       optionals (config.wayland.enable || config.xorg.enable) [
+        android-studio
         dfeet
+        jetbrains.idea-community
+        openjdk11
         sqlitebrowser
         wireshark
       ]
