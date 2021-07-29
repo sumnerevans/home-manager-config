@@ -1291,3 +1291,7 @@ There's a million things that can go wrong, and none of them are "I can't write
 a 'for' loop fast enough".
     -- Michael Dominic (Referring to GitHub Copilot, Coder Radio 422)
 %
+The fun thing about block based programming languages is your code looks like
+actual spaghetti.
+    -- Jack Garner (hekn denk memes)
+%
