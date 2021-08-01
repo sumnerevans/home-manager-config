@@ -11,6 +11,10 @@
     path = ${config.xdg.dataHome}/vdirsyncer/contacts/addressbook
     type = birthdays
 
+    [[beeper_calendar_local]]
+    path = ${config.xdg.dataHome}/vdirsyncer/work-calendars/*
+    type = discover
+
     [locale]
     timeformat = %H:%M
     dateformat = %Y-%m-%d

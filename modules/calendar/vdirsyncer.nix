@@ -61,5 +61,24 @@ in
 
       # Calendar
       ${mkPair { name = "calendars"; metadata = [ "displayname" "color" ]; }}
+
+      # Work Calendar
+      [pair beeper_google_calendar]
+      a = "beeper_google_calendar_local"
+      b = "beeper_google_calendar_remote"
+      collections = ["from a", "from b"]
+      conflict_resolution = "b wins"
+      metadata = [ "displayname", "color" ]
+
+      [storage beeper_google_calendar_local]
+      type = "filesystem"
+      path = "${config.xdg.dataHome}/vdirsyncer/work-calendars/"
+      fileext = ".ics"
+
+      [storage beeper_google_calendar_remote]
+      type = "google_calendar"
+      token_file = "${config.xdg.dataHome}/vdirsyncer/beeper_google_calendar_token_file"
+      client_id.fetch = ["command", "${pkgs.pass}/bin/pass", "vdirsyncer/gcp_client_id"]
+      client_secret.fetch = ["command", "${pkgs.pass}/bin/pass", "vdirsyncer/gcp_client_secret"]
     '';
 }
