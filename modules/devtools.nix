@@ -35,5 +35,9 @@ in
     xdg.configFile."pypoetry/config.toml".source = tomlFormat.generate "config.toml" {
       virtualenvs.in-project = true;
     };
+
+    home.file.".ideavimrc".text = ''
+      set clipboard+=unnamed
+    '';
   };
 }
