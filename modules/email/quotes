@@ -1295,3 +1295,9 @@ The fun thing about block based programming languages is your code looks like
 actual spaghetti.
     -- Jack Garner (hekn denk memes)
 %
+Me: I can't ping IPv6 addresses from my VPS. Where should I start debugging?
+Jo: I'm suddenly having this problem on my laptop, you must have cursed me
+Me: Yes, that is one side effect of using IPv6. It's as infectious as COVID.
+    Don't play around with IPs with colons in them. They may cause a pandemic.
+Jo: Better wear your subnet mask
+%
