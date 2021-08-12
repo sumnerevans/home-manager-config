@@ -47,8 +47,8 @@ in
         map = [ "index" ];
       }
       {
-        action = "<change-folder>${config.accounts.email.accounts.Mines.maildir.absPath}/INBOX<enter>";
-        key = "M";
+        action = "<change-folder>${config.accounts.email.accounts.Work.maildir.absPath}/INBOX<enter>";
+        key = "W";
         map = [ "index" ];
       }
       {

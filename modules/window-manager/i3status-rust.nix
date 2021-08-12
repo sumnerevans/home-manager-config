@@ -48,7 +48,15 @@
                   {
                     block = "maildir";
                     interval = 10;
-                    inboxes = map (f: "${home}/Mail/${f}/INBOX") [ "Personal" "Mines" "Gmail" "TEF" ];
+                    inboxes = map (f: "${home}/Mail/${f}/INBOX") [ "Personal" "Gmail" ];
+                    threshold_warning = 25;
+                    threshold_critical = 50;
+                    priority = 10;
+                  }
+                  {
+                    block = "maildir";
+                    interval = 10;
+                    inboxes = map (f: "${home}/Mail/${f}/INBOX") [ "Work" ];
                     threshold_warning = 25;
                     threshold_critical = 50;
                     priority = 10;
@@ -77,15 +85,6 @@
                     player = "sublimemusic";
                     buttons = [ (mkIf (!config.laptop.enable) "prev") "play" "next" ];
                     priority = 40;
-                  }
-                  {
-                    block = "toggle";
-                    text = "CSM";
-                    command_state = "${nmcli} con show --active | ${pkgs.gnugrep}/bin/grep 'Mines VPN'";
-                    command_on = "${nmcli} con up id 'Mines VPN'";
-                    command_off = "${nmcli} con down id 'Mines VPN'";
-                    interval = 5;
-                    priority = 60;
                   }
                   {
                     # Ping time
