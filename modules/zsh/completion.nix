@@ -2,10 +2,10 @@
   programs.zsh = {
     enableAutosuggestions = true;
     enableCompletion = true;
-    initExtra = ''
+    completionInit = ''
       # add custom completion scripts
       # TODO: get this working
-      fpath+=(~/.zsh/completion)
+      fpath+=(${config.home.homeDirectory}/.zsh/completion)
 
       # Auto-Correction
       setopt correct
