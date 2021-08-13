@@ -1,5 +1,8 @@
 { pkgs, ... }: {
   programs.neovim = {
+    extraPackages = with pkgs; [
+      gopls
+    ];
     plugins = with pkgs.vimPlugins; [
       {
         plugin = coc-nvim;
