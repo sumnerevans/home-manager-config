@@ -25,6 +25,7 @@ in
     sch = "${home}/school";
     tea = "${home}/school/teaching";
     aca = "${home}/school/teaching/aca";
+    ppl = "${home}/school/teaching/pplf21";
 
     # NixOS config
     cfg = "/etc/nixos";
