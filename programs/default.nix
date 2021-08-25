@@ -9,7 +9,6 @@ in
     aspellDicts.en
     bind
     bitwarden-cli
-    chezmoi
     fd
     file
     fortune
