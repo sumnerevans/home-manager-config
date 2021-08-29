@@ -1,7 +1,7 @@
 { lib, pkgs }: with pkgs;
 python3Packages.buildPythonApplication rec {
   pname = "mailnotify";
-  version = "0.0.1";
+  version = "unstable-2021-08-29";
   format = "pyproject";
 
   nativeBuildInputs = [
@@ -30,8 +30,8 @@ python3Packages.buildPythonApplication rec {
   src = fetchFromSourcehut {
     owner = "~sumner";
     repo = pname;
-    rev = "06499f01ba9b86a0e5ce0099305f012476bea391";
-    sha256 = "sha256-cmAILZ3QUBTCkKonsVQcJ8DW4DWwvaKWTE6eCPNAnmU=";
+    rev = "8393742b22a0ff18ab03b28eaeed5d1e0e27099d";
+    sha256 = "sha256-ecI6ITx9dWjyov2/gx8NGsvlHiNfrGdGgx30CeWrw8E=";
   };
 
   meta = with lib; {
