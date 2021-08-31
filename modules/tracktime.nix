@@ -43,7 +43,7 @@ in
     };
 
     customer_rates = {
-      Beeper = 50.0;
+      Beeper = 57.5;
       TTD = 51.92;
     };
 
