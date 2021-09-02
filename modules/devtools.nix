@@ -20,6 +20,7 @@ in
         dfeet
         jetbrains.idea-community
         openjdk11
+        postman
         sqlitebrowser
         wireshark
       ]
