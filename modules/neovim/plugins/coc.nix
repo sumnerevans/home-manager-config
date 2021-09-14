@@ -24,6 +24,7 @@
               \ 'coc-marketplace',
               \ 'coc-omnisharp',
               \ 'coc-pyright',
+              \ 'coc-rust-analyzer',
               \ 'coc-sh',
               \ 'coc-texlab',
               \ 'coc-tsserver',
