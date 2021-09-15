@@ -117,6 +117,7 @@
       "${config.home.homeDirectory}/.local/bin"
       "${config.home.homeDirectory}/.cargo/bin"
       "${config.home.homeDirectory}/go/bin"
+      "${config.home.homeDirectory}/.beeper-stack-tools"
     ];
   };
 }
