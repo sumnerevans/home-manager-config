@@ -24,7 +24,7 @@ in
 
     realName = mkDefault "Sumner Evans";
     userName = mkDefault address;
-    passwordCommand = mkDefault "${pkgs.pass}/bin/pass Mail/${address}";
+    passwordCommand = mkDefault "cat ${config.xdg.configHome}/nixpkgs/secrets/mail/${address}";
 
     mbsync = {
       enable = true;
@@ -57,11 +57,11 @@ in
   };
 
   imapnotifyConfig = { name, ... }: {
-    imapnotify = {
-      enable = true;
-      boxes = [ "INBOX" ];
-      onNotify = "${pkgs.isync}/bin/mbsync ${name}:%s";
-    };
+    # imapnotify = {
+    #   enable = true;
+    #   boxes = [ "INBOX" ];
+    #   onNotify = "${pkgs.isync}/bin/mbsync ${name}:%s";
+    # };
   };
 
   migaduConfig = {

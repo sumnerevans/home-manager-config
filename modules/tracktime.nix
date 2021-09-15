@@ -1,5 +1,5 @@
-{ lib, pkgs, ... }: with lib; with pkgs; let
-  passCmd = "${pass}/bin/pass";
+{ config, lib, pkgs, ... }: with lib; with pkgs; let
+  secretsDir = "${config.xdg.configHome}/nixpkgs/secrets";
   tracktime = callPackage ../pkgs/tracktime.nix {};
   yamlFormat = pkgs.formats.yaml {};
 in
@@ -9,25 +9,19 @@ in
   xdg.configFile."tracktime/tracktimerc".source = yamlFormat.generate "tracktimerc" {
     fullname = "Sumner Evans";
     github = {
-      access_token = "${passCmd} VCS/GitHub-tracktime-access-token|";
+      access_token = "cat ${secretsDir}/github-tracktime-access-token|";
       username = "sumnerevans";
     };
 
     gitlab = {
       api_root = "https://gitlab.com/api/v4/";
-      api_key = "${passCmd} VCS/GitLab-API-Key|";
+      api_key = "cat ${secretsDir}/gitlab-api-key|";
     };
 
     sourcehut = {
       api_root = "https://todo.sr.ht/api/";
-      access_token = "${passCmd} VCS/Sourcehut-Access-Token|";
+      access_token = "cat ${secretsDir}/sourcehut-access-token|";
       username = "~sumner";
-    };
-
-    jira = {
-      root = "https://atlassian.thetradedesk.com/jira/";
-      sso_email = "sumner.evans@thetradedesk.com";
-      sso_password = "${passCmd} Work/TTD/SSO|";
     };
 
     sync_time = true;

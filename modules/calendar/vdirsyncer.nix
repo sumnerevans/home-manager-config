@@ -5,6 +5,9 @@
     ${vdirsyncer} sync
     ${vdirsyncer} metasync
   '';
+
+  passwordFetchCommand = passwordName:
+    ''["command", "${pkgs.coreutils}/bin/cat", "${config.xdg.configHome}/nixpkgs/secrets/vdirsyncer/${passwordName}"]'';
 in
 {
   home.packages = [ pkgs.vdirsyncer ];
@@ -48,7 +51,7 @@ in
       type = "${typeToRemoteType name}"
       url = "https://dav.sumnerevans.com/"
       username = "sumner"
-      password.fetch = ["command", "${pkgs.pass}/bin/pass", "Xandikos"]
+      password.fetch = ${passwordFetchCommand "xandikos"}
     '';
   in
     ''
@@ -78,7 +81,7 @@ in
       [storage beeper_google_calendar_remote]
       type = "google_calendar"
       token_file = "${config.xdg.dataHome}/vdirsyncer/beeper_google_calendar_token_file"
-      client_id.fetch = ["command", "${pkgs.pass}/bin/pass", "vdirsyncer/gcp_client_id"]
-      client_secret.fetch = ["command", "${pkgs.pass}/bin/pass", "vdirsyncer/gcp_client_secret"]
+      client_id.fetch = ${passwordFetchCommand "gcp_client_id"}
+      client_secret.fetch = ${passwordFetchCommand "gcp_client_secret"}
     '';
 }
