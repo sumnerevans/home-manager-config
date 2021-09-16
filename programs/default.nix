@@ -25,6 +25,7 @@ in
     nox
     openssl
     pciutils
+    pwgen
     ranger
     restic
     ripgrep

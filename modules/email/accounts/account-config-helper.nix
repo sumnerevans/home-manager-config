@@ -57,11 +57,11 @@ in
   };
 
   imapnotifyConfig = { name, ... }: {
-    # imapnotify = {
-    #   enable = true;
-    #   boxes = [ "INBOX" ];
-    #   onNotify = "${pkgs.isync}/bin/mbsync ${name}:%s";
-    # };
+    imapnotify = {
+      enable = true;
+      boxes = [ "INBOX" ];
+      onNotify = "${pkgs.isync}/bin/mbsync ${name}:%s";
+    };
   };
 
   migaduConfig = {
