@@ -23,6 +23,7 @@
               \ 'coc-lists',
               \ 'coc-marketplace',
               \ 'coc-omnisharp',
+              \ 'coc-prettier',
               \ 'coc-pyright',
               \ 'coc-rust-analyzer',
               \ 'coc-sh',
