@@ -1,14 +1,20 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   chromeCommandLineArgs = "-high-dpi-support=0 -force-device-scale-factor=1";
 in
 {
   home.packages = with pkgs; [
     (google-chrome.override { commandLineArgs = chromeCommandLineArgs; })
-    firefox-bin # TODO use the module?
     elinks
     w3m
   ];
+
+  programs.firefox = {
+    enable = true;
+    package = pkgs.wrapFirefox pkgs.firefox-unwrapped (
+      if config.wayland.enable then { forceWayland = true; } else {}
+    );
+  };
 
   home.sessionVariables = {
     # Enable touchscreen in Firefox
