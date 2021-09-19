@@ -27,11 +27,7 @@ in
       spotify
       streamlink
       sublime-music
-    ] ++ (
-      optionals cfg.enable [
-        steam
-      ]
-    );
+    ];
 
     programs.feh.enable = true;
 
