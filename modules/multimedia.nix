@@ -25,7 +25,6 @@ in
       kdenlive
       libreoffice-fresh
       spotify
-      streamlink
       sublime-music
     ];
 
