@@ -18,6 +18,10 @@ in
       api_key = "cat ${secretsDir}/gitlab-api-key|";
     };
 
+    linear = {
+      default_org = "beeper";
+    };
+
     sourcehut = {
       api_root = "https://todo.sr.ht/api/";
       access_token = "cat ${secretsDir}/sourcehut-access-token|";

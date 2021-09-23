@@ -61,6 +61,7 @@ in
       soviet = "${pkgs.pamixer}/bin/pamixer --set-volume 50 && mpv --quiet -vo caca 'https://www.youtube.com/watch?v=U06jlgpMtQs'";
       tar = "${pkgs.libarchive}/bin/bsdtar";
       tt-beeper = "tt start -c Beeper";
+      tt-bri = "tt start -t linear -c Beeper -p BRI";
       tt-element = "tt start -c Beeper 'Element catchup'";
       tt-tea = "tt start -p teaching/aca";
       tt-issues = "tt start -t gl -p 'beeper/issues' -c Beeper";
