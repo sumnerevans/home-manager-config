@@ -7,6 +7,7 @@
 in
 {
   imports = [
+    ./autorandr.nix
     ./i3status-rust.nix
     ./rofi.nix
     ./wallpaper.nix

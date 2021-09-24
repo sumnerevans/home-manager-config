@@ -15,7 +15,7 @@ in
     extrai3wmConfig = mkOption {
       type = types.attrsOf types.anything;
       description = "Extra config for i3wm";
-      default = { };
+      default = {};
     };
     remapEscToCaps = mkOption {
       type = types.bool;
@@ -33,7 +33,7 @@ in
         common.i3SwayConfig
         {
           config.startup = [
-            { command = "${config.home.homeDirectory}/bin/display-configuration.sh"; }
+            { command = "${pkgs.autorandr}/bin/autorandr --change"; always = true; }
           ];
 
           config.keybindings = {
@@ -159,8 +159,7 @@ in
           }
         );
       in
-      mapAttrs
-        (
+        mapAttrs (
           name: value: {
             Unit = {
               Description = "Run ${name} on startup.";
@@ -170,7 +169,6 @@ in
             Service.Restart = "always";
             Install.WantedBy = [ "graphical-session.target" ];
           }
-        )
-        startupServices;
+        ) startupServices;
   };
 }
