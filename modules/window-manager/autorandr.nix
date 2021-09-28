@@ -70,7 +70,7 @@ in
             DP-4 = fingerprints.Dell_P2421D;
           };
           config = {
-            DP-0 = configs.Dell_S2417DG;
+            DP-0 = configs.Dell_S2417DG // { position = "0x0"; };
             DP-4 = configs.Dell_P2421D // { position = "2560x0"; };
           };
         };
