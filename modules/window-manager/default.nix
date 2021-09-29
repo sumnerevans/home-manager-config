@@ -9,6 +9,7 @@ in
   imports = [
     ./autorandr.nix
     ./i3status-rust.nix
+    ./kanshi.nix
     ./rofi.nix
     ./wallpaper.nix
     ./wayland.nix
