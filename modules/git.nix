@@ -1,5 +1,6 @@
-{ lib, pkgs, ... }: let
-  offlinemsmtp = pkgs.callPackage ../pkgs/offlinemsmtp.nix {};
+{ lib, pkgs, ... }:
+let
+  offlinemsmtp = pkgs.callPackage ../pkgs/offlinemsmtp.nix { };
 in
 {
   home.packages = with pkgs.gitAndTools; [ gh hub lab ];
@@ -60,4 +61,25 @@ in
     url = https://gitlab.com
     private_token = ${lib.removeSuffix "\n" (builtins.readFile ../secrets/gitlab-api-key)}
   '';
+
+  programs.zsh.shellAliases = {
+    ga = "git add";
+    gaa = "git add -A";
+    gap = "git add -p";
+    gc = "git commit";
+    gca = "gc -a";
+    gcaa = "gca --amend";
+    gcan = "gc --amend --no-edit";
+    gcaan = "gcaa --no-edit";
+    gch = "git checkout";
+    gd = "git diff";
+    gdc = "git diff --cached";
+    gfetch = "git fetch";
+    gl = "git log --pretty=format:'%C(auto)%h %ad %C(green)%s%Creset %C(auto)%d [%an (%G? %GK)]' --graph --date=format:'%Y-%m-%d %H:%M' --all";
+    gpull = "git pull";
+    gpush = "git push";
+    grhh = "git reset --hard HEAD";
+    gs = "git status";
+    gst = "git stash";
+  };
 }

@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: with lib; with pkgs; let
   secretsDir = "${config.xdg.configHome}/nixpkgs/secrets";
-  tracktime = callPackage ../pkgs/tracktime.nix {};
-  yamlFormat = pkgs.formats.yaml {};
+  tracktime = callPackage ../pkgs/tracktime.nix { };
+  yamlFormat = pkgs.formats.yaml { };
 in
 {
   home.packages = [ tracktime ];
@@ -73,5 +73,15 @@ in
 
     # Needed so that the synchroniser can find the Chrome binary.
     chromedriver.chrome_bin = "${pkgs.google-chrome}/bin/google-chrome-stable";
+  };
+
+  # Aliases
+  programs.zsh.shellAliases = {
+    tt-beeper = "tt start -c Beeper";
+    tt-bri = "tt start -t linear -c Beeper -p BRI";
+    tt-element = "tt start -c Beeper 'Element catchup'";
+    tt-tea = "tt start -p teaching/aca";
+    tt-issues = "tt start -t gl -p 'beeper/issues' -c Beeper";
+    tt-standup = "tt start -c Beeper 'Standup'";
   };
 }

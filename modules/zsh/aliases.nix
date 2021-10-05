@@ -12,26 +12,6 @@ in
       hlpr = "lpr -P HP_ENVY_4500_series";
       hlprd = "hlpr -o Duplex=DuplexNoTumble";
 
-      # Git
-      ga = "git add";
-      gaa = "git add -A";
-      gap = "git add -p";
-      gc = "git commit";
-      gca = "gc -a";
-      gcaa = "gca --amend";
-      gcan = "gc --amend --no-edit";
-      gcaan = "gcaa --no-edit";
-      gch = "git checkout";
-      gd = "git diff";
-      gdc = "git diff --cached";
-      gfetch = "git fetch";
-      gl = "git log --pretty=format:'%C(auto)%h %ad %C(green)%s%Creset %C(auto)%d [%an (%G? %GK)]' --graph --date=format:'%Y-%m-%d %H:%M' --all";
-      gpull = "git pull";
-      gpush = "git push";
-      grhh = "git reset --hard HEAD";
-      gs = "git status";
-      gst = "git stash";
-
       # Config
       projectlist = "vim ~st/projectlist && projectsync";
       quotesfile = "vim ${config.xdg.configHome}/nixpkgs/modules/email/quotes";
@@ -60,12 +40,6 @@ in
       screen = "screen -DR";
       soviet = "${pkgs.pamixer}/bin/pamixer --set-volume 50 && mpv --quiet -vo caca 'https://www.youtube.com/watch?v=U06jlgpMtQs'";
       tar = "${pkgs.libarchive}/bin/bsdtar";
-      tt-beeper = "tt start -c Beeper";
-      tt-bri = "tt start -t linear -c Beeper -p BRI";
-      tt-element = "tt start -c Beeper 'Element catchup'";
-      tt-tea = "tt start -p teaching/aca";
-      tt-issues = "tt start -t gl -p 'beeper/issues' -c Beeper";
-      tt-standup = "tt start -c Beeper 'Standup'";
       wdir = "watch --color -n .5 'ls -lha --color=always'";
       xelatex = "xelatex -shell-escape";
       zathura = pdfviewer;
