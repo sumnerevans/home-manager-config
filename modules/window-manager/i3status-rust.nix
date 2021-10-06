@@ -140,7 +140,7 @@
                     {
                       block = "toggle";
                       text = "DND";
-                      command_state = "[[ $(${dunstctl} is-paused) == true ]]";
+                      command_state = "[[ $(${dunstctl} is-paused) == true ]] && echo 1";
                       command_on = "${dunstctl} set-paused true";
                       command_off = "${dunstctl} set-paused false";
                       interval = 60;
