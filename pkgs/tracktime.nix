@@ -1,7 +1,7 @@
 { lib, pkgs }: with pkgs;
 python3Packages.buildPythonApplication rec {
   pname = "tracktime";
-  version = "0.9.21rc1";
+  version = "0.10.0";
   format = "pyproject";
 
   nativeBuildInputs = [
@@ -26,8 +26,8 @@ python3Packages.buildPythonApplication rec {
   src = fetchFromSourcehut {
     owner = "~sumner";
     repo = pname;
-    rev = "1c4cea12160505dab60c96d02dc1b40bfe929603";
-    sha256 = "sha256-WkFCon9rj6+TyWQ326f7jEXx9cAJNMoUIp33fm4gnrk=";
+    rev = "v${version}";
+    sha256 = "sha256-iUu/TcpSDejrSeNf1u74njt8BbyYsnL/xnH4j+5dX/0=";
   };
 
   meta = with lib; {

@@ -20,6 +20,7 @@ in
 
     linear = {
       default_org = "beeper";
+      api_key = "cat ${secretsDir}/linear-personal-api-key|";
     };
 
     sourcehut = {
