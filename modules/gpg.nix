@@ -2,8 +2,6 @@
   agentTTL = 60 * 60 * 4; # 4 hours
   waylandCfg = config.wayland;
   xorgCfg = config.xorg;
-
-  yubikey-touch-detector = pkgs.callPackage ../pkgs/yubikey-touch-detector.nix {};
 in
 {
   programs.gpg.enable = true;
@@ -25,7 +23,7 @@ in
     };
 
     Service = {
-      ExecStart = "${yubikey-touch-detector}/bin/yubikey-touch-detector --libnotify";
+      ExecStart = "${pkgs.yubikey-touch-detector}/bin/yubikey-touch-detector --libnotify";
       Restart = "always";
       RestartSec = 5;
     };
