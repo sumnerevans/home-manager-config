@@ -8,7 +8,7 @@
       Software Engineer at Beeper
       2 Chronicles 7:14
 
-      https://sumnerevans.com | +1 (720) 459-1501 | GPG: B50022FD
+      https://sumnerevans.com | @sumner:nevarro.space | GPG: B50022FD
     '';
   };
 

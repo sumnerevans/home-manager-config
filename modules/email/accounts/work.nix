@@ -5,7 +5,7 @@
     color = "blue";
     signatureLines = ''
       Sumner Evans | Software Engineer at Beeper
-      https://sumnerevans.com | +1 (720) 459-1501 | GPG: B50022FD
+      https://sumnerevans.com | @sumner:nevarro.space | GPG: B50022FD
     '';
   };
 
