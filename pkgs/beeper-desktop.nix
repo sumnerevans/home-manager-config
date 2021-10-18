@@ -1,6 +1,6 @@
 { lib, fetchurl, appimageTools, gsettings-desktop-schemas, gtk3 }:
 let
-  buildNum = "211013nkx1ahsnn";
+  buildNum = "211018qsr0f34jd";
 in
 appimageTools.wrapType2 rec {
   name = "beeper";
