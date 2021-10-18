@@ -9,12 +9,7 @@ in
     w3m
   ];
 
-  programs.firefox = {
-    enable = true;
-    package = pkgs.wrapFirefox pkgs.firefox-unwrapped (
-      if config.wayland.enable then { forceWayland = true; } else {}
-    );
-  };
+  programs.firefox.enable = true;
 
   home.sessionVariables = {
     # Enable touchscreen in Firefox
