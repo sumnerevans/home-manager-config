@@ -1,13 +1,13 @@
-{ lib, fetchurl, appimageTools, gsettings-desktop-schemas, gtk3 }:
+{ lib, fetchurl, appimageTools }:
 let
-  buildNum = "211018qsr0f34jd";
+  buildNum = "2110191rkpi1bjk";
 in
 appimageTools.wrapType2 rec {
   name = "beeper";
 
   src = fetchurl {
     url = "https://dl.todesktop.com/201202u1n7yn5b0/builds/${buildNum}/linux/appimage/x64";
-    sha256 = "sha256-dspgp/TFicRqSZEpOBs8hKbNAm5KkjvThT3XCq5siG4=";
+    sha256 = "sha256-Za/tPdDhgTCWb91PXUkS89MgWSGKQIwg1aYrLx2ErDE=";
   };
 
   extraInstallCommands =
