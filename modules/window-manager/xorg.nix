@@ -15,7 +15,7 @@ in
     extrai3wmConfig = mkOption {
       type = types.attrsOf types.anything;
       description = "Extra config for i3wm";
-      default = {};
+      default = { };
     };
     remapEscToCaps = mkOption {
       type = types.bool;
@@ -99,10 +99,15 @@ in
       };
       settings = {
         global = {
+          follow = "none";
           corner_radius = 5;
           frame_color = "#8EC07C";
-          geometry = "350x50-15+45";
+          width = 350;
+          height = 50;
+          offset = "15x36";
           horizontal_padding = 6;
+          notification_limit = 11;
+          indicate_hidden = true;
           idle_threshold = 30;
           markup = true;
           padding = 6;
@@ -159,7 +164,8 @@ in
           }
         );
       in
-        mapAttrs (
+      mapAttrs
+        (
           name: value: {
             Unit = {
               Description = "Run ${name} on startup.";
@@ -169,6 +175,7 @@ in
             Service.Restart = "always";
             Install.WantedBy = [ "graphical-session.target" ];
           }
-        ) startupServices;
+        )
+        startupServices;
   };
 }
