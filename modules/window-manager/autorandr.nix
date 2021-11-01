@@ -74,6 +74,7 @@ in
           };
           hooks = {
             postswitch = ''
+              ${i3msg} '[workspace="10"]' move workspace to output DP-1
               ${i3msg} '[workspace="11: "]' move workspace to output DP-1
               ${i3msg} '[workspace="12: "]' move workspace to output DP-1
             '';
