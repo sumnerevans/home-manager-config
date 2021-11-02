@@ -103,7 +103,8 @@ in
           corner_radius = 5;
           frame_color = "#8EC07C";
           width = 350;
-          height = 50;
+          height = 200;
+          notification_height = 50;
           offset = "15x36";
           horizontal_padding = 6;
           notification_limit = 11;
