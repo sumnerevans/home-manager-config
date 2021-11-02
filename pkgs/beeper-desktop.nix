@@ -1,13 +1,13 @@
 { lib, fetchurl, appimageTools }:
 let
-  buildNum = "211028m190fz3rt";
+  buildNum = "211102s62fundmb";
 in
 appimageTools.wrapType2 rec {
   name = "beeper";
 
   src = fetchurl {
     url = "https://dl.todesktop.com/201202u1n7yn5b0/builds/${buildNum}/linux/appimage/x64";
-    sha256 = "sha256-OExCE4+260tlEwIYw90yGGME5pMOAKTVepYOc5jDXQU=";
+    sha256 = "sha256-ZoJ3RghbCmI0DmTE3zHEvKVHlrV8h6uuw/dagGC2FrM=";
   };
 
   extraInstallCommands =
