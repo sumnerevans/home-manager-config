@@ -10,17 +10,6 @@
     # Scale to 1.8 instead of 2.
     output.eDP-1.scale = "1.75";
     input = {
-      "*" = {
-        # Use 3l for all keyboards that get attached
-        xkb_layout = "us";
-        xkb_variant = "3l";
-
-        # Get right click (2 finger) and middle click (3 finger) on touchpad
-        click_method = "clickfinger";
-
-        # Always use natural scrolling
-        natural_scroll = "enabled";
-      };
       "1:1:AT_Translated_Set_2_keyboard" = {
         xkb_layout = "us";
         xkb_variant = "3l-cros";
