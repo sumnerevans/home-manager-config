@@ -77,6 +77,9 @@ in
           "*" = {
             # Always use natural scrolling
             natural_scroll = "enabled";
+
+            # Get right click (2 finger) and middle click (3 finger) on touchpad
+            click_method = "clickfinger";
           };
 
           "type:keyboard" = {
@@ -85,14 +88,10 @@ in
             xkb_variant = "3l";
           };
 
-          "type:touchpad" = {
-            # Get right click (2 finger) and middle click (3 finger) on touchpad
-            click_method = "clickfinger";
-          };
-
           # Use normal layout for Yubikey so that we don't get weirdness
           "4176:1031:Yubico_YubiKey_OTP+FIDO+CCID" = {
             xkb_layout = "us";
+            xkb_variant = ''""'';
           };
         };
 
