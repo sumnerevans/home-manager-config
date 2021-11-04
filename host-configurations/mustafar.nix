@@ -25,6 +25,10 @@
         xkb_layout = "us";
         xkb_variant = "3l-cros";
       };
+      "4176:1031:Yubico_YubiKey_OTP+FIDO+CCID" = {
+        xkb_layout = "us";
+        xkb_variant = "us";
+      };
 
       # Don't scroll so fast
       "1739:52731:Synaptics_TM3579-001".scroll_factor = "0.75";
