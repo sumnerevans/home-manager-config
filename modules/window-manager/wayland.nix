@@ -7,6 +7,7 @@
     "${pkgs.swaylock-effects}/bin/swaylock"
     "--daemonize"
     "--screenshots"
+    "--color 000"
     "--clock"
     "--indicator"
     "--indicator-radius 100"
@@ -102,12 +103,14 @@ in
             slurp = "${pkgs.slurp}/bin/slurp";
             screenshotOutfile = "${config.home.homeDirectory}/tmp/$(${pkgs.coreutils}/bin/date +%Y-%m-%d-%T).png";
             screenshotSlurpScript = pkgs.writeShellScriptBin "screenshot" ''
-              ${grim} -g "$(${slurp})" ${screenshotOutfile}
-              ${pkgs.wl-clipboard}/bin/wl-copy <${screenshotOutfile}
+              filename=${screenshotOutfile}
+              ${grim} -g "$(${slurp})" $filename
+              ${pkgs.wl-clipboard}/bin/wl-copy <$filename
             '';
             screenshotFullscreenScript = pkgs.writeShellScriptBin "screenshot" ''
-              ${grim} ${screenshotOutfile}
-              ${pkgs.wl-clipboard}/bin/wl-copy <${screenshotOutfile}
+              filename=${screenshotOutfile}
+              ${grim} $filename
+              ${pkgs.wl-clipboard}/bin/wl-copy <$filename
             '';
           in
           {

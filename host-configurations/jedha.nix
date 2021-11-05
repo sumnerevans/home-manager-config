@@ -1,5 +1,5 @@
 { ... }: {
-  xorg.enable = true;
+  wayland.enable = true;
   laptop.enable = true;
   networking.interfaces = [ "enp0s31f6" "wlp4s0" ];
   programs.i3status-rust.extraBlocks = [
