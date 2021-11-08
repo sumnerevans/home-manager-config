@@ -1,5 +1,5 @@
 { config, lib, pkgs, ... }: with lib; let
-  tomlFormat = pkgs.formats.toml {};
+  tomlFormat = pkgs.formats.toml { };
 in
 {
   options = {
@@ -12,6 +12,7 @@ in
     home.packages = with pkgs; [
       # Shell Utilities
       delta
+      mosh
       watchexec
     ] ++ (
       # GUI Tools
@@ -25,6 +26,10 @@ in
         wireshark
       ]
     );
+
+    programs.zsh.shellAliases = {
+      tat = "${pkgs.mosh}/bin/mosh tatooine";
+    };
 
     # Enable developer programs
     programs.direnv.enable = true;
