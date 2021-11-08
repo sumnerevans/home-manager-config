@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: with pkgs; let
+{ config, lib, pkgs, ... }: with pkgs; let
   aliasfile = "${config.xdg.configHome}/neomutt/aliases";
   mailboxfile = "${config.xdg.configHome}/neomutt/mailboxes";
   bindir = "${config.home.homeDirectory}/bin";
@@ -7,7 +7,7 @@
   syncthingdir = "${config.home.homeDirectory}/Syncthing";
 in
 {
-  home.file."bin/mutt_helper" = {
+  home.file."bin/mutt_helper" = lib.mkIf (config.wayland.enable || config.xorg.enable) {
     text = ''
       #!/usr/bin/env sh
       set -xe

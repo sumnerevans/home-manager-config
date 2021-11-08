@@ -1,3 +1,7 @@
+{ pkgs, ... }:
+let
+  editor = "${pkgs.neovim}/bin/nvim";
+in
 {
   imports = [
     ./alacritty.nix
@@ -24,4 +28,9 @@
     ./yubikey.nix
     ./zsh
   ];
+
+  home.sessionVariables = {
+    VISUAL = "${editor}";
+    EDITOR = "${editor}";
+  };
 }
