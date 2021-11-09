@@ -46,7 +46,7 @@
                     [[ ! "$TERM" =~ screen ]] &&
                     [[ ! "$TERM" =~ tmux ]] &&
                     [ -z "$TMUX" ]; then
-                exec tmux && exit
+                exec tmux new-session -A && exit
             fi
         fi
 
