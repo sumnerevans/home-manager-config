@@ -82,7 +82,7 @@ in
     tt-bri = "tt start -t linear -c Beeper -p BRI";
     tt-element = "tt start -c Beeper 'Element catchup'";
     tt-hspc = "tt start -t gl -p ColoradoSchoolOfMines/hspc-problems";
-    tt-tea = "tt start -p teaching/aca";
+    tt-tea = "tt start -p teaching/ppl";
     tt-issues = "tt start -t gl -p 'beeper/issues' -c Beeper";
     tt-standup = "tt start -c Beeper 'Standup'";
   };
