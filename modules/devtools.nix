@@ -12,6 +12,7 @@ in
     home.packages = with pkgs; [
       # Shell Utilities
       delta
+      eternal-terminal
       mosh
       watchexec
     ] ++ (

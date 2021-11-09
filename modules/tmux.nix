@@ -8,7 +8,7 @@
     historyLimit = 10000;
     newSession = true;
     shell = "${pkgs.zsh}/bin/zsh";
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
 
     plugins = with pkgs.tmuxPlugins; [
       yank
@@ -46,6 +46,8 @@
       # Improve copy mode
       bind-key -T copy-mode-vi 'v' send-keys -X begin-selection
       bind-key -T copy-mode-vi 'y' send-keys -X copy-selection-and-cancel
+
+      set -ga terminal-overrides ',*256col*:Tc'
     '';
   };
 }

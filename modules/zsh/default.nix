@@ -49,13 +49,6 @@
                 exec tmux new-session -A && exit
             fi
         fi
-
-        # If tmux, use screen-256color as TERM
-        if [ -z "''${TMUX+x}" ]; then
-            export TERM=xterm-256color
-        else
-            export TERM=screen-256color
-        fi
       '';
 
       initExtra =
