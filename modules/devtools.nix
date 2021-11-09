@@ -29,7 +29,7 @@ in
     );
 
     programs.zsh.shellAliases = {
-      tat = "${pkgs.mosh}/bin/mosh tatooine";
+      tat = "${pkgs.eternal-terminal}/bin/et tatooine";
     };
 
     # Enable developer programs
