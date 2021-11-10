@@ -30,6 +30,7 @@ in
   ];
 
   home.sessionVariables = {
+    COLORTERM = "truecolor";
     VISUAL = "${editor}";
     EDITOR = "${editor}";
   };
