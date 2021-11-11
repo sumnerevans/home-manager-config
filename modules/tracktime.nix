@@ -9,23 +9,23 @@ in
   xdg.configFile."tracktime/tracktimerc".source = yamlFormat.generate "tracktimerc" {
     fullname = "Sumner Evans";
     github = {
-      access_token = "cat ${secretsDir}/github-tracktime-access-token|";
+      access_token = "${pkgs.coreutils}/bin/cat ${secretsDir}/github-tracktime-access-token|";
       username = "sumnerevans";
     };
 
     gitlab = {
       api_root = "https://gitlab.com/api/v4/";
-      api_key = "cat ${secretsDir}/gitlab-api-key|";
+      api_key = "${pkgs.coreutils}/bin/cat ${secretsDir}/gitlab-api-key|";
     };
 
     linear = {
       default_org = "beeper";
-      api_key = "cat ${secretsDir}/linear-personal-api-key|";
+      api_key = "${pkgs.coreutils}/bin/cat ${secretsDir}/linear-personal-api-key|";
     };
 
     sourcehut = {
       api_root = "https://todo.sr.ht/api/";
-      access_token = "cat ${secretsDir}/sourcehut-access-token|";
+      access_token = "${pkgs.coreutils}/bin/cat ${secretsDir}/sourcehut-access-token|";
       username = "~sumner";
     };
 

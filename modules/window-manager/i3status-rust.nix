@@ -28,7 +28,7 @@
             parseRollingPingScript = pkgs.writeShellScriptBin "parse-rolling-ping" ''
               ${cu}/cat ${homeTmp}/rolling_ping | ${pkgs.gnugrep}/bin/grep "fail" > /dev/null
               [[ $? == 0 ]] && printf "∞" && exit 0
-              printf "%0.3f" $(cat ${homeTmp}/rolling_ping | ${pkgs.jq}/bin/jq -s add/length)
+              printf "%0.3f" $(${cu}/cat ${homeTmp}/rolling_ping | ${pkgs.jq}/bin/jq -s add/length)
             '';
           in
           {

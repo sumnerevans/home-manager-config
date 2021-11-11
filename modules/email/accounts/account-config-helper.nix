@@ -24,7 +24,7 @@ in
 
     realName = mkDefault "Sumner Evans";
     userName = mkDefault address;
-    passwordCommand = mkDefault "cat ${config.xdg.configHome}/nixpkgs/secrets/mail/${address}";
+    passwordCommand = mkDefault "${pkgs.coreutils}/bin/cat ${config.xdg.configHome}/nixpkgs/secrets/mail/${address}";
 
     mbsync = {
       enable = true;
