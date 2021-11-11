@@ -4,6 +4,7 @@
     serverSupport = true;
   };
   cfg = config.gaming;
+  hasGui = config.wayland.enable || config.xorg.enable;
 in
 {
   options.gaming.enable = mkEnableOption "gaming programs";
@@ -12,25 +13,29 @@ in
     home.packages = [
       # Shell Utilities
       ffmpeg-full
-      pavucontrol
-      playerctl
       youtube-dl
+    ] ++ (
+      # GUI Tools
+      optionals hasGui [
+        pavucontrol
+        playerctl
 
-      # Multimedia
-      fbida
-      gimp
-      guvcview
-      imagemagick
-      inkscape
-      kdenlive
-      libreoffice-fresh
-      spotify
-      sublime-music
-    ];
+        # Multimedia
+        fbida
+        gimp
+        guvcview
+        imagemagick
+        inkscape
+        kdenlive
+        libreoffice-fresh
+        spotify
+        sublime-music
+      ]
+    );
 
     programs.feh.enable = true;
 
-    programs.mpv.enable = true;
+    programs.mpv.enable = hasGui;
     programs.mpv.config = {
       force-window = "yes";
       hwdec = "auto-safe";
@@ -39,11 +44,11 @@ in
       ytdl-format = "bestvideo+bestaudio";
     };
 
-    programs.obs-studio.enable = true;
+    programs.obs-studio.enable = hasGui;
     programs.obs-studio.plugins = with pkgs; [
       obs-studio-plugins.wlrobs
     ];
 
-    programs.zathura.enable = true;
+    programs.zathura.enable = hasGui;
   };
 }

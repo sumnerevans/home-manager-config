@@ -1,6 +1,7 @@
-{ config, pkgs, ... }: with pkgs; let
+{ config, lib, pkgs, ... }: with pkgs; let
   python-csmdirsearch = callPackage ../pkgs/python-csmdirsearch.nix { };
   python-gitlab = callPackage ../pkgs/python-gitlab.nix { };
+  hasGui = config.wayland.enable || config.xorg.enable;
 in
 {
   home.packages = [
@@ -40,16 +41,6 @@ in
     xdg_utils
     zip
 
-    # Configuration GUIs
-    gnome3.gnome-power-manager
-    gnome3.networkmanagerapplet
-
-    # GUI Tools
-    baobab
-    bitwarden
-    write_stylus
-    xournal
-
     # Python
     (
       python3.withPackages (
@@ -75,6 +66,16 @@ in
         ]
       )
     )
+  ] ++ lib.optionals hasGui [
+    # Configuration GUIs
+    gnome3.gnome-power-manager
+    gnome3.networkmanagerapplet
+
+    # GUI Tools
+    baobab
+    bitwarden
+    write_stylus
+    xournal
 
     (
       xfce.thunar.override {
@@ -87,13 +88,10 @@ in
   ];
 
   programs.bat.enable = true;
-
+  programs.bottom.enable = true;
   programs.home-manager.enable = true;
-
   programs.htop.enable = true;
-
   programs.noti.enable = true;
-
   programs.password-store.enable = true;
 
   # TODO ssh

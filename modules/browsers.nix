@@ -1,21 +1,22 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }: with lib;
 let
   chromeCommandLineArgs = "-high-dpi-support=0 -force-device-scale-factor=1";
+  hasGui = config.wayland.enable || config.xorg.enable;
 in
 {
   home.packages = with pkgs; [
-    (google-chrome.override { commandLineArgs = chromeCommandLineArgs; })
     elinks
     w3m
+  ] ++ optionals hasGui [
+    (google-chrome.override { commandLineArgs = chromeCommandLineArgs; })
   ];
 
-  programs.firefox.enable = true;
+  programs.chromium.enable = hasGui;
+  programs.firefox.enable = hasGui;
 
-  home.sessionVariables = {
+  home.sessionVariables = mkIf hasGui {
     # Enable touchscreen in Firefox
     MOZ_USE_XINPUT2 = "1";
     MOZ_DBUS_REMOTE = "1";
   };
-
-  programs.chromium.enable = true;
 }

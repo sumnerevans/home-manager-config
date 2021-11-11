@@ -67,13 +67,6 @@ in
       "Tracy Camp" = "Dr. Tracy Camp";
       TTD = "The Trade Desk";
     };
-
-    external_synchroniser_files = {
-      # jira = "/home/sumner/projects/tracktime/examples/jira_selenium_chrome.py";
-    };
-
-    # Needed so that the synchroniser can find the Chrome binary.
-    chromedriver.chrome_bin = "${pkgs.google-chrome}/bin/google-chrome-stable";
   };
 
   # Aliases

@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }: with lib; let
   tomlFormat = pkgs.formats.toml { };
+  hasGui = config.wayland.enable || config.xorg.enable;
 in
 {
   options = {
@@ -17,7 +18,7 @@ in
       watchexec
     ] ++ (
       # GUI Tools
-      optionals (config.wayland.enable || config.xorg.enable) [
+      optionals hasGui [
         android-studio
         dfeet
         jetbrains.idea-community
@@ -37,7 +38,7 @@ in
     programs.direnv.nix-direnv.enable = true;
     programs.jq.enable = true;
     programs.opam.enable = true;
-    programs.vscode.enable = true;
+    programs.vscode.enable = hasGui;
 
     xdg.configFile."pypoetry/config.toml".source = tomlFormat.generate "config.toml" {
       virtualenvs.in-project = true;

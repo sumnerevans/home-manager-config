@@ -1,8 +1,10 @@
-{ config, pkgs, ... }: with pkgs; let
-  mailnotify = callPackage ../../pkgs/mailnotify.nix { };
+{ config, lib, pkgs, ... }:
+let
+  mailnotify = pkgs.callPackage ../../pkgs/mailnotify.nix { };
+  hasGui = config.wayland.enable || config.xorg.enable;
 in
 {
-  systemd.user.services.mailnotify = {
+  systemd.user.services.mailnotify = lib.mkIf hasGui {
     Unit = {
       Description = "mailnotify daemon";
       PartOf = [ "graphical-session.target" ];
@@ -10,7 +12,7 @@ in
 
     Service = {
       ExecStart = ''
-        ${mailnotify}/bin/mailnotify ${config.accounts.email.maildirBasePath}
+        ${pkgs.mailnotify}/bin/mailnotify ${config.accounts.email.maildirBasePath}
       '';
       Environment = [
         "ICON_PATH=${pkgs.gnome-icon-theme}/share/icons/gnome/48x48/status/mail-unread.png"
