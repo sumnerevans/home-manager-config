@@ -12,7 +12,7 @@
 
     plugins = with pkgs.tmuxPlugins; [
       yank
-      #resurrect
+      resurrect
       {
         # Resurrect tmux sessions (https://github.com/tmux-plugins/tmux-continuum)
         plugin = continuum;
@@ -23,7 +23,7 @@
     ];
 
     extraConfig = ''
-      # Use Alt-HJKL to move around between vim panes and tmux windows.
+      # Use Alt[-Ctrl]-HJKL to move around between vim panes and tmux windows.
       is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
           | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
       bind -n M-C-h if-shell "$is_vim" 'send-keys M-h' 'select-pane -L'
@@ -36,7 +36,7 @@
       bind -n M-k if-shell "$is_vim" 'send-keys M-k' 'select-pane -U'
       bind -n M-l if-shell "$is_vim" 'send-keys M-l' 'select-pane -R'
 
-      # Open a new window with Alt-Enter
+      # Open a new window with Alt[-Ctrl]-Enter
       bind -n M-C-Enter split-window -h
       bind -n M-Enter split-window -h
 
@@ -48,6 +48,12 @@
       bind-key -T copy-mode-vi 'y' send-keys -X copy-selection-and-cancel
 
       set -ga terminal-overrides ',*256col*:Tc'
+
+      # new window by right click on status line
+      bind-key -n MouseDown3Status new-window -a -t= -c '#{pane_current_path}'
+
+      # new window in background by middle click on status line
+      bind-key -n MouseDown2Status new-window -ad -t= -c '#{pane_current_path}'
     '';
   };
 }
