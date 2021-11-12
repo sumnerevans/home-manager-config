@@ -1,25 +1,26 @@
 { lib, fetchurl, appimageTools }:
-let
-  buildNum = "211102s62fundmb";
-in
 appimageTools.wrapType2 rec {
   name = "beeper";
+  version = "2.10.3";
 
   src = fetchurl {
-    url = "https://dl.todesktop.com/201202u1n7yn5b0/builds/${buildNum}/linux/appimage/x64";
-    sha256 = "sha256-ZoJ3RghbCmI0DmTE3zHEvKVHlrV8h6uuw/dagGC2FrM=";
+    url = "https://download.beeper.com/linux/appimage/x64";
+    sha256 = "sha256-Jm5qYAt89N7Wyrsy18S6m2UKFhLT/UBHL/gLkTGOVQY=";
   };
 
   extraInstallCommands =
     let
       appimageContents = appimageTools.extractType2 { inherit name src; };
+      installIcon = size: ''
+        install -m 444 -D ${appimageContents}/usr/share/icons/hicolor/${size}x${size}/apps/beeper.png \
+          $out/share/icons/hicolor/${size}x${size}/apps/beeper.png
+      '';
     in
     ''
-      install -Dm444 ${appimageContents}/beeper-beta.desktop -t $out/share/applications
-      substituteInPlace $out/share/applications/beeper-beta.desktop \
-        --replace 'Exec=AppRun' 'Exec=${name}'
-      install -m 444 -D ${appimageContents}/usr/share/icons/hicolor/1024x1024/apps/beeper-beta.png \
-        $out/share/icons/hicolor/1024x1024/apps/beeper-beta.png
+      install -Dm444 ${appimageContents}/beeper.desktop -t $out/share/applications
+      substituteInPlace $out/share/applications/beeper.desktop \
+        --replace 'Exec=AppRun --no-sandbox' 'Exec=${name}'
+      ${lib.concatMapStringsSep "\n" installIcon (map toString [16 32 48 64 128 256 512 1024 ])}
     '';
 
   meta = with lib; {
