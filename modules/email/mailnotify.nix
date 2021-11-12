@@ -12,7 +12,7 @@ in
 
     Service = {
       ExecStart = ''
-        ${pkgs.mailnotify}/bin/mailnotify ${config.accounts.email.maildirBasePath}
+        ${mailnotify}/bin/mailnotify ${config.accounts.email.maildirBasePath}
       '';
       Environment = [
         "ICON_PATH=${pkgs.gnome-icon-theme}/share/icons/gnome/48x48/status/mail-unread.png"
