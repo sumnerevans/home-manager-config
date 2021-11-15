@@ -1,9 +1,10 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   mkModBind = key: command: ''
     bind -n M-C-${key} ${command}
     bind -n M-${key} ${command}
   '';
+  configFilePath = "${config.xdg.configHome}/tmux/tmux.conf";
 in
 {
   programs.tmux = {
@@ -48,6 +49,9 @@ in
       bind-key -T copy-mode-vi 'v' send-keys -X begin-selection
       bind-key -T copy-mode-vi 'y' send-keys -X copy-selection-and-cancel
 
+      # renumber windows sequentially after closing any of them
+      set -g renumber-windows on
+
       set -ga terminal-overrides ',*256col*:Tc'
 
       # new window by right click on status line
@@ -55,6 +59,9 @@ in
 
       # new window in background by middle click on status line
       bind-key -n MouseDown2Status new-window -ad -t= -c '#{pane_current_path}'
+
+      bind-key R run-shell 'tmux source-file ${configFilePath} > /dev/null; \
+                            tmux display-message "Sourced ${configFilePath}!"'
     '';
   };
 }
