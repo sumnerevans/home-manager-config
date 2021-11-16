@@ -1,6 +1,9 @@
 { config, lib, pkgs, ... }: with lib; let
   tomlFormat = pkgs.formats.toml { };
   hasGui = config.wayland.enable || config.xorg.enable;
+  exposePort = pkgs.writeShellScriptBin "exposeport" ''
+    sudo ssh -L $2:localhost:$2 $1
+  '';
 in
 {
   options = {
@@ -31,6 +34,7 @@ in
 
     programs.zsh.shellAliases = {
       tat = "${pkgs.eternal-terminal}/bin/et tatooine";
+      tat-synapse = "${exposePort}/bin/exposeport tatooine.sumnerevans.com 8008";
     };
 
     # Enable developer programs
