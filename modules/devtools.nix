@@ -19,6 +19,10 @@ in
       eternal-terminal
       mosh
       watchexec
+
+      # SQL Terminal GUI
+      litecli
+      pgcli
     ] ++ (
       # GUI Tools
       optionals hasGui [
