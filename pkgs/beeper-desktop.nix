@@ -1,11 +1,11 @@
 { lib, fetchurl, appimageTools }:
 appimageTools.wrapType2 rec {
   name = "beeper";
-  version = "2.10.3";
+  version = "2.12.9";
 
   src = fetchurl {
     url = "https://download.beeper.com/linux/appimage/x64";
-    sha256 = "sha256-Jm5qYAt89N7Wyrsy18S6m2UKFhLT/UBHL/gLkTGOVQY=";
+    sha256 = "sha256-p7zfy7IXdK4r6LDHLSAw9lgHS9oSgyyCSOcWs4Ov7go=";
   };
 
   extraInstallCommands =
