@@ -31,6 +31,9 @@ in
     ];
 
     extraConfig = ''
+      # Border color
+      set -g pane-active-border-style fg=red,bg=default 
+
       # Use Alt[-Ctrl]-HJKL to move around between vim panes and tmux windows.
       is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
           | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
@@ -41,6 +44,10 @@ in
 
       # Open a new window with Alt[-Ctrl]-Enter
       ${mkModBind "Enter" "split-window -h"}
+
+      # Right status
+      set -g status-interval 1
+      set -g status-right '%Y-%m-%d %H:%M:%S'  
 
       # Use the mouse
       set -gq mouse on
