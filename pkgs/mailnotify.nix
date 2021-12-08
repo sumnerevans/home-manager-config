@@ -27,11 +27,11 @@ python3Packages.buildPythonApplication rec {
   # https://github.com/NixOS/nixpkgs/issues/56943
   strictDeps = false;
 
-  src = fetchFromSourcehut {
-    owner = "~sumner";
+  src = fetchFromGitHub {
+    owner = "sumnerevans";
     repo = pname;
-    rev = "8393742b22a0ff18ab03b28eaeed5d1e0e27099d";
-    sha256 = "sha256-ecI6ITx9dWjyov2/gx8NGsvlHiNfrGdGgx30CeWrw8E=";
+    rev = "cc2040d9518af8347dd01eff22c70c8386740290";
+    sha256 = "sha256-mvGUfmHMW+Po6G9cVu5OiDKHI6Bw2yAXc2Unnuhgr5k=";
   };
 
   meta = with lib; {
