@@ -15,6 +15,7 @@ in
     ./gpg.nix
     ./multimedia.nix
     ./neovim
+    ./nix.nix
     ./newsboat.nix
     ./scripts
     ./ssh.nix
