@@ -17,6 +17,7 @@ in
       # Shell Utilities
       delta
       eternal-terminal
+      exposePort
       mosh
       watchexec
 
@@ -38,6 +39,7 @@ in
 
     programs.zsh.shellAliases = {
       tat = "${pkgs.eternal-terminal}/bin/et tatooine";
+      tat-expose = "${exposePort}/bin/exposeport tatooine.sumnerevans.com";
       tat-synapse = "${exposePort}/bin/exposeport tatooine.sumnerevans.com 8008";
     };
 
