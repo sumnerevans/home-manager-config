@@ -59,6 +59,7 @@
           tput = "${pkgs.ncurses}/bin/tput";
         in
         ''
+          # TODO a lot of this stuff has to be after all of the aliases
           if [[ $FOR_MUTT_HELPER != 1 ]]; then
 
             ${builtins.readFile ./key-widgets.zsh}

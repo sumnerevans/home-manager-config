@@ -2,6 +2,7 @@
   programs.neovim = {
     extraPackages = with pkgs; [
       gopls
+      kotlin-language-server
     ];
     plugins = with pkgs.vimPlugins; [
       {
@@ -20,6 +21,7 @@
               \ 'coc-html',
               \ 'coc-java',
               \ 'coc-json',
+              \ 'coc-kotlin',
               \ 'coc-lists',
               \ 'coc-marketplace',
               \ 'coc-omnisharp',
