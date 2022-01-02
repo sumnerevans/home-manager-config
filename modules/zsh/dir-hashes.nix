@@ -1,11 +1,9 @@
 { config, ... }:
 let
   home = config.home.homeDirectory;
-  doc = "${config.home.homeDirectory}/Documents";
-  proj = "${config.home.homeDirectory}/projects";
 in
 {
-  programs.zsh.dirHashes = {
+  programs.zsh.dirHashes = rec {
     dl = "${home}/Downloads";
     pass = "${home}/.local/share/password-store";
     pics = "${home}/Pictures";
@@ -15,22 +13,23 @@ in
     vid = "${home}/Videos";
 
     # Documents
-    doc = doc;
+    doc = "${home}/Documents";
     ch = "${doc}/cheatsheets";
     no = "${doc}/notes";
     pres = "${doc}/presentations";
 
     # Teaching
     sch = "${home}/school";
-    tea = "${home}/school/teaching";
-    aca = "${home}/school/teaching/aca";
-    ppl = "${home}/school/teaching/pplf21";
+    tea = "${sch}/teaching";
+    algo = "${tea}/algos22";
+    aca = "${tea}/aca";
+    ppl = "${tea}/pplf21";
 
     # NixOS config
     cfg = "/etc/nixos";
 
     # Projects
-    proj = proj;
+    proj = "${home}/projects";
     aoc = "${proj}/advent-of-code";
     hm = "${proj}/home-manager";
     hspc = "${proj}/acm/hspc-problems";

@@ -12,6 +12,7 @@ in
       beeper-desktop
       discord
       element-desktop
+      teams
       fractal
       mumble
       neochat
