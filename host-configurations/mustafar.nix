@@ -26,10 +26,10 @@
     keybindings = {
       # F6/F7 are the brightness up/down keys. Without mod, change screen
       # brightness. With mod, change the keyboard.
-      F6 = "exec brightnessctl s 5%-";
-      F7 = "exec brightnessctl s 5%+";
-      "${windowManager.modKey}+F6" = "exec brightnessctl -d chromeos::kbd_backlight s 1%-";
-      "${windowManager.modKey}+F7" = "exec brightnessctl -d chromeos::kbd_backlight s 1%+";
+      "${windowManager.modKey}+F6" = "exec brightnessctl s 5%-";
+      "${windowManager.modKey}+F7" = "exec brightnessctl s 5%+";
+      "${windowManager.modKey}+Shift+F6" = "exec brightnessctl -d chromeos::kbd_backlight s 1%-";
+      "${windowManager.modKey}+Shift+F7" = "exec brightnessctl -d chromeos::kbd_backlight s 1%+";
     };
   };
 }
