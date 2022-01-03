@@ -28,6 +28,23 @@ in
   };
 
   config = mkIf cfg.enable {
+    # Lock screen & screen off
+    services.swayidle = {
+      enable = true;
+      timeouts = [
+        { timeout = 300; command = swaylockCmd; }
+        {
+          timeout = 360;
+          command = ''${pkgs.sway}/bin/swaymsg "output * dpms off"'';
+          resumeCommand = ''${pkgs.sway}/bin/swaymsg "output * dpms on"'';
+        }
+      ];
+      events = [
+        { event = "before-sleep"; command = "${pkgs.playerctl}/bin/playerctl pause"; }
+        { event = "before-sleep"; command = swaylockCmd; }
+      ];
+    };
+
     wayland.windowManager.sway = mkMerge [
       common.i3SwayConfig
       {
@@ -48,19 +65,6 @@ in
 
             # Window transparency
             { command = "${inactive-windows-transparency}/bin/inactive-windows-transparency"; }
-
-            # Lock screen & DPMS
-            {
-              # TODO add keyboard on kohaku
-              command = ''
-                swayidle -w \
-                    timeout 300 '${swaylockCmd}' \
-                    timeout 360 '${pkgs.sway}/bin/swaymsg "output * dpms off"' \
-                         resume '${pkgs.sway}/bin/swaymsg "output * dpms on"' \
-                   before-sleep '${pkgs.playerctl}/bin/playerctl pause' \
-                   before-sleep '${swaylockCmd}'
-              '';
-            }
 
             # Make all the pinentry stuff work
             # See: https://github.com/NixOS/nixpkgs/issues/119445#issuecomment-820507505
