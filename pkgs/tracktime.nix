@@ -26,8 +26,8 @@ python3Packages.buildPythonApplication rec {
   src = fetchFromSourcehut {
     owner = "~sumner";
     repo = pname;
-    rev = "724b55115234709236356b9a9028664d073e4a87";
-    sha256 = "sha256-rtsLQsmXbv4743v+qm4hbnA517yXEU4xt8pna5VPnkE=";
+    rev = "cd3bbb228f5d7b7037223ca34755ec2be05d0535";
+    sha256 = "sha256-86o4wBJwkFgsc2+WS7mGijkgU139e2CJyFuXcWVOK78=";
   };
 
   meta = with lib; {
