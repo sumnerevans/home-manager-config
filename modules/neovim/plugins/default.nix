@@ -28,7 +28,7 @@
     # Language Support
     # ./ale.nix
     ./coc.nix
-    ./vim-markdown-composer.nix
+    # ./vim-markdown-composer.nix
   ];
 
   programs.neovim.plugins = with vimPlugins; [
