@@ -29,6 +29,9 @@
     # ./ale.nix
     ./coc.nix
     # ./vim-markdown-composer.nix
+
+    # Organization Tools
+    ./vim-todo-lists.nix
   ];
 
   programs.neovim.plugins = with vimPlugins; [
