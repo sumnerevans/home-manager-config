@@ -1,7 +1,7 @@
 { lib, pkgs }: with pkgs;
 python3Packages.buildPythonApplication rec {
   pname = "offlinemsmtp";
-  version = "0.3.8";
+  version = "0.3.10";
 
   nativeBuildInputs = [
     gobject-introspection
@@ -28,7 +28,7 @@ python3Packages.buildPythonApplication rec {
 
   src = python3.pkgs.fetchPypi {
     inherit pname version;
-    sha256 = "86a3747e51d61e08679532f24625d08f36de1084f0a6c1cec07675e6c4975b1a";
+    sha256 = "sha256-7+f/kjl1QVaVG7FT5ByewoXbIsrQLsdRblDcIwYwjVE=";
   };
 
   meta = with lib; {
