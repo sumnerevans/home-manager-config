@@ -43,10 +43,6 @@ endfunction
 noremap j gj
 noremap k gk
 
-" Run make
-nnoremap <F5> :make<CR>
-nnoremap <S-F5> :make run<CR>
-
 " Clean up paragraph
 noremap <C-c> vipgq
 

@@ -41,6 +41,7 @@
         black
         flake8
         pynvim
+        setuptools
       ]
     );
 

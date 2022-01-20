@@ -20,6 +20,7 @@
               \ 'coc-go',
               \ 'coc-html',
               \ 'coc-java',
+              \ 'coc-java-debug',
               \ 'coc-json',
               \ 'coc-kotlin',
               \ 'coc-lists',

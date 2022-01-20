@@ -29,6 +29,7 @@
     # ./ale.nix
     ./coc.nix
     # ./vim-markdown-composer.nix
+    ./vimspector.nix
 
     # Organization Tools
     ./vim-todo-lists.nix
