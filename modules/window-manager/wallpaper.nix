@@ -176,7 +176,7 @@ in
       type = mkOption {
         type = types.enum [ "mojave_dynamic" "catalina_dynamic" "monterey_dynamic" "random_bg" ];
         description = "The kind of wallpaper to use.";
-        default = "monterey_dynamic";
+        default = "mojave_dynamic";
       };
 
       bgSourceDirs = mkOption {
