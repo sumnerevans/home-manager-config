@@ -38,7 +38,6 @@ in
     sub = "${proj}/sublime-music/sublime-music";
     sws = "${proj}/sumnerevans.com";
     tt = "${proj}/tracktime";
-    vis = "${proj}/acm/visplay";
     yt = "${proj}/youtube-content";
   };
 }
