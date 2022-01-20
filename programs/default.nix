@@ -69,7 +69,7 @@ in
   ] ++ lib.optionals hasGui [
     # Configuration GUIs
     gnome3.gnome-power-manager
-    gnome3.networkmanagerapplet
+    networkmanagerapplet
 
     # GUI Tools
     baobab
