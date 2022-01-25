@@ -145,6 +145,9 @@ in
       MOZ_ENABLE_WAYLAND = "1";
       XDG_CURRENT_DESKTOP = "sway";
       XDG_SESSION_TYPE = "wayland";
+
+      # Make IDEA work
+      _JAVA_AWT_WM_NONREPARENTING = "1";
     };
 
     home.packages = with pkgs; [
