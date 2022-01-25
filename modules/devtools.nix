@@ -4,6 +4,18 @@
   exposePort = pkgs.writeShellScriptBin "exposeport" ''
     sudo ssh -L $2:localhost:$2 $1
   '';
+
+  package = pkgs.vscode;
+  extensions = with pkgs.vscode-extensions; [
+    ms-vsliveshare.vsliveshare
+  ];
+
+  finalPackage = (pkgs.vscode-with-extensions.override {
+    vscode = package;
+    vscodeExtensions = extensions;
+  }).overrideAttrs (old: {
+    inherit (package) pname version;
+  });
 in
 {
   options = {
@@ -49,6 +61,7 @@ in
     programs.jq.enable = true;
     programs.opam.enable = true;
     programs.vscode.enable = hasGui;
+    programs.vscode.package = finalPackage;
 
     xdg.configFile."pypoetry/config.toml".source = tomlFormat.generate "config.toml" {
       virtualenvs.in-project = true;
