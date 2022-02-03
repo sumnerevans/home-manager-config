@@ -10,10 +10,10 @@ in
     aspellDicts.en
     bind
     bitwarden-cli
+    czkawka
     fd
     file
     fortune
-    fslint
     iftop
     kbdlight
     libarchive
