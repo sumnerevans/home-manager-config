@@ -26,6 +26,7 @@ in
         plugin = continuum;
         extraConfig = ''
           set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '1'
         '';
       }
     ];
@@ -47,7 +48,7 @@ in
 
       # Right status
       set -g status-interval 1
-      set -g status-right '%Y-%m-%d %H:%M:%S'  
+      set -g status-right '%Y-%m-%d %H:%M:%S'
 
       # Use the mouse
       set -gq mouse on
