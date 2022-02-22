@@ -39,12 +39,13 @@ in
     ] ++ (
       # GUI Tools
       optionals hasGui [
-        android-studio
         dfeet
+        eclipses.eclipse-java
         jetbrains.idea-community
         openjdk11
         postman
         sqlitebrowser
+        visualvm
         wireshark
       ]
     );
