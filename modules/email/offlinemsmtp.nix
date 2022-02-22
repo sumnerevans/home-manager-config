@@ -12,7 +12,8 @@ in
       ExecStart = ''
         ${offlinemsmtp}/bin/offlinemsmtp --daemon \
           --send-mail-file ${config.home.homeDirectory}/tmp/offlinemsmtp-sendmail \
-          --file ${config.xdg.configHome}/msmtp/config
+          --file ${config.xdg.configHome}/msmtp/config \
+          --loglevel DEBUG
       '';
       Restart = "always";
       RestartSec = 5;
