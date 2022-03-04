@@ -17,6 +17,7 @@ in
     iftop
     kbdlight
     libarchive
+    libheif
     libnotify
     light
     lsof
