@@ -40,7 +40,6 @@ in
       # GUI Tools
       optionals hasGui [
         dfeet
-        eclipses.eclipse-java
         jetbrains.idea-community
         openjdk11
         postman
