@@ -3,12 +3,30 @@
   common = import ./common.nix { inherit config lib pkgs; };
   clipmanHistpath = ''--histpath="${config.xdg.cacheHome}/clipman.json"'';
   clipmanCmd = "${pkgs.clipman}/bin/clipman";
+
+  swaylock-effects = pkgs.swaylock-effects.overrideAttrs (old: rec {
+    pname = "swaylock-effects";
+    version = "unstable-2022-03-05";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "mortie";
+      repo = "swaylock-effects";
+      rev = "a8fc557b86e70f2f7a30ca9ff9b3124f89e7f204";
+      sha256 = "sha256-GN+cxzC11Dk1nN9wVWIyv+rCrg4yaHnCePRYS1c4JTk=";
+    };
+
+    postPatch = ''
+      sed -iE "s/version: '1\.3',/version: '${version}',/" meson.build
+    '';
+  });
+
   swaylockCmd = concatStringsSep " " [
-    "${pkgs.swaylock-effects}/bin/swaylock"
+    "${swaylock-effects}/bin/swaylock"
     "--daemonize"
     "--screenshots"
-    "--color 000"
+    "--color 000000"
     "--clock"
+    "--ignore-empty-password"
     "--indicator"
     "--indicator-radius 100"
     "--indicator-thickness 7"
