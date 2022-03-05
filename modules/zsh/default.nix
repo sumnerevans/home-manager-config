@@ -10,6 +10,7 @@
   options = {
     isLinux = mkEnableOption "Linux support" // { default = true; };
     isMacOS = mkEnableOption "macOS support";
+    autoAddSSHKeysToAgent = mkEnableOption "automatically add SSH keys to the SSH agent" // { default = true; };
   };
 
   config = {
@@ -57,6 +58,11 @@
       initExtra =
         let
           tput = "${pkgs.ncurses}/bin/tput";
+          opensshAdd = optionalString config.autoAddSSHKeysToAgent ''
+            ${pkgs.openssh}/bin/ssh-add -l | \
+              ${pkgs.gnugrep}/bin/grep "The agent has no identities" && \
+              ${pkgs.openssh}/bin/ssh-add
+          '';
         in
         ''
           # TODO a lot of this stuff has to be after all of the aliases
@@ -68,8 +74,8 @@
             # Colors
             autoload colors zsh/terminfo
             colors
-            ${strings.optionalString config.isLinux "eval $(dircolors -b)"}
-            ${strings.optionalString config.isMacOS "export CLICOLOR=1"}
+            ${optionalString config.isLinux "eval $(dircolors -b)"}
+            ${optionalString config.isMacOS "export CLICOLOR=1"}
 
             setopt appendhistory
             setopt extendedglob
@@ -82,9 +88,7 @@
                 ${pkgs.coreutils}/bin/ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
             fi
             export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-            ${pkgs.openssh}/bin/ssh-add -l | \
-              ${pkgs.gnugrep}/bin/grep "The agent has no identities" && \
-              ${pkgs.openssh}/bin/ssh-add
+            ${opensshAdd}
 
             echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
 

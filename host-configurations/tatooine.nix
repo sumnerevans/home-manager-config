@@ -1,1 +1,3 @@
-{ }
+{
+  autoAddSSHKeysToAgent = false;
+}
