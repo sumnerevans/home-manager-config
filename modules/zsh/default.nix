@@ -88,12 +88,9 @@
 
             echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
 
-            # Show my calendar
-            ${pkgs.khal}/bin/khal calendar
-
             # Notify me if I haven't written in my journal for the day.
             if [[ ! -f ${config.home.homeDirectory}/Documents/journal/$(${pkgs.coreutils}/bin/date +%Y-%m-%d).rst ]]; then
-                echo "\n$(${tput} bold)Make sure to write in your journal today.$(${tput} sgr 0)"
+                echo "\n$(${tput} bold)>>>> Make sure to write in your journal today. <<<<$(${tput} sgr 0)"
                 echo
             fi
 
