@@ -28,6 +28,7 @@
   "explorer.git.icon.status.modified": "✹",
   "explorer.icon.enableNerdfont": true,
   "explorer.git.showIgnored": true,
+  "explorer.position": "right",
   "languageserver": {
     "nix": {
       "command": "rnix-lsp",
