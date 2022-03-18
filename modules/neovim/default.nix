@@ -55,6 +55,4 @@
   };
 
   home.symlinks."${config.xdg.configHome}/nvim/spell/en.utf-8.add" = "${config.home.homeDirectory}/Syncthing/.config/nvim/spell/en.utf-8.add";
-
-  xdg.configFile."nvim/coc-settings.json".source = ./coc-settings.json;
 }
