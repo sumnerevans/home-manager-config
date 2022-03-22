@@ -50,7 +50,7 @@
                     [[ ! "$TERM" =~ screen ]] &&
                     [[ ! "$TERM" =~ tmux ]] &&
                     [ -z "$TMUX" ]; then
-                exec tmux new-session -A && exit
+                exec tmux attach && exit
             fi
         fi
       '';
