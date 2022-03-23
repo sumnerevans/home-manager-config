@@ -98,6 +98,7 @@
         floating.criteria = [
           { instance = "pinentry"; }
           { title = "Firefox - Sharing Indicator"; }
+          { class = "zoom"; }
         ];
 
         defaultWorkspace = ''workspace "${elemAt workspaces 0}"'';
