@@ -58,6 +58,7 @@ in
 
     Inquiries = mkMerge [
       (helper.commonConfig inquiriesConfig)
+      (helper.imapnotifyConfig inquiriesConfig)
       helper.migaduConfig
     ];
 
@@ -71,7 +72,7 @@ in
       helper.migaduConfig
     ];
 
-    Nevarro-Admin= mkMerge [
+    Nevarro-Admin = mkMerge [
       (helper.commonConfig nevarroAdmin)
       helper.migaduConfig
     ];
