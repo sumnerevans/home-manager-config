@@ -33,7 +33,7 @@
           in
           {
             icons = "awesome";
-            theme = "slick";
+            theme = "nord-dark";
 
             blocks = map (x: builtins.removeAttrs x [ "priority" ]) (
               sort (a: b: a.priority < b.priority) (

@@ -1,6 +1,7 @@
 { config, pkgs, runtimeShell, ... }: let
   grep = "${pkgs.gnugrep}/bin/grep";
   pacmd = "${pkgs.pulseaudio}/bin/pacmd";
+  pactl = "${pkgs.pulseaudio}/bin/pactl";
   sed = "${pkgs.gnused}/bin/sed";
   mkBashScript = scriptText: {
     executable = true;
@@ -10,83 +11,36 @@
     '';
   };
   binDir = "${config.home.homeDirectory}/bin";
-in
-{
-  home.file."bin/change-audio-sink" = mkBashScript ''
-    device_description=$1
 
-    if [[ $device_description == "" ]]; then
-        echo "Usage: ./change-audio-sink 'DESCRIPTION OF SINK'"
-        exit 1
-    fi
-
-    # Find the index of the device with the given description.
-    sinks="$(${pacmd} list-sinks | ${grep} -e 'index:' -e 'device.description')"
-    i=0
-    dev_index=0
-    activate=0
-    while IFS= read -r line; do
-        if [ $(( $i % 2 )) -eq 0 ]; then
-            dev_index="$(echo "$line" | ${sed} -n 's/^.*index: \(.*\)$/\1/p')"
-        else
-            description="$(echo "$line" | ${sed} -n 's/^.*device.description = "\(.*\)"$/\1/p')"
-
-            if [[ $description =~ $device_description ]]; then
-                break
-            fi
-        fi
-        i=$(($i + 1))
-    done <<< "$sinks"
-
-    echo "Switching default sink to: $dev_index"
-    ${pacmd} set-default-sink $dev_index
-
-    sink_inputs="$(${pacmd} list-sink-inputs | ${grep} -e 'index:')"
-    while IFS= read -r line; do
-        input_id="$(echo "$line" | ${sed} -n 's/^.*index: \(.*\)$/\1/p')"
-        echo "Switching input $input_id to $dev_index"
-        ${pacmd} move-sink-input $input_id $dev_index
-    done <<< "$sink_inputs"
-
-    exit 2
+  switchToHeadphones = ''
+    ${pactl} set-default-sink alsa_output.pci-0000_29_00.3.analog-stereo
   '';
 
-  home.file."bin/current-audio-device" = mkBashScript ''
-    # Find the description of the active audio sink.
-    sinks="$(${pacmd} list-sinks | ${grep} -e 'index:' -e 'device.description')"
-    i=0
-    has_star=0
-    activate=0
-    while IFS= read -r line; do
-        if [ $(( $i % 2 )) -eq 0 ]; then
-            has_star="$(echo "$line" | ${sed} -n 's/^.*\(\*\) index: .*$/\1/p')"
-        else
-            description="$(echo "$line" | ${sed} -n 's/^.*device.description = "\(.*\)"$/\1/p')"
+  switchToSpeakers = ''
+    ${pactl} set-default-sink alsa_output.usb-Audioengine_Audioengine_2_-00.analog-stereo
+  '';
+in
+{
+  home.packages = with pkgs; [
+    # Add the pulseaudio package here so that pactl works.
+    # TODO eventually, I should move off of pactl
+    pulseaudio
+  ];
 
-            if [[ $has_star == "*" ]]; then
-                echo $description
-                exit 0
-            fi
-        fi
-        i=$(($i + 1))
-    done <<< "$sinks"
+  home.file."bin/current-audio-device" = mkBashScript ''
+    ${pactl} info | ${grep} 'Default Sink' | ${pkgs.coreutils}/bin/cut -d ':' -f 2
   '';
 
   home.file."bin/toggle-audio" = mkBashScript ''
     # If it's on the headphones, toggle to speakers. Otherwise, toggle to the
     # headphones by default.
-    if [[ $(${binDir}/current-audio-device) =~ "Family 17h (Models 00h-0fh)" ]]; then
-        ${binDir}/change-audio-sink 'PCM2704 16-bit stereo audio'
+    if [[ $(${binDir}/current-audio-device) =~ "alsa_output.pci-0000_29_00.3.analog-stereo" ]]; then
+      ${switchToSpeakers}
     else
-        ${binDir}/change-audio-sink 'Family 17h \(Models 00h-0fh\)'
+      ${switchToHeadphones}
     fi
   '';
 
-  home.file."bin/headphones" = mkBashScript ''
-    ${binDir}/change-audio-sink 'Family 17h \(Models 00h-0fh\)'
-  '';
-
-  home.file."bin/speakers" = mkBashScript ''
-    ${binDir}/change-audio-sink 'PCM2704 16-bit stereo audio DAC'
-  '';
+  home.file."bin/headphones" = mkBashScript switchToHeadphones;
+  home.file."bin/speakers" = mkBashScript switchToSpeakers;
 }
