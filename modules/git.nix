@@ -21,6 +21,10 @@ in
       signByDefault = true;
     };
 
+    aliases = {
+      "s" = "show --ext-diff";
+    };
+
     extraConfig = {
       core.editor = "${pkgs.neovim}/bin/nvim";
       diff = {
@@ -85,6 +89,7 @@ in
     gpush = "git push";
     grhh = "git reset --hard HEAD";
     gs = "git status";
+    gsh = "git show --ext-diff";
     gst = "git stash";
   };
 }
