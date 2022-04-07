@@ -17,7 +17,7 @@ function __lprompt {
         echo -n "%B%F{yellow}[SSH]%f%b "
     fi
 
-    echo "%F{green}%n@%m%f %B%F{cyan}%~%F{white} %# %b%f"
+    echo "%B%F{cyan}%~%F{white} %# %b%f"
 }
 
 function __rprompt {
@@ -60,18 +60,23 @@ function __rprompt {
     if [[ $? == 0 ]]; then
         echo -n "["
 
-        if [[ `git ls-files -u >& /dev/null` == "" ]]; then
-            # If files have been modified, dirty.
-            [[ `git diff` != "" ||
-                `git ls-files --others --exclude-standard` != "" ||
-                `git diff --staged` != "" ]] && echo -n $YELLOW || echo -n $GREEN
-
-            # If files have been staged for commit, add a "+"
-            [[ `git diff --staged` != "" ]] && echo -n "+"
-        else
+        if [[ $(git ls-files --others --exclude-standard | wc -l) != 0 ]]; then
             # Untracked files
-            echo -n $RED
+            echo -n "${RED}U$(git ls-files --others --exclude-standard | wc -l) "
+        else
+            if [[ $(git status --porcelain | wc -l) != 0 ]]; then
+                # Files have been modified, dirty.
+                echo -n $YELLOW
+
+                staged=$(git status --porcelain | grep '^M' | wc -l)
+
+                # If files have been staged for commit, add a "+"
+                [[ $staged != 0 ]] && echo -n "+$staged "
+            else
+                echo -n $GREEN
+            fi
         fi
+
         # Show the branch name.
         branch_name=$(git branch | command grep '* ' | sed 's/\* \(.*\)/\1/')
         if [[ $branch_name == "" ]]; then
