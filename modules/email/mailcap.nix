@@ -1,36 +1,51 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }: with lib;
 let
   feh = "${pkgs.feh}/bin/feh";
   libreoffice = "${pkgs.libreoffice}/bin/libreoffice";
   icalviewScript = pkgs.writeScript "icalview" (builtins.readFile ./icalview.py);
-in
-{
-  xdg.configFile."neomutt/mailcap".text = ''
+  mutt-display-filter = pkgs.writeScriptBin "mdf" (builtins.readFile ./bin/mutt-display-filter.py);
+
+  programSection = executable: items: (
+    listToAttrs (map
+      (mimetype: { name = mimetype; value = executable; })
+      items));
+
+  config = {
     # HTML
-    text/html; ${pkgs.elinks}/bin/elinks -dump %s; copiousoutput;
+    "text/html" = [ "${pkgs.elinks}/bin/elinks -dump %s" "copiousoutput" ];
+
+    # Patch files
+    "text/x-patch" = [ "${mutt-display-filter}/bin/mdf" "copiousoutput" ];
 
     # PDF documents
-    application/pdf; ${pkgs.zathura}/bin/zathura %s
-
-    # Images
-    image/jpg; ${feh} %s
-    image/jpeg; ${feh} %s
-    image/pjpeg; ${feh} %s
-    image/png; ${feh} %s
-    image/gif; ${feh} %s
-
-    # iCal
-    text/calendar; ${icalviewScript}; copiousoutput
-    application/calendar; ${icalviewScript}; copiousoutput
-    application/ics; ${icalviewScript}; copiousoutput
-
-    # Office Suites
-    application/msword; ${libreoffice} %s;
-    application/vnd.ms-word.document.12; ${libreoffice} %s;
-    application/vnd.openxmlformats-officedocument.wordprocessingml.document; ${libreoffice} %s;
-    application/vnd.oasis.opendocument.text; ${libreoffice} %s;
+    "application/pdf" = [ "${pkgs.zathura}/bin/zathura %s" ];
 
     # Microsoft LookOut
-    application/ms-tnef; ${pkgs.tnef}/bin/tnef -w -C /home/sumner/tmp %s;
-  '';
+    "application/ms-tnef" = [ "${pkgs.tnef}/bin/tnef -w -C /home/sumner/tmp %s" ];
+  }
+
+  # Images
+  // (programSection
+    [ "${feh} %s" ]
+    [ "image/jpg" "image/jpeg" "image/pjpeg" "image/png" "image/gif" ])
+
+  # iCal
+  // (programSection
+    [ icalviewScript "copiousoutput" ]
+    [ "text/calendar" "application/calendar" "application/ics" ])
+
+  # Office Suites
+  // (programSection
+    [ "${libreoffice} %s" ]
+    [
+      "application/msword"
+      "application/vnd.ms-word.document.12"
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      "application/vnd.oasis.opendocument.text"
+    ]);
+in
+{
+  xdg.configFile."neomutt/mailcap".text = concatStringsSep "\n" (mapAttrsToList
+    (name: value: ''${name}; ${concatStringsSep "; " value};'')
+    config);
 }
