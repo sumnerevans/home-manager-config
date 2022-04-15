@@ -100,9 +100,16 @@
                   }
                   {
                     block = "time";
-                    format = "%F %R:%S";
+                    format = "UTC %H";
+                    timezone = "Etc/UTC";
                     interval = 1;
                     priority = 100;
+                  }
+                  {
+                    block = "time";
+                    format = "%F %R:%S";
+                    interval = 1;
+                    priority = 101;
                   }
                 ] ++ (
                   # Include a "net" block for each of the network interfaces.

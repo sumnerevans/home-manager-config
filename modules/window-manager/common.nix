@@ -114,7 +114,7 @@
           "${modifier}+Shift+q" = "kill";
 
           # RESTART SWAY IN-PLACE (PRESERVES YOUR LAYOUT/SESSION, CAN BE USED TO UPGRADE SWAY)
-          "${modifier}+Shift+R" = "restart";
+          "${modifier}+Shift+R" = "reload";
 
           # LAUNCHERS
           "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -show run";
