@@ -7,7 +7,9 @@
   });
 in
 {
-  home.packages = optionals (config.wayland.enable || config.xorg.enable)
+  home.packages = [
+    gomuks
+  ] ++ optionals (config.wayland.enable || config.xorg.enable)
     [
       beeper-desktop
       discord
