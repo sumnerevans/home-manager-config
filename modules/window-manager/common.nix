@@ -119,8 +119,7 @@
           # LAUNCHERS
           "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -show run";
           "${modifier}+space" = "exec ${pkgs.rofi}/bin/rofi -show drun -show-icons";
-          F4 = "exec ${menucalc}/bin/= -- -lines 3"; # menu-calc
-          F3 = "exec ${pkgs.rofi-pass}/bin/rofi-pass -- -i";
+          "${modifier}+F4" = "exec ${menucalc}/bin/= -- -lines 3"; # menu-calc
 
           # FOCUS
           "${modifier}+${left}" = "focus left";
