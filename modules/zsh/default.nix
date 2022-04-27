@@ -53,6 +53,8 @@
                 exec tmux attach && exit
             fi
         fi
+
+        export TERM=xterm-256color
       '';
 
       initExtra =
