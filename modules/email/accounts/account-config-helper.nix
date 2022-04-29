@@ -70,8 +70,9 @@ in
   };
 
   signatureConfig = { signatureLines, ... }: {
-    neomutt.extraConfig = ''
-      set signature="${mkSignatureScript signatureLines}|"
-    '';
+    signature = {
+      showSignature = "append";
+      command = mkSignatureScript signatureLines;
+    };
   };
 }
