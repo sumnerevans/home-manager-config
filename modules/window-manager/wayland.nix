@@ -15,6 +15,8 @@
       sha256 = "sha256-GN+cxzC11Dk1nN9wVWIyv+rCrg4yaHnCePRYS1c4JTk=";
     };
 
+    patches = [];
+
     postPatch = ''
       sed -iE "s/version: '1\.3',/version: '${version}',/" meson.build
     '';
