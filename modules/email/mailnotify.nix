@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  mailnotify = pkgs.callPackage ../../pkgs/mailnotify.nix { };
+  mailnotify = pkgs.callPackage ../../pkgs/mailnotify { };
   hasGui = config.wayland.enable || config.xorg.enable;
 in
 {
@@ -12,11 +12,8 @@ in
 
     Service = {
       ExecStart = ''
-        ${mailnotify}/bin/mailnotify ${config.accounts.email.maildirBasePath}
+        ${mailnotify}/bin/mailnotify ${config.accounts.email.maildirBasePath} ${pkgs.gnome-icon-theme}/share/icons/gnome/48x48/status/mail-unread.png
       '';
-      Environment = [
-        "ICON_PATH=${pkgs.gnome-icon-theme}/share/icons/gnome/48x48/status/mail-unread.png"
-      ];
       Restart = "always";
       RestartSec = 5;
     };
