@@ -7,7 +7,7 @@
 
   package = pkgs.vscode;
   extensions = with pkgs.vscode-extensions; [
-    ms-vsliveshare.vsliveshare
+    # ms-vsliveshare.vsliveshare
   ];
 
   finalPackage = (pkgs.vscode-with-extensions.override {
