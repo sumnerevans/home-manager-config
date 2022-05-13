@@ -91,11 +91,8 @@ in
             # and: https://github.com/NixOS/nixpkgs/issues/57602#issuecomment-820512097
             { command = "dbus-update-activation-environment WAYLAND_DISPLAY"; }
 
-            # GTK
-            { command = "${gsettings} set ${gnomeSchema} gtk-theme 'Arc-Dark'"; always = true; }
-            { command = "${gsettings} set ${gnomeSchema} icon-theme 'Arc'"; always = true; }
-            { command = "${gsettings} set ${gnomeSchema} cursor-theme 'capitaine-cursors'"; always = true; }
-            { command = "${gsettings} set ${gnomeSchema} cursor-size 24"; always = true; }
+            # Wallpaper
+            { command = "systemctl restart --user wallpaper.service"; always = true; }
           ];
 
         config.input = {

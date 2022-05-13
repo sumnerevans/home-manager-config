@@ -36,6 +36,14 @@ in
       TERMINAL = "${terminal}";
     };
 
+    home.pointerCursor = {
+      package = pkgs.capitaine-cursors;
+      name = "capitaine-cursors";
+      size = 24;
+
+      gtk.enable = true;
+    };
+
     gtk = {
       enable = true;
       iconTheme = {

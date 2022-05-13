@@ -56,12 +56,6 @@ in
         cfg.extrai3wmConfig
       ];
 
-      pointerCursor = {
-        package = pkgs.capitaine-cursors;
-        name = "Capitaine";
-        size = 16;
-      };
-
       profileExtra = ''
         systemctl --user import-environment
       '';
@@ -70,6 +64,8 @@ in
     xresources.extraConfig = ''
       Xft.dpi: 100
     '';
+
+    home.pointerCursor.x11.enable = true;
 
     services.clipmenu.enable = true;
     home.sessionVariables = {
