@@ -15,7 +15,7 @@
       sha256 = "sha256-GN+cxzC11Dk1nN9wVWIyv+rCrg4yaHnCePRYS1c4JTk=";
     };
 
-    patches = [];
+    patches = [ ];
 
     postPatch = ''
       sed -iE "s/version: '1\.3',/version: '${version}',/" meson.build
@@ -188,6 +188,17 @@ in
 
     programs.mako = {
       enable = true;
+      package = pkgs.mako.overrideAttrs (old: rec {
+        pname = "mako";
+        version = "unstable-2022-05-14";
+
+        src = pkgs.fetchFromGitHub {
+          owner = "emersion";
+          repo = pname;
+          rev = "55104d36575230d57af007cd9e7d53cb3a92a96e";
+          sha256 = "sha256-n5KsA/PmH+wE/6RHP4ACG9b7xmF48AqjEPnuIptofLQ=";
+        };
+      });
 
       borderRadius = 5;
       borderSize = 2;
