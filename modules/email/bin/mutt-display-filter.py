@@ -88,7 +88,7 @@ diff_desc_re = re.compile(r"@@ (-\d+,\d+ \+\d+,\d+) @@")
 
 date_re = re.compile("Date: (.*)")
 email_re = re.compile("<mailto:(.*?)>")
-url_re = re.compile(r"(https?://[^\s]*)")
+url_re = re.compile(r"(https?://[^\s>]*)")
 
 
 for line in sys.stdin.readlines():
