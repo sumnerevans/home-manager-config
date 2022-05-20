@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }: with lib; let
   tomlFormat = pkgs.formats.toml { };
+  iniFormat = pkgs.formats.ini { };
   hasGui = config.wayland.enable || config.xorg.enable;
   exposePort = pkgs.writeShellScriptBin "exposeport" ''
     sudo ssh -L $2:localhost:$2 $1
@@ -70,5 +71,13 @@ in
     home.file.".ideavimrc".text = ''
       set clipboard+=unnamed
     '';
+
+    xdg.configFile."pgcli/config".source = iniFormat.generate "config" {
+      main = {
+        wider_completion_menu = "True";
+        log_file = "${config.home.homeDirectory}/.cache/pgcli/log";
+        vi = "True";
+      };
+    };
   };
 }
