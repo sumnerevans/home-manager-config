@@ -8,6 +8,18 @@
     coc = {
       enable = true;
 
+      package = pkgs.vimUtils.buildVimPluginFrom2Nix {
+        pname = "coc.nvim";
+        version = "2022-05-21";
+        src = pkgs.fetchFromGitHub {
+          owner = "neoclide";
+          repo = "coc.nvim";
+          rev = "791c9f673b882768486450e73d8bda10e391401d";
+          sha256 = "sha256-MobgwhFQ1Ld7pFknsurSFAsN5v+vGbEFojTAYD/kI9c=";
+        };
+        meta.homepage = "https://github.com/neoclide/coc.nvim/";
+      };
+
       settings = {
         "coc.preferences.rootPatterns" = [ ".rooter_root" ".git" ".hg" ".projections.json" ];
         "explorer.keyMappings.global" = {
