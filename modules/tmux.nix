@@ -48,7 +48,7 @@ in
 
       # Right status
       set -g status-interval 1
-      set -g status-right '%Y-%m-%d %H:%M:%S'
+      set -g status-right 'Continuum status: #{continuum_status} | %Y-%m-%d %H:%M:%S'
 
       # Use the mouse
       set -gq mouse on
