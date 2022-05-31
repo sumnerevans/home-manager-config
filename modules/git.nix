@@ -75,7 +75,7 @@ in
     ga = "git add";
     gaa = "git add -A";
     gap = "git add -p";
-    gc = "git commit";
+    gc = "git commit --signoff";
     gca = "gc -a";
     gcaa = "gca --amend";
     gcan = "gc --amend --no-edit";
