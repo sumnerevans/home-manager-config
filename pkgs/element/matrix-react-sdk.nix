@@ -10,25 +10,25 @@
 , nodejs
 }: stdenv.mkDerivation rec {
   pname = "matrix-react-sdk";
-  version = "3.44.0";
+  version = "3.46.0-rc.1";
 
   src = fetchFromGitHub {
     owner = "matrix-org";
     repo = "matrix-react-sdk";
     rev = "v${version}";
-    sha256 = "sha256-dvhXUO83JoygUQiaK5vkzfQm8qAc6BbhIbbyMxVONBg=";
+    sha256 = "sha256-pdZDGqYZg6hEU2irVDj7f83rsMV2qQtcN7qtlR3eeEk=";
   };
 
   offlineCache = fetchYarnDeps {
     yarnLock = src + "/yarn.lock";
-    sha256 = "sha256-WMnlmT1iyNsOqowbc6+gqo4iZtEeDyPpG/8OV24aD7g=";
+    sha256 = "sha256-Zxz0/zDR1f+9KmvE9HxKqRrOdj6Rsu9ZD+Ii62ZvJT0=";
   };
 
   patches = [
     # All of my patches to matrix-react-sdk
     (fetchpatch {
-      url = "https://github.com/sumnerevans/matrix-react-sdk/commit/70aeda0b6fd726587ff4c3c73c2039091685959d.patch";
-      sha256 = "sha256-pcffwQ1Wur3+m0Ltj2NEMk/l85pMu8isiJknZW+5r3I=";
+      url = "https://github.com/sumnerevans/matrix-react-sdk/commit/ed00c00901c1741042162924bba5e800eee71402.patch";
+      sha256 = "sha256-YNXRGlTDhYdIeciVRNkERqg366OYVgUaQWFAY9aP1p4=";
     })
   ];
 
