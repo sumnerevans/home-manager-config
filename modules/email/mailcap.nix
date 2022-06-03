@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: with lib;
+{ config, lib, pkgs, ... }: with lib;
 let
   feh = "${pkgs.feh}/bin/feh";
   libreoffice = "${pkgs.libreoffice}/bin/libreoffice";
@@ -10,12 +10,15 @@ let
       (mimetype: { name = mimetype; value = executable; })
       items));
 
-  config = {
+  mailcapConfig = {
     # HTML
     "text/html" = [ "${pkgs.elinks}/bin/elinks -dump %s" "copiousoutput" ];
 
     # Patch files
-    "text/x-patch" = [ "${mdf}/bin/mdf" "copiousoutput" ];
+    "text/x-patch" = [
+      ''${mdf}/bin/mdf --root-uri "http://localhost:${toString config.mdf.port}''
+      "copiousoutput"
+    ];
 
     # PDF documents
     "application/pdf" = [ "${pkgs.zathura}/bin/zathura %s" ];
@@ -47,5 +50,5 @@ in
 {
   xdg.configFile."neomutt/mailcap".text = concatStringsSep "\n" (mapAttrsToList
     (name: value: ''${name}; ${concatStringsSep "; " value};'')
-    config);
+    mailcapConfig);
 }

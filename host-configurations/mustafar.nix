@@ -6,6 +6,8 @@
 
   programs.alacritty.settings.font.size = 11;
 
+  mdf.port = 1024;
+
   wayland.extraSwayConfig.config = {
     # Scale to 1.8 instead of 2.
     output.eDP-1.scale = "1.75";
