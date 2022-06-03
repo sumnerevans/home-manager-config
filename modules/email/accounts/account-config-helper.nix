@@ -34,6 +34,11 @@ in
 
     msmtp.enable = true;
 
+    smtp = {
+      port = 587;
+      tls.useStartTls = true;
+    };
+
     neomutt = {
       enable = true;
       sendMailCommand = "${offlinemsmtp}/bin/offlinemsmtp -a ${name}";
