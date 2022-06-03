@@ -3,7 +3,7 @@ let
   feh = "${pkgs.feh}/bin/feh";
   libreoffice = "${pkgs.libreoffice}/bin/libreoffice";
   icalviewScript = pkgs.writeScript "icalview" (builtins.readFile ./icalview.py);
-  mutt-display-filter = pkgs.writeScriptBin "mdf" (builtins.readFile ./bin/mutt-display-filter.py);
+  mdf = pkgs.callPackage ../../pkgs/mdf { };
 
   programSection = executable: items: (
     listToAttrs (map
@@ -15,7 +15,7 @@ let
     "text/html" = [ "${pkgs.elinks}/bin/elinks -dump %s" "copiousoutput" ];
 
     # Patch files
-    "text/x-patch" = [ "${mutt-display-filter}/bin/mdf" "copiousoutput" ];
+    "text/x-patch" = [ "${mdf}/bin/mdf" "copiousoutput" ];
 
     # PDF documents
     "application/pdf" = [ "${pkgs.zathura}/bin/zathura %s" ];

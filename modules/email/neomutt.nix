@@ -2,7 +2,7 @@
   aliasfile = "${config.xdg.configHome}/neomutt/aliases";
   mailboxfile = "${config.xdg.configHome}/neomutt/mailboxes";
   bindir = "${config.home.homeDirectory}/bin";
-  mutt-display-filter = pkgs.writeScriptBin "mdf" (builtins.readFile ./bin/mutt-display-filter.py);
+  mdf = pkgs.callPackage ../../pkgs/mdf { };
 
   syncthingdir = "${config.home.homeDirectory}/Syncthing";
 in
@@ -24,6 +24,18 @@ in
 
   home.symlinks."${aliasfile}" = "${syncthingdir}/.config/neomutt/aliases";
   home.symlinks."${mailboxfile}" = "${syncthingdir}/.config/neomutt/mailboxes";
+
+  systemd.user.services.mdf = {
+    Unit.Description = "Run the mut display filter daemon for serving redirect pages.";
+
+    Service = {
+      ExecStart = "${mdf}/bin/mdf --daemon";
+      Restart = "always";
+      RestartSec = 5;
+    };
+
+    Install.WantedBy = [ "default.target" ];
+  };
 
   programs.neomutt = {
     enable = true;
@@ -101,7 +113,7 @@ in
       source ${mailboxfile}
 
       set allow_ansi
-      set display_filter="${mutt-display-filter}/bin/mdf"
+      set display_filter="${mdf}/bin/mdf"
 
       # Use return to open message because I'm not a savage
       unbind index <return>
