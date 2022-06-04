@@ -8,8 +8,8 @@ buildGoPackage rec {
   src = fetchFromGitHub {
     owner = "sumnerevans";
     repo = pname;
-    rev = "v${version}";
-    sha256 = "sha256-Dnr5p4riCEDeEgvcm1vkN3jOVP29k2FiKP3l/UknbqU=";
+    rev = "b7d1a6264326f7d598252eecf8002329c6c68cd9";
+    sha256 = "sha256-yV42TKzBwwY2iyCn33AwvlFO3KfKLb4hehjD+kXZnLE=";
   };
 
   goDeps = ./deps.nix;
