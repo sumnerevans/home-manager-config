@@ -47,6 +47,9 @@ in
         sqlitebrowser
         visualvm
         wireshark
+
+        # GTK Development
+        icon-library
       ]
     );
 
