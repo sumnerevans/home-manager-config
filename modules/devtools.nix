@@ -54,7 +54,7 @@ in
     );
 
     programs.zsh.shellAliases = {
-      tat = "${pkgs.eternal-terminal}/bin/et tatooine -t 8008:8008,3719:3719";
+      tat = "${pkgs.eternal-terminal}/bin/et tatooine -t 8008:8008,8009:8009,3719:3719";
       tat-expose = "${exposePort}/bin/exposeport tatooine.sumnerevans.com";
       tat-synapse = "${exposePort}/bin/exposeport tatooine.sumnerevans.com 8008";
     };
