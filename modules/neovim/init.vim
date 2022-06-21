@@ -9,7 +9,6 @@ set pastetoggle=<F2>                                    " Make C-S-V paste work 
 set scrolloff=5                                         " Always have 5 lines above/below the current line
 set showbreak=↩\ 
 set signcolumn=yes                                      " Always show the sign column for git gutter
-set title                                               " Override the terminal title
 set virtualedit=onemore                                 " Allow the cursor to go one past the EOL
 set nojoinspaces                                        " One space after period when doing gq
 
