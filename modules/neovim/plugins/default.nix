@@ -8,7 +8,8 @@
     # UI Chrome
     ./fzf-vim.nix
     # ./nerdtree.nix
-    ./vim-airline.nix
+    # ./vim-airline.nix
+    ./vim-lightline.nix
     ./vim-togglelist.nix
 
     # Editor
