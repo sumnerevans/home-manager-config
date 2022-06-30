@@ -32,6 +32,12 @@
         call lightline#coc#register()
       '';
     }
-    lightline-bufferline
+    {
+      plugin = lightline-bufferline;
+      config = ''
+        let g:lightline#bufferline#clickable = 1
+        let g:lightline.component_raw = {'buffers': 1}
+      '';
+    }
   ];
 }
