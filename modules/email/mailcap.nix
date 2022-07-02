@@ -16,7 +16,7 @@ let
 
     # Patch files
     "text/x-patch" = [
-      ''${mdf}/bin/mdf --root-uri "http://localhost:${toString config.mdf.port}''
+      ''${mdf}/bin/mdf --root-uri "http://localhost:${toString config.mdf.port}"''
       "copiousoutput"
     ];
 
