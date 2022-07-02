@@ -75,6 +75,7 @@
             \ 'coc-texlab',
             \ 'coc-tsserver',
             \ 'coc-word',
+            \ 'coc-xml',
             \ 'coc-yaml',
             \ ]
 
