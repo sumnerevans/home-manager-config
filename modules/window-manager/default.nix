@@ -34,6 +34,7 @@ in
 
     home.sessionVariables = {
       TERMINAL = "${terminal}";
+      GTK_THEME = "Arc-Dark";
     };
 
     home.pointerCursor = {
@@ -60,6 +61,10 @@ in
         gtk-application-prefer-dark-theme = 1;
         gtk-toolbar-style = "GTK_TOOLBAR_ICONS";
         gtk-toolbar-icon-size = "GTK_ICON_SIZE_LARGE_TOOLBAR";
+      };
+
+      gtk4.extraConfig = {
+        gtk-application-prefer-dark-theme = 1;
       };
     };
 

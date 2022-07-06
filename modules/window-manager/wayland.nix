@@ -158,7 +158,6 @@ in
     ];
 
     home.sessionVariables = {
-      GTK_THEME = "Arc-Dark";
       MOZ_ENABLE_WAYLAND = "1";
       XDG_CURRENT_DESKTOP = "sway";
       XDG_SESSION_TYPE = "wayland";
