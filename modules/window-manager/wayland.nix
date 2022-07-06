@@ -189,13 +189,13 @@ in
       enable = true;
       package = pkgs.mako.overrideAttrs (old: rec {
         pname = "mako";
-        version = "unstable-2022-05-14";
+        version = "1.7";
 
         src = pkgs.fetchFromGitHub {
           owner = "emersion";
           repo = pname;
-          rev = "55104d36575230d57af007cd9e7d53cb3a92a96e";
-          sha256 = "sha256-n5KsA/PmH+wE/6RHP4ACG9b7xmF48AqjEPnuIptofLQ=";
+          rev = "v${version}";
+          sha256 = "sha256-CT4J7PDmTapQPi2OjXrnS6zqJwkVJTBtmwlZ2lp6f0I=";
         };
       });
 
