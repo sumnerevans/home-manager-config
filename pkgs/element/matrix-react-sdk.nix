@@ -10,18 +10,18 @@
 , nodejs
 }: stdenv.mkDerivation rec {
   pname = "matrix-react-sdk";
-  version = "3.46.0-rc.1";
+  version = "3.48.0";
 
   src = fetchFromGitHub {
     owner = "matrix-org";
     repo = "matrix-react-sdk";
     rev = "v${version}";
-    sha256 = "sha256-pdZDGqYZg6hEU2irVDj7f83rsMV2qQtcN7qtlR3eeEk=";
+    sha256 = "sha256-1wukw7fhJ+tvNwBeOhlJJvYrdczf+LKO+wVMa7qpHsA=";
   };
 
   offlineCache = fetchYarnDeps {
     yarnLock = src + "/yarn.lock";
-    sha256 = "sha256-Zxz0/zDR1f+9KmvE9HxKqRrOdj6Rsu9ZD+Ii62ZvJT0=";
+    sha256 = "sha256-SgeLJEPJf5YFIwtG6zldTPfyeqmrSIBiItyH4xnbZi8=";
   };
 
   patches = [

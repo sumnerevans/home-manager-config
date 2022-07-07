@@ -40,14 +40,6 @@ mkYarnPackage rec {
     sha256 = pinData.desktopYarnHash;
   };
 
-  patches = [
-    # Upgrade to Electron 19
-    (fetchpatch {
-      url = "https://patch-diff.githubusercontent.com/raw/vector-im/element-desktop/pull/372.patch";
-      sha256 = "sha256-FjIoaf/lOIWRLV+FU//zgJOrsULDTl4oEQNpJhbhZ3Y=";
-    })
-  ];
-
   nativeBuildInputs = [ makeWrapper ] ++ lib.optionals stdenv.isDarwin [ desktopToDarwinBundle ];
 
   inherit seshat;
