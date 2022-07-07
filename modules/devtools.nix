@@ -40,6 +40,7 @@ in
     ] ++ (
       # GUI Tools
       optionals hasGui [
+        cambalache
         dfeet
         jetbrains.idea-community
         openjdk11
