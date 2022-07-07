@@ -38,6 +38,7 @@ in
     light
     lsof
     mkpasswd
+    ncdu
     neofetch
     nodejs
     nox
