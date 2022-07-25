@@ -95,6 +95,8 @@ in
     write_stylus
     xournal
 
+    notion-app-enhanced
+
     (
       xfce.thunar.override {
         thunarPlugins = [
