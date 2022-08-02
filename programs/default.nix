@@ -65,7 +65,6 @@ in
         ps: with ps; [
           dateutil
           fuzzywuzzy
-          goobook
           html2text
           i3ipc
           icalendar
