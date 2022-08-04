@@ -8,8 +8,9 @@
     if [[ $? != 0 ]]; then
         echo "fail" > ${rollingPingFile}
     else
-        ${pkgs.coreutils}/bin/cat ${rollingPingFile} | ${pkgs.gnugrep}/bin/grep "fail"
-        [[ $? == 0 ]] && rm ${rollingPingFile}
+        ${pkgs.coreutils}/bin/cat ${rollingPingFile} | \
+          ${pkgs.gnugrep}/bin/grep "fail" && \
+          echo -n "" > ${rollingPingFile}
         ping=$(echo $ping | \
           ${pkgs.gnugrep}/bin/grep 'rtt' | \
           ${pkgs.coreutils}/bin/cut -d '/' -f 5)
