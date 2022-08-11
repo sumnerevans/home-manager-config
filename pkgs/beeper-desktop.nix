@@ -1,11 +1,11 @@
 { lib, fetchurl, appimageTools }:
 appimageTools.wrapType2 rec {
   name = "beeper-beta";
-  version = "unstable-2022-07-02";
+  version = "unstable-2022-08-11";
 
   src = fetchurl {
-    url = "https://dl.todesktop.com/201202u1n7yn5b0/builds/220702dfidux8tv/linux/appimage/x64";
-    sha256 = "sha256-mvVlaVllWa3CuIlLfp9XK/7F/SUFiBtEKgKY5nHZz+Y=";
+    url = "https://dl.todesktop.com/201202u1n7yn5b0/builds/220811od2x827dg/linux/appimage/x64";
+    sha256 = "sha256-KAWVOhp/jIIGZ7e6Kz20Xnd2kd0n8Xeo4Ub0svStHZQ=";
   };
 
   extraInstallCommands =
