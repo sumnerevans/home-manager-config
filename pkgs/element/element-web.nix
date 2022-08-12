@@ -46,15 +46,12 @@ stdenv.mkDerivation rec {
 
   configurePhase = ''
     runHook preConfigure
-
     export HOME=$PWD/tmp
     mkdir -p $HOME
-
     fixup_yarn_lock yarn.lock
     yarn config --offline set yarn-offline-mirror $offlineCache
     yarn install --offline --frozen-lockfile --ignore-platform --ignore-scripts --no-progress --non-interactive
     patchShebangs node_modules
-
     runHook postConfigure
   '';
 
@@ -63,6 +60,7 @@ stdenv.mkDerivation rec {
 
     export VERSION=${version}
     yarn build:res --offline
+    yarn build:module_system --offline
     yarn build:bundle --offline
 
     runHook postBuild

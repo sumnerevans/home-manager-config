@@ -5,6 +5,9 @@
 , makeWrapper
 , makeDesktopItem
 , mkYarnPackage
+, fixup_yarn_lock
+, yarn
+, nodejs
 , fetchYarnDeps
 , electron
 , element-web
@@ -34,27 +37,41 @@ mkYarnPackage rec {
     rev = "v${version}";
     sha256 = pinData.desktopSrcHash;
   };
+  packageResolutions = {
+    "@types/node" = "16.11.38";
+  };
 
   offlineCache = fetchYarnDeps {
     yarnLock = src + "/yarn.lock";
     sha256 = pinData.desktopYarnHash;
   };
 
-  nativeBuildInputs = [ makeWrapper ] ++ lib.optionals stdenv.isDarwin [ desktopToDarwinBundle ];
+  nativeBuildInputs = [ yarn fixup_yarn_lock nodejs makeWrapper ]
+    ++ lib.optionals stdenv.isDarwin [ desktopToDarwinBundle ];
 
   inherit seshat;
 
+  configurePhase = ''
+    runHook preConfigure
+    export HOME=$(mktemp -d)
+    yarn config --offline set yarn-offline-mirror $offlineCache
+    fixup_yarn_lock yarn.lock
+    yarn install --offline --frozen-lockfile --ignore-platform --ignore-scripts --no-progress --non-interactive
+    patchShebangs node_modules/
+    runHook postConfigure
+  '';
+
   buildPhase = ''
     runHook preBuild
-    export HOME=$(mktemp -d)
-    pushd deps/element-desktop/
-    npx tsc
-    yarn run i18n
-    node ./scripts/copy-res.js
-    popd
+
+    yarn --offline run build:ts
+    yarn --offline run i18n
+    yarn --offline run build:res
+
     rm -rf node_modules/matrix-seshat node_modules/keytar
     ${lib.optionalString useKeytar "ln -s ${keytar} node_modules/keytar"}
     ln -s $seshat node_modules/matrix-seshat
+
     runHook postBuild
   '';
 
@@ -64,9 +81,9 @@ mkYarnPackage rec {
     # resources
     mkdir -p "$out/share/element"
     ln -s '${element-web}' "$out/share/element/webapp"
-    cp -r './deps/element-desktop' "$out/share/element/electron"
-    cp -r './deps/element-desktop/res/img' "$out/share/element"
-    rm "$out/share/element/electron/node_modules"
+    cp -r '.' "$out/share/element/electron"
+    cp -r './res/img' "$out/share/element"
+    rm -rf "$out/share/element/electron/node_modules"
     cp -r './node_modules' "$out/share/element/electron"
     cp $out/share/element/electron/lib/i18n/strings/en_EN.json $out/share/element/electron/lib/i18n/strings/en-us.json
     ln -s $out/share/element/electron/lib/i18n/strings/en{-us,}.json
@@ -89,12 +106,6 @@ mkYarnPackage rec {
       --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--enable-features=UseOzonePlatform --ozone-platform=wayland}}"
 
     runHook postInstall
-  '';
-
-  # Do not attempt generating a tarball for element-web again.
-  # note: `doDist = false;` does not work.
-  distPhase = ''
-    true
   '';
 
   # The desktop item properties should be kept in sync with data from upstream:
