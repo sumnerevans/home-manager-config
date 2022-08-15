@@ -13,7 +13,9 @@
     }
     {
       plugin = vimPlugins.vim-airline-themes;
-      config = "let g:airline_theme='one'";
+      config = ''
+        let g:airline_theme='one'
+      '';
     }
   ];
 }

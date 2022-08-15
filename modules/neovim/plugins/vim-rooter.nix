@@ -6,7 +6,9 @@ in
   programs.neovim.plugins = [
     {
       plugin = vimPlugins.vim-rooter;
-      config = "let g:rooter_patterns = [${concatMapStringsSep ", " (p: "'${p}'") rooter_patterns}]";
+      config = ''
+        let g:rooter_patterns = [${concatMapStringsSep ", " (p: "'${p}'") rooter_patterns}]
+      '';
     }
   ];
 }
