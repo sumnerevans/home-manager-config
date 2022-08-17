@@ -27,7 +27,7 @@ let
   keytar = callPackage ./keytar { inherit Security AppKit; };
   seshat = callPackage ./seshat { inherit CoreServices; };
 in
-mkYarnPackage rec {
+stdenv.mkDerivation rec {
   pname = "element-desktop";
   inherit (pinData) version;
   name = "${pname}-${version}";
@@ -36,9 +36,6 @@ mkYarnPackage rec {
     repo = "element-desktop";
     rev = "v${version}";
     sha256 = pinData.desktopSrcHash;
-  };
-  packageResolutions = {
-    "@types/node" = "16.11.38";
   };
 
   offlineCache = fetchYarnDeps {
