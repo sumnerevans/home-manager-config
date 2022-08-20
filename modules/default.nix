@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  editor = "${pkgs.neovim}/bin/nvim";
+  editor = "nvim";
 in
 {
   imports = [

@@ -4,6 +4,7 @@ let
   libreoffice = "${pkgs.libreoffice}/bin/libreoffice";
   icalviewScript = pkgs.writeScript "icalview" (builtins.readFile ./icalview.py);
   mdf = pkgs.callPackage ../../pkgs/mdf { };
+  hasGui = config.wayland.enable || config.xorg.enable;
 
   programSection = executable: items: (
     listToAttrs (map
@@ -20,12 +21,14 @@ let
       "copiousoutput"
     ];
 
-    # PDF documents
-    "application/pdf" = [ "${pkgs.zathura}/bin/zathura %s" ];
-
     # Microsoft LookOut
     "application/ms-tnef" = [ "${pkgs.tnef}/bin/tnef -w -C /home/sumner/tmp %s" ];
   }
+
+  // (optionalAttrs hasGui {
+    # PDF documents
+    "application/pdf" = [ "${pkgs.zathura}/bin/zathura %s" ];
+  })
 
   # Images
   // (programSection
