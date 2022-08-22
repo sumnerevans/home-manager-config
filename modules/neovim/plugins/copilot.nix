@@ -12,11 +12,11 @@
   };
 in
 {
-  programs.neovim.plugins = [
-    {
-      plugin = copilot;
-      config = ''
-      '';
-    }
-  ];
+  # programs.neovim.plugins = [
+  #   {
+  #     plugin = copilot;
+  #     config = ''
+  #     '';
+  #   }
+  # ];
 }
