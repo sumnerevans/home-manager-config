@@ -1,4 +1,5 @@
-{ config, lib, pkgs, ... }: let
+{ config, lib, pkgs, ... }:
+let
   agentTTL = 60 * 60 * 4; # 4 hours
   waylandCfg = config.wayland;
   xorgCfg = config.xorg;
@@ -24,6 +25,7 @@ in
 
     Service = {
       ExecStart = "${pkgs.yubikey-touch-detector}/bin/yubikey-touch-detector --libnotify";
+      Environment = [ "PATH=${lib.makeBinPath [ pkgs.gnupg ]}" ];
       Restart = "always";
       RestartSec = 5;
     };
