@@ -29,7 +29,7 @@
     # Language Support
     # ./ale.nix
     ./coc.nix
-    ./copilot.nix
+    # ./copilot.nix
     # ./vim-markdown-composer.nix
     ./vimspector.nix
 
