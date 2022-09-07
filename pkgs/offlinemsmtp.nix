@@ -1,9 +1,18 @@
 { lib, pkgs }: with pkgs;
 python3Packages.buildPythonApplication rec {
   pname = "offlinemsmtp";
-  version = "0.3.10";
+  version = "0.3.11rc1";
+  format = "pyproject";
+
+  src = pkgs.fetchFromGitHub {
+    owner = "sumnerevans";
+    repo = pname;
+    rev = "ee1318b8b8b3e9ae663909e384b2e6533b221946";
+    sha256 = "sha256-49s/7M2RWX1uXxRQyxcDdx5iHISTzXqU7cu6BVpTWhw=";
+  };
 
   nativeBuildInputs = [
+    python3Packages.poetry-core
     gobject-introspection
     python3Packages.setuptools
     wrapGAppsHook
@@ -20,20 +29,17 @@ python3Packages.buildPythonApplication rec {
     watchdog
   ];
 
-  doCheck = false;
+  pythonImportsCheck = [
+    "offlinemsmtp"
+  ];
 
   # hook for gobject-introspection doesn't like strictDeps
   # https://github.com/NixOS/nixpkgs/issues/56943
   strictDeps = false;
 
-  src = python3.pkgs.fetchPypi {
-    inherit pname version;
-    sha256 = "sha256-7+f/kjl1QVaVG7FT5ByewoXbIsrQLsdRblDcIwYwjVE=";
-  };
-
   meta = with lib; {
     description = "msmtp wrapper allowing for offline use";
-    homepage = "https://git.sr.ht/~sumner/offlinemsmtp";
+    homepage = "https://github.com/sumnerevans/offlinemsmtp";
     license = licenses.gpl3Plus;
   };
 }
