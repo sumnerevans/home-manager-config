@@ -14,7 +14,7 @@ in
     userName = "Sumner Evans";
 
     attributes = [ "*.pdf diff=pdf" ];
-    difftastic.enable = true;
+    delta.enable = true;
 
     signing = {
       key = "8904527AB50022FD";
