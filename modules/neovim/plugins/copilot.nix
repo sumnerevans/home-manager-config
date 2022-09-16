@@ -16,6 +16,9 @@ in
     {
       plugin = copilot;
       config = ''
+        imap <silent><script><expr> <C-c> copilot#Accept("\<CR>")
+        imap <silent> <C-l> <Plug>(copilot-next)
+        let g:copilot_no_tab_map = v:true
       '';
     }
   ];
