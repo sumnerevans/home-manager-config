@@ -129,7 +129,7 @@ in
       fadeDelta = 5;
 
       inactiveOpacity = 0.8;
-      opacityRule = [
+      opacityRules = [
         "100:class_g *= 'obs'"
         "100:class_g *= 'i3lock'"
         "100:class_g ?= 'rofi'"

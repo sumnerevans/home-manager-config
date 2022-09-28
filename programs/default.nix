@@ -56,7 +56,7 @@ in
     unzip
     usbutils
     wget
-    xdg_utils
+    xdg-utils
     zip
 
     # Python
@@ -85,7 +85,7 @@ in
     )
   ] ++ lib.optionals hasGui [
     # Configuration GUIs
-    gnome3.gnome-power-manager
+    gnome.gnome-power-manager
     networkmanagerapplet
 
     # GUI Tools
