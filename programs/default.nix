@@ -63,7 +63,7 @@ in
     (
       python3.withPackages (
         ps: with ps; [
-          dateutil
+          python-dateutil
           fuzzywuzzy
           html2text
           i3ipc
