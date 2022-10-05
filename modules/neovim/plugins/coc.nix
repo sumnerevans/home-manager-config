@@ -120,6 +120,9 @@
             exe 'CocCommand explorer ' . cwd
         endfunction
         map <S-T> :call CocExploreCwd()<CR>
+
+        " Open the diagnostics when diagnostics change
+        autocmd BufWritePost * call timer_start(500, { tid -> execute('execute "CocDiagnostics" | execute "botright lwindow" | execute "wincmd p"') })
       '';
     };
   };
