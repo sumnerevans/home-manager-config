@@ -20,15 +20,15 @@ in
 
     plugins = with pkgs.tmuxPlugins; [
       yank
-      resurrect
-      {
-        # Resurrect tmux sessions (https://github.com/tmux-plugins/tmux-continuum)
-        plugin = continuum;
-        extraConfig = ''
-          set -g @continuum-restore 'on'
-          set -g @continuum-save-interval '1'
-        '';
-      }
+      #resurrect
+      #{
+      #  # Resurrect tmux sessions (https://github.com/tmux-plugins/tmux-continuum)
+      #  plugin = continuum;
+      #  extraConfig = ''
+      #    set -g @continuum-restore 'on'
+      #    set -g @continuum-save-interval '1'
+      #  '';
+      #}
     ];
 
     extraConfig = ''
