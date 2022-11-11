@@ -11,12 +11,6 @@
     color = "green";
   };
 
-  inquiriesConfig = {
-    name = "Inquiries";
-    address = "inquiries@sumnerevans.com";
-    color = "green";
-  };
-
   junkConfig = {
     name = "Junk";
     address = "junk@sumnerevans.com";
@@ -53,12 +47,6 @@ in
 
     Comments = mkMerge [
       (helper.commonConfig commentsConfig)
-      helper.migaduConfig
-    ];
-
-    Inquiries = mkMerge [
-      (helper.commonConfig inquiriesConfig)
-      (helper.imapnotifyConfig inquiriesConfig)
       helper.migaduConfig
     ];
 
