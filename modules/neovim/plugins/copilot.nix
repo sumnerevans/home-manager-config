@@ -19,6 +19,8 @@ in
         imap <silent><script><expr> <C-c> copilot#Accept("\<CR>")
         imap <silent> <C-l> <Plug>(copilot-next)
         let g:copilot_no_tab_map = v:true
+
+        let g:copilot_node_command = "${nodejs-16_x}/bin/node"
       '';
     }
   ];
