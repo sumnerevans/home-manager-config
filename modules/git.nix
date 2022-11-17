@@ -26,7 +26,7 @@ in
     };
 
     extraConfig = {
-      core.editor = "${pkgs.neovim}/bin/nvim";
+      core.editor = "nvim";
       diff = {
         colorMoved = "default";
         submodule = "log";
