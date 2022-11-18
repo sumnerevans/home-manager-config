@@ -48,7 +48,7 @@
                   {
                     block = "maildir";
                     interval = 10;
-                    inboxes = map (f: "${home}/Mail/${f}/INBOX") [ "Personal" "Gmail" ];
+                    inboxes = map (f: "${home}/Mail/${f}/INBOX") [ "Personal" "Financial" ];
                     threshold_warning = 25;
                     threshold_critical = 50;
                     priority = 10;
@@ -56,10 +56,18 @@
                   {
                     block = "maildir";
                     interval = 10;
+                    inboxes = map (f: "${home}/Mail/${f}/INBOX") [ "Teaching" ];
+                    threshold_warning = 25;
+                    threshold_critical = 50;
+                    priority = 11;
+                  }
+                  {
+                    block = "maildir";
+                    interval = 10;
                     inboxes = map (f: "${home}/Mail/${f}/INBOX") [ "Work" ];
                     threshold_warning = 1;
                     threshold_critical = 5;
-                    priority = 10;
+                    priority = 12;
                   }
                   {
                     block = "toggle";
