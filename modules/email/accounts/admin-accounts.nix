@@ -62,6 +62,7 @@ in
 
     Nevarro-Admin = mkMerge [
       (helper.commonConfig nevarroAdmin)
+      (helper.imapnotifyConfig nevarroAdmin)
       helper.migaduConfig
     ];
   };
