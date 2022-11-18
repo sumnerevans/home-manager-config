@@ -1,14 +1,14 @@
 { lib, pkgs }: with pkgs;
 python3Packages.buildPythonApplication rec {
   pname = "offlinemsmtp";
-  version = "0.3.11rc1";
+  version = "0.4.0";
   format = "pyproject";
 
   src = pkgs.fetchFromGitHub {
     owner = "sumnerevans";
     repo = pname;
-    rev = "ee1318b8b8b3e9ae663909e384b2e6533b221946";
-    sha256 = "sha256-49s/7M2RWX1uXxRQyxcDdx5iHISTzXqU7cu6BVpTWhw=";
+    rev = "v${version}";
+    sha256 = "sha256-k9X7TCiBDq3fDlCZa0eyH3Z6IDCvVjpGvQCoO4bsw5Q=";
   };
 
   nativeBuildInputs = [
@@ -23,10 +23,10 @@ python3Packages.buildPythonApplication rec {
   ];
 
   propagatedBuildInputs = with python3Packages; [
+    inotify
     msmtp
     pass
     pygobject3
-    watchdog
   ];
 
   pythonImportsCheck = [
