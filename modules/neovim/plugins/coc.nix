@@ -19,6 +19,7 @@
         };
 
         "explorer.file.showHiddenFiles" = true;
+        "explorer.file.reveal.auto" = true;
         "explorer.git.icon.status.added" = "✚";
         "explorer.git.icon.status.copied" = "➜";
         "explorer.git.icon.status.deleted" = "✖";
@@ -30,7 +31,6 @@
         "explorer.git.icon.status.untracked" = "?";
         "explorer.git.showIgnored" = true;
         "explorer.icon.enableNerdfont" = true;
-        "explorer.position" = "right";
 
         "suggest.noselect" = true;
 
