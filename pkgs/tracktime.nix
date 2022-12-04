@@ -5,7 +5,7 @@ python3Packages.buildPythonApplication rec {
   format = "pyproject";
 
   nativeBuildInputs = [
-    python3Packages.poetry
+    python3Packages.poetry-core
   ];
 
   propagatedBuildInputs = with python3Packages; [
@@ -22,6 +22,11 @@ python3Packages.buildPythonApplication rec {
   ];
 
   doCheck = false;
+
+  postPatch = ''
+    substituteInPlace pyproject.toml \
+      --replace 'build-backend = "poetry.masonry.api"' 'build-backend = "poetry.core.masonry.api"'
+  '';
 
   src = fetchFromSourcehut {
     owner = "~sumner";
