@@ -35,6 +35,7 @@ in
   accounts.email.accounts = {
     Admin = mkMerge [
       (helper.commonConfig adminConfig)
+      (helper.imapnotifyConfig adminConfig)
       helper.migaduConfig
       {
         aliases = [
