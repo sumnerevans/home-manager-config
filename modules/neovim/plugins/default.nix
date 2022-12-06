@@ -3,6 +3,7 @@
     # Project Navigation and Configuration
     ./ctrlsf.nix
     ./editorconfig-vim.nix
+    ./vim-localvimrc.nix
     ./vim-rooter.nix
 
     # UI Chrome
