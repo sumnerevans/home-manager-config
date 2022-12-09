@@ -1,25 +1,17 @@
 { lib, config, pkgs, ... }: {
+  nixpkgs.overlays = [
+    # Workaround from https://github.com/NixOS/nixpkgs/issues/205014
+    (self: super: {
+      khal = (super.khal.overridePythonAttrs (
+        attrs: rec {
+          doCheck = false;
+        }
+      ));
+    })
+  ];
+
   home.packages = [
     pkgs.khal
-    # Workaround from https://github.com/pimutils/khal/issues/1092
-    # (pkgs.khal.overridePythonAttrs (
-    #   attrs: rec {
-    #     # fixes https://github.com/pimutils/khal/issues/1092
-    #     tzlocal21 = pkgs.python39Packages.tzlocal.overridePythonAttrs (old: rec {
-    #       pname = "tzlocal";
-    #       version = "2.1";
-    #       propagatedBuildInputs = [ pkgs.python39Packages.pytz ];
-    #       src = pkgs.python39Packages.fetchPypi {
-    #         inherit pname version;
-    #         sha256 = "sha256-ZDyXxSlK7cc3eApJ2d8wiJMhy+EgTqwsLsYTQDWpLkQ=";
-    #       };
-    #       doCheck = false;
-    #       pythonImportsCheck = [ "tzlocal" ];
-    #     });
-    #     propagatedBuildInputs = (builtins.filter (i: i.pname != "tzlocal")
-    #       attrs.propagatedBuildInputs) ++ [ tzlocal21 ];
-    #   }
-    # ))
   ];
 
   xdg.configFile."khal/config".text = ''
