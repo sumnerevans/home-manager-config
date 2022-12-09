@@ -18,7 +18,7 @@ python3Packages.buildPythonApplication rec {
     requests
     selenium
     tabulate
-    wkhtmltopdf
+    # wkhtmltopdf
   ];
 
   doCheck = false;
@@ -28,16 +28,16 @@ python3Packages.buildPythonApplication rec {
       --replace 'build-backend = "poetry.masonry.api"' 'build-backend = "poetry.core.masonry.api"'
   '';
 
-  src = fetchFromSourcehut {
-    owner = "~sumner";
+  src = fetchFromGitHub {
+    owner = "sumnerevans";
     repo = pname;
-    rev = "cd3bbb228f5d7b7037223ca34755ec2be05d0535";
-    sha256 = "sha256-86o4wBJwkFgsc2+WS7mGijkgU139e2CJyFuXcWVOK78=";
+    rev = "bb965fb84c649ce1c57e5549dbdd69ffc3644014";
+    sha256 = "sha256-1kwmBlZya71jFPS4G7lkVo7iwxrKv2W0GbP4onciBps=";
   };
 
   meta = with lib; {
     description = "Time tracking library with command line interface.";
-    homepage = "https://git.sr.ht/~sumner/tracktime";
+    homepage = "https://github.com/sumnerevans/tracktime";
     license = licenses.gpl3Plus;
   };
 }
