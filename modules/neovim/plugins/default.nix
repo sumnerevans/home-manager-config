@@ -19,9 +19,9 @@
     ./rainbow.nix
     # ./supertab.nix
     ./vim-commentary.nix
-    ./vim-multiple-cursors.nix
     ./vim-signify.nix
     ./vim-template.nix
+    ./vim-visual-multi.nix
 
     # Integration with environment
     ./vim-autoswap.nix
