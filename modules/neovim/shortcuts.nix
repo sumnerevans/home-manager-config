@@ -62,6 +62,15 @@
       ];
     }
     {
+      name = "Go";
+      filetype = "go";
+      commands = [
+        { shortcut = "pr"; action = ''fmt.Printf("\n", )<Esc>F(la''; }
+        { shortcut = "lfor"; action = ''for _,  := range (<>) { (<>) }<Esc>0f,la''; }
+        { shortcut = "for"; action = ''for  := range (<>) { (<>) }<Esc>0frla''; }
+      ];
+    }
+    {
       name = "JavaScript";
       filetype = "javascript";
       commands = [
