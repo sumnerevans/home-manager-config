@@ -4,22 +4,6 @@
   hasGui = config.wayland.enable || config.xorg.enable;
 in
 {
-  # Fix for https://gitlab.gnome.org/GNOME/libnotify/-/issues/25/
-  # until https://github.com/NixOS/nixpkgs/pull/172287 gets to unstable
-  nixpkgs.overlays = [
-    (self: super: {
-      libnotify = super.libnotify.overrideAttrs (old: rec {
-        pname = "libnotify";
-        version = "0.7.12";
-
-        src = fetchurl {
-          url = "mirror://gnome/sources/${pname}/${lib.versions.majorMinor version}/${pname}-${version}.tar.xz";
-          sha256 = "dEsrN1CBNfgmG3Vanevm4JrdQhrcdb3pMPbhmLcKtG4=";
-        };
-      });
-    })
-  ];
-
   home.packages = [
     # Shell Utilities
     aspell
