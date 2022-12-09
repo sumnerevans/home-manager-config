@@ -23,6 +23,7 @@ in
     ./syncthing.nix
     ./tmux.nix
     ./tracktime.nix
+    ./ttchat.nix
     ./udiskie.nix
     ./window-manager
     ./xdg.nix
