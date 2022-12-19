@@ -37,6 +37,9 @@ in
       # SQL Terminal GUI
       litecli
       pgcli
+
+      # Better Python REPL
+      python3Packages.ptpython
     ] ++ (
       # GUI Tools
       optionals hasGui [
