@@ -21,7 +21,7 @@
       Software Engineer at Beeper
       2 Chronicles 7:14
 
-      https://sumnerevans.com | @sumner:nevarro.space | GPG: B50022FD
+      https://sumnerevans.com | @sumner:nevarro.space
     '';
   };
 
@@ -29,6 +29,13 @@
     name = "Financial";
     address = "financial@sumnerevans.com";
     color = "green";
+    signatureLines = ''
+      Jonathan Sumner Evans
+      Software Engineer at Beeper
+      2 Chronicles 7:14
+
+      https://sumnerevans.com | @sumner:nevarro.space
+    '';
   };
 
   teachingConfig = {
@@ -72,6 +79,7 @@ in
 
     Financial = mkMerge [
       (helper.commonConfig financialConfig)
+      (helper.signatureConfig financialConfig)
       helper.migaduConfig
     ];
 
