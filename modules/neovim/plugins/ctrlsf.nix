@@ -1,5 +1,6 @@
 # Sublime Text-like search
-{ pkgs, ... }: let
+{ pkgs, ... }:
+let
   ctrlsf = pkgs.vimUtils.buildVimPluginFrom2Nix rec {
     pname = "ctrlsf";
     version = "2.1.2";

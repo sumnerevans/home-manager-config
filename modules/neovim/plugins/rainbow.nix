@@ -1,4 +1,5 @@
-{ pkgs, ... }: let
+{ pkgs, ... }:
+let
   rainbow = pkgs.vimUtils.buildVimPluginFrom2Nix rec {
     pname = "rainbow";
     version = "3.3.1";

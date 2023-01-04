@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: let
+{ config, pkgs, ... }:
+let
   rollingPingFile = "${config.home.homeDirectory}/tmp/rolling_ping";
   writepingScript = pkgs.writeShellScript "writeping" ''
     ${pkgs.coreutils}/bin/touch ${rollingPingFile}

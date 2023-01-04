@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: let
+{ lib, pkgs, ... }:
+let
   contact-query = pkgs.writeScriptBin "contact-query" (builtins.readFile ./bin/contact-query.py);
   contact-search = pkgs.writeScriptBin "contact-search" (builtins.readFile ./bin/contact-search.py);
 in

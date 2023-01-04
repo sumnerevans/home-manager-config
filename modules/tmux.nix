@@ -33,7 +33,7 @@ in
 
     extraConfig = ''
       # Border color
-      set -g pane-active-border-style fg=red,bg=default 
+      set -g pane-active-border-style fg=red,bg=default
 
       # Use Alt[-Ctrl]-HJKL to move around between vim panes and tmux windows.
       is_vim="ps -o state= -o comm= -t '#{pane_tty}' \

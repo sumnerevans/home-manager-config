@@ -32,4 +32,4 @@ autocmd FileType * syntax spell toplevel
 autocmd FileType rst setlocal nofoldenable
 
 " Remove unused imports on save for Go
-autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport') 
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')

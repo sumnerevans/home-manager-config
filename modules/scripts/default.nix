@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: let
+{ lib, pkgs, ... }:
+let
   set-contact-photo = pkgs.writeScriptBin "set-contact-photo"
     (builtins.readFile ./bin/set-contact-photo.py);
 in

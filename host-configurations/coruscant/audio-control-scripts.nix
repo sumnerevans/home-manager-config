@@ -1,4 +1,5 @@
-{ config, pkgs, runtimeShell, ... }: let
+{ config, pkgs, runtimeShell, ... }:
+let
   grep = "${pkgs.gnugrep}/bin/grep";
   pacmd = "${pkgs.pulseaudio}/bin/pacmd";
   pactl = "${pkgs.pulseaudio}/bin/pactl";
