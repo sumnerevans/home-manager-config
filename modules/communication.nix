@@ -40,7 +40,10 @@ in
     gomuks
   ] ++ optionals (config.wayland.enable || config.xorg.enable)
     [
-      beeper-desktop
+      (if config.wayland.enable then
+        pkgs.writeShellScriptBin "beeper-desktop" ''
+          ${beeper-desktop}/bin/beeper-desktop --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations
+        '' else beeper-desktop)
       discord
       element-desktop
       fractal
