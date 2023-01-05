@@ -95,27 +95,38 @@ in
             { command = "systemctl restart --user wallpaper.service"; always = true; }
           ];
 
-        config.input = {
-          "*" = {
-            # Always use natural scrolling
-            natural_scroll = "enabled";
+        config.input =
+          let
+            useUS = [
+              # My Ergodox has a hardware 3l implementation.
+              "12951:18806:ZSA_Technology_Labs_Inc_ErgoDox_EZ_Glow"
+              "12951:18806:ZSA_Technology_Labs_Inc_ErgoDox_EZ_Glow_Consumer_Control"
+              "12951:18806:ZSA_Technology_Labs_Inc_ErgoDox_EZ_Glow_Keyboard"
+              "12951:18806:ZSA_Technology_Labs_Inc_ErgoDox_EZ_Glow_System_Control"
+              # Use normal layout for Yubikey
+              "4176:1031:Yubico_YubiKey_OTP+FIDO+CCID"
+            ];
+          in
+          {
+            "*" = {
+              # Always use natural scrolling
+              natural_scroll = "enabled";
 
-            # Get right click (2 finger) and middle click (3 finger) on touchpad
-            click_method = "clickfinger";
-          };
+              # Get right click (2 finger) and middle click (3 finger) on touchpad
+              click_method = "clickfinger";
+            };
 
-          "type:keyboard" = {
-            # Use 3l by default for all keyboards that get attached
-            xkb_layout = "us";
-            xkb_variant = "3l";
-          };
-
-          # Use normal layout for Yubikey so that we don't get weirdness
-          "4176:1031:Yubico_YubiKey_OTP+FIDO+CCID" = {
-            xkb_layout = "us";
-            xkb_variant = ''""'';
-          };
-        };
+            "type:keyboard" = {
+              # Use 3l by default for all keyboards that get attached
+              xkb_layout = "us";
+              xkb_variant = "3l";
+            };
+          } // (listToAttrs (map
+            (identifier: {
+              name = identifier;
+              value = { xkb_layout = "us"; xkb_variant = ''""''; };
+            })
+            useUS));
 
         config.keybindings =
           let
