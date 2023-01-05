@@ -42,7 +42,7 @@ in
     [
       (if config.wayland.enable then
         pkgs.writeShellScriptBin "beeper-desktop" ''
-          ${beeper-desktop}/bin/beeper-desktop --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations
+          ${beeper-desktop}/bin/beeper-beta --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations
         '' else beeper-desktop)
       discord
       element-desktop
