@@ -78,6 +78,6 @@ in
     tt-inf = "tt start -t linear -c Beeper -p INF";
     tt-issues = "tt start -t gl -p 'beeper/issues' -c Beeper";
     tt-standup = "tt start -c Beeper 'Standup'";
-    tt-tea = "tt start -p teaching/ppl";
+    tt-tea = "tt start -p teaching/comporg";
   };
 }
