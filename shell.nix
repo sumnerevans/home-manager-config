@@ -2,6 +2,7 @@
 mkShell {
   propagatedBuildInputs = [
     black
+    cargo
     git-crypt
     pre-commit
     rnix-lsp
