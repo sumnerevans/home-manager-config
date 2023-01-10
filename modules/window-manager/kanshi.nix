@@ -17,6 +17,16 @@
       criteria = "Lenovo Group Limited M14 V906P5HA";
       mode = "1920x1080@60Hz";
     };
+    DellP2421D = {
+      criteria = "Dell Inc. DELL P2421D D643X53";
+      mode = "2560x1440@59.951Hz";
+      position = "2560,0";
+    };
+    DellS2417DG = {
+      criteria = "Dell Inc. Dell S2417DG #ASNmc/dFujvd";
+      mode = "2560x1440@143.998Hz";
+      position = "0,0";
+    };
   };
 
   arrangeWorkspaces = [
@@ -59,6 +69,12 @@ in
               mode = "1920x1080@60Hz";
               position = "1920,0";
             }
+          ];
+        };
+        DoubleDell = {
+          outputs = [
+            configs.DellP2421D
+            configs.DellS2417DG
           ];
         };
       };
