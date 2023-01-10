@@ -14,7 +14,7 @@ let
   binDir = "${config.home.homeDirectory}/bin";
 
   switchToHeadphones = ''
-    ${pactl} set-default-sink alsa_output.pci-0000_29_00.3.analog-stereo
+    ${pactl} set-default-sink alsa_output.pci-0000_2b_00.3.analog-stereo
   '';
 
   switchToSpeakers = ''
@@ -35,7 +35,7 @@ in
   home.file."bin/toggle-audio" = mkBashScript ''
     # If it's on the headphones, toggle to speakers. Otherwise, toggle to the
     # headphones by default.
-    if [[ $(${binDir}/current-audio-device) =~ "alsa_output.pci-0000_29_00.3.analog-stereo" ]]; then
+    if [[ $(${binDir}/current-audio-device) =~ "alsa_output.pci-0000_2b_00.3.analog-stereo" ]]; then
       ${switchToSpeakers}
     else
       ${switchToHeadphones}
