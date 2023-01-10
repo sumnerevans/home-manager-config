@@ -3,10 +3,7 @@
     ./audio-control-scripts.nix
   ];
 
-  home.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1";
-
   wayland.enable = true;
-  wayland.windowManager.sway.extraOptions = [ "--unsupported-gpu" ];
   networking.interfaces = [ "enp37s0" "wlp35s0" ];
 
   mdf.port = 1024;
