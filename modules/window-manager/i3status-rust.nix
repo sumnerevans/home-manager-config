@@ -41,9 +41,12 @@
                   # Common blocks
                   {
                     block = "custom";
-                    command = "echo  $(ls ${home}/.offlinemsmtp-outbox | ${cu}/wc -l)";
+                    command = ''
+                      ls ${home}/.offlinemsmtp-outbox | ${cu}/wc -l | jq '{icon: "mail", text: .|tostring, state: (if (. > 0) then "Critical" else "Idle" end)}'
+                    '';
                     interval = 10;
                     priority = 0;
+                    json = true;
                   }
                   {
                     block = "maildir";
