@@ -13,11 +13,11 @@
   caches.cachix = [
     {
       name = "sumnerevans";
-      sha256 = "sha256:042yrl18pfiqnjmy7rmiq0rsi8kldvi88w2g1lv90y40pmcq9zdy";
+      sha256 = "sha256:0did3acpg6azxclffz02ahhg5gf8mwzdhb11w16j3qhkhi8v2dmf";
     }
     {
       name = "nix-community";
-      sha256 = "sha256:1955r436fs102ny80wfzy99d4253bh2i1vv1x4d4sh0zx2ssmhrk";
+      sha256 = "sha256:1rgbl9hzmpi5x2xx9777sf6jamz5b9qg72hkdn1vnhyqcy008xwg";
     }
   ];
 }
