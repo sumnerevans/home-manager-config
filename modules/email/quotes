@@ -1471,3 +1471,9 @@ Learning CS academically helps you see when old things get invented
 again.
     -- Me
 %
+What I've really learned is that software cannot be single paradigm.
+There's some stuff that makes sense in OOP. There's some stuff that
+makes sense functionally. And there's some stuff that just needs strcmp
+in a loop.
+    -- Jack Rosenthal (hekn dank memes)
+%
