@@ -27,7 +27,7 @@ in
         imagemagick
         inkscape
         kdenlive
-        libreoffice-fresh
+        libreoffice
         spotify
         sublime-music
       ]
