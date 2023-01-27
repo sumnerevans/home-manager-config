@@ -44,7 +44,7 @@
     vim-fugitive
 
     # Editor
-    auto-pairs
+    # auto-pairs
     vim-closetag
     vim-surround
 

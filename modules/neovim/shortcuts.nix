@@ -13,17 +13,17 @@
       name = "LaTeX";
       filetype = "tex";
       commands = [
-        { shortcut = "bf"; action = "\\textbf{}<Esc>i"; }
-        { shortcut = "it"; action = "\\textit{}<Esc>i"; }
-        { shortcut = "tt"; action = "\\texttt{}<Esc>i"; }
-        { shortcut = "bb"; action = "\\mathbb{}<Esc>i"; }
+        { shortcut = "bf"; action = "\\textbf{<Esc>a"; }
+        { shortcut = "it"; action = "\\textit{<Esc>a"; }
+        { shortcut = "tt"; action = "\\texttt{<Esc>a"; }
+        { shortcut = "bb"; action = "\\mathbb{<Esc>a"; }
         { shortcut = "ta"; action = "\\begin{tabular}<Enter>(<>)<Enter>\\end{tabular}<Esc>2kA{}<Esc>i"; }
         { shortcut = "ol"; action = "\\begin{enumerate}<Enter><Enter>\\end{enumerate}<Esc>kA\\item<Space>"; }
         { shortcut = "ul"; action = "\\begin{itemize}<Enter><Enter>\\end{itemize}<Esc>kA\\item<Space>"; }
         { shortcut = "li"; action = "\\item"; }
-        { shortcut = "sec"; action = "\\section{}<Esc>i"; }
-        { shortcut = "ssec"; action = "\\subsection{}<Esc>i"; }
-        { shortcut = "sssec"; action = "\\subsubsection{}<Esc>i"; }
+        { shortcut = "sec"; action = "\\section{<Esc>a"; }
+        { shortcut = "ssec"; action = "\\subsection{<Esc>a"; }
+        { shortcut = "sssec"; action = "\\subsubsection{<Esc>a"; }
         { shortcut = "be"; action = "\\begin{DELRN}(<>)<Enter>(<>)<Enter>\\end{DELRN}<Esc>2k0fR:MultipleCursorsFind<Space>DELRN<Enter>c"; }
         { shortcut = "min"; action = "\\begin{minted}{(<>)}<Enter>(<>)<Enter>\\end{minted}<Esc>2kA{}<Esc>i"; }
         { shortcut = "int"; action = "\\int_{(<>)}^{(<>)}<Space>(<>)<Esc>T{i"; }
