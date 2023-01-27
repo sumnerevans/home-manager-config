@@ -43,10 +43,12 @@ in
     ] ++ (
       # GUI Tools
       optionals hasGui [
+        android-studio
         dfeet
         jetbrains.idea-community
         openjdk11
         postman
+        rars
         sqlitebrowser
         visualvm
         wireshark
