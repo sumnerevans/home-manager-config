@@ -75,6 +75,7 @@
             \ 'coc-rust-analyzer',
             \ 'coc-sh',
             \ 'coc-texlab',
+            \ 'coc-toml',
             \ 'coc-tsserver',
             \ 'coc-word',
             \ 'coc-xml',
