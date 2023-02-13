@@ -71,11 +71,12 @@ in
 
   # Aliases
   programs.zsh.shellAliases = {
-    tt-beeper = "tt start -c Beeper";
     tt-be = "tt start -t linear -c Beeper -p BE";
+    tt-beeper = "tt start -c Beeper";
     tt-element = "tt start -c Beeper 'Element catchup'";
     tt-hspc = "tt start -t gh -p ColoradoSchoolOfMines/hspc-problems";
     tt-issues = "tt start -t gl -p 'beeper/issues' -c Beeper";
+    tt-nevarro = "tt start -c Nevarro";
     tt-standup = "tt start -c Beeper 'Standup'";
     tt-tea = "tt start -p teaching/comporg";
   };

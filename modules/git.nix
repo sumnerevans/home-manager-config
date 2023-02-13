@@ -32,9 +32,10 @@ in
         submodule = "log";
       };
       init.defaultBranch = "master";
-      pull.rebase = false;
+      pull.ff = "only";
       tag.gpgsign = true;
       status.submoduleSummary = true;
+      rebase.autoSquash = true;
 
       sendemail = {
         annotate = "yes";
