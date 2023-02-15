@@ -30,14 +30,18 @@ in
 
     # Projects
     proj = "${home}/projects";
-    aoc = "${proj}/advent-of-code";
-    hm = "${proj}/home-manager";
-    hspc = "${proj}/acm/hspc-problems";
-    kattis = "${home}/projects/kattis";
-    res = "${proj}/resume";
-    sub = "${proj}/sublime-music/sublime-music";
-    sws = "${proj}/sumnerevans.com";
-    tt = "${proj}/tracktime";
-    yt = "${proj}/youtube-content";
+    gh = "${proj}/github.com";
+
+    beep = "${gh}/sumnerevans/beeper";
+
+    aoc = "${gh}/sumnerevans/advent-of-code";
+    hm = "${gh}/nix-community/home-manager";
+    hspc = "${gh}/ColoradoSchoolOfMines/hspc-problems";
+    kattis = "${gh}/sumnerevans/kattis";
+    res = "${gh}/sumnerevans/resume";
+    sub = "${gh}/sublime-music/sublime-music";
+    sws = "${gh}/sumnerevans/sumnerevans.com";
+    tt = "${gh}/sumnerevans/tracktime";
+    yt = "${gh}/sumnerevans/youtube-content";
   };
 }
