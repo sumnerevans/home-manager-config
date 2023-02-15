@@ -1,10 +1,9 @@
-{ lib, fetchFromGitHub, buildGoPackage, olm }:
+{ lib, fetchFromGitHub, buildGoModule }:
 
-buildGoPackage rec {
+buildGoModule rec {
   pname = "mailnotify";
   version = "0.1.0";
 
-  goPackagePath = "github.com/sumnerevans/mailnotify";
   src = fetchFromGitHub {
     owner = "sumnerevans";
     repo = pname;
@@ -12,7 +11,7 @@ buildGoPackage rec {
     sha256 = "sha256-KPgOtNPK4tE9hzFd7sJwIxRbwh2KFXu/1/m4GT/MBYU=";
   };
 
-  goDeps = ./deps.nix;
+  vendorHash = "sha256-KPAAAAAK4tE9hzFd7sJwIxRbwh2KFXu/1/m4GT/MBYU=";
 
   meta = with lib; {
     description = "A small program that notifies when mail has arrived in your mail directory.";

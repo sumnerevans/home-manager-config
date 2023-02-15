@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  mailnotify = pkgs.callPackage ../../pkgs/mailnotify { };
+  mailnotify = pkgs.callPackage ../../pkgs/mailnotify.nix { };
   hasGui = config.wayland.enable || config.xorg.enable;
 in
 {

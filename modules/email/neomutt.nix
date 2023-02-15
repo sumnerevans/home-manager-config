@@ -2,7 +2,7 @@
   aliasfile = "${config.xdg.configHome}/neomutt/aliases";
   mailboxfile = "${config.xdg.configHome}/neomutt/mailboxes";
   bindir = "${config.home.homeDirectory}/bin";
-  mdf = pkgs.callPackage ../../pkgs/mdf { };
+  mdf = pkgs.callPackage ../../pkgs/mdf.nix { };
 
   syncthingdir = "${config.home.homeDirectory}/Syncthing";
 in

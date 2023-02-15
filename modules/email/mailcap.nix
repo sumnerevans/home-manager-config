@@ -3,7 +3,7 @@ let
   feh = "${pkgs.feh}/bin/feh";
   libreoffice = "${pkgs.libreoffice}/bin/libreoffice";
   icalviewScript = pkgs.writeScript "icalview" (builtins.readFile ./icalview.py);
-  mdf = pkgs.callPackage ../../pkgs/mdf { };
+  mdf = pkgs.callPackage ../../pkgs/mdf.nix { };
   hasGui = config.wayland.enable || config.xorg.enable;
 
   programSection = executable: items: (

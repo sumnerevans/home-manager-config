@@ -1,10 +1,9 @@
-{ lib, fetchFromGitHub, buildGoPackage, olm }:
+{ lib, fetchFromGitHub, buildGoModule }:
 
-buildGoPackage rec {
+buildGoModule rec {
   pname = "mdf";
   version = "0.1.0";
 
-  goPackagePath = "github.com/sumnerevans/mdf";
   src = fetchFromGitHub {
     owner = "sumnerevans";
     repo = pname;
@@ -12,7 +11,7 @@ buildGoPackage rec {
     sha256 = "sha256-yV42TKzBwwY2iyCn33AwvlFO3KfKLb4hehjD+kXZnLE=";
   };
 
-  goDeps = ./deps.nix;
+  vendorHash = "sha256-PcXa+5cvprr9h0RaGvlSG5GtNYT7A8pn3sD0neisHec=";
 
   meta = with lib; {
     description = "A simple service for helping redirect URLs.";
