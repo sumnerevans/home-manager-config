@@ -1,9 +1,15 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   offlinemsmtp = pkgs.callPackage ../pkgs/offlinemsmtp.nix { };
+  git-get = pkgs.callPackage ../pkgs/git-get.nix { };
 in
 {
-  home.packages = with pkgs.gitAndTools; [ gh hub lab ];
+  home.packages = with pkgs.gitAndTools; [
+    gh
+    hub
+    lab
+    git-get
+  ];
 
   programs.git = {
     enable = true;
@@ -36,6 +42,10 @@ in
       tag.gpgsign = true;
       status.submoduleSummary = true;
       rebase.autoSquash = true;
+
+      gitget = {
+        root = "${config.home.homeDirectory}/projects";
+      };
 
       sendemail = {
         annotate = "yes";
