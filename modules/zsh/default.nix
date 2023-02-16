@@ -72,6 +72,7 @@
 
             ${builtins.readFile ./key-widgets.zsh}
             ${builtins.readFile ./prompt.zsh}
+            ${builtins.readFile ./git-repo-nav.zsh}
 
             # Colors
             autoload colors zsh/terminfo
