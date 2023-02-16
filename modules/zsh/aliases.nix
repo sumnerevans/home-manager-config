@@ -35,7 +35,6 @@ in
       ohea = "echo 'You need to either wake up or go to bed!'";
       open = if config.isLinux then "(thunar &> /dev/null &)" else "open .";
       pdflatex = "pdflatex -shell-escape";
-      pwd = "pwd && pwd -P";
       sbcl = "rlwrap sbcl";
       screen = "screen -DR";
       soviet = "${pkgs.pamixer}/bin/pamixer --set-volume 50 && mpv --quiet -vo caca 'https://www.youtube.com/watch?v=U06jlgpMtQs'";
