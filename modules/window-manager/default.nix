@@ -28,7 +28,6 @@ in
     home.packages = with pkgs; [
       brightnessctl
       menucalc
-      screenkey
       wmctrl
     ];
 
