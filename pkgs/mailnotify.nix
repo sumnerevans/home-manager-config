@@ -11,7 +11,7 @@ buildGoModule rec {
     sha256 = "sha256-KPgOtNPK4tE9hzFd7sJwIxRbwh2KFXu/1/m4GT/MBYU=";
   };
 
-  vendorHash = "sha256-KPAAAAAK4tE9hzFd7sJwIxRbwh2KFXu/1/m4GT/MBYU=";
+  vendorHash = "sha256-Mj1vte+bnDmY/tn6+GXX9IwIKgy9J4QvoIP/pLcID6E=";
 
   meta = with lib; {
     description = "A small program that notifies when mail has arrived in your mail directory.";
