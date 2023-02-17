@@ -4,8 +4,8 @@ appimageTools.wrapType2 rec {
   version = "unstable-2023-01-27";
 
   src = fetchurl {
-    url = "https://dl.todesktop.com/201202u1n7yn5b0/builds/23012586lse7ira/linux/appimage/x64";
-    sha256 = "sha256-1bbij7PmlUQroGCT5ae+dbboNLMPUcX8lEWUUwJlXU4=";
+    url = "https://dl.todesktop.com/201202u1n7yn5b0/builds/230217gd5sourba/linux/appimage/x64";
+    sha256 = "sha256-ZlnCYPNn5QEH8etZndZ99QZOr7RInSmg6VZNkJcfyPU=";
   };
 
   extraInstallCommands =
