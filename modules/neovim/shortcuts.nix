@@ -24,7 +24,7 @@
         { shortcut = "sec"; action = "\\section{<Esc>a"; }
         { shortcut = "ssec"; action = "\\subsection{<Esc>a"; }
         { shortcut = "sssec"; action = "\\subsubsection{<Esc>a"; }
-        { shortcut = "be"; action = "\\begin{DELRN}(<>)<Enter>(<>)<Enter>\\end{DELRN}<Esc>2k0fR:MultipleCursorsFind<Space>DELRN<Enter>c"; }
+        { shortcut = "be"; action = "\\begin{DELRN}(<>)<Enter>(<>)<Enter>\\end{DELRN}<Esc>2k0fR:call vm#commands#find_under(0,0)<Enter>:call vm#commands#find_next(0,0)<Enter>c"; }
         { shortcut = "min"; action = "\\begin{minted}{(<>)}<Enter>(<>)<Enter>\\end{minted}<Esc>2kA{}<Esc>i"; }
         { shortcut = "int"; action = "\\int_{(<>)}^{(<>)}<Space>(<>)<Esc>T{i"; }
         { shortcut = "sum"; action = "\\sum_{(<>)}^{(<>)}<Space>(<>)<Esc>T{i"; }
@@ -46,7 +46,6 @@
         { shortcut = "li"; action = "<li></li><Esc>F>a"; }
         { shortcut = "ol"; action = "<ol><Enter><li></li><Enter></ol><Esc>0k2f<i"; }
         { shortcut = "div"; action = ''<div class=""><Enter>(<>)<Enter></div><Esc>02kf"a''; }
-        { shortcut = "tg"; action = "<DELRN>(<>)</DELRN><Esc>0fR:MultipleCursorsFind<Space>DELRN<Enter>c"; }
         { shortcut = "tr"; action = "<tr></tr><Esc>F<i"; }
         { shortcut = "td"; action = "<td></td><Esc>F<i"; }
         { shortcut = "th"; action = "<th></th><Esc>F<i"; }
