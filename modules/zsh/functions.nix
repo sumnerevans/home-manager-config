@@ -31,11 +31,12 @@
         precmd = ''
           # If the cd just happend...
           if [[ "''$${chpwd_just_happened}" == "1" ]]; then
-              # Automatically list directory contents.
-              ${ls} --color -Fa
+            # Automatically list directory contents.
+            ${ls} --color -Fa
 
-              # Run the post-cd command if it exists
-              [[ ! -z "$POST_CD_COMMAND" ]] && $POST_CD_COMMAND
+            if [ -f .pre-commit-config.yaml ]; then
+              pre-commit install --install-hooks
+            fi
           fi
           unset ${chpwd_just_happened}
         '';

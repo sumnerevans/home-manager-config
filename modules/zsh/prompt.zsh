@@ -12,12 +12,19 @@ function preexec() {
 
 # Just a modified version of adam1
 function __lprompt {
-    # If we are in an SSH connection, show green "[SSH]".
-    if [[ -n $SSH_CONNECTION ]]; then
+    # If we are in a non-TMUX SSH connection, show yellow "[SSH]".
+    if [[ -n $SSH_CONNECTION && ! -n $TMUX ]]; then
         echo -n "%B%F{yellow}[SSH]%f%b "
     fi
 
-    echo "%B%F{cyan}%~%F{white} %# %b%f"
+    lprompt_color="%F{cyan}"
+    extra_lprompt=" "
+    if [[ $BEEPER_ENV == "production" && ! -n $BEEPER_READONLY ]]; then
+        lprompt_color="%F{red}"
+        extra_lprompt=" (🚨 PRODUCTION 🚨) "
+    fi
+
+    echo "%B${lprompt_color}%~${extra_lprompt}%F{white}%# %b%f"
 }
 
 function __rprompt {
