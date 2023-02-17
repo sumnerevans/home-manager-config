@@ -6,8 +6,8 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "sumnerevans";
     repo = "menu-calc";
-    rev = version;
-    sha256 = "041jj6x1ihg9jkj5lww6cqlvjc9f7m1rfk83dspspqjqb6ibfs5x";
+    rev = "1728157d4e06966f6ecfcd5c5cb1216291a0ff78";
+    sha256 = "sha256-Gx5SXg20mYvz0jZTmelJZIuI8hNEWSt+cViPSMl4W6Q=";
   };
 
   buildInputs = [ makeWrapper ];
@@ -26,12 +26,12 @@ stdenv.mkDerivation rec {
     bc
     rofi
     xclip
+    wl-clipboard
   ];
 
   fixupPhase = ''
     patchShebangs $out/bin
-    wrapProgram $out/bin/= \
-      --prefix PATH : "${wrapperPath}"
+    wrapProgram $out/bin/= --prefix PATH : "${wrapperPath}"
   '';
 
   meta = {
