@@ -44,6 +44,11 @@
             "args" = [ "--lib" "racket-langserver" ];
             "filetypes" = [ "racket" ];
           };
+          "terraform" = {
+            "command" = "terraform-lsp";
+            "filetypes" = [ "terraform" ];
+            "initializationOptions" = { };
+          };
           "vala" = {
             "command" = "vala-language-server";
             "filetypes" = [ "vala" "genie" ];
