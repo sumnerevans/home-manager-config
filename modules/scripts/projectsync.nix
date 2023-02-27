@@ -6,7 +6,7 @@
   projectsyncScript = pkgs.writeShellScriptBin "projectsync" ''
     set -xe
     while read -ra project; do
-      ${git-get}/bin/git-get $project
+      ${git-get}/bin/git-get -r $(git config gitget.root) $project
     done <"${config.home.homeDirectory}/Syncthing/projectlist"
   '';
 in
