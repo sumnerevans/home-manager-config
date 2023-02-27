@@ -19,6 +19,7 @@ in
       config = ''
         let g:blamer_enabled = 1
         let g:blamer_date_format = '%Y-%m-%d'
+        let g:blamer_template = '<committer>, <committer-time> • <commit-short> • <summary>'
       '';
     }
   ];
