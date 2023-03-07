@@ -23,6 +23,12 @@
     color = "green";
   };
 
+  mineshspcAdmin = {
+    name = "MinesHSPC-Admin";
+    address = "admin@mineshspc.com";
+    color = "green";
+  };
+
   nevarroAdmin = {
     name = "Nevarro-Admin";
     address = "admin@nevarro.space";
@@ -58,6 +64,12 @@ in
 
     BMT-Admin = mkMerge [
       (helper.commonConfig bookMyTimeAdmin)
+      helper.migaduConfig
+    ];
+
+    MinesHSPC-Admin = mkMerge [
+      (helper.commonConfig mineshspcAdmin)
+      (helper.imapnotifyConfig mineshspcAdmin)
       helper.migaduConfig
     ];
 
