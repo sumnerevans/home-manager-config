@@ -69,7 +69,7 @@ in
       common.i3SwayConfig
       {
         wrapperFeatures.gtk = true;
-        config.focus.forceWrapping = true;
+        config.focus.wrapping = "force";
         config.startup =
           let
             wlpaste = "${pkgs.wl-clipboard}/bin/wl-paste";
@@ -197,7 +197,7 @@ in
     # Gammastep
     services.gammastep = common.redshiftGammastepCfg;
 
-    programs.mako = {
+    services.mako = {
       enable = true;
       package = pkgs.mako.overrideAttrs (old: rec {
         pname = "mako";
