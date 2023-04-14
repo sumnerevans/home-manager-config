@@ -14,7 +14,7 @@ in
 
       # Config
       projectlist = "vim ~st/projectlist && projectsync";
-      quotesfile = "vim ${config.xdg.configHome}/nixpkgs/modules/email/quotes";
+      quotesfile = "vim ${config.xdg.configHome}/home-manager/modules/email/quotes";
       reload = ". ~/.zshrc && echo 'ZSH Config Reloaded from ~/.zshrc'";
       sshconf = "vim ~/.ssh/config";
       vimrc = "realvim ~/.vim/vimrc";

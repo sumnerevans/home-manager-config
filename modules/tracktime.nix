@@ -1,5 +1,5 @@
 { config, lib, pkgs, ... }: with lib; with pkgs; let
-  secretsDir = "${config.xdg.configHome}/nixpkgs/secrets";
+  secretsDir = "${config.xdg.configHome}/home-manager/secrets";
   tracktime = callPackage ../pkgs/tracktime.nix { };
   yamlFormat = pkgs.formats.yaml { };
 in

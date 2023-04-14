@@ -7,7 +7,7 @@
   '';
 
   passwordFetchCommand = passwordName:
-    ''["command", "${pkgs.coreutils}/bin/cat", "${config.xdg.configHome}/nixpkgs/secrets/vdirsyncer/${passwordName}"]'';
+    ''["command", "${pkgs.coreutils}/bin/cat", "${config.xdg.configHome}/home-manager/secrets/vdirsyncer/${passwordName}"]'';
 in
 {
   home.packages = [ pkgs.vdirsyncer ];
