@@ -69,7 +69,7 @@ in
       common.i3SwayConfig
       {
         wrapperFeatures.gtk = true;
-        config.focus.wrapping = "force";
+        config.focus.wrapping = "yes";
         config.startup =
           let
             wlpaste = "${pkgs.wl-clipboard}/bin/wl-paste";
