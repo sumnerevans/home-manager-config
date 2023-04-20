@@ -30,20 +30,24 @@
               [[ $? == 0 ]] && printf "∞" && exit 0
               printf "%0.3f" $(${cu}/cat ${homeTmp}/rolling_ping | ${pkgs.jq}/bin/jq -s add/length)
             '';
+            outgoingMailScript = pkgs.writeShellScriptBin "parse-outgoing-mail" ''
+              ls ${home}/.offlinemsmtp-outbox | ${cu}/wc -l | jq '{icon: "mail", text: .|tostring, state: (if (. > 0) then "Critical" else "Idle" end)}'
+            '';
           in
           {
-            icons = "awesome";
-            theme = "nord-dark";
+            # icons = "awesome";
+            # theme = "nord-dark";
+            settings = {
+              icons.icons = "awesome4";
+              theme.theme = "nord-dark";
+            };
 
             blocks = map (x: builtins.removeAttrs x [ "priority" ]) (
               sort (a: b: a.priority < b.priority) (
                 [
-                  # Common blocks
                   {
                     block = "custom";
-                    command = ''
-                      ls ${home}/.offlinemsmtp-outbox | ${cu}/wc -l | jq '{icon: "mail", text: .|tostring, state: (if (. > 0) then "Critical" else "Idle" end)}'
-                    '';
+                    command = "${outgoingMailScript}/bin/parse-outgoing-mail";
                     interval = 10;
                     priority = 0;
                     json = true;
@@ -74,8 +78,8 @@
                   }
                   {
                     block = "toggle";
-                    text = "Send Email?";
-                    command_state = "ls ${homeTmp}/offlinemsmtp-sendmail >/dev/null && echo 'Send Email'";
+                    format = " $icon Send Email? ";
+                    command_state = "ls ${homeTmp}/offlinemsmtp-sendmail >/dev/null && echo 1";
                     command_on = "${cu}/touch ${homeTmp}/offlinemsmtp-sendmail";
                     command_off = "${cu}/rm ${homeTmp}/offlinemsmtp-sendmail";
                     interval = 5;
@@ -83,18 +87,21 @@
                   }
                   {
                     block = "memory";
-                    format_mem = "{mem_used;G}";
-                    format_swap = "{swap_used;G}";
                     warning_mem = 90;
                     warning_swap = 90;
                     critical_mem = 95;
                     critical_swap = 95;
                     priority = 30;
+                    format = " $icon $mem_used.eng(prefix:M) ";
                   }
                   {
                     block = "music";
                     player = "sublimemusic";
-                    buttons = [ (mkIf (!config.laptop.enable) "prev") "play" "next" ];
+                    format =
+                      if config.laptop.enable then
+                        " $icon {$combo.str(max_w:20) $play $next |} "
+                      else
+                        " $icon {$combo.str(max_w:20) $prev $play $next |} ";
                     priority = 40;
                   }
                   {
@@ -106,19 +113,20 @@
                   }
                   {
                     block = "sound";
+                    format = "{$volume.eng(w:2) |}";
                     step_width = 2;
                     priority = 90;
                   }
                   {
                     block = "time";
-                    format = "UTC %H";
+                    format = " $icon UTC $timestamp.datetime(f:'%H')";
                     timezone = "Etc/UTC";
                     interval = 1;
                     priority = 100;
                   }
                   {
                     block = "time";
-                    format = "%F %R:%S";
+                    format = " $icon UTC $timestamp.datetime(f:'%F %R:%S') ";
                     interval = 1;
                     priority = 101;
                   }
@@ -131,9 +139,8 @@
                         block = "net";
                         device = dev;
                         interval = 5;
-                        format = "{ip}";
-                        hide_missing = true;
-                        hide_inactive = true;
+                        format = " $icon $ip";
+                        missing_format = "";
                         priority = 80 + i;
                       }
                     )
@@ -147,7 +154,7 @@
                     {
                       block = "battery";
                       interval = 30;
-                      format = "{percentage} {time}";
+                      format = " $icon $percentage $time";
                       device = "BAT0";
                       priority = 110;
                     }
@@ -157,7 +164,7 @@
                   optionals config.xorg.enable [
                     {
                       block = "toggle";
-                      text = "DND";
+                      format = "DND";
                       command_state = "[[ $(${dunstctl} is-paused) == true ]] && echo 1";
                       command_on = "${dunstctl} set-paused true";
                       command_off = "${dunstctl} set-paused false";
