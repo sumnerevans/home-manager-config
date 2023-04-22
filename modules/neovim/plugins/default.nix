@@ -22,6 +22,7 @@
     ./vim-signify.nix
     ./vim-template.nix
     ./vim-visual-multi.nix
+    ./vista-vim.nix
 
     # Integration with environment
     ./vim-autoswap.nix
