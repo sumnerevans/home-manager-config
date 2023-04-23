@@ -162,7 +162,7 @@ in
 
         config.seat."*" = {
           hide_cursor = "when-typing enable";
-          xcursor_theme = "capitaine-cursors 24";
+          xcursor_theme = "phinger-cursors-light 32";
         };
       }
       cfg.extraSwayConfig

@@ -37,9 +37,9 @@ in
     };
 
     home.pointerCursor = {
-      package = pkgs.capitaine-cursors;
-      name = "capitaine-cursors";
-      size = 24;
+      package = pkgs.phinger-cursors;
+      name = "phinger-cursors-light";
+      size = 32;
 
       gtk.enable = true;
     };
