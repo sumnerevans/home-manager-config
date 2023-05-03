@@ -113,7 +113,7 @@
                   }
                   {
                     block = "sound";
-                    format = "{$volume.eng(w:2) |}";
+                    format = " $icon {$volume.eng(w:2) |}";
                     step_width = 2;
                     priority = 90;
                   }
