@@ -78,6 +78,9 @@ in
     write_stylus
     xournal
 
+    # Virtual Machine Client
+    virt-manager
+
     (
       xfce.thunar.override {
         thunarPlugins = [
