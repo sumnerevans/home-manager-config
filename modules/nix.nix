@@ -1,23 +1,20 @@
-{ pkgs, ... }: {
+{ pkgs, declarative-cachix, ... }: {
   imports = [
-    (
-      let
-        declCachix = builtins.fetchTarball "https://github.com/jonascarpay/declarative-cachix/archive/b63e9cb0d0962656d08fb4668a5b6b1ba1ca5648.tar.gz";
-      in
-      import "${declCachix}/home-manager.nix"
-    )
+    declarative-cachix.homeManagerModules.declarative-cachix
   ];
+
+  nix.package = pkgs.nix;
 
   home.packages = [ pkgs.cachix ];
 
   caches.cachix = [
     {
       name = "sumnerevans";
-      sha256 = "sha256:0did3acpg6azxclffz02ahhg5gf8mwzdhb11w16j3qhkhi8v2dmf";
+      sha256 = "sha256:0l8bn98zhpcwl8yv3hlm00411xrv7lxq30xcmq2xbg82hgh6rwdj";
     }
     {
       name = "nix-community";
-      sha256 = "sha256:1rgbl9hzmpi5x2xx9777sf6jamz5b9qg72hkdn1vnhyqcy008xwg";
+      sha256 = "sha256:0m6kb0a0m3pr6bbzqz54x37h5ri121sraj1idfmsrr6prknc7q3x";
     }
   ];
 

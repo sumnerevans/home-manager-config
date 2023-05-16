@@ -2,7 +2,6 @@
   imports = [
     ./modules
     ./programs
-    ./host-config.nix
   ];
 
   home = {
