@@ -15,10 +15,11 @@
   outputs = { nixpkgs, home-manager, declarative-cachix, flake-utils, ... }:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-
       mkConfig = hostModule: home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
 
         modules = [
           ./home.nix
@@ -30,6 +31,7 @@
     in
     {
       homeConfigurations."tatooine" = mkConfig ./host-configurations/tatooine.nix;
+      homeConfigurations."coruscant" = mkConfig ./host-configurations/coruscant;
     } // (flake-utils.lib.eachDefaultSystem
       (system:
         let
