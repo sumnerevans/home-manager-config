@@ -32,6 +32,7 @@
     {
       homeConfigurations."tatooine" = mkConfig ./host-configurations/tatooine.nix;
       homeConfigurations."coruscant" = mkConfig ./host-configurations/coruscant;
+      homeConfigurations."scarif" = mkConfig ./host-configurations/scarif.nix;
     } // (flake-utils.lib.eachDefaultSystem
       (system:
         let
