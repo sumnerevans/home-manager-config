@@ -74,7 +74,8 @@ in
 
     # GUI Tools
     baobab
-    bitwarden
+    # Disabled until https://nixpk.gs/pr-tracker.html?pr=230971 hits unstable
+    # bitwarden
     write_stylus
     xournal
 
