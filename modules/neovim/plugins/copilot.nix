@@ -1,12 +1,12 @@
 { pkgs, ... }: with pkgs; let
   copilot = pkgs.vimUtils.buildVimPluginFrom2Nix rec {
     pname = "copilot";
-    version = "1.6.0";
+    version = "1.8.4";
     src = pkgs.fetchFromGitHub {
       owner = "github";
       repo = "copilot.vim";
-      rev = "8ba151a20bc1d7a5c72e592e51bfc925d5bbb837";
-      sha256 = "sha256-GmwR+S5sQnVUbVShP53jNpSKMZaoeh9Rf37v89wAJ3M=";
+      rev = "1358e8e45ecedc53daf971924a0541ddf6224faf";
+      sha256 = "sha256-6xIOngHzmBrgNfl0JI5dUkRLGlq2Tf+HsUj5gha/Ppw=";
     };
     meta.homepage = "https://github.com/features/copilot";
   };
@@ -19,8 +19,6 @@ in
         imap <silent><script><expr> <C-c> copilot#Accept("\<CR>")
         imap <silent> <C-l> <Plug>(copilot-next)
         let g:copilot_no_tab_map = v:true
-
-        let g:copilot_node_command = "${nodejs-16_x}/bin/node"
       '';
     }
   ];
