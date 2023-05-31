@@ -9,6 +9,8 @@ in
     w3m
   ] ++ optionals hasGui [
     (google-chrome.override { commandLineArgs = chromeCommandLineArgs; })
+
+    nyxt
   ];
 
   programs.chromium.enable = hasGui;
