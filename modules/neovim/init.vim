@@ -7,7 +7,7 @@ set mouse=a                                             " Enable mouse scrolling
 set number                                              " Show the current line number
 set pastetoggle=<F2>                                    " Make C-S-V paste work better
 set scrolloff=5                                         " Always have 5 lines above/below the current line
-set showbreak=↩\ 
+set showbreak=↩\
 set signcolumn=yes                                      " Always show the sign column for git gutter
 set virtualedit=onemore                                 " Allow the cursor to go one past the EOL
 set nojoinspaces                                        " One space after period when doing gq
@@ -25,11 +25,6 @@ set smartcase   " unless the search string has uppercase letters
 set showtabline=2       " Always show the tab bar
 set splitbelow          " Default split below, rather than above
 set splitright          " Default split to the right, rather than the left
-
-" Buffer navigation
-map <C-H> :bp<CR>
-map <C-L> :bn<CR>
-map <C-W> :bdelete<CR>
 
 " Quickfix --------------------------------------------------------------------
 au FileType qf call AdjustWindowHeight(5, 5)

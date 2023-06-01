@@ -7,6 +7,7 @@
     ./vim-rooter.nix
 
     # UI Chrome
+    ./barbar.nix
     ./fzf-vim.nix
     # ./nerdtree.nix
     # ./vim-airline.nix
