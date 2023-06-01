@@ -35,9 +35,6 @@
     ./copilot.nix
     # ./vim-markdown-composer.nix
     ./vimspector.nix
-
-    # Organization Tools
-    ./vim-todo-lists.nix
   ];
 
   programs.neovim.plugins = with vimPlugins; [
