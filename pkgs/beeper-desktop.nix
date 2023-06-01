@@ -4,8 +4,8 @@ appimageTools.wrapType2 rec {
   version = "unstable-2023-05-22";
 
   src = fetchurl {
-    url = "https://beta.beeper.com/builds/230523ak8id0ihq/linux/appimage/x64";
-    sha256 = "sha256-7o/WoQcPIB40Mh8nIo7WTy5IPStnzOL9/Mt1bwvs9CU=";
+    url = "https://beta.beeper.com/builds/230601ps11crwno/linux/appimage/x64";
+    sha256 = "sha256-XJAvLLXWONJvOjwV/inVpRl652itqZJ5o2fwL6It7+Q=";
   };
 
   extraInstallCommands =
