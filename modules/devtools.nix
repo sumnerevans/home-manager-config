@@ -28,6 +28,9 @@ in
 
       # Better Python REPL
       python3Packages.ptpython
+
+      # Languages
+      go
     ] ++ (
       # GUI Tools
       optionals hasGui [
