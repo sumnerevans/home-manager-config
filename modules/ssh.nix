@@ -4,4 +4,6 @@ let
 in
 {
   home.symlinks."${homedir}/.ssh/config" = "${homedir}/Syncthing/.ssh/config";
+
+  services.ssh-agent.enable = true;
 }

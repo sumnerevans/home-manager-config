@@ -61,6 +61,7 @@
         let
           tput = "${pkgs.ncurses}/bin/tput";
           opensshAdd = optionalString config.autoAddSSHKeysToAgent ''
+            # Add my key to the ssh-agent if necessary
             ${pkgs.openssh}/bin/ssh-add -l | \
               ${pkgs.gnugrep}/bin/grep "The agent has no identities" && \
               ${pkgs.openssh}/bin/ssh-add
@@ -85,12 +86,6 @@
             setopt autopushd
             setopt nobeep  # Don't beep ever
 
-            # Set up the ssh-agent if necesarry
-            if [[ ! -S ~/.ssh/ssh_auth_sock  ]]; then
-                eval `${pkgs.openssh}/bin/ssh-agent`
-                ${pkgs.coreutils}/bin/ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
-            fi
-            export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
             ${opensshAdd}
 
             echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
