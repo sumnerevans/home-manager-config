@@ -79,6 +79,7 @@
             \ 'coc-pyright',
             \ 'coc-rust-analyzer',
             \ 'coc-sh',
+            \ 'coc-svelte',
             \ 'coc-texlab',
             \ 'coc-toml',
             \ 'coc-tsserver',
