@@ -34,13 +34,6 @@ in
 
     day_worked_min_threshold = 120;
 
-    project_rates = {
-      "CSCI 400" = 40;
-      "CSCI 406" = 40;
-      "Grading 101" = 15;
-      "teaching/aca" = 22;
-    };
-
     customer_rates = {
       Beeper = 57.5;
       TTD = 51.92;
@@ -51,10 +44,6 @@ in
         207 High Street
         Palo Alto, CA 94301
       '';
-      "Tracy Camp" = ''
-        Computer Sceince Department
-        Colorado School of Mines
-      '';
       TTD = ''
         42 N. Chestnut St
         Ventura, CA 93001
@@ -64,7 +53,6 @@ in
 
     customer_aliases = {
       Beeper = "Beeper Inc.";
-      "Tracy Camp" = "Dr. Tracy Camp";
       TTD = "The Trade Desk";
     };
   };
@@ -78,6 +66,6 @@ in
     tt-issues = "tt start -t gl -p 'beeper/issues' -c Beeper";
     tt-nevarro = "tt start -c Nevarro";
     tt-standup = "tt start -c Beeper 'Standup'";
-    tt-tea = "tt start -p teaching/comporg";
+    tt-tea = "tt start -p teaching/algo";
   };
 }
