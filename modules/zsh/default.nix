@@ -38,8 +38,17 @@
 
       history = {
         expireDuplicatesFirst = true;
+        ignoreAllDups = true;
         extended = true;
         path = "${config.home.homeDirectory}/.histfile";
+
+        ignorePatterns = [
+          "gl"
+          "gs"
+          "tt"
+          "l"
+          "ll"
+        ];
       };
 
       initExtraFirst = ''
