@@ -11,6 +11,7 @@ in
     bind
     bitwarden-cli
     czkawka
+    cinny-desktop
     fd
     file
     fortune
