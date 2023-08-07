@@ -126,7 +126,7 @@
                   }
                   {
                     block = "time";
-                    format = " $icon UTC $timestamp.datetime(f:'%F %R:%S') ";
+                    format = " $icon $timestamp.datetime(f:'%F %R:%S') ";
                     interval = 1;
                     priority = 101;
                   }
