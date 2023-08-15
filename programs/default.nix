@@ -20,6 +20,7 @@ in
     libarchive
     libheif
     libnotify
+    libxml2
     light
     lsof
     mkpasswd
