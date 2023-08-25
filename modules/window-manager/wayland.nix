@@ -164,6 +164,15 @@ in
           hide_cursor = "when-typing enable";
           xcursor_theme = "phinger-cursors-light 32";
         };
+
+        config.window.commands = [
+          {
+            command = "floating enable";
+            criteria = {
+              app_id = "Element";
+            };
+          }
+        ];
       }
       cfg.extraSwayConfig
     ];
