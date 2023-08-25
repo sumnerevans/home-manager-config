@@ -34,6 +34,14 @@ python3Packages.buildPythonApplication rec {
     wrapGAppsHook
   ];
 
+  postPatch = ''
+    sed -i "/--cov/d" setup.cfg
+    sed -i "/--no-cov-on-fail/d" setup.cfg
+
+    # https://github.com/sublime-music/sublime-music/commit/f477659d24e372ed6654501deebad91ae4b0b51c
+    sed -i "s/python-mpv/mpv/g" pyproject.toml
+  '';
+
   buildInputs = [
     gtk3
     pango
