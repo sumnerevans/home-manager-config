@@ -25,6 +25,8 @@ python3Packages.buildPythonApplication rec {
 
   postPatch = ''
     substituteInPlace pyproject.toml \
+      --replace 'requires = ["poetry>=0.12"]' 'requires = ["poetry-core>=1.0.0"]'
+    substituteInPlace pyproject.toml \
       --replace 'build-backend = "poetry.masonry.api"' 'build-backend = "poetry.core.masonry.api"'
     substituteInPlace pyproject.toml \
       --replace 'tabulate = "^0.8.7"' 'tabulate = ">=0.8.7"'
