@@ -38,7 +38,6 @@ in
         dfeet
         jetbrains.idea-community
         openjdk11
-        postman
         rars
         sqlitebrowser
         visualvm
