@@ -2,7 +2,7 @@
 python3Packages.buildPythonApplication rec {
   pname = "offlinemsmtp";
   version = "unstable-2023-06-23";
-  format = "flit";
+  format = "pyproject";
 
   src = pkgs.fetchFromGitHub {
     owner = "sumnerevans";
@@ -12,6 +12,7 @@ python3Packages.buildPythonApplication rec {
   };
 
   nativeBuildInputs = [
+    python3Packages.flit-core
     gobject-introspection
     python3Packages.setuptools
     wrapGAppsHook
