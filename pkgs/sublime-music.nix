@@ -19,7 +19,7 @@
 python3Packages.buildPythonApplication rec {
   pname = "sublime-music";
   version = "0.12.0rc1";
-  format = "flit";
+  format = "pyproject";
 
   src = fetchFromGitHub {
     owner = "sublime-music";
@@ -29,6 +29,7 @@ python3Packages.buildPythonApplication rec {
   };
 
   nativeBuildInputs = [
+    python3Packages.flit-core
     gobject-introspection
     python3Packages.poetry-core
     wrapGAppsHook
