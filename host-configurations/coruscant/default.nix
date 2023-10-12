@@ -23,4 +23,6 @@
         command_off = cmd;
       }
     ];
+
+  wayland.windowManager.sway.config.keybindings."${config.windowManager.modKey}+m" = "exec ${pkgs.dbus}/bin/dbus-send --session --dest=net.sourceforge.mumble.mumble --type=method_call '/' 'net.sourceforge.mumble.Mumble.toggleSelfMuted'";
 }
