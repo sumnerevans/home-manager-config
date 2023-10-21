@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }: with lib; let
   beeper-desktop = pkgs.callPackage ../pkgs/beeper-desktop.nix { };
-  matrix-react-sdk = pkgs.callPackage ../pkgs/element/matrix-react-sdk.nix { };
 in
 {
   home.packages = with pkgs; [
