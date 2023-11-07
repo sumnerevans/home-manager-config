@@ -131,17 +131,15 @@ in
         config.keybindings =
           let
             modifier = config.windowManager.modKey;
-            grim = "${pkgs.grim}/bin/grim";
-            slurp = "${pkgs.slurp}/bin/slurp";
             screenshotOutfile = "${config.home.homeDirectory}/tmp/$(${pkgs.coreutils}/bin/date +%Y-%m-%d-%T).png";
-            screenshotSlurpScript = pkgs.writeShellScriptBin "screenshot" ''
+            flameshotCopyScript = pkgs.writeShellScriptBin "flameshot-copy" ''
               filename=${screenshotOutfile}
-              ${grim} -g "$(${slurp})" $filename
+              ${pkgs.flameshot}/bin/flameshot gui -p $filename
               ${pkgs.wl-clipboard}/bin/wl-copy <$filename
             '';
             screenshotFullscreenScript = pkgs.writeShellScriptBin "screenshot" ''
               filename=${screenshotOutfile}
-              ${grim} $filename
+              ${pkgs.grim}/bin/grim $filename
               ${pkgs.wl-clipboard}/bin/wl-copy <$filename
             '';
           in
@@ -156,9 +154,16 @@ in
             "${modifier}+Shift+e" = "exec ${pkgs.sway}/bin/swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
 
             # Screenshots
-            "${modifier}+shift+c" = "exec ${screenshotSlurpScript}/bin/screenshot";
+            "${modifier}+shift+c" = "exec ${flameshotCopyScript}/bin/flameshot-copy";
             Print = "exec ${screenshotFullscreenScript}/bin/screenshot";
           };
+
+        config.window.commands = [
+          {
+            command = "fullscreen enable global";
+            criteria = { title = "flameshot"; app_id = "flameshot"; };
+          }
+        ];
 
         config.seat."*" = {
           hide_cursor = "when-typing enable";
@@ -180,6 +185,7 @@ in
 
     home.packages = with pkgs; [
       clipman
+      flameshot
       glib
       grim
       slurp
