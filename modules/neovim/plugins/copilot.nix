@@ -1,12 +1,12 @@
 { pkgs, ... }: with pkgs; let
   copilot = pkgs.vimUtils.buildVimPluginFrom2Nix rec {
     pname = "copilot";
-    version = "1.8.4";
+    version = "1.11.4";
     src = pkgs.fetchFromGitHub {
       owner = "github";
       repo = "copilot.vim";
-      rev = "1358e8e45ecedc53daf971924a0541ddf6224faf";
-      sha256 = "sha256-6xIOngHzmBrgNfl0JI5dUkRLGlq2Tf+HsUj5gha/Ppw=";
+      rev = "309b3c803d1862d5e84c7c9c5749ae04010123b8";
+      sha256 = "sha256-yuaG4kOSXSivFQCvc6iEZP230tlaFoXcZb0WxBjeWdA=";
     };
     meta.homepage = "https://github.com/features/copilot";
   };
