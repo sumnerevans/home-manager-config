@@ -5,7 +5,7 @@ let
     ${pkgs.coreutils}/bin/touch ${rollingPingFile}
 
     # Append the new ping time.
-    ping=$(/run/wrappers/bin/ping -c 1 -W 1 8.8.8.8)
+    ping=$(${pkgs.iputils}/bin/ping -c 1 -W 1 8.8.8.8)
     if [[ $? != 0 ]]; then
         echo "fail" > ${rollingPingFile}
     else
