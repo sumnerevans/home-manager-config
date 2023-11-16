@@ -18,6 +18,7 @@
           ];
         };
 
+        "explorer.position" = "right";
         "explorer.file.showHiddenFiles" = true;
         "explorer.file.reveal.auto" = true;
         "explorer.git.icon.status.added" = "✚";
