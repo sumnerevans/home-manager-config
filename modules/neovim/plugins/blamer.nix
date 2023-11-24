@@ -1,6 +1,6 @@
 # Enable git blame on the line.
 { pkgs, ... }: with pkgs; let
-  blamer = pkgs.vimUtils.buildVimPluginFrom2Nix rec {
+  blamer = pkgs.vimUtils.buildVimPlugin rec {
     pname = "blamer";
     version = "1.3.0";
     src = pkgs.fetchFromGitHub {

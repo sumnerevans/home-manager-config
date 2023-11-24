@@ -35,6 +35,7 @@
     ./copilot.nix
     # ./vim-markdown-composer.nix
     ./vim-svelte.nix
+    ./templ.vim.nix
     ./vimspector.nix
   ];
 

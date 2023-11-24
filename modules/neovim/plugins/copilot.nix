@@ -1,5 +1,5 @@
 { pkgs, ... }: with pkgs; let
-  copilot = pkgs.vimUtils.buildVimPluginFrom2Nix rec {
+  copilot = pkgs.vimUtils.buildVimPlugin rec {
     pname = "copilot";
     version = "1.11.4";
     src = pkgs.fetchFromGitHub {

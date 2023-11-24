@@ -1,7 +1,7 @@
 # Sublime Text-like search
 { config, pkgs, ... }:
 let
-  vim-template = pkgs.vimUtils.buildVimPluginFrom2Nix rec {
+  vim-template = pkgs.vimUtils.buildVimPlugin rec {
     pname = "vim-template";
     version = "0.0.1";
     src = pkgs.fetchFromGitHub {
