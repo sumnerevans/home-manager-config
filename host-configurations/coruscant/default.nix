@@ -4,7 +4,7 @@
   ];
 
   wayland.enable = true;
-  networking.interfaces = [ "wlp35s0" ];
+  networking.interfaces = [ "enp37s0" "wlp35s0" ];
 
   mdf.port = 1024;
 
