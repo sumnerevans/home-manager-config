@@ -25,7 +25,6 @@
 
     # Language Server and Completion
     ./nvim-cmp.nix
-    ./nvim-lint.nix
     ./nvim-lspconfig.nix
     ./trouble.nvim.nix
 
