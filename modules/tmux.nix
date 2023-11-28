@@ -5,8 +5,7 @@ let
     bind -n M-${key} ${command}
   '';
   configFilePath = "${config.xdg.configHome}/tmux/tmux.conf";
-in
-{
+in {
   programs.tmux = {
     enable = true;
     baseIndex = 1;

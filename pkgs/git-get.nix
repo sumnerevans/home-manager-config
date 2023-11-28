@@ -1,8 +1,7 @@
 { lib, fetchFromGitHub, git, buildGoModule }:
 
 let config-module = "git-get/pkg/cfg";
-in
-buildGoModule rec {
+in buildGoModule rec {
   pname = "git-get";
   version = "0.5.0";
 
@@ -32,11 +31,7 @@ buildGoModule rec {
     ldflags+=" -X ${config-module}.date=$(cat SOURCE_DATE_EPOCH)"
   '';
 
-  ldflags = [
-    "-s"
-    "-w"
-    "-X ${config-module}.version=v${version}"
-  ];
+  ldflags = [ "-s" "-w" "-X ${config-module}.version=v${version}" ];
 
   preInstall = ''
     mv "$GOPATH/bin/get" "$GOPATH/bin/git-get"
@@ -44,7 +39,8 @@ buildGoModule rec {
   '';
 
   meta = with lib; {
-    description = "A better way to clone, organize and manage multiple git repositories";
+    description =
+      "A better way to clone, organize and manage multiple git repositories";
     homepage = "https://github.com/grdl/git-get";
     license = licenses.mit;
   };

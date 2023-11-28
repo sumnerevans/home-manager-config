@@ -1,7 +1,7 @@
-{ config, pkgs, ... }: with pkgs; let
-  quotesPath = "${config.xdg.dataHome}/fortune/quotes";
-in
-{
+{ config, pkgs, ... }:
+with pkgs;
+let quotesPath = "${config.xdg.dataHome}/fortune/quotes";
+in {
   imports = [
     ./accounts
     ./contact-query.nix

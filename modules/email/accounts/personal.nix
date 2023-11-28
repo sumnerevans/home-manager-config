@@ -1,4 +1,6 @@
-{ config, pkgs, lib, ... }: with lib; let
+{ config, pkgs, lib, ... }:
+with lib;
+let
   personalAccountConfig = {
     address = "me@sumnerevans.com";
     name = "Personal";
@@ -72,9 +74,7 @@ in
       (helper.imapnotifyConfig inquiriesConfig)
       (helper.signatureConfig personalAccountConfig)
       helper.migaduConfig
-      {
-        aliases = [ "resume@sumnerevans.com" ];
-      }
+      { aliases = [ "resume@sumnerevans.com" ]; }
     ];
 
     Financial = mkMerge [

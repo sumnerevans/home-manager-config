@@ -1,7 +1,5 @@
 { pkgs, declarative-cachix, ... }: {
-  imports = [
-    declarative-cachix.homeManagerModules.declarative-cachix
-  ];
+  imports = [ declarative-cachix.homeManagerModules.declarative-cachix ];
 
   nix.package = pkgs.nix;
 
@@ -20,9 +18,10 @@
 
   nixpkgs.config = {
     packageOverrides = pkgs: {
-      nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-        inherit pkgs;
-      };
+      nur = import (builtins.fetchTarball
+        "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+          inherit pkgs;
+        };
     };
     allowUnfree = true;
     android_sdk.accept_license = true;

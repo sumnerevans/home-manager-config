@@ -1,4 +1,5 @@
-{ lib, ... }: with lib; rec {
+{ lib, ... }:
+with lib; rec {
   wayland.enable = true;
   laptop.enable = true;
   networking.interfaces = [ "wlp0s20f3" ];
@@ -30,8 +31,10 @@
       # brightness. With mod, change the keyboard.
       "${windowManager.modKey}+F6" = "exec brightnessctl s 5%-";
       "${windowManager.modKey}+F7" = "exec brightnessctl s 5%+";
-      "${windowManager.modKey}+Shift+F6" = "exec brightnessctl -d chromeos::kbd_backlight s 1%-";
-      "${windowManager.modKey}+Shift+F7" = "exec brightnessctl -d chromeos::kbd_backlight s 1%+";
+      "${windowManager.modKey}+Shift+F6" =
+        "exec brightnessctl -d chromeos::kbd_backlight s 1%-";
+      "${windowManager.modKey}+Shift+F7" =
+        "exec brightnessctl -d chromeos::kbd_backlight s 1%+";
     };
   };
 }

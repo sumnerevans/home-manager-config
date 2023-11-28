@@ -22,11 +22,12 @@ let
   '';
 in
 {
-  home.packages = with pkgs; [
-    # Add the pulseaudio package here so that pactl works.
-    # TODO eventually, I should move off of pactl
-    pulseaudio
-  ];
+  home.packages = with pkgs;
+    [
+      # Add the pulseaudio package here so that pactl works.
+      # TODO eventually, I should move off of pactl
+      pulseaudio
+    ];
 
   home.file."bin/current-audio-device" = mkBashScript ''
     ${pactl} info | ${grep} 'Default Sink' | ${pkgs.coreutils}/bin/cut -d ':' -f 2

@@ -14,7 +14,8 @@ buildGoModule rec {
   vendorHash = "sha256-Mj1vte+bnDmY/tn6+GXX9IwIKgy9J4QvoIP/pLcID6E=";
 
   meta = with lib; {
-    description = "A small program that notifies when mail has arrived in your mail directory.";
+    description =
+      "A small program that notifies when mail has arrived in your mail directory.";
     homepage = "https://github.com/sumnerevans/mailnotify";
     license = licenses.gpl3Plus;
   };

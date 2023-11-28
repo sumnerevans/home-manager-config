@@ -1,4 +1,6 @@
-{ config, pkgs, ... }: with pkgs; let
+{ config, pkgs, ... }:
+with pkgs;
+let
   # Clones projects into the ~/projects directory.
   git-get = pkgs.callPackage ../../pkgs/git-get.nix { };
 
@@ -10,6 +12,4 @@
     done <"${config.home.homeDirectory}/Syncthing/projectlist"
   '';
 in
-{
-  home.packages = [ projectsyncScript ];
-}
+{ home.packages = [ projectsyncScript ]; }

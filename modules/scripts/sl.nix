@@ -1,4 +1,6 @@
-{ config, pkgs, ... }: with pkgs; let
+{ config, pkgs, ... }:
+with pkgs;
+let
   # Reverse ls when you type sl
   ls = "${coreutils}/bin/ls";
   slScript = pkgs.writeScriptBin "sl" ''
@@ -21,6 +23,4 @@
         print(line[::-1])
   '';
 in
-{
-  home.packages = [ slScript ];
-}
+{ home.packages = [ slScript ]; }

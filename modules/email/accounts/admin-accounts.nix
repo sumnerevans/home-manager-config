@@ -1,4 +1,6 @@
-{ config, pkgs, lib, ... }: with lib; let
+{ config, pkgs, lib, ... }:
+with lib;
+let
   adminConfig = {
     name = "Admin";
     address = "admin@sumnerevans.com";
@@ -52,20 +54,13 @@ in
       }
     ];
 
-    Comments = mkMerge [
-      (helper.commonConfig commentsConfig)
-      helper.migaduConfig
-    ];
+    Comments =
+      mkMerge [ (helper.commonConfig commentsConfig) helper.migaduConfig ];
 
-    Junk = mkMerge [
-      (helper.commonConfig junkConfig)
-      helper.migaduConfig
-    ];
+    Junk = mkMerge [ (helper.commonConfig junkConfig) helper.migaduConfig ];
 
-    BMT-Admin = mkMerge [
-      (helper.commonConfig bookMyTimeAdmin)
-      helper.migaduConfig
-    ];
+    BMT-Admin =
+      mkMerge [ (helper.commonConfig bookMyTimeAdmin) helper.migaduConfig ];
 
     MinesHSPC-Admin = mkMerge [
       (helper.commonConfig mineshspcAdmin)

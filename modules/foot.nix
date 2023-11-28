@@ -3,21 +3,18 @@
     enable = true;
     server.enable = true;
     settings = {
-      scrollback = {
-        lines = 100000;
-      };
+      scrollback = { lines = 100000; };
 
       url = {
         launch = "xdg-open \${url}";
         label-letters = "sadfjklewcmpgh";
         osc8-underline = "url-mode";
         protocols = "http, https, ftp, ftps, file, gemini, gopher";
-        uri-characters = ''abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.,~:;/?#@!$&%*+="'()[]'';
+        uri-characters = ''
+          abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.,~:;/?#@!$&%*+="'()[]'';
       };
 
-      key-bindings = {
-        show-urls-launch = "Control+Shift+K";
-      };
+      key-bindings = { show-urls-launch = "Control+Shift+K"; };
 
       # Colors (One Dark)
       # https://github.com/eendroroy/alacritty-theme/blob/master/themes/one_dark.yaml

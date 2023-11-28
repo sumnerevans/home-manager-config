@@ -1,4 +1,6 @@
-{ config, pkgs, lib, ... }: with lib; let
+{ config, pkgs, lib, ... }:
+with lib;
+let
   accountConfig = {
     address = "sumner.evans98@gmail.com";
     name = "Gmail";

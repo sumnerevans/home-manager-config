@@ -1,12 +1,15 @@
-{ config, pkgs, lib, ... }: with lib; let
+{ config, pkgs, lib, ... }:
+with lib;
+let
   cfg = config.wallpaper;
   waylandCfg = config.wayland;
   xorgCfg = config.xorg;
 
   doSetWallpaperScriptPart =
-    if waylandCfg.enable
-    then ''${pkgs.sway}/bin/swaymsg -s $SWAYSOCK output "*" bg $f1 fill''
-    else "${pkgs.feh}/bin/feh --bg-fill $f1 $f2";
+    if waylandCfg.enable then
+      ''${pkgs.sway}/bin/swaymsg -s $SWAYSOCK output "*" bg $f1 fill''
+    else
+      "${pkgs.feh}/bin/feh --bg-fill $f1 $f2";
 
   home = config.home.homeDirectory;
   cu = "${pkgs.coreutils}/bin";
@@ -16,19 +19,18 @@
 
   loadBgListScriptPart =
     let
-      loadList = concatMapStringsSep "\n" (
-        d:
-        if builtins.pathExists d
-        then "${pkgs.findutils}/bin/find -L ${d} -type f >> ${bglistFile}"
-        else throw "${d} is not a directory!"
-      );
+      loadList = concatMapStringsSep "\n" (d:
+        if builtins.pathExists d then
+          "${pkgs.findutils}/bin/find -L ${d} -type f >> ${bglistFile}"
+        else
+          throw "${d} is not a directory!");
     in
-    if cfg.bgSourceDirs == [ ] then throw "At least one source dir required!"
-    else
-      ''
-        ${loadList cfg.bgSourceDirs}
-        ${cu}/cat ${bglistFile} | ${cu}/shuf | tee ${bglistFile}
-      '';
+    if cfg.bgSourceDirs == [ ] then
+      throw "At least one source dir required!"
+    else ''
+      ${loadList cfg.bgSourceDirs}
+      ${cu}/cat ${bglistFile} | ${cu}/shuf | tee ${bglistFile}
+    '';
 
   dynamicWallpaperScriptPart = { name, wpGroups, parentDir ? "Apple" }:
     let
@@ -37,7 +39,10 @@
       max = lists.foldl max - 1;
       mkWpGroup = { hours, wpNum }: ''
         ${concatMapStringsSep "|" zeroPad hours})
-          ${strings.optionalString ((length hours) > 1) ''[[ "$h" != ${zeroPad (last hours)} ]] && skip_transition=1''}
+          ${
+            strings.optionalString ((length hours) > 1)
+            ''[[ "$h" != ${zeroPad (last hours)} ]] && skip_transition=1''
+          }
           wp_num=${toString wpNum}
           ${strings.optionalString ((length wpGroups) == wpNum) "wp_next=1"}
           ;;
@@ -107,22 +112,70 @@
             {
               name = "mojave_dynamic";
               wpGroups = [
-                { hours = [ 23 0 1 2 ]; wpNum = 15; }
-                { hours = [ 3 4 ]; wpNum = 16; }
-                { hours = [ 5 ]; wpNum = 1; }
-                { hours = [ 6 ]; wpNum = 2; }
-                { hours = [ 7 ]; wpNum = 3; }
-                { hours = [ 8 ]; wpNum = 4; }
-                { hours = [ 9 ]; wpNum = 5; }
-                { hours = [ 10 ]; wpNum = 6; }
-                { hours = [ 11 12 ]; wpNum = 7; }
-                { hours = [ 13 14 ]; wpNum = 8; }
-                { hours = [ 15 ]; wpNum = 9; }
-                { hours = [ 16 ]; wpNum = 10; }
-                { hours = [ 17 ]; wpNum = 11; }
-                { hours = [ 18 ]; wpNum = 12; }
-                { hours = [ 19 ]; wpNum = 13; }
-                { hours = [ 20 21 22 ]; wpNum = 14; }
+                {
+                  hours = [ 23 0 1 2 ];
+                  wpNum = 15;
+                }
+                {
+                  hours = [ 3 4 ];
+                  wpNum = 16;
+                }
+                {
+                  hours = [ 5 ];
+                  wpNum = 1;
+                }
+                {
+                  hours = [ 6 ];
+                  wpNum = 2;
+                }
+                {
+                  hours = [ 7 ];
+                  wpNum = 3;
+                }
+                {
+                  hours = [ 8 ];
+                  wpNum = 4;
+                }
+                {
+                  hours = [ 9 ];
+                  wpNum = 5;
+                }
+                {
+                  hours = [ 10 ];
+                  wpNum = 6;
+                }
+                {
+                  hours = [ 11 12 ];
+                  wpNum = 7;
+                }
+                {
+                  hours = [ 13 14 ];
+                  wpNum = 8;
+                }
+                {
+                  hours = [ 15 ];
+                  wpNum = 9;
+                }
+                {
+                  hours = [ 16 ];
+                  wpNum = 10;
+                }
+                {
+                  hours = [ 17 ];
+                  wpNum = 11;
+                }
+                {
+                  hours = [ 18 ];
+                  wpNum = 12;
+                }
+                {
+                  hours = [ 19 ];
+                  wpNum = 13;
+                }
+                {
+                  hours = [ 20 21 22 ];
+                  wpNum = 14;
+                }
               ];
             }
         else if cfg.type == "catalina_dynamic" then
@@ -130,14 +183,38 @@
             {
               name = "catalina_dynamic";
               wpGroups = [
-                { hours = [ 0 1 2 ]; wpNum = 1; }
-                { hours = [ 3 4 5 ]; wpNum = 2; }
-                { hours = [ 6 7 8 ]; wpNum = 3; }
-                { hours = [ 9 10 11 ]; wpNum = 4; }
-                { hours = [ 12 13 14 ]; wpNum = 5; }
-                { hours = [ 15 16 17 ]; wpNum = 6; }
-                { hours = [ 18 19 20 ]; wpNum = 7; }
-                { hours = [ 21 22 23 ]; wpNum = 8; }
+                {
+                  hours = [ 0 1 2 ];
+                  wpNum = 1;
+                }
+                {
+                  hours = [ 3 4 5 ];
+                  wpNum = 2;
+                }
+                {
+                  hours = [ 6 7 8 ];
+                  wpNum = 3;
+                }
+                {
+                  hours = [ 9 10 11 ];
+                  wpNum = 4;
+                }
+                {
+                  hours = [ 12 13 14 ];
+                  wpNum = 5;
+                }
+                {
+                  hours = [ 15 16 17 ];
+                  wpNum = 6;
+                }
+                {
+                  hours = [ 18 19 20 ];
+                  wpNum = 7;
+                }
+                {
+                  hours = [ 21 22 23 ];
+                  wpNum = 8;
+                }
               ];
             }
         else if cfg.type == "monterey_dynamic" then
@@ -146,24 +223,70 @@
               name = "monterey_dynamic";
               parentDir = "levitt";
               wpGroups = [
-                { hours = [ 23 0 1 2 3 ]; wpNum = 2; }
-                { hours = [ 4 ]; wpNum = 1; }
-                { hours = [ 5 ]; wpNum = 3; }
-                { hours = [ 6 ]; wpNum = 4; }
-                { hours = [ 7 ]; wpNum = 5; }
-                { hours = [ 8 ]; wpNum = 6; }
-                { hours = [ 9 ]; wpNum = 7; }
-                { hours = [ 10 ]; wpNum = 9; }
-                { hours = [ 11 ]; wpNum = 8; }
-                { hours = [ 12 ]; wpNum = 10; }
-                { hours = [ 13 14 ]; wpNum = 12; }
-                { hours = [ 15 16 ]; wpNum = 11; }
-                { hours = [ 17 18 ]; wpNum = 13; }
-                { hours = [ 19 20 ]; wpNum = 14; }
-                { hours = [ 21 22 ]; wpNum = 15; }
+                {
+                  hours = [ 23 0 1 2 3 ];
+                  wpNum = 2;
+                }
+                {
+                  hours = [ 4 ];
+                  wpNum = 1;
+                }
+                {
+                  hours = [ 5 ];
+                  wpNum = 3;
+                }
+                {
+                  hours = [ 6 ];
+                  wpNum = 4;
+                }
+                {
+                  hours = [ 7 ];
+                  wpNum = 5;
+                }
+                {
+                  hours = [ 8 ];
+                  wpNum = 6;
+                }
+                {
+                  hours = [ 9 ];
+                  wpNum = 7;
+                }
+                {
+                  hours = [ 10 ];
+                  wpNum = 9;
+                }
+                {
+                  hours = [ 11 ];
+                  wpNum = 8;
+                }
+                {
+                  hours = [ 12 ];
+                  wpNum = 10;
+                }
+                {
+                  hours = [ 13 14 ];
+                  wpNum = 12;
+                }
+                {
+                  hours = [ 15 16 ];
+                  wpNum = 11;
+                }
+                {
+                  hours = [ 17 18 ];
+                  wpNum = 13;
+                }
+                {
+                  hours = [ 19 20 ];
+                  wpNum = 14;
+                }
+                {
+                  hours = [ 21 22 ];
+                  wpNum = 15;
+                }
               ];
             }
-        else randomBgScriptPart;
+        else
+          randomBgScriptPart;
     in
     pkgs.writeShellScript "set_wallpaper" ''
       set -xe
@@ -174,14 +297,20 @@ in
   options = {
     wallpaper = {
       type = mkOption {
-        type = types.enum [ "mojave_dynamic" "catalina_dynamic" "monterey_dynamic" "random_bg" ];
+        type = types.enum [
+          "mojave_dynamic"
+          "catalina_dynamic"
+          "monterey_dynamic"
+          "random_bg"
+        ];
         description = "The kind of wallpaper to use.";
         default = "mojave_dynamic";
       };
 
       bgSourceDirs = mkOption {
         type = types.listOf types.path;
-        description = "Paths to the directories to use for the wallpaper rotation.";
+        description =
+          "Paths to the directories to use for the wallpaper rotation.";
         default = [ ];
       };
     };
@@ -200,9 +329,7 @@ in
         Environment = "DISPLAY=:0";
       };
 
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
+      Install = { WantedBy = [ "graphical-session.target" ]; };
     };
 
     systemd.user.timers.wallpaper = {

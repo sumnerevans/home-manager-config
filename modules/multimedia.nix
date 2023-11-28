@@ -1,12 +1,14 @@
-{ config, lib, pkgs, ... }: with lib; with pkgs; let
+{ config, lib, pkgs, ... }:
+with lib;
+with pkgs;
+let
   sublime-music = callPackage ../pkgs/sublime-music.nix {
     chromecastSupport = true;
     serverSupport = true;
   };
   cfg = config.gaming;
   hasGui = config.wayland.enable || config.xorg.enable;
-in
-{
+in {
   options.gaming.enable = mkEnableOption "gaming programs";
 
   config = {
@@ -30,8 +32,7 @@ in
         libreoffice
         spotify
         sublime-music
-      ]
-    );
+      ]);
 
     programs.feh.enable = true;
 
@@ -45,9 +46,7 @@ in
     };
 
     programs.obs-studio.enable = hasGui;
-    programs.obs-studio.plugins = with pkgs; [
-      obs-studio-plugins.wlrobs
-    ];
+    programs.obs-studio.plugins = with pkgs; [ obs-studio-plugins.wlrobs ];
 
     programs.zathura.enable = hasGui;
   };

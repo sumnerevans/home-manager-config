@@ -1,4 +1,6 @@
-{ config, lib, pkgs, ... }: with lib; let
+{ config, lib, pkgs, ... }:
+with lib;
+let
   cu = "${pkgs.coreutils}/bin";
   cfg = config.home.symlinks;
 
@@ -7,8 +9,7 @@
     $DRY_RUN_CMD ${cu}/ln -sf $VERBOSE_ARG \
       ${target} ${destination}
   '';
-in
-{
+in {
   options = {
     home.symlinks = mkOption {
       type = types.attrsOf (types.str);

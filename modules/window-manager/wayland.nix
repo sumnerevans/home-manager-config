@@ -1,4 +1,6 @@
-{ config, lib, options, pkgs, ... }: with lib; let
+{ config, lib, options, pkgs, ... }:
+with lib;
+let
   cfg = config.wayland;
   common = import ./common.nix { inherit config lib pkgs; };
   clipmanHistpath = ''--histpath="${config.xdg.cacheHome}/clipman.json"'';
@@ -52,7 +54,10 @@ in
     services.swayidle = {
       enable = true;
       timeouts = [
-        { timeout = 300; command = swaylockCmd; }
+        {
+          timeout = 300;
+          command = swaylockCmd;
+        }
         {
           timeout = 360;
           command = ''${pkgs.sway}/bin/swaymsg "output * dpms off"'';
@@ -60,8 +65,14 @@ in
         }
       ];
       events = [
-        { event = "before-sleep"; command = "${pkgs.playerctl}/bin/playerctl pause"; }
-        { event = "before-sleep"; command = swaylockCmd; }
+        {
+          event = "before-sleep";
+          command = "${pkgs.playerctl}/bin/playerctl pause";
+        }
+        {
+          event = "before-sleep";
+          command = swaylockCmd;
+        }
       ];
     };
 
@@ -75,24 +86,39 @@ in
             wlpaste = "${pkgs.wl-clipboard}/bin/wl-paste";
             gsettings = "${pkgs.glib}/bin/gsettings";
             gnomeSchema = "org.gnome.desktop.interface";
-            inactive-windows-transparency = pkgs.writeScriptBin "inactive-windows-transparency"
-              (builtins.readFile ./bin/inactive-windows-transparency.py);
+            inactive-windows-transparency =
+              pkgs.writeScriptBin "inactive-windows-transparency"
+                (builtins.readFile ./bin/inactive-windows-transparency.py);
           in
           [
             # Clipboard Manager
-            { command = "${wlpaste} -t text --watch ${clipmanCmd} store --max-items=10000 ${clipmanHistpath}"; }
-            { command = "${wlpaste} -p -t text --watch ${clipmanCmd} store -P --max-items=10000 ${clipmanHistpath}"; }
+            {
+              command =
+                "${wlpaste} -t text --watch ${clipmanCmd} store --max-items=10000 ${clipmanHistpath}";
+            }
+            {
+              command =
+                "${wlpaste} -p -t text --watch ${clipmanCmd} store -P --max-items=10000 ${clipmanHistpath}";
+            }
 
             # Window transparency
-            { command = "${inactive-windows-transparency}/bin/inactive-windows-transparency"; }
+            {
+              command =
+                "${inactive-windows-transparency}/bin/inactive-windows-transparency";
+            }
 
             # Make all the pinentry stuff work
             # See: https://github.com/NixOS/nixpkgs/issues/119445#issuecomment-820507505
             # and: https://github.com/NixOS/nixpkgs/issues/57602#issuecomment-820512097
-            { command = "dbus-update-activation-environment WAYLAND_DISPLAY"; }
+            {
+              command = "dbus-update-activation-environment WAYLAND_DISPLAY";
+            }
 
             # Wallpaper
-            { command = "systemctl restart --user wallpaper.service"; always = true; }
+            {
+              command = "systemctl restart --user wallpaper.service";
+              always = true;
+            }
           ];
 
         config.input =
@@ -124,14 +150,18 @@ in
           } // (listToAttrs (map
             (identifier: {
               name = identifier;
-              value = { xkb_layout = "us"; xkb_variant = ''""''; };
+              value = {
+                xkb_layout = "us";
+                xkb_variant = ''""'';
+              };
             })
             useUS));
 
         config.keybindings =
           let
             modifier = config.windowManager.modKey;
-            screenshotOutfile = "${config.home.homeDirectory}/tmp/$(${pkgs.coreutils}/bin/date +%Y-%m-%d-%T).png";
+            screenshotOutfile =
+              "${config.home.homeDirectory}/tmp/$(${pkgs.coreutils}/bin/date +%Y-%m-%d-%T).png";
             flameshotCopyScript = pkgs.writeShellScriptBin "flameshot-copy" ''
               filename=${screenshotOutfile}
               ${pkgs.flameshot}/bin/flameshot gui -p $filename
@@ -145,25 +175,29 @@ in
           in
           {
             # Popup Clipboard Manager
-            "${modifier}+c" = "exec ${clipmanCmd} pick -t rofi ${clipmanHistpath}";
+            "${modifier}+c" =
+              "exec ${clipmanCmd} pick -t rofi ${clipmanHistpath}";
 
             # Lock screen
             "${modifier}+Shift+x" = "exec ${swaylockCmd}";
 
             # exit sway (logs you out of your session)
-            "${modifier}+Shift+e" = "exec ${pkgs.sway}/bin/swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
+            "${modifier}+Shift+e" =
+              "exec ${pkgs.sway}/bin/swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
 
             # Screenshots
-            "${modifier}+shift+c" = "exec ${flameshotCopyScript}/bin/flameshot-copy";
+            "${modifier}+shift+c" =
+              "exec ${flameshotCopyScript}/bin/flameshot-copy";
             Print = "exec ${screenshotFullscreenScript}/bin/screenshot";
           };
 
-        config.window.commands = [
-          {
-            command = "fullscreen enable global";
-            criteria = { title = "flameshot"; app_id = "flameshot"; };
-          }
-        ];
+        config.window.commands = [{
+          command = "fullscreen enable global";
+          criteria = {
+            title = "flameshot";
+            app_id = "flameshot";
+          };
+        }];
 
         config.seat."*" = {
           hide_cursor = "when-typing enable";
@@ -196,9 +230,7 @@ in
       # TODO use wofi?
     ];
 
-    programs.mpv.config = {
-      gpu-context = "wayland";
-    };
+    programs.mpv.config = { gpu-context = "wayland"; };
 
     # Gammastep
     services.gammastep = common.redshiftGammastepCfg;
@@ -224,38 +256,36 @@ in
       groupBy = "app-name,summary";
       sort = "-priority";
       width = 400;
-      backgroundColor = common.notificationColorConfig.urgency_normal.background + "CC";
+      backgroundColor = common.notificationColorConfig.urgency_normal.background
+        + "CC";
       borderColor = common.notificationColorConfig.urgency_normal.frame_color;
       textColor = common.notificationColorConfig.urgency_normal.foreground;
 
-      extraConfig = generators.toINI { } (
-        mapAttrs'
-          (
-            name: val: nameValuePair
-              (builtins.replaceStrings [ "_" "critical" ] [ "=" "high" ] name)
-              (
-                mapAttrs'
-                  (
-                    k: v:
-                      nameValuePair
-                        (
-                          if k == "timeout" then "default-timeout"
-                          else if k == "frame_color" then "border-color"
-                          else if k == "foreground" then "text-color"
-                          else if k == "background" then "background-color"
-                          else k
-                        )
-                        (
-                          if k == "timeout" then v * 1000
-                          else if k == "background" then v + "CC"
-                          else v
-                        )
-                  )
-                  val
-              )
-          )
-          common.notificationColorConfig
-      );
+      extraConfig = generators.toINI { } (mapAttrs'
+        (name: val:
+          nameValuePair
+            (builtins.replaceStrings [ "_" "critical" ] [ "=" "high" ] name)
+            (mapAttrs'
+              (k: v:
+                nameValuePair
+                  (if k == "timeout" then
+                    "default-timeout"
+                  else if k == "frame_color" then
+                    "border-color"
+                  else if k == "foreground" then
+                    "text-color"
+                  else if k == "background" then
+                    "background-color"
+                  else
+                    k)
+                  (if k == "timeout" then
+                    v * 1000
+                  else if k == "background" then
+                    v + "CC"
+                  else
+                    v))
+              val))
+        common.notificationColorConfig);
     };
   };
 }

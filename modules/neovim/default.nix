@@ -12,13 +12,9 @@
 # - wmctrl
 # - probably others
 
-{ config, pkgs, lib, ... }: with lib; {
-  imports = [
-    ./clipboard.nix
-    ./plugins
-    ./shortcuts.nix
-    ./theme.nix
-  ];
+{ config, pkgs, lib, ... }:
+with lib; {
+  imports = [ ./clipboard.nix ./plugins ./shortcuts.nix ./theme.nix ];
 
   programs.neovim = {
     enable = true;
@@ -27,23 +23,9 @@
       ./filetype-specific-configs.vim
     ];
 
-    extraPackages = with pkgs; [
-      bat
-      clang
-      openjdk11_headless
-      ripgrep
-      rnix-lsp
-      texlab
-    ];
+    extraPackages = with pkgs; [ bat ripgrep texlab ];
 
-    extraPython3Packages = (
-      ps: with ps; [
-        black
-        flake8
-        pynvim
-        setuptools
-      ]
-    );
+    extraPython3Packages = (ps: with ps; [ pynvim setuptools ]);
 
     viAlias = true;
     vimAlias = true;
@@ -54,5 +36,6 @@
     withRuby = true;
   };
 
-  home.symlinks."${config.xdg.configHome}/nvim/spell/en.utf-8.add" = "${config.home.homeDirectory}/Syncthing/.config/nvim/spell/en.utf-8.add";
+  home.symlinks."${config.xdg.configHome}/nvim/spell/en.utf-8.add" =
+    "${config.home.homeDirectory}/Syncthing/.config/nvim/spell/en.utf-8.add";
 }

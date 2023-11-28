@@ -1,4 +1,6 @@
-{ config, lib, pkgs, ... }: with pkgs; let
+{ config, lib, pkgs, ... }:
+with pkgs;
+let
   pgrep = "${procps}/bin/pgrep";
   sleep = "${coreutils}/bin/sleep";
   ffmpegFilters = lib.concatStringsSep "," [

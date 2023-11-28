@@ -2,17 +2,11 @@
   nixpkgs.overlays = [
     # Workaround from https://github.com/NixOS/nixpkgs/issues/205014
     (self: super: {
-      khal = (super.khal.overridePythonAttrs (
-        attrs: rec {
-          doCheck = false;
-        }
-      ));
+      khal = (super.khal.overridePythonAttrs (attrs: rec { doCheck = false; }));
     })
   ];
 
-  home.packages = [
-    pkgs.khal
-  ];
+  home.packages = [ pkgs.khal ];
 
   xdg.configFile."khal/config".text = ''
     [calendars]

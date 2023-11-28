@@ -1,4 +1,6 @@
-{ config, lib, pkgs, ... }: with lib; let
+{ config, lib, pkgs, ... }:
+with lib;
+let
   cfg = config.wayland;
 
   configs = {
@@ -30,9 +32,12 @@
   };
 
   arrangeWorkspaces = [
-    ''${pkgs.sway}/bin/swaymsg '[workspace="10"]' move workspace to output right''
-    ''${pkgs.sway}/bin/swaymsg '[workspace="11: "]' move workspace to output right''
-    ''${pkgs.sway}/bin/swaymsg '[workspace="12: "]' move workspace to output right''
+    ''
+      ${pkgs.sway}/bin/swaymsg '[workspace="10"]' move workspace to output right''
+    ''
+      ${pkgs.sway}/bin/swaymsg '[workspace="11: "]' move workspace to output right''
+    ''
+      ${pkgs.sway}/bin/swaymsg '[workspace="12: "]' move workspace to output right''
   ];
 in
 {
@@ -41,12 +46,8 @@ in
     services.kanshi = {
       enable = true;
       profiles = {
-        Kohaku_Undocked = {
-          outputs = [ configs.KohakuInternal ];
-        };
-        ThinkPad_Undocked = {
-          outputs = [ configs.ThinkPadInternal ];
-        };
+        Kohaku_Undocked = { outputs = [ configs.KohakuInternal ]; };
+        ThinkPad_Undocked = { outputs = [ configs.ThinkPadInternal ]; };
         Kohaku_ThinkVision = {
           exec = arrangeWorkspaces;
           outputs = [
@@ -71,12 +72,7 @@ in
             }
           ];
         };
-        DoubleDell = {
-          outputs = [
-            configs.DellP2421D
-            configs.DellS2417DG
-          ];
-        };
+        DoubleDell = { outputs = [ configs.DellP2421D configs.DellS2417DG ]; };
       };
     };
   };

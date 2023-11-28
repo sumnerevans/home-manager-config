@@ -1,61 +1,67 @@
-{ config, lib, pkgs, ... }: with lib; with pkgs; let
+{ config, lib, pkgs, ... }:
+with lib;
+with pkgs;
+let
   secretsDir = "${config.xdg.configHome}/home-manager/secrets";
   tracktime = callPackage ../pkgs/tracktime.nix { };
   yamlFormat = pkgs.formats.yaml { };
-in
-{
+in {
   home.packages = [ tracktime ];
 
-  xdg.configFile."tracktime/tracktimerc".source = yamlFormat.generate "tracktimerc" {
-    fullname = "Sumner Evans";
-    github = {
-      access_token = "${pkgs.coreutils}/bin/cat ${secretsDir}/github-tracktime-access-token|";
-      username = "sumnerevans";
+  xdg.configFile."tracktime/tracktimerc".source =
+    yamlFormat.generate "tracktimerc" {
+      fullname = "Sumner Evans";
+      github = {
+        access_token =
+          "${pkgs.coreutils}/bin/cat ${secretsDir}/github-tracktime-access-token|";
+        username = "sumnerevans";
+      };
+
+      gitlab = {
+        api_root = "https://gitlab.com/api/v4/";
+        api_key = "${pkgs.coreutils}/bin/cat ${secretsDir}/gitlab-api-key|";
+      };
+
+      linear = {
+        default_org = "beeper";
+        api_key =
+          "${pkgs.coreutils}/bin/cat ${secretsDir}/linear-personal-api-key|";
+      };
+
+      sourcehut = {
+        api_root = "https://todo.sr.ht/api/";
+        access_token =
+          "${pkgs.coreutils}/bin/cat ${secretsDir}/sourcehut-access-token|";
+        username = "~sumner";
+      };
+
+      sync_time = true;
+      tableformat = "fancy_grid";
+
+      day_worked_min_threshold = 120;
+
+      customer_rates = {
+        Beeper = 57.5;
+        TTD = 51.92;
+      };
+
+      customer_addresses = {
+        Beeper = ''
+          207 High Street
+          Palo Alto, CA 94301
+        '';
+        TTD = ''
+          42 N. Chestnut St
+          Ventura, CA 93001
+          United States of America
+        '';
+      };
+
+      customer_aliases = {
+        Beeper = "Beeper Inc.";
+        TTD = "The Trade Desk";
+      };
     };
-
-    gitlab = {
-      api_root = "https://gitlab.com/api/v4/";
-      api_key = "${pkgs.coreutils}/bin/cat ${secretsDir}/gitlab-api-key|";
-    };
-
-    linear = {
-      default_org = "beeper";
-      api_key = "${pkgs.coreutils}/bin/cat ${secretsDir}/linear-personal-api-key|";
-    };
-
-    sourcehut = {
-      api_root = "https://todo.sr.ht/api/";
-      access_token = "${pkgs.coreutils}/bin/cat ${secretsDir}/sourcehut-access-token|";
-      username = "~sumner";
-    };
-
-    sync_time = true;
-    tableformat = "fancy_grid";
-
-    day_worked_min_threshold = 120;
-
-    customer_rates = {
-      Beeper = 57.5;
-      TTD = 51.92;
-    };
-
-    customer_addresses = {
-      Beeper = ''
-        207 High Street
-        Palo Alto, CA 94301
-      '';
-      TTD = ''
-        42 N. Chestnut St
-        Ventura, CA 93001
-        United States of America
-      '';
-    };
-
-    customer_aliases = {
-      Beeper = "Beeper Inc.";
-      TTD = "The Trade Desk";
-    };
-  };
 
   # Aliases
   programs.zsh.shellAliases = {

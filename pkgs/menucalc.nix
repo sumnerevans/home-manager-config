@@ -1,4 +1,5 @@
-{ lib, pkgs }: with pkgs;
+{ lib, pkgs }:
+with pkgs;
 stdenv.mkDerivation rec {
   pname = "menucalc";
   version = "v1.3.0";
@@ -22,12 +23,7 @@ stdenv.mkDerivation rec {
     install -D -m644 ./menu-calc.1 "$out/share/man/man1/menu-calc.1"
   '';
 
-  wrapperPath = with lib; makeBinPath [
-    bc
-    rofi
-    xclip
-    wl-clipboard
-  ];
+  wrapperPath = with lib; makeBinPath [ bc rofi xclip wl-clipboard ];
 
   fixupPhase = ''
     patchShebangs $out/bin
@@ -36,7 +32,7 @@ stdenv.mkDerivation rec {
 
   meta = {
     description = "A calculator for Rofi/dmenu(2)";
-    homepage = https://github.com/sumnerevans/menu-calc;
+    homepage = "https://github.com/sumnerevans/menu-calc";
     # maintainers = with stdenv.lib.maintainers; [ sumnerevans ];
     license = lib.licenses.mit;
     platforms = with lib.platforms; linux;

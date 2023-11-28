@@ -4,24 +4,24 @@ appimageTools.wrapType2 rec {
   version = "unstable-2023-11-01";
 
   src = fetchurl {
-    url = "https://dl.todesktop.com/201202u1n7yn5b0/builds/231102jalaykpby/linux/appimage/x64";
+    url =
+      "https://dl.todesktop.com/201202u1n7yn5b0/builds/231102jalaykpby/linux/appimage/x64";
     sha256 = "sha256-luEPdyqrZqthmFpIUdXjRdpHdzXdwUTAf2DClt/IZoI=";
   };
 
-  extraInstallCommands =
-    let
-      appimageContents = appimageTools.extractType2 { inherit name src; };
-      installIcon = size: ''
-        install -m 444 -D ${appimageContents}/usr/share/icons/hicolor/${size}x${size}/apps/${name}.png \
-          $out/share/icons/hicolor/${size}x${size}/apps/${name}.png
-      '';
-    in
-    ''
-      install -Dm444 ${appimageContents}/${name}.desktop -t $out/share/applications
-      substituteInPlace $out/share/applications/${name}.desktop \
-        --replace 'Exec=AppRun --no-sandbox' 'Exec=${name}'
-      ${lib.concatMapStringsSep "\n" installIcon (map toString [16 32 48 64 128 256 512 1024 ])}
+  extraInstallCommands = let
+    appimageContents = appimageTools.extractType2 { inherit name src; };
+    installIcon = size: ''
+      install -m 444 -D ${appimageContents}/usr/share/icons/hicolor/${size}x${size}/apps/${name}.png \
+        $out/share/icons/hicolor/${size}x${size}/apps/${name}.png
     '';
+  in ''
+    install -Dm444 ${appimageContents}/${name}.desktop -t $out/share/applications
+    substituteInPlace $out/share/applications/${name}.desktop \
+      --replace 'Exec=AppRun --no-sandbox' 'Exec=${name}'
+    ${lib.concatMapStringsSep "\n" installIcon
+    (map toString [ 16 32 48 64 128 256 512 1024 ])}
+  '';
 
   meta = with lib; {
     homepage = "https://www.beeper.com/";

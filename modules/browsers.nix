@@ -1,17 +1,15 @@
-{ config, lib, pkgs, ... }: with lib;
+{ config, lib, pkgs, ... }:
+with lib;
 let
   chromeCommandLineArgs = "-high-dpi-support=0 -force-device-scale-factor=1";
   hasGui = config.wayland.enable || config.xorg.enable;
-in
-{
-  home.packages = with pkgs; [
-    elinks
-    w3m
-  ] ++ optionals hasGui [
-    (google-chrome.override { commandLineArgs = chromeCommandLineArgs; })
+in {
+  home.packages = with pkgs;
+    [ elinks w3m ] ++ optionals hasGui [
+      (google-chrome.override { commandLineArgs = chromeCommandLineArgs; })
 
-    nyxt
-  ];
+      nyxt
+    ];
 
   programs.chromium.enable = hasGui;
   programs.firefox.enable = hasGui;

@@ -1,8 +1,6 @@
 { config, ... }:
-let
-  home = config.home.homeDirectory;
-in
-{
+let home = config.home.homeDirectory;
+in {
   programs.zsh.dirHashes = rec {
     dl = "${home}/Downloads";
     pass = "${home}/.local/share/password-store";

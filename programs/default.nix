@@ -1,9 +1,10 @@
-{ config, lib, pkgs, ... }: with pkgs; let
+{ config, lib, pkgs, ... }:
+with pkgs;
+let
   python-csmdirsearch = callPackage ../pkgs/python-csmdirsearch.nix { };
   python-gitlab = callPackage ../pkgs/python-gitlab.nix { };
   hasGui = config.wayland.enable || config.xorg.enable;
-in
-{
+in {
   home.packages = [
     # Shell Utilities
     aspell
@@ -46,29 +47,26 @@ in
     zip
 
     # Python
-    (
-      python3.withPackages (
-        ps: with ps; [
-          python-dateutil
-          fuzzywuzzy
-          html2text
-          i3ipc
-          icalendar
-          pillow
-          pip
-          pycairo
-          pygobject3
-          pynvim
-          python-Levenshtein
-          python-csmdirsearch
-          python-gitlab
-          pytz
-          tabulate
-          vobject
-          watchdog
-        ]
-      )
-    )
+    (python3.withPackages (ps:
+      with ps; [
+        python-dateutil
+        fuzzywuzzy
+        html2text
+        i3ipc
+        icalendar
+        pillow
+        pip
+        pycairo
+        pygobject3
+        pynvim
+        python-Levenshtein
+        python-csmdirsearch
+        python-gitlab
+        pytz
+        tabulate
+        vobject
+        watchdog
+      ]))
   ] ++ lib.optionals hasGui [
     # Configuration GUIs
     gnome.gnome-power-manager
@@ -84,14 +82,9 @@ in
     # Virtual Machine Client
     virt-manager
 
-    (
-      xfce.thunar.override {
-        thunarPlugins = [
-          xfce.thunar-archive-plugin
-          xfce.thunar-volman
-        ];
-      }
-    )
+    (xfce.thunar.override {
+      thunarPlugins = [ xfce.thunar-archive-plugin xfce.thunar-volman ];
+    })
   ];
 
   programs.bat.enable = true;

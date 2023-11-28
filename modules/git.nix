@@ -2,14 +2,8 @@
 let
   offlinemsmtp = pkgs.callPackage ../pkgs/offlinemsmtp.nix { };
   git-get = pkgs.callPackage ../pkgs/git-get.nix { };
-in
-{
-  home.packages = with pkgs.gitAndTools; [
-    gh
-    hub
-    lab
-    git-get
-  ];
+in {
+  home.packages = with pkgs.gitAndTools; [ gh hub lab git-get ];
 
   programs.git = {
     enable = true;
@@ -27,9 +21,7 @@ in
       signByDefault = true;
     };
 
-    aliases = {
-      "s" = "show --ext-diff";
-    };
+    aliases = { "s" = "show --ext-diff"; };
 
     extraConfig = {
       core.editor = "nvim";
@@ -43,9 +35,7 @@ in
       status.submoduleSummary = true;
       rebase.autoSquash = true;
 
-      gitget = {
-        root = "${config.home.homeDirectory}/projects";
-      };
+      gitget = { root = "${config.home.homeDirectory}/projects"; };
 
       sendemail = {
         annotate = "yes";
@@ -79,7 +69,9 @@ in
 
     [gitlab]
     url = https://gitlab.com
-    private_token = ${lib.removeSuffix "\n" (builtins.readFile ../secrets/gitlab-api-key)}
+    private_token = ${
+      lib.removeSuffix "\n" (builtins.readFile ../secrets/gitlab-api-key)
+    }
   '';
 
   programs.zsh.shellAliases = {
@@ -95,7 +87,8 @@ in
     gd = "git diff";
     gdc = "git diff --cached";
     gfetch = "git fetch";
-    gl = "git log --pretty=format:'%C(auto)%h %ad %C(green)%s%Creset %C(auto)%d [%an (%G? %GK)]' --graph --date=format:'%Y-%m-%d %H:%M' --all";
+    gl =
+      "git log --pretty=format:'%C(auto)%h %ad %C(green)%s%Creset %C(auto)%d [%an (%G? %GK)]' --graph --date=format:'%Y-%m-%d %H:%M' --all";
     gpull = "git pull";
     gpush = "git push";
     grhh = "git reset --hard HEAD";

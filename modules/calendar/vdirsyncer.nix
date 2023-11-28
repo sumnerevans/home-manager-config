@@ -1,4 +1,6 @@
-{ lib, config, pkgs, ... }: with lib; let
+{ lib, config, pkgs, ... }:
+with lib;
+let
   vdirsyncer = "${pkgs.vdirsyncer}/bin/vdirsyncer";
   vdirsyncerScript = pkgs.writeShellScript "vdirsyncer" ''
     ${vdirsyncer} discover
@@ -7,7 +9,8 @@
   '';
 
   passwordFetchCommand = passwordName:
-    ''["command", "${pkgs.coreutils}/bin/cat", "${config.xdg.configHome}/home-manager/secrets/vdirsyncer/${passwordName}"]'';
+    ''
+      ["command", "${pkgs.coreutils}/bin/cat", "${config.xdg.configHome}/home-manager/secrets/vdirsyncer/${passwordName}"]'';
 in
 {
   home.packages = [ pkgs.vdirsyncer ];
@@ -64,7 +67,10 @@ in
       ${mkPair { name = "contacts"; }}
 
       # Calendar
-      ${mkPair { name = "calendars"; metadata = [ "displayname" "color" ]; }}
+      ${mkPair {
+        name = "calendars";
+        metadata = [ "displayname" "color" ];
+      }}
 
       # Work Calendar
       [pair beeper_google_calendar]

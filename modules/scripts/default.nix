@@ -4,12 +4,7 @@ let
     (builtins.readFile ./bin/set-contact-photo.py);
 in
 {
-  imports = [
-    ./projectsync.nix
-    ./sl.nix
-  ];
+  imports = [ ./projectsync.nix ./sl.nix ];
 
-  home.packages = [
-    set-contact-photo
-  ];
+  home.packages = [ set-contact-photo ];
 }

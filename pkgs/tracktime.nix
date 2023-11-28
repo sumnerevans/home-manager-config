@@ -1,12 +1,11 @@
-{ lib, pkgs }: with pkgs;
+{ lib, pkgs }:
+with pkgs;
 python3Packages.buildPythonApplication rec {
   pname = "tracktime";
   version = "0.10.0";
   format = "pyproject";
 
-  nativeBuildInputs = [
-    python3Packages.poetry-core
-  ];
+  nativeBuildInputs = [ python3Packages.poetry-core ];
 
   propagatedBuildInputs = with python3Packages; [
     argcomplete

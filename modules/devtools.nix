@@ -1,12 +1,13 @@
-{ config, lib, pkgs, ... }: with lib; let
+{ config, lib, pkgs, ... }:
+with lib;
+let
   tomlFormat = pkgs.formats.toml { };
   iniFormat = pkgs.formats.ini { };
   hasGui = config.wayland.enable || config.xorg.enable;
   exposePort = pkgs.writeShellScriptBin "exposeport" ''
     sudo ssh -L $2:localhost:$2 $1
   '';
-in
-{
+in {
   options = {
     devTools.enable = mkEnableOption "developer tools and applications" // {
       default = true;
@@ -14,44 +15,48 @@ in
   };
 
   config = mkIf config.devTools.enable {
-    home.packages = with pkgs; [
-      # Shell Utilities
-      delta
-      eternal-terminal
-      exposePort
-      mosh
-      watchexec
+    home.packages = with pkgs;
+      [
+        # Shell Utilities
+        delta
+        eternal-terminal
+        exposePort
+        nodePackages.jsonlint
+        mosh
+        tree-sitter
+        watchexec
 
-      # SQL Terminal GUI
-      litecli
-      pgcli
+        # SQL Terminal GUI
+        litecli
+        pgcli
 
-      # Better Python REPL
-      python3Packages.ptpython
+        # Better Python REPL
+        python3Packages.ptpython
 
-      # Languages
-      go
-    ] ++ (
-      # GUI Tools
-      optionals hasGui [
-        android-studio
-        dfeet
-        jetbrains.idea-community
-        openjdk11
-        rars
-        sqlitebrowser
-        visualvm
-        wireshark
+        # Languages
+        go
+      ] ++ (
+        # GUI Tools
+        optionals hasGui [
+          android-studio
+          dfeet
+          jetbrains.idea-community
+          openjdk11
+          rars
+          sqlitebrowser
+          visualvm
+          wireshark
 
-        # GTK Development
-        icon-library
-      ]
-    );
+          # GTK Development
+          icon-library
+        ]);
 
     programs.zsh.shellAliases = {
-      tat = "sudo ${pkgs.eternal-terminal}/bin/et sumner@tatooine.sumnerevans.com -t 443:443,8008:8008,8009:8009,3719:3719";
+      tat =
+        "sudo ${pkgs.eternal-terminal}/bin/et sumner@tatooine.sumnerevans.com -t 443:443,8008:8008,8009:8009,3719:3719";
       tat-expose = "${exposePort}/bin/exposeport tatooine.sumnerevans.com";
-      tat-synapse = "${exposePort}/bin/exposeport tatooine.sumnerevans.com 8008";
+      tat-synapse =
+        "${exposePort}/bin/exposeport tatooine.sumnerevans.com 8008";
     };
 
     # Enable developer programs
@@ -60,13 +65,10 @@ in
     programs.jq.enable = true;
     programs.opam.enable = true;
     programs.vscode.enable = hasGui;
-    programs.vscode.extensions = with pkgs.vscode-extensions; [
-      golang.go
-    ];
+    programs.vscode.extensions = with pkgs.vscode-extensions; [ golang.go ];
 
-    xdg.configFile."pypoetry/config.toml".source = tomlFormat.generate "config.toml" {
-      virtualenvs.in-project = true;
-    };
+    xdg.configFile."pypoetry/config.toml".source =
+      tomlFormat.generate "config.toml" { virtualenvs.in-project = true; };
 
     home.file.".ideavimrc".text = ''
       set clipboard+=unnamed

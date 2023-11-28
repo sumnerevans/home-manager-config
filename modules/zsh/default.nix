@@ -1,4 +1,5 @@
-{ config, lib, pkgs, ... }: with lib; {
+{ config, lib, pkgs, ... }:
+with lib; {
   imports = [
     ./aliases.nix
     ./completion.nix
@@ -10,7 +11,10 @@
   options = {
     isLinux = mkEnableOption "Linux support" // { default = true; };
     isMacOS = mkEnableOption "macOS support";
-    autoAddSSHKeysToAgent = mkEnableOption "automatically add SSH keys to the SSH agent" // { default = true; };
+    autoAddSSHKeysToAgent =
+      mkEnableOption "automatically add SSH keys to the SSH agent" // {
+        default = true;
+      };
   };
 
   config = {
@@ -30,7 +34,8 @@
 
         # Pipenv
         PIPENV_MAX_DEPTH = 10000; # basically infinite
-        PIPENV_VENV_IN_PROJECT = 1; # store the virtual environment in .venv in the project directory
+        PIPENV_VENV_IN_PROJECT =
+          1; # store the virtual environment in .venv in the project directory
 
         # Use colors!
         TERM = "xterm-256color";
@@ -42,13 +47,7 @@
         extended = true;
         path = "${config.home.homeDirectory}/.histfile";
 
-        ignorePatterns = [
-          "gl"
-          "gs"
-          "tt"
-          "l"
-          "ll"
-        ];
+        ignorePatterns = [ "gl" "gs" "tt" "l" "ll" ];
       };
 
       initExtraFirst = ''

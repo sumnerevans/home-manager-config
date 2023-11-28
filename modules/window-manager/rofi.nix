@@ -5,9 +5,7 @@
     location = "top";
     terminal = "${pkgs.alacritty}/bin/alacritty";
     yoffset = 80;
-    extraConfig = {
-      matching = "fuzzy";
-    };
+    extraConfig = { matching = "fuzzy"; };
 
     theme = "Arc-Dark";
     pass.enable = true;

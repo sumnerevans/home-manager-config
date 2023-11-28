@@ -1,4 +1,6 @@
-{ config, lib, pkgs, ... }: with lib; let
+{ config, lib, pkgs, ... }:
+with lib;
+let
   menucalc = pkgs.callPackage ../../pkgs/menucalc.nix { };
   terminal = "${pkgs.alacritty}/bin/alacritty";
   waylandCfg = config.wayland;
@@ -18,18 +20,15 @@ in
 
   options = {
     windowManager.modKey = mkOption {
-      type = types.enum [ "Shift" "Control" "Mod1" "Mod2" "Mod3" "Mod4" "Mod5" ];
+      type =
+        types.enum [ "Shift" "Control" "Mod1" "Mod2" "Mod3" "Mod4" "Mod5" ];
       default = "Mod4";
       description = "Modifier key that is used for all default keybindings.";
     };
   };
 
   config = mkIf (waylandCfg.enable || xorgCfg.enable) {
-    home.packages = with pkgs; [
-      brightnessctl
-      menucalc
-      wmctrl
-    ];
+    home.packages = with pkgs; [ brightnessctl menucalc wmctrl ];
 
     home.sessionVariables = {
       TERMINAL = "${terminal}";
@@ -62,9 +61,7 @@ in
         gtk-toolbar-icon-size = "GTK_ICON_SIZE_LARGE_TOOLBAR";
       };
 
-      gtk4.extraConfig = {
-        gtk-application-prefer-dark-theme = 1;
-      };
+      gtk4.extraConfig = { gtk-application-prefer-dark-theme = 1; };
     };
 
     qt = {
@@ -74,7 +71,10 @@ in
 
     # Enable GUI services
     services.blueman-applet.enable = true;
-    services.kdeconnect = { enable = true; indicator = true; };
+    services.kdeconnect = {
+      enable = true;
+      indicator = true;
+    };
     services.network-manager-applet.enable = true;
   };
 }

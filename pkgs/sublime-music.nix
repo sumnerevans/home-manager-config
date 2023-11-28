@@ -1,20 +1,12 @@
-{ fetchFromGitHub
-, lib
-, python3Packages
-, gobject-introspection
-, gtk3
-, pango
-, wrapGAppsHook
-, dbus
-, xvfb-run
-, chromecastSupport ? false
-, serverSupport ? false
-, keyringSupport ? true
-, notifySupport ? true
-, libnotify
-, networkSupport ? true
-, networkmanager
-}:
+{ fetchFromGitHub, lib, python3Packages, gobject-introspection, gtk3, pango
+, wrapGAppsHook, dbus, xvfb-run
+, chromecastSupport ? false # whether to enable chromecast support
+, serverSupport ?
+  false # whether to serve files from the local machine for chromecast playback
+, keyringSupport ? true # whether to enable keyring support
+, notifySupport ? true # whether to enable notification support
+, libnotify, networkSupport ? true # whether to enable NetworkManager support
+, networkmanager }:
 
 python3Packages.buildPythonApplication rec {
   pname = "sublime-music";
@@ -43,31 +35,24 @@ python3Packages.buildPythonApplication rec {
     sed -i "s/python-mpv/mpv/g" pyproject.toml
   '';
 
-  buildInputs = [
-    gtk3
-    pango
-  ]
-  ++ lib.optional notifySupport libnotify
-  ++ lib.optional networkSupport networkmanager
-  ;
+  buildInputs = [ gtk3 pango ] ++ lib.optional notifySupport libnotify
+    ++ lib.optional networkSupport networkmanager;
 
-  propagatedBuildInputs = with python3Packages; [
-    bleach
-    dataclasses-json
-    deepdiff
-    mpv
-    peewee
-    pygobject3
-    python-dateutil
-    python-Levenshtein
-    requests
-    semver
-    thefuzz
-  ]
-  ++ lib.optional chromecastSupport PyChromecast
-  ++ lib.optional keyringSupport keyring
-  ++ lib.optional serverSupport bottle
-  ;
+  propagatedBuildInputs = with python3Packages;
+    [
+      bleach
+      dataclasses-json
+      deepdiff
+      mpv
+      peewee
+      pygobject3
+      python-dateutil
+      python-Levenshtein
+      requests
+      semver
+      thefuzz
+    ] ++ lib.optional chromecastSupport PyChromecast
+    ++ lib.optional keyringSupport keyring ++ lib.optional serverSupport bottle;
 
   # hook for gobject-introspection doesn't like strictDeps
   # https://github.com/NixOS/nixpkgs/issues/56943

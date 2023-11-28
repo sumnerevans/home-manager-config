@@ -5,13 +5,11 @@
 
   mdf.port = 1024;
 
-  programs.i3status-rust.extraBlocks = [
-    {
-      block = "battery";
-      interval = 30;
-      format = "{percentage} {time}";
-      device = "BAT1";
-      priority = 111;
-    }
-  ];
+  programs.i3status-rust.extraBlocks = [{
+    block = "battery";
+    interval = 30;
+    format = "{percentage} {time}";
+    device = "BAT1";
+    priority = 111;
+  }];
 }

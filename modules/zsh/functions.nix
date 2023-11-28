@@ -1,4 +1,5 @@
-{ config, lib, pkgs, ... }: with lib; {
+{ config, lib, pkgs, ... }:
+with lib; {
   programs.zsh.initExtra =
     let
       fnToStr = name: body: ''

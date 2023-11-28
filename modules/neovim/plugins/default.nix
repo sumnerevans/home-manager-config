@@ -1,55 +1,46 @@
-{ pkgs, ... }: with pkgs; {
+{ pkgs, ... }: {
   imports = [
-    # Project Navigation and Configuration
+    # Project Navigation
     ./ctrlsf.nix
+    ./fzf-vim.nix
+
+    # Local Environment Configuration and Integration
     ./editorconfig-vim.nix
+    ./vim-autoswap.nix
     ./vim-localvimrc.nix
     ./vim-rooter.nix
+    ./vim-tmux-navigator.nix
 
     # UI Chrome
     ./barbar.nix
-    ./fzf-vim.nix
-    # ./nerdtree.nix
-    # ./vim-airline.nix
+    ./blamer.nix
+    ./gitsigns-nvim.nix
     ./vim-lightline.nix
-    ./vim-togglelist.nix
+    ./nvim-tree-lua.nix
 
     # Editor
-    ./blamer.nix
-    # ./deoplete.nix
-    ./rainbow.nix
-    # ./supertab.nix
-    ./vim-commentary.nix
-    ./vim-signify.nix
-    ./vim-template.nix
-    ./vim-visual-multi.nix
-    ./vista-vim.nix
-
-    # Integration with environment
-    ./vim-autoswap.nix
-    ./vim-tmux-navigator.nix
-
-    # Language Support
-    # ./ale.nix
-    ./coc.nix
     ./copilot.nix
-    # ./vim-markdown-composer.nix
-    ./vim-svelte.nix
-    ./templ.vim.nix
-    ./vimspector.nix
+    ./vim-commentary.nix
+    ./vim-template.nix
+
+    # Language Server and Completion
+    ./nvim-cmp.nix
+    ./nvim-lint.nix
+    ./nvim-lspconfig.nix
+    ./trouble.nvim.nix
+
+    # Synatx Highlighting
+    ./rainbow-delimiters.nix
+    ./tree-sitter.nix
   ];
 
-  programs.neovim.plugins = with vimPlugins; [
-    # Project Navigation and Configuration
-    direnv-vim
-    vim-fugitive
+  programs.neovim.plugins = [
+    # Local Environment Configuration and Integration
+    pkgs.vimPlugins.direnv-vim
 
     # Editor
-    # auto-pairs
-    vim-closetag
-    vim-surround
-
-    # Language Support
-    vim-polyglot # Syntax support for basically all of the languages
+    pkgs.vimPlugins.vim-closetag
+    pkgs.vimPlugins.vim-surround
+    pkgs.vimPlugins.vim-visual-multi
   ];
 }

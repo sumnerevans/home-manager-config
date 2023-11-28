@@ -1,4 +1,5 @@
-{ lib, pkgs }: with pkgs;
+{ lib, pkgs }:
+with pkgs;
 python3Packages.buildPythonApplication rec {
   pname = "offlinemsmtp";
   version = "unstable-2023-06-23";
@@ -18,9 +19,7 @@ python3Packages.buildPythonApplication rec {
     wrapGAppsHook
   ];
 
-  buildInputs = [
-    libnotify
-  ];
+  buildInputs = [ libnotify ];
 
   propagatedBuildInputs = with python3Packages; [
     inotify
@@ -29,9 +28,7 @@ python3Packages.buildPythonApplication rec {
     pygobject3
   ];
 
-  pythonImportsCheck = [
-    "offlinemsmtp"
-  ];
+  pythonImportsCheck = [ "offlinemsmtp" ];
 
   # hook for gobject-introspection doesn't like strictDeps
   # https://github.com/NixOS/nixpkgs/issues/56943
