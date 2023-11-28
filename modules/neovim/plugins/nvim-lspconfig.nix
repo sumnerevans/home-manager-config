@@ -1,4 +1,3 @@
-# nvim-lspconfig
 { pkgs, templ-pkg, ... }:
 let
   pylspPython = pkgs.python3.withPackages (ps:
@@ -119,6 +118,22 @@ in {
               vim.lsp.buf.format { async = true }
             end, opts)
           end,
+        })
+
+        local max_width = math.max(math.floor(vim.o.columns * 0.7), 100)
+        local max_height = math.max(math.floor(vim.o.lines * 0.3), 30)
+
+        -- NOTE: the hover handler returns the bufnr,winnr so can be used for mappings
+        vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+          border = 'rounded',
+          max_width = max_width,
+          max_height = max_height,
+        })
+
+        vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+          border = 'rounded',
+          max_width = max_width,
+          max_height = max_height,
         })
       '';
     }];
