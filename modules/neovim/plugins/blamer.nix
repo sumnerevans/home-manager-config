@@ -1,6 +1,5 @@
 # Enable git blame on the line.
 { pkgs, ... }:
-with pkgs;
 let
   blamer = pkgs.vimUtils.buildVimPlugin rec {
     pname = "blamer";
@@ -13,8 +12,7 @@ let
     };
     meta.homepage = "https://github.com/APZelos/blamer.nvim";
   };
-in
-{
+in {
   programs.neovim.plugins = [{
     plugin = blamer;
     config = ''

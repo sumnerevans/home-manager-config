@@ -1,4 +1,3 @@
-# nvim-cmp
 { pkgs, ... }:
 with pkgs;
 let
@@ -14,7 +13,6 @@ in {
       (luaPlugin cmp-nvim-lsp)
       (luaPlugin cmp-nvim-lsp-signature-help)
       (luaPlugin lspkind-nvim)
-      (luaPlugin luasnip)
       (luaPlugin luasnip)
       {
         type = "lua";
@@ -78,8 +76,8 @@ in {
               },
             },
             mapping = {
-              ["<Tab>"] = vim.schedule_wrap(function(fallback)
-                if cmp.visible() and has_words_before() then
+              ["<Tab>"] = cmp.mapping(function(fallback)
+                if cmp.visible() then
                   cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
                 elseif luasnip.expand_or_jumpable() then
                   luasnip.expand_or_jump()
@@ -111,10 +109,6 @@ in {
                 s = cmp.mapping.confirm({ select = true }),
                 c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
               }),
-              ['<C-Space>'] = cmp.mapping.confirm({
-                behavior = cmp.ConfirmBehavior.Replace,
-                select = true,
-              }),
               ['<C-c>'] = cmp.mapping.confirm({
                 behavior = cmp.ConfirmBehavior.Replace,
                 select = true,
@@ -123,9 +117,6 @@ in {
                 behavior = cmp.ConfirmBehavior.Replace,
                 select = true,
               }),
-            },
-            experimental = {
-              ghost_text = true,
             },
           })
         '';
