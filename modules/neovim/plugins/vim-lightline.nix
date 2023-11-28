@@ -8,22 +8,15 @@
           \     'left': [
           \         [ 'mode', 'paste' ],
           \         [ 'readonly', 'filename', 'modified' ],
-          \         [ 'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ],
-          \         [ 'coc_status' ]
           \     ]
           \   },
           \   'component_expand': {
           \     'buffers': 'lightline#bufferline#buffers'
-          \   }
+          \   },
+          \   'separator': {'left': '', 'right': ''},
           \ }
 
         let g:lightline.colorscheme = 'one'
-      '';
-    }
-    {
-      plugin = vim-lightline-coc;
-      config = ''
-        call lightline#coc#register()
       '';
     }
     {
