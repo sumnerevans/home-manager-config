@@ -12,7 +12,6 @@ in {
         beeper-desktop)
       discord
       element-desktop
-      fractal
       mumble
       neochat
       nheko
