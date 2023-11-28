@@ -63,9 +63,16 @@ in {
           cmd = { "${pkgs.vscode-langservers-extracted}/bin/vscode-json-language-server", "--stdio" },
           capabilities = capabilities,
         }
-        lspconfig.nixd.setup{
-          cmd = { "${pkgs.nixd}/bin/nixd" },
+        lspconfig.nil_ls.setup {
+          cmd = { "${pkgs.nil}/bin/nil" },
           capabilities = capabilities,
+          settings = {
+            ["nil"] = {
+              formatting = {
+                command = { "${pkgs.nixfmt}/bin/nixfmt" },
+              },
+            },
+          },
         }
         lspconfig.pylsp.setup {
           cmd = { "${pylspPython}/bin/pylsp" },
