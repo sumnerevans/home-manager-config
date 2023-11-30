@@ -14,6 +14,9 @@
           add_trailing = true,
           group_empty = true,
         },
+        update_focused_file = {
+          enable = true,
+        }
       }
 
       vim.keymap.set('n', '<S-T>', function()
