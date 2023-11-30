@@ -52,11 +52,11 @@ in {
             },
             sources = {
               { name = "nvim_lsp", priority = 100 },
-              { name = "nvim_lsp_signature_help", priority = 95 },
-              { name = "luasnip", priority = 80 },
-              { name = "async_path", priority = 70 },
-              { name = "spell", priority = 60 },
-              { name = "fuzzy_buffer", priority = 50 },
+              { name = "nvim_lsp_signature_help", priority = 90 },
+              { name = "async_path", priority = 80 },
+              { name = "spell", priority = 70 },
+              { name = "fuzzy_buffer", priority = 60 },
+              { name = "luasnip", priority = 50 },
             },
             window = {
               documentation = cmp.config.window.bordered(),

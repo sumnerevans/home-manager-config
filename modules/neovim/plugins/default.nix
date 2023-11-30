@@ -19,6 +19,7 @@
 
     # Editor
     ./copilot.nix
+    ./nvim-neoclip.nix
     ./vim-commentary.nix
     ./vim-template.nix
 
