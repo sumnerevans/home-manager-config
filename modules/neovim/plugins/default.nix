@@ -1,8 +1,7 @@
 { pkgs, ... }: {
   imports = [
     # Project Navigation
-    ./ctrlsf.nix
-    ./fzf-vim.nix
+    ./telescope.nix
 
     # Local Environment Configuration and Integration
     ./editorconfig-vim.nix

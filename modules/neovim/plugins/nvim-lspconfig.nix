@@ -103,14 +103,16 @@ in {
         vim.api.nvim_create_autocmd('LspAttach', {
           group = vim.api.nvim_create_augroup('UserLspConfig', {}),
           callback = function(ev)
+            local telescope_builtin = require('telescope.builtin')
+
             -- Buffer local mappings.
             -- See `:help vim.lsp.*` for documentation on any of the below functions
             local opts = { buffer = ev.buf }
-            vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-            vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-            vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+            vim.keymap.set('n', 'gd', telescope_builtin.lsp_definitions, {})
+            vim.keymap.set('n', 'gi', telescope_builtin.lsp_implementations, {})
+            vim.keymap.set('n', 'gr', telescope_builtin.lsp_references, {})
             vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-            vim.keymap.set('n', 'S', vim.lsp.buf.workspace_symbol, opts)
+            vim.keymap.set('n', 'S', telescope_builtin.lsp_dynamic_workspace_symbols, {})
             vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
             vim.keymap.set('n', '<F6>', vim.lsp.buf.rename, opts)
             vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)

@@ -6,7 +6,6 @@
 #
 # Dependencies
 # - bat
-# - fzf
 # - python-neovim
 # - ripgrep
 # - wmctrl
