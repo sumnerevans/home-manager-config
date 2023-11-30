@@ -42,9 +42,6 @@ in {
                 maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
                 ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
                 preset = "codicons", -- codicons preset
-                symbol_map = {
-                  Copilot = "",
-                },
               })
             },
             preselect = cmp.PreselectMode.None,
@@ -56,7 +53,6 @@ in {
             sources = {
               { name = "nvim_lsp", priority = 100 },
               { name = "nvim_lsp_signature_help", priority = 95 },
-              { name = "copilot", priority = 90 },
               { name = "luasnip", priority = 80 },
               { name = "async_path", priority = 70 },
               { name = "spell", priority = 60 },
@@ -108,10 +104,6 @@ in {
                 end,
                 s = cmp.mapping.confirm({ select = true }),
                 c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-              }),
-              ['<C-c>'] = cmp.mapping.confirm({
-                behavior = cmp.ConfirmBehavior.Replace,
-                select = true,
               }),
               ['<C-y>'] = cmp.mapping.confirm({
                 behavior = cmp.ConfirmBehavior.Replace,
