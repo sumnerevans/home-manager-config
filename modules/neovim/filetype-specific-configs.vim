@@ -25,8 +25,5 @@ autocmd BufRead *.email,$HOME/tmp/mutt-*,$HOME/tmp/neomutt-*,$HOME/.config/home-
 " Use TAB = 2 spaces for a few file types
 autocmd FileType javascript,json,xhtml,html,htmldjango,scss,less,yaml,css,markdown,rst,lisp,nix setlocal shiftwidth=2
 
-" Make spelling a top level syntax element
-autocmd FileType * syntax spell toplevel
-
 " Disable folding on RST
 autocmd FileType rst setlocal nofoldenable

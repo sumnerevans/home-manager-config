@@ -1,5 +1,4 @@
-{ config, lib, pkgs, ... }:
-with lib; {
+{
   programs.fzf = {
     enable = true;
     changeDirWidgetOptions = [ "--preview 'tree -C {} | head -200'" ];

@@ -9,7 +9,6 @@ set pastetoggle=<F2>                                    " Make C-S-V paste work 
 set scrolloff=5                                         " Always have 5 lines above/below the current line
 set showbreak=↩\
 set signcolumn=yes                                      " Always show the sign column for git gutter
-set virtualedit=onemore                                 " Allow the cursor to go one past the EOL
 set nojoinspaces                                        " One space after period when doing gq
 
 " Tabs
@@ -25,12 +24,6 @@ set smartcase   " unless the search string has uppercase letters
 set showtabline=2       " Always show the tab bar
 set splitbelow          " Default split below, rather than above
 set splitright          " Default split to the right, rather than the left
-
-" Quickfix --------------------------------------------------------------------
-au FileType qf call AdjustWindowHeight(5, 5)
-function! AdjustWindowHeight(minheight, maxheight)
-  exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
-endfunction
 
 " Custom keybindings ----------------------------------------------------------
 " Make j and k behave nicer when the line wraps
