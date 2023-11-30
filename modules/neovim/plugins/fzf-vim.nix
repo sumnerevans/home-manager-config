@@ -29,7 +29,7 @@ in with pkgs; {
         config = ''
           require('lspfuzzy').setup {
             fzf_preview = {          -- arguments to the FZF '--preview-window' option
-              'up:+{2}-/2'        -- preview above and centered on entry
+              'down:+{2}-/2,75%'     -- preview below and centered on entry
             },
           }
         '';
