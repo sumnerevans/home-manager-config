@@ -1,11 +1,11 @@
 { pkgs, ... }:
 with pkgs; {
   programs.neovim = {
-    extraPackages = [ delta fd ripgrep ];
+    extraPackages = [ delta fd fzy ripgrep ];
     plugins = [
       {
         type = "lua";
-        plugin = vimPlugins.telescope-fzf-native-nvim;
+        plugin = vimPlugins.telescope-fzy-native-nvim;
       }
       {
         type = "lua";
@@ -66,6 +66,8 @@ with pkgs; {
               },
             },
           }
+
+          require('telescope').load_extension('fzy_native')
 
           local telescope_builtin = require('telescope.builtin')
           vim.keymap.set('n', '<C-p>', telescope_builtin.find_files, {})
