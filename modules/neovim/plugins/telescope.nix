@@ -71,7 +71,12 @@ with pkgs; {
 
           local telescope_builtin = require('telescope.builtin')
           vim.keymap.set('n', '<C-p>', telescope_builtin.find_files, {})
-          vim.keymap.set('n', '<C-S>', telescope_builtin.live_grep, {})
+          vim.keymap.set('n', '<C-S>', function()
+            telescope_builtin.grep_string({
+              search = "",
+              only_sort_text = true,
+            })
+          end, {})
           vim.keymap.set('v', '<C-S>', telescope_builtin.grep_string, {})
         '';
       }
