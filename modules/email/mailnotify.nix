@@ -2,8 +2,7 @@
 let
   mailnotify = pkgs.callPackage ../../pkgs/mailnotify.nix { };
   hasGui = config.wayland.enable || config.xorg.enable;
-in
-{
+in {
   systemd.user.services.mailnotify = lib.mkIf hasGui {
     Unit = {
       Description = "mailnotify daemon";

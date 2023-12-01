@@ -1,4 +1,4 @@
-{ lib, pkgs }:
+{ pkgs }:
 with pkgs;
 python3.pkgs.buildPythonPackage rec {
   pname = "csmdirsearch";

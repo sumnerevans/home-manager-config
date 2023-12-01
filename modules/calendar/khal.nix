@@ -1,8 +1,8 @@
-{ lib, config, pkgs, ... }: {
+{ config, pkgs, ... }: {
   nixpkgs.overlays = [
     # Workaround from https://github.com/NixOS/nixpkgs/issues/205014
     (self: super: {
-      khal = (super.khal.overridePythonAttrs (attrs: rec { doCheck = false; }));
+      khal = (super.khal.overridePythonAttrs (attrs: { doCheck = false; }));
     })
   ];
 

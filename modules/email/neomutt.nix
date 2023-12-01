@@ -4,12 +4,10 @@ with lib;
 let
   aliasfile = "${config.xdg.configHome}/neomutt/aliases";
   mailboxfile = "${config.xdg.configHome}/neomutt/mailboxes";
-  bindir = "${config.home.homeDirectory}/bin";
   mdf = pkgs.callPackage ../../pkgs/mdf.nix { };
 
   syncthingdir = "${config.home.homeDirectory}/Syncthing";
-in
-{
+in {
   options.mdf.port = mkOption {
     type = types.int;
     description = "The port for the mdf daemon to use";

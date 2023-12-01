@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, pkgs, ... }:
 with lib;
 let
   # ICS import settings
@@ -20,8 +20,7 @@ let
     set -xe
     ${concatMapStringsSep "\n" icsImportCurl icsSubscriptions}
   '';
-in
-{
+in {
   systemd.user.services."ics-subscription-import" = {
     Unit.Description = "Download the icsSubscriptions and import using khal.";
 

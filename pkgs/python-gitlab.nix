@@ -1,4 +1,4 @@
-{ lib, pkgs }:
+{ pkgs }:
 with pkgs;
 pkgs.python3.pkgs.buildPythonPackage rec {
   pname = "python-gitlab";

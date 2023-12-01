@@ -34,94 +34,86 @@ with lib; {
     };
   };
 
-  i3SwayConfig =
-    let
-      resizeStr = "  ";
-      gapSize = 6;
-      workspaces = [ "1: " "2" "3" "4" "5" "6" "7" "8" "9" "10" ];
-      extraWorkspaces = [
-        {
-          name = "11: ";
-          keycode = 20;
-        }
-        {
-          name = "12: ";
-          keycode = 21;
-        }
-      ];
+  i3SwayConfig = let
+    resizeStr = "  ";
+    gapSize = 6;
+    workspaces = [ "1: " "2" "3" "4" "5" "6" "7" "8" "9" "10" ];
+    extraWorkspaces = [
+      {
+        name = "11: ";
+        keycode = 20;
+      }
+      {
+        name = "12: ";
+        keycode = 21;
+      }
+    ];
 
-      left = "h";
-      down = "j";
-      up = "k";
-      right = "l";
-      fonts = {
-        names = [ "FontAwesome" "Iosevka" ];
-        size = 10.0;
-      };
+    left = "h";
+    down = "j";
+    up = "k";
+    right = "l";
+    fonts = {
+      names = [ "FontAwesome" "Iosevka" ];
+      size = 10.0;
+    };
 
-      menucalc = pkgs.callPackage ../../pkgs/menucalc.nix { };
-    in
-    {
-      enable = true;
-      config = rec {
-        inherit fonts;
-        gaps.inner = gapSize;
-        modifier = config.windowManager.modKey;
-        terminal = config.home.sessionVariables.TERMINAL;
+    menucalc = pkgs.callPackage ../../pkgs/menucalc.nix { };
+  in {
+    enable = true;
+    config = rec {
+      inherit fonts;
+      gaps.inner = gapSize;
+      modifier = config.windowManager.modKey;
+      terminal = config.home.sessionVariables.TERMINAL;
 
-        assigns = {
-          # Browsers
-          ${elemAt workspaces 0} = [{ class = "Firefox"; }];
+      assigns = {
+        # Browsers
+        ${elemAt workspaces 0} = [{ class = "Firefox"; }];
 
-          # Chat Clients
-          ${(elemAt extraWorkspaces 0).name} = [
-            { class = "discord"; }
-            { class = "Element"; }
-            { class = "Slack"; }
-            { class = "Telegram"; }
-            { title = "Mutt"; }
-          ];
-
-          # Music
-          ${(elemAt extraWorkspaces 1).name} = [{ class = "sublime-music"; }];
-        };
-
-        bars = [{
-          inherit fonts;
-          position = "top";
-          statusCommand =
-            "${pkgs.i3status-rust}/bin/i3status-rs ${config.xdg.configHome}/i3status-rust/config-top.toml";
-          colors = {
-            background = "#00000090";
-            separator = "#aaaaaa";
-          };
-        }];
-
-        floating.criteria = [
-          { instance = "pinentry"; }
-          { title = "Firefox - Sharing Indicator"; }
-          { class = "zoom"; }
+        # Chat Clients
+        ${(elemAt extraWorkspaces 0).name} = [
+          { class = "discord"; }
+          { class = "Element"; }
+          { class = "Slack"; }
+          { class = "Telegram"; }
+          { title = "Mutt"; }
         ];
 
-        defaultWorkspace = ''workspace "${elemAt workspaces 0}"'';
+        # Music
+        ${(elemAt extraWorkspaces 1).name} = [{ class = "sublime-music"; }];
+      };
 
-        keybindings = listToAttrs
-          (
-            # Switch to workspace
-            (imap1
-              (i: name: {
-                name = "${modifier}+${toString (mod i 10)}";
-                value = ''workspace "${name}"'';
-              })
-              workspaces)
-            # Move to workspace
-            ++ (imap1
-              (i: name: {
-                name = "${modifier}+Shift+${toString (mod i 10)}";
-                value = ''move container to workspace "${name}"'';
-              })
-              workspaces)
-          ) // {
+      bars = [{
+        inherit fonts;
+        position = "top";
+        statusCommand =
+          "${pkgs.i3status-rust}/bin/i3status-rs ${config.xdg.configHome}/i3status-rust/config-top.toml";
+        colors = {
+          background = "#00000090";
+          separator = "#aaaaaa";
+        };
+      }];
+
+      floating.criteria = [
+        { instance = "pinentry"; }
+        { title = "Firefox - Sharing Indicator"; }
+        { class = "zoom"; }
+      ];
+
+      defaultWorkspace = ''workspace "${elemAt workspaces 0}"'';
+
+      keybindings = listToAttrs (
+        # Switch to workspace
+        (imap1 (i: name: {
+          name = "${modifier}+${toString (mod i 10)}";
+          value = ''workspace "${name}"'';
+        }) workspaces)
+        # Move to workspace
+        ++ (imap1 (i: name: {
+          name = "${modifier}+Shift+${toString (mod i 10)}";
+          value = ''move container to workspace "${name}"'';
+        }) workspaces)) // {
           "${modifier}+Return" = "exec ${terminal}";
           "${modifier}+Shift+q" = "kill";
 
@@ -192,51 +184,45 @@ with lib; {
             mkIf config.laptop.enable "exec brightnessctl s +5%";
         };
 
-        keycodebindings = listToAttrs
-          (
-            # Switch to workspace
-            (imap1
-              (i:
-                { name, keycode }: {
-                  name = "${modifier}+${toString keycode}";
-                  value = ''workspace "${name}"'';
-                })
-              extraWorkspaces)
-            # Move to workspace
-            ++ (imap1
-              (i:
-                { name, keycode }: {
-                  name = "${modifier}+Shift+${toString keycode}";
-                  value = ''move container to workspace "${name}"'';
-                })
-              extraWorkspaces)
-          ) // {
-          "${modifier}+34" =
-            "exec ${config.home.homeDirectory}/bin/mutt_helper"; # Launch mutt
-          "${modifier}+35" =
-            "exec ${pkgs.element-desktop}/bin/element-desktop"; # Launch Element
-        };
-
-        modes = {
-          "${resizeStr}" = {
-            "${left}" = "resize shrink width 10 px or 10 ppt";
-            "${down}" = "resize grow height 10 px or 10 ppt";
-            "${up}" = "resize shrink height 10 px or 10 ppt";
-            "${right}" = "resize grow width 10 px or 10 ppt";
-            "Left" = "resize shrink width 10 px or 10 ppt";
-            "Down" = "resize grow height 10 px or 10 ppt";
-            "Up" = "resize shrink height 10 px or 10 ppt";
-            "Right" = "resize grow width 10 px or 10 ppt";
-            "Escape" = "mode default";
-            "Return" = "mode default";
-            "${modifier}+r" = "mode default";
+      keycodebindings = listToAttrs (
+        # Switch to workspace
+        (imap1 (i:
+          { name, keycode }: {
+            name = "${modifier}+${toString keycode}";
+            value = ''workspace "${name}"'';
+          }) extraWorkspaces)
+        # Move to workspace
+        ++ (imap1 (i:
+          { name, keycode }: {
+            name = "${modifier}+Shift+${toString keycode}";
+            value = ''move container to workspace "${name}"'';
+          }) extraWorkspaces)) // {
+            "${modifier}+34" =
+              "exec ${config.home.homeDirectory}/bin/mutt_helper"; # Launch mutt
+            "${modifier}+35" =
+              "exec ${pkgs.element-desktop}/bin/element-desktop"; # Launch Element
           };
-        };
 
-        window = {
-          border = 0;
-          hideEdgeBorders = "both";
+      modes = {
+        "${resizeStr}" = {
+          "${left}" = "resize shrink width 10 px or 10 ppt";
+          "${down}" = "resize grow height 10 px or 10 ppt";
+          "${up}" = "resize shrink height 10 px or 10 ppt";
+          "${right}" = "resize grow width 10 px or 10 ppt";
+          "Left" = "resize shrink width 10 px or 10 ppt";
+          "Down" = "resize grow height 10 px or 10 ppt";
+          "Up" = "resize shrink height 10 px or 10 ppt";
+          "Right" = "resize grow width 10 px or 10 ppt";
+          "Escape" = "mode default";
+          "Return" = "mode default";
+          "${modifier}+r" = "mode default";
         };
       };
+
+      window = {
+        border = 0;
+        hideEdgeBorders = "both";
+      };
     };
+  };
 }

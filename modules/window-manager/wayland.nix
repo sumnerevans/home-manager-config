@@ -1,4 +1,4 @@
-{ config, lib, options, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 let
   cfg = config.wayland;
@@ -38,8 +38,7 @@ let
     "--effect-vignette 0.7:0.7"
     "--fade-in 0.5"
   ];
-in
-{
+in {
   options = {
     wayland.enable = mkEnableOption "the Wayland stack";
     wayland.extraSwayConfig = mkOption {
@@ -81,115 +80,105 @@ in
       {
         wrapperFeatures.gtk = true;
         config.focus.wrapping = "yes";
-        config.startup =
-          let
-            wlpaste = "${pkgs.wl-clipboard}/bin/wl-paste";
-            gsettings = "${pkgs.glib}/bin/gsettings";
-            gnomeSchema = "org.gnome.desktop.interface";
-            inactive-windows-transparency =
-              pkgs.writeScriptBin "inactive-windows-transparency"
-                (builtins.readFile ./bin/inactive-windows-transparency.py);
-          in
-          [
-            # Clipboard Manager
-            {
-              command =
-                "${wlpaste} -t text --watch ${clipmanCmd} store --max-items=10000 ${clipmanHistpath}";
-            }
-            {
-              command =
-                "${wlpaste} -p -t text --watch ${clipmanCmd} store -P --max-items=10000 ${clipmanHistpath}";
-            }
+        config.startup = let
+          wlpaste = "${pkgs.wl-clipboard}/bin/wl-paste";
+          inactive-windows-transparency =
+            pkgs.writeScriptBin "inactive-windows-transparency"
+            (builtins.readFile ./bin/inactive-windows-transparency.py);
+        in [
+          # Clipboard Manager
+          {
+            command =
+              "${wlpaste} -t text --watch ${clipmanCmd} store --max-items=10000 ${clipmanHistpath}";
+          }
+          {
+            command =
+              "${wlpaste} -p -t text --watch ${clipmanCmd} store -P --max-items=10000 ${clipmanHistpath}";
+          }
 
-            # Window transparency
-            {
-              command =
-                "${inactive-windows-transparency}/bin/inactive-windows-transparency";
-            }
+          # Window transparency
+          {
+            command =
+              "${inactive-windows-transparency}/bin/inactive-windows-transparency";
+          }
 
-            # Make all the pinentry stuff work
-            # See: https://github.com/NixOS/nixpkgs/issues/119445#issuecomment-820507505
-            # and: https://github.com/NixOS/nixpkgs/issues/57602#issuecomment-820512097
-            {
-              command = "dbus-update-activation-environment WAYLAND_DISPLAY";
-            }
+          # Make all the pinentry stuff work
+          # See: https://github.com/NixOS/nixpkgs/issues/119445#issuecomment-820507505
+          # and: https://github.com/NixOS/nixpkgs/issues/57602#issuecomment-820512097
+          {
+            command = "dbus-update-activation-environment WAYLAND_DISPLAY";
+          }
 
-            # Wallpaper
-            {
-              command = "systemctl restart --user wallpaper.service";
-              always = true;
-            }
+          # Wallpaper
+          {
+            command = "systemctl restart --user wallpaper.service";
+            always = true;
+          }
+        ];
+
+        config.input = let
+          useUS = [
+            # My Ergodox has a hardware 3l implementation.
+            "12951:18806:ZSA_Technology_Labs_Inc_ErgoDox_EZ_Glow"
+            "12951:18806:ZSA_Technology_Labs_Inc_ErgoDox_EZ_Glow_Consumer_Control"
+            "12951:18806:ZSA_Technology_Labs_Inc_ErgoDox_EZ_Glow_Keyboard"
+            "12951:18806:ZSA_Technology_Labs_Inc_ErgoDox_EZ_Glow_System_Control"
+            # Use normal layout for Yubikey
+            "4176:1031:Yubico_YubiKey_OTP+FIDO+CCID"
           ];
+        in {
+          "*" = {
+            # Always use natural scrolling
+            natural_scroll = "enabled";
 
-        config.input =
-          let
-            useUS = [
-              # My Ergodox has a hardware 3l implementation.
-              "12951:18806:ZSA_Technology_Labs_Inc_ErgoDox_EZ_Glow"
-              "12951:18806:ZSA_Technology_Labs_Inc_ErgoDox_EZ_Glow_Consumer_Control"
-              "12951:18806:ZSA_Technology_Labs_Inc_ErgoDox_EZ_Glow_Keyboard"
-              "12951:18806:ZSA_Technology_Labs_Inc_ErgoDox_EZ_Glow_System_Control"
-              # Use normal layout for Yubikey
-              "4176:1031:Yubico_YubiKey_OTP+FIDO+CCID"
-            ];
-          in
-          {
-            "*" = {
-              # Always use natural scrolling
-              natural_scroll = "enabled";
-
-              # Get right click (2 finger) and middle click (3 finger) on touchpad
-              click_method = "clickfinger";
-            };
-
-            "type:keyboard" = {
-              # Use 3l by default for all keyboards that get attached
-              xkb_layout = "us";
-              xkb_variant = "3l";
-            };
-          } // (listToAttrs (map
-            (identifier: {
-              name = identifier;
-              value = {
-                xkb_layout = "us";
-                xkb_variant = ''""'';
-              };
-            })
-            useUS));
-
-        config.keybindings =
-          let
-            modifier = config.windowManager.modKey;
-            screenshotOutfile =
-              "${config.home.homeDirectory}/tmp/$(${pkgs.coreutils}/bin/date +%Y-%m-%d-%T).png";
-            flameshotCopyScript = pkgs.writeShellScriptBin "flameshot-copy" ''
-              filename=${screenshotOutfile}
-              ${pkgs.flameshot}/bin/flameshot gui -p $filename
-              ${pkgs.wl-clipboard}/bin/wl-copy <$filename
-            '';
-            screenshotFullscreenScript = pkgs.writeShellScriptBin "screenshot" ''
-              filename=${screenshotOutfile}
-              ${pkgs.grim}/bin/grim $filename
-              ${pkgs.wl-clipboard}/bin/wl-copy <$filename
-            '';
-          in
-          {
-            # Popup Clipboard Manager
-            "${modifier}+c" =
-              "exec ${clipmanCmd} pick -t rofi ${clipmanHistpath}";
-
-            # Lock screen
-            "${modifier}+Shift+x" = "exec ${swaylockCmd}";
-
-            # exit sway (logs you out of your session)
-            "${modifier}+Shift+e" =
-              "exec ${pkgs.sway}/bin/swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
-
-            # Screenshots
-            "${modifier}+shift+c" =
-              "exec ${flameshotCopyScript}/bin/flameshot-copy";
-            Print = "exec ${screenshotFullscreenScript}/bin/screenshot";
+            # Get right click (2 finger) and middle click (3 finger) on touchpad
+            click_method = "clickfinger";
           };
+
+          "type:keyboard" = {
+            # Use 3l by default for all keyboards that get attached
+            xkb_layout = "us";
+            xkb_variant = "3l";
+          };
+        } // (listToAttrs (map (identifier: {
+          name = identifier;
+          value = {
+            xkb_layout = "us";
+            xkb_variant = ''""'';
+          };
+        }) useUS));
+
+        config.keybindings = let
+          modifier = config.windowManager.modKey;
+          screenshotOutfile =
+            "${config.home.homeDirectory}/tmp/$(${pkgs.coreutils}/bin/date +%Y-%m-%d-%T).png";
+          flameshotCopyScript = pkgs.writeShellScriptBin "flameshot-copy" ''
+            filename=${screenshotOutfile}
+            ${pkgs.flameshot}/bin/flameshot gui -p $filename
+            ${pkgs.wl-clipboard}/bin/wl-copy <$filename
+          '';
+          screenshotFullscreenScript = pkgs.writeShellScriptBin "screenshot" ''
+            filename=${screenshotOutfile}
+            ${pkgs.grim}/bin/grim $filename
+            ${pkgs.wl-clipboard}/bin/wl-copy <$filename
+          '';
+        in {
+          # Popup Clipboard Manager
+          "${modifier}+c" =
+            "exec ${clipmanCmd} pick -t rofi ${clipmanHistpath}";
+
+          # Lock screen
+          "${modifier}+Shift+x" = "exec ${swaylockCmd}";
+
+          # exit sway (logs you out of your session)
+          "${modifier}+Shift+e" =
+            "exec ${pkgs.sway}/bin/swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
+
+          # Screenshots
+          "${modifier}+shift+c" =
+            "exec ${flameshotCopyScript}/bin/flameshot-copy";
+          Print = "exec ${screenshotFullscreenScript}/bin/screenshot";
+        };
 
         config.window.commands = [{
           command = "fullscreen enable global";
@@ -261,31 +250,25 @@ in
       borderColor = common.notificationColorConfig.urgency_normal.frame_color;
       textColor = common.notificationColorConfig.urgency_normal.foreground;
 
-      extraConfig = generators.toINI { } (mapAttrs'
-        (name: val:
-          nameValuePair
-            (builtins.replaceStrings [ "_" "critical" ] [ "=" "high" ] name)
-            (mapAttrs'
-              (k: v:
-                nameValuePair
-                  (if k == "timeout" then
-                    "default-timeout"
-                  else if k == "frame_color" then
-                    "border-color"
-                  else if k == "foreground" then
-                    "text-color"
-                  else if k == "background" then
-                    "background-color"
-                  else
-                    k)
-                  (if k == "timeout" then
-                    v * 1000
-                  else if k == "background" then
-                    v + "CC"
-                  else
-                    v))
-              val))
-        common.notificationColorConfig);
+      extraConfig = generators.toINI { } (mapAttrs' (name: val:
+        nameValuePair
+        (builtins.replaceStrings [ "_" "critical" ] [ "=" "high" ] name)
+        (mapAttrs' (k: v:
+          nameValuePair (if k == "timeout" then
+            "default-timeout"
+          else if k == "frame_color" then
+            "border-color"
+          else if k == "foreground" then
+            "text-color"
+          else if k == "background" then
+            "background-color"
+          else
+            k) (if k == "timeout" then
+              v * 1000
+            else if k == "background" then
+              v + "CC"
+            else
+              v)) val)) common.notificationColorConfig);
     };
   };
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 with pkgs;
 let
   # Reverse ls when you type sl
@@ -22,5 +22,4 @@ let
         print(' ' * (max_line_len - len(line)), end="")
         print(line[::-1])
   '';
-in
-{ home.packages = [ slScript ]; }
+in { home.packages = [ slScript ]; }

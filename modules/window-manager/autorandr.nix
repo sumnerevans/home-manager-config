@@ -50,8 +50,7 @@ let
       rate = "60.00";
     };
   };
-in
-{
+in {
   config = mkIf cfg.enable {
     programs.autorandr = {
       enable = true;

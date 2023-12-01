@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ lib, ... }:
 with lib;
 let
   mkAuGroup = { name, commands, filetype }: ''
@@ -266,8 +266,7 @@ let
       }];
     }
   ];
-in
-{
+in {
   programs.neovim.extraConfig = ''
     inoremap ;g (<>)
 

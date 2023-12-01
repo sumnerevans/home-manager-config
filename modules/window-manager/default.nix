@@ -5,8 +5,7 @@ let
   terminal = "${pkgs.alacritty}/bin/alacritty";
   waylandCfg = config.wayland;
   xorgCfg = config.xorg;
-in
-{
+in {
   imports = [
     ./autorandr.nix
     ./i3status-rust.nix

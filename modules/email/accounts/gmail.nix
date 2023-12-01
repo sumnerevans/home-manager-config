@@ -18,8 +18,7 @@ let
   };
 
   helper = import ./account-config-helper.nix { inherit config pkgs lib; };
-in
-{
+in {
   accounts.email.accounts.Gmail = mkMerge [
     (helper.commonConfig accountConfig)
     (helper.imapnotifyConfig accountConfig)

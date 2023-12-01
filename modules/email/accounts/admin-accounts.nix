@@ -38,8 +38,7 @@ let
   };
 
   helper = import ./account-config-helper.nix { inherit config pkgs lib; };
-in
-{
+in {
   accounts.email.accounts = {
     Admin = mkMerge [
       (helper.commonConfig adminConfig)

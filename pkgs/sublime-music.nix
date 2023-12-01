@@ -1,5 +1,5 @@
 { fetchFromGitHub, lib, python3Packages, gobject-introspection, gtk3, pango
-, wrapGAppsHook, dbus, xvfb-run
+, wrapGAppsHook
 , chromecastSupport ? false # whether to enable chromecast support
 , serverSupport ?
   false # whether to serve files from the local machine for chromecast playback

@@ -21,8 +21,7 @@ let
     # Only keep the last 10 values.
     echo "$(${pkgs.coreutils}/bin/tail ${rollingPingFile})" > ${rollingPingFile}
   '';
-in
-{
+in {
   systemd.user.services.writeping = {
     Unit.Description =
       "Write the new ping value for rolling ping average calculation";

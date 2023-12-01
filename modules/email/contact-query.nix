@@ -4,8 +4,7 @@ let
     (builtins.readFile ./bin/contact-query.py);
   contact-search = pkgs.writeScriptBin "contact-search"
     (builtins.readFile ./bin/contact-search.py);
-in
-{
+in {
   home.packages = [ contact-query contact-search ];
 
   programs.neomutt.extraConfig = ''

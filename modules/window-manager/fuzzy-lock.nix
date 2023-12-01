@@ -45,5 +45,4 @@ let
       ${sleep} 1
     done
   '';
-in
-fuzzy-lock
+in fuzzy-lock

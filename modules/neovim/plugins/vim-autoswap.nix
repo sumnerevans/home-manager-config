@@ -1,5 +1,5 @@
 # Swap to the already opened file
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 with pkgs; {
   programs.neovim = {
     extraPackages = [ wmctrl ];

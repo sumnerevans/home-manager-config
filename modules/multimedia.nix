@@ -6,7 +6,6 @@ let
     chromecastSupport = true;
     serverSupport = true;
   };
-  cfg = config.gaming;
   hasGui = config.wayland.enable || config.xorg.enable;
 in {
   options.gaming.enable = mkEnableOption "gaming programs";

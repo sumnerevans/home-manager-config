@@ -1,7 +1,7 @@
 # Sublime Text-like search
 { config, pkgs, ... }:
 let
-  vim-template = pkgs.vimUtils.buildVimPlugin rec {
+  vim-template = pkgs.vimUtils.buildVimPlugin {
     pname = "vim-template";
     version = "unstable-2023-11-27";
     src = pkgs.fetchFromGitHub {
@@ -12,8 +12,7 @@ let
     };
     meta.homepage = "https://github.com/aperezdc/vim-template";
   };
-in
-{
+in {
   programs.neovim.plugins = [{
     plugin = vim-template;
     config = ''

@@ -9,10 +9,7 @@ let
   tmpdir = "${config.home.homeDirectory}/tmp";
   mvTmp = "${pkgs.coreutils}/bin/mv $f ${tmpdir}";
   scrotCmd = "${pkgs.scrot}/bin/scrot '%Y-%m-%d-%T.png'";
-  i3lockcmd =
-    "${pkgs.i3lock-fancy}/bin/i3lock-fancy --font Iosevka -- ${scrotCmd} -z";
-in
-{
+in {
   options.xorg = {
     enable = mkEnableOption "the Xorg stack";
     extrai3wmConfig = mkOption {
@@ -153,29 +150,25 @@ in
       ];
     };
 
-    systemd.user.services =
-      let
-        xmodmapConfig = pkgs.writeText "Xmodmap.conf" ''
-          ! Reverse scrolling
-          ! pointer = 1 2 3 5 4 6 7 8 9 10 11 12
-          keycode 9 = Caps_Lock Caps_Lock Caps_Lock
-        '';
-        startupServices = {
-          xbanish = "${pkgs.xbanish}/bin/xbanish";
-        } // (optionalAttrs cfg.remapEscToCaps {
-          xmodmap = "${pkgs.xorg.xmodmap}/bin/xmodmap ${xmodmapConfig}";
-        });
-      in
-      mapAttrs
-        (name: value: {
-          Unit = {
-            Description = "Run ${name} on startup.";
-            PartOf = [ "graphical-session.target" ];
-          };
-          Service.ExecStart = value;
-          Service.Restart = "always";
-          Install.WantedBy = [ "graphical-session.target" ];
-        })
-        startupServices;
+    systemd.user.services = let
+      xmodmapConfig = pkgs.writeText "Xmodmap.conf" ''
+        ! Reverse scrolling
+        ! pointer = 1 2 3 5 4 6 7 8 9 10 11 12
+        keycode 9 = Caps_Lock Caps_Lock Caps_Lock
+      '';
+      startupServices = {
+        xbanish = "${pkgs.xbanish}/bin/xbanish";
+      } // (optionalAttrs cfg.remapEscToCaps {
+        xmodmap = "${pkgs.xorg.xmodmap}/bin/xmodmap ${xmodmapConfig}";
+      });
+    in mapAttrs (name: value: {
+      Unit = {
+        Description = "Run ${name} on startup.";
+        PartOf = [ "graphical-session.target" ];
+      };
+      Service.ExecStart = value;
+      Service.Restart = "always";
+      Install.WantedBy = [ "graphical-session.target" ];
+    }) startupServices;
   };
 }

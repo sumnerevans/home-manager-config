@@ -10,12 +10,11 @@ let
     "--file ${config.xdg.configHome}/msmtp/config"
   ]
   # If headless, don't do notifications.
-  ++ (optional cfg.headless "--silent")
-  # Add sendmail file if it exists
-  ++ (optional (cfg.sendmailFile != null)
-    "--send-mail-file ${cfg.sendmailFile}");
-in
-{
+    ++ (optional cfg.headless "--silent")
+    # Add sendmail file if it exists
+    ++ (optional (cfg.sendmailFile != null)
+      "--send-mail-file ${cfg.sendmailFile}");
+in {
   options = {
     offlinemsmtp = {
       headless = mkEnableOption
@@ -34,11 +33,10 @@ in
     systemd.user.services.offlinemsmtp = {
       Unit = {
         Description = "offlinemsmtp daemon";
-        PartOf =
-          if cfg.headless then
-            [ "graphical-session.target" ]
-          else
-            [ "default.target" ];
+        PartOf = if cfg.headless then
+          [ "graphical-session.target" ]
+        else
+          [ "default.target" ];
       };
 
       Service = {
@@ -49,11 +47,10 @@ in
         RestartSec = 5;
       };
 
-      Install.WantedBy =
-        if cfg.headless then
-          [ "graphical-session.target" ]
-        else
-          [ "default.target" ];
+      Install.WantedBy = if cfg.headless then
+        [ "graphical-session.target" ]
+      else
+        [ "default.target" ];
     };
   };
 }

@@ -1,4 +1,3 @@
-{ pkgs, ... }:
 let editor = "nvim";
 in {
   imports = [

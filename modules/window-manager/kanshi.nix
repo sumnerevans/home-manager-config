@@ -39,8 +39,7 @@ let
     ''
       ${pkgs.sway}/bin/swaymsg '[workspace="12: "]' move workspace to output right''
   ];
-in
-{
+in {
   config = mkIf cfg.enable {
     home.packages = [ pkgs.kanshi ];
     services.kanshi = {

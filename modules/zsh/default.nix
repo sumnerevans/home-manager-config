@@ -65,52 +65,50 @@ with lib; {
         export TERM=xterm-256color
       '';
 
-      initExtra =
-        let
-          tput = "${pkgs.ncurses}/bin/tput";
-          opensshAdd = optionalString config.autoAddSSHKeysToAgent ''
-            # Add my key to the ssh-agent if necessary
-            ${pkgs.openssh}/bin/ssh-add -l | \
-              ${pkgs.gnugrep}/bin/grep "The agent has no identities" && \
-              ${pkgs.openssh}/bin/ssh-add
-          '';
-        in
-        ''
-          # TODO a lot of this stuff has to be after all of the aliases
-          if [[ $FOR_MUTT_HELPER != 1 ]]; then
-
-            ${builtins.readFile ./key-widgets.zsh}
-            ${builtins.readFile ./prompt.zsh}
-            ${builtins.readFile ./git-repo-nav.zsh}
-
-            # Colors
-            autoload colors zsh/terminfo
-            colors
-            ${optionalString config.isLinux "eval $(dircolors -b)"}
-            ${optionalString config.isMacOS "export CLICOLOR=1"}
-
-            setopt appendhistory
-            setopt extendedglob
-            setopt autopushd
-            setopt nobeep  # Don't beep ever
-
-            ${opensshAdd}
-
-            echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
-
-            # Notify me if I haven't written in my journal for the day.
-            if [[ ! -f ${config.home.homeDirectory}/Documents/journal/$(${pkgs.coreutils}/bin/date +%Y-%m-%d).rst ]]; then
-                echo "\n$(${tput} bold)>>>> Make sure to write in your journal today. <<<<$(${tput} sgr 0)"
-                echo
-            fi
-
-            # Show a quote
-            ${pkgs.fortune}/bin/fortune ${config.xdg.dataHome}/fortune/quotes
-
-            echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
-
-          fi
+      initExtra = let
+        tput = "${pkgs.ncurses}/bin/tput";
+        opensshAdd = optionalString config.autoAddSSHKeysToAgent ''
+          # Add my key to the ssh-agent if necessary
+          ${pkgs.openssh}/bin/ssh-add -l | \
+            ${pkgs.gnugrep}/bin/grep "The agent has no identities" && \
+            ${pkgs.openssh}/bin/ssh-add
         '';
+      in ''
+        # TODO a lot of this stuff has to be after all of the aliases
+        if [[ $FOR_MUTT_HELPER != 1 ]]; then
+
+          ${builtins.readFile ./key-widgets.zsh}
+          ${builtins.readFile ./prompt.zsh}
+          ${builtins.readFile ./git-repo-nav.zsh}
+
+          # Colors
+          autoload colors zsh/terminfo
+          colors
+          ${optionalString config.isLinux "eval $(dircolors -b)"}
+          ${optionalString config.isMacOS "export CLICOLOR=1"}
+
+          setopt appendhistory
+          setopt extendedglob
+          setopt autopushd
+          setopt nobeep  # Don't beep ever
+
+          ${opensshAdd}
+
+          echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
+
+          # Notify me if I haven't written in my journal for the day.
+          if [[ ! -f ${config.home.homeDirectory}/Documents/journal/$(${pkgs.coreutils}/bin/date +%Y-%m-%d).rst ]]; then
+              echo "\n$(${tput} bold)>>>> Make sure to write in your journal today. <<<<$(${tput} sgr 0)"
+              echo
+          fi
+
+          # Show a quote
+          ${pkgs.fortune}/bin/fortune ${config.xdg.dataHome}/fortune/quotes
+
+          echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
+
+        fi
+      '';
     };
 
     programs.direnv.enableZshIntegration = true;

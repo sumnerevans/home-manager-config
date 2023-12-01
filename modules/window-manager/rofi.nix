@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   programs.rofi = {
     enable = true;
     font = "pango:Iosevka 12";

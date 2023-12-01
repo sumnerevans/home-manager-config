@@ -20,8 +20,7 @@ let
           quote = subprocess.check_output(quotes_cmd).decode("utf-8").strip()
       print(quote)
     '';
-in
-{
+in {
   # Common configuration
   commonConfig = { address, name, color ? "", ... }: {
     inherit address;

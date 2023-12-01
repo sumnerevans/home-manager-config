@@ -1,9 +1,7 @@
-{ config, pkgs, runtimeShell, ... }:
+{ config, pkgs, ... }:
 let
   grep = "${pkgs.gnugrep}/bin/grep";
-  pacmd = "${pkgs.pulseaudio}/bin/pacmd";
   pactl = "${pkgs.pulseaudio}/bin/pactl";
-  sed = "${pkgs.gnused}/bin/sed";
   mkBashScript = scriptText: {
     executable = true;
     text = ''
@@ -20,8 +18,7 @@ let
   switchToSpeakers = ''
     ${pactl} set-default-sink alsa_output.usb-Audioengine_Audioengine_2_-00.analog-stereo
   '';
-in
-{
+in {
   home.packages = with pkgs;
     [
       # Add the pulseaudio package here so that pactl works.
