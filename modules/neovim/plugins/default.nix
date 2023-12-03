@@ -23,7 +23,8 @@
     ./vim-commentary.nix
     ./vim-template.nix
 
-    # Language Server and Completion
+    # Language Server, Completion, and Formatting
+    ./conform.nvim.nix
     ./nvim-cmp.nix
     ./nvim-lspconfig.nix
     ./trouble.nvim.nix
