@@ -27,6 +27,10 @@ in {
           local lspconfig = require('lspconfig')
           local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+          lspconfig.bashls.setup {
+            cmd = { "${pkgs.nodePackages.bash-language-server}/bin/bash-language-server", "start" },
+            capabilities = capabilities,
+          }
           lspconfig.clangd.setup {
             cmd = { "${pkgs.clang-tools}/bin/clangd" },
             capabilities = capabilities,
