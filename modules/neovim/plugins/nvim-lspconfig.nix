@@ -11,7 +11,7 @@ let
     ]);
 in {
   programs.neovim = {
-    extraPackages = [ pkgs.ocamlPackages.ocamlformat ];
+    extraPackages = [ pkgs.ocamlPackages.ocamlformat pkgs.fantomas ];
     plugins = with pkgs.vimPlugins; [
       {
         plugin = Ionide-vim;
@@ -53,6 +53,10 @@ in {
           }
           lspconfig.jsonls.setup {
             cmd = { "${pkgs.vscode-langservers-extracted}/bin/vscode-json-language-server", "--stdio" },
+            capabilities = capabilities,
+          }
+          lspconfig.kotlin_language_server.setup {
+            cmd = { "${pkgs.kotlin-language-server}/bin/kotlin-language-server" },
             capabilities = capabilities,
           }
           lspconfig.remark_ls.setup {
