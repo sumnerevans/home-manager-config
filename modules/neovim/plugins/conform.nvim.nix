@@ -6,13 +6,19 @@
       require("conform").setup({
         formatters_by_ft = {
           go = { "goimports", "gofmt" },
-          markdown = { "prettier" },
+          markdown = { "deno_fmt" },
           nix = { "nixfmt" },
+          typescript = { "prettier" },
         },
         formatters = {
-          goimports = { command = "${pkgs.gotools}/bin/goimports" },
+          deno_fmt = { command = "${pkgs.deno}/bin/prettier" },
           gofmt = { command = "${pkgs.go}/bin/gofmt" },
-          prettier = { command = "${pkgs.nodePackages.prettier}/bin/prettier" },
+          goimports = { command = "${pkgs.gotools}/bin/goimports" },
+          nixfmt = { command = "${pkgs.nixfmt}/bin/nixfmt" },
+          prettier = {
+            command = "${pkgs.nodePackages.prettier}/bin/prettier",
+            prepend_args = { "--trailing-comma", "es5" },
+          },
         },
       })
       vim.keymap.set('n', '<C-f>', function()
