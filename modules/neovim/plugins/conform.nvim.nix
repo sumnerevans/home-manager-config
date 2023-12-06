@@ -11,7 +11,7 @@
           typescript = { "prettier" },
         },
         formatters = {
-          deno_fmt = { command = "${pkgs.deno}/bin/prettier" },
+          deno_fmt = { command = "${pkgs.deno}/bin/deno" },
           gofmt = { command = "${pkgs.go}/bin/gofmt" },
           goimports = { command = "${pkgs.gotools}/bin/goimports" },
           nixfmt = { command = "${pkgs.nixfmt}/bin/nixfmt" },
