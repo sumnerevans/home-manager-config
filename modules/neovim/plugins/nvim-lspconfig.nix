@@ -59,10 +59,6 @@ in {
             cmd = { "${pkgs.kotlin-language-server}/bin/kotlin-language-server" },
             capabilities = capabilities,
           }
-          lspconfig.remark_ls.setup {
-            cmd = { "${config.home.homeDirectory}/node_modules/.bin/remark-language-server", "--stdio" },
-            capabilities = capabilities,
-          }
           lspconfig.nil_ls.setup {
             cmd = { "${pkgs.nil}/bin/nil" },
             capabilities = capabilities,
@@ -90,8 +86,16 @@ in {
               },
             },
           }
+          lspconfig.remark_ls.setup {
+            cmd = { "${config.home.homeDirectory}/node_modules/.bin/remark-language-server", "--stdio" },
+            capabilities = capabilities,
+          }
           lspconfig.templ.setup {
             cmd = { "${templ-pkg}/bin/templ", "lsp" },
+            capabilities = capabilities,
+          }
+          lspconfig.texlab.setup {
+            cmd = { "${pkgs.texlab}/bin/texlab" },
             capabilities = capabilities,
           }
           lspconfig.tsserver.setup {
