@@ -67,6 +67,7 @@ in {
   programs.zsh.shellAliases = {
     tt-be = "tt start -t linear -c Beeper -p BE";
     tt-beeper = "tt start -c Beeper";
+    tt-boop = "tt start -t linear -c Beeper -p BOOP";
     tt-element = "tt start -c Beeper 'Element catchup'";
     tt-hspc = "tt start -t gh -p ColoradoSchoolOfMines/hspc-problems";
     tt-issues = "tt start -t gl -p 'beeper/issues' -c Beeper";
