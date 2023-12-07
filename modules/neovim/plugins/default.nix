@@ -4,7 +4,6 @@
     ./telescope.nix
 
     # Local Environment Configuration and Integration
-    ./editorconfig-vim.nix
     ./vim-autoswap.nix
     ./vim-localvimrc.nix
     ./vim-rooter.nix
