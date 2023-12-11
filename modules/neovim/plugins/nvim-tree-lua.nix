@@ -5,6 +5,13 @@
     config = ''
       -- https://github.com/nvim-tree/nvim-tree.lua/wiki/Recipes#sorting-files-naturally-respecting-numbers-within-files-names
       local function natural_cmp(left, right)
+        -- Directories before files
+        if left.type == "directory" and right.type ~= "directory" then
+          return true
+        elseif left.type ~= "directory" and right.type == "directory" then
+          return false
+        end
+
         left = left.name:lower()
         right = right.name:lower()
 
@@ -46,6 +53,9 @@
         sort_by = function(nodes)
           table.sort(nodes, natural_cmp)
         end,
+        filters = {
+          git_ignored = false,
+        },
       }
 
       vim.keymap.set('n', '<S-T>', function()
