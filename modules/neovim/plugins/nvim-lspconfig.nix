@@ -105,6 +105,13 @@ in {
           lspconfig.yamlls.setup {
             cmd = { "${pkgs.nodePackages.yaml-language-server}/bin/yaml-language-server", "--stdio" },
             capabilities = capabilities,
+            settings = {
+              yaml = {
+                schemas = {
+                  ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+                },
+              },
+            },
           }
           -- F#
           require('ionide').setup {
