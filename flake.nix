@@ -11,7 +11,7 @@
     flake-utils.url = "github:numtide/flake-utils";
     declarative-cachix.url = "github:jonascarpay/declarative-cachix";
     templ = {
-      url = "github:a-h/templ/v0.2.476";
+      url = "github:a-h/templ/v0.2.501";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

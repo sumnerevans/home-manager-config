@@ -11,7 +11,11 @@ let
     ]);
 in {
   programs.neovim = {
-    extraPackages = [ pkgs.ocamlPackages.ocamlformat pkgs.fantomas ];
+    extraPackages = with pkgs; [
+      ocamlPackages.ocamlformat
+      fantomas
+      gopls # needed for templ
+    ];
     plugins = with pkgs.vimPlugins; [
       {
         plugin = Ionide-vim;
