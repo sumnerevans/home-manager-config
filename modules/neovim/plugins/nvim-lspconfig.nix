@@ -50,6 +50,17 @@ in {
           lspconfig.gopls.setup {
             cmd = { "${pkgs.gopls}/bin/gopls" },
             capabilities = capabilities,
+            settings = {
+              gopls = {
+                analyses = {
+                  unusedparams = true,
+                  unusedvariable = true,
+                  unusedwrite = true,
+                  useany = true,
+                },
+                staticcheck = true,
+              },
+            },
           }
           lspconfig.html.setup {
             cmd = { "${pkgs.vscode-langservers-extracted}/bin/vscode-html-language-server", "--stdio" },
