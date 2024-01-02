@@ -5,14 +5,13 @@
     config = ''
       require("conform").setup({
         formatters_by_ft = {
-          go = { "goimports", "gofmt" },
+          go = { "goimports" },
           markdown = { "deno_fmt" },
           nix = { "nixfmt" },
           typescript = { "prettier" },
         },
         formatters = {
           deno_fmt = { command = "${pkgs.deno}/bin/deno" },
-          gofmt = { command = "${pkgs.go}/bin/gofmt" },
           goimports = { command = "${pkgs.gotools}/bin/goimports" },
           nixfmt = { command = "${pkgs.nixfmt}/bin/nixfmt" },
           prettier = {
@@ -23,7 +22,8 @@
       })
       vim.keymap.set('n', '<C-f>', function()
         require("conform").format {
-          lsp_fallback = true,
+          lsp_fallback = "always",
+          timeout_ms = 5000,
         }
       end, opts)
     '';
