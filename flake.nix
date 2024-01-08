@@ -14,23 +14,34 @@
       url = "github:a-h/templ/v0.2.501";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    menucalc = {
+      url = "github:sumnerevans/menu-calc";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs =
-    { nixpkgs, home-manager, declarative-cachix, flake-utils, templ, ... }:
+  outputs = { self, nixpkgs, home-manager, declarative-cachix, flake-utils
+    , templ, menucalc }:
     let
       system = "x86_64-linux";
       templ-pkg = templ.packages.${system}.templ;
+      menucalc-pkg = menucalc.packages.${system}.menucalc;
       mkConfig = hostModule:
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             inherit system;
             config.allowUnfree = true;
+            overlays = [
+              (final: prev: {
+                templ = templ-pkg;
+                menucalc = menucalc-pkg;
+              })
+            ];
           };
 
           modules = [ ./home.nix hostModule ];
 
-          extraSpecialArgs = { inherit declarative-cachix templ-pkg; };
+          extraSpecialArgs = { inherit declarative-cachix; };
         };
     in {
       homeConfigurations."tatooine" =

@@ -57,8 +57,6 @@ with lib; {
       names = [ "FontAwesome" "Iosevka" ];
       size = 10.0;
     };
-
-    menucalc = pkgs.callPackage ../../pkgs/menucalc.nix { };
   in {
     enable = true;
     config = rec {
@@ -124,7 +122,7 @@ with lib; {
           "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -show run";
           "${modifier}+space" =
             "exec ${pkgs.rofi}/bin/rofi -show drun -show-icons";
-          "${modifier}+F4" = "exec ${menucalc}/bin/= -- -lines 3"; # menu-calc
+          "${modifier}+F4" = "exec ${pkgs.menucalc}/bin/= -- -lines 3"; # menu-calc
 
           # FOCUS
           "${modifier}+${left}" = "focus left";

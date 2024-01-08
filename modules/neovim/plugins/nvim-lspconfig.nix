@@ -1,4 +1,4 @@
-{ config, pkgs, templ-pkg, ... }:
+{ config, pkgs, ... }:
 let
   pylspPython = pkgs.python3.withPackages (ps:
     with ps; [
@@ -106,7 +106,7 @@ in {
             capabilities = capabilities,
           }
           lspconfig.templ.setup {
-            cmd = { "${templ-pkg}/bin/templ", "lsp" },
+            cmd = { "${pkgs.templ}/bin/templ", "lsp" },
             capabilities = capabilities,
           }
           lspconfig.texlab.setup {
