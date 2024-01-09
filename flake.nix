@@ -24,8 +24,6 @@
     , templ, menucalc }:
     let
       system = "x86_64-linux";
-      templ-pkg = templ.packages.${system}.templ;
-      menucalc-pkg = menucalc.packages.${system}.menucalc;
       mkConfig = hostModule:
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
@@ -33,8 +31,8 @@
             config.allowUnfree = true;
             overlays = [
               (final: prev: {
-                templ = templ-pkg;
-                menucalc = menucalc-pkg;
+                inherit (templ.packages.${system}) templ;
+                inherit (menucalc.packages.${system}) menucalc;
               })
             ];
           };
