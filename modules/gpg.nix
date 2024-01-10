@@ -11,7 +11,7 @@ in {
     enable = true;
     defaultCacheTtl = agentTTL;
     maxCacheTtl = agentTTL;
-    pinentryFlavor = "gnome3";
+    pinentryFlavor = "curses";
     verbose = true;
   };
 
