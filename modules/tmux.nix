@@ -12,23 +12,12 @@ in {
     keyMode = "vi";
     clock24 = true;
     escapeTime = 0;
-    historyLimit = 10000;
+    historyLimit = 50000;
     newSession = true;
     shell = "${pkgs.zsh}/bin/zsh";
     terminal = "tmux-256color";
 
-    plugins = with pkgs.tmuxPlugins; [
-      yank
-      resurrect
-      {
-        # Resurrect tmux sessions (https://github.com/tmux-plugins/tmux-continuum)
-        plugin = continuum;
-        extraConfig = ''
-          set -g @continuum-restore 'on'
-          set -g @continuum-save-interval '1'
-        '';
-      }
-    ];
+    plugins = with pkgs.tmuxPlugins; [ yank ];
 
     extraConfig = ''
       # Border color
@@ -44,10 +33,6 @@ in {
 
       # Open a new window with Alt[-Ctrl]-Enter
       ${mkModBind "Enter" "split-window -h"}
-
-      # Right status
-      set -g status-interval 1
-      set -g status-right 'Continuum status: #{continuum_status} | %Y-%m-%d %H:%M:%S'
 
       # Use the mouse
       set -gq mouse on
