@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let
   pylspPython = pkgs.python3.withPackages (ps:
     with ps; [
@@ -100,10 +100,6 @@ in {
                 },
               },
             },
-          }
-          lspconfig.remark_ls.setup {
-            cmd = { "${config.home.homeDirectory}/node_modules/.bin/remark-language-server", "--stdio" },
-            capabilities = capabilities,
           }
           lspconfig.templ.setup {
             cmd = { "${pkgs.templ}/bin/templ", "lsp" },
