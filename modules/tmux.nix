@@ -34,6 +34,10 @@ in {
       # Open a new window with Alt[-Ctrl]-Enter
       ${mkModBind "Enter" "split-window -h"}
 
+      # Right status
+      set -g status-interval 1
+      set -g status-right '%Y-%m-%d %H:%M:%S'
+
       # Use the mouse
       set -gq mouse on
 
