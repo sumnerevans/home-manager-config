@@ -19,9 +19,6 @@ in {
     # Teaching
     sch = "${home}/school";
     tea = "${sch}/teaching";
-    algo = "${tea}/algos22";
-    aca = "${tea}/aca";
-    ppl = "${tea}/pplf21";
 
     # NixOS config
     cfg = "/etc/nixos";
