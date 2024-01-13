@@ -74,5 +74,6 @@ in {
     tt-nevarro = "tt start -c Nevarro";
     tt-standup = "tt start -c Beeper 'Standup'";
     tt-tea = "tt start -p teaching/algo";
+    tt-tut = "tt start -p teaching/tutoring";
   };
 }
