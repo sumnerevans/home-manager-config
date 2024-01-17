@@ -51,14 +51,6 @@ in {
           icon-library
         ]);
 
-    programs.zsh.shellAliases = {
-      tat =
-        "sudo ${pkgs.eternal-terminal}/bin/et sumner@tatooine.sumnerevans.com -t 443:443,8008:8008,8009:8009,3719:3719";
-      tat-expose = "${exposePort}/bin/exposeport tatooine.sumnerevans.com";
-      tat-synapse =
-        "${exposePort}/bin/exposeport tatooine.sumnerevans.com 8008";
-    };
-
     # Enable developer programs
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;
