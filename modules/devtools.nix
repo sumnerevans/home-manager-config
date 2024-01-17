@@ -43,6 +43,7 @@ in {
           jetbrains.idea-community
           openjdk11
           rars
+          remmina
           sqlitebrowser
           visualvm
           wireshark
