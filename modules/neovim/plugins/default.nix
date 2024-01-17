@@ -43,6 +43,7 @@
     # Editor
     pkgs.vimPlugins.vim-closetag
     pkgs.vimPlugins.vim-surround
+    pkgs.vimPlugins.vim-tmux-clipboard
     pkgs.vimPlugins.vim-visual-multi
   ];
 }
