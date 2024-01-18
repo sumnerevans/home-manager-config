@@ -25,7 +25,6 @@ in {
     ./udiskie.nix
     ./window-manager
     ./xdg.nix
-    ./yubikey.nix
     ./zsh
   ];
 
