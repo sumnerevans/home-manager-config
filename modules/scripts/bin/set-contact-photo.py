@@ -14,7 +14,7 @@ if len(sys.argv) != 3:
 with open(sys.argv[1]) as cf:
     vcard = vobject.readOne(cf.read())
 
-with open(sys.argv[2], 'rb') as imagefile:
+with open(sys.argv[2], "rb") as imagefile:
     image_data = imagefile.read()
     image = Image.open(io.BytesIO(image_data))
 
@@ -51,10 +51,10 @@ if len(photos) > 1:
 for child in photos:
     vcard.remove(child)
 
-photo = vcard.add('photo')
+photo = vcard.add("photo")
 photo.type_param = image.format
-photo.encoding_param = 'b'
+photo.encoding_param = "b"
 photo.value = image_data
 
-with open(sys.argv[1], 'w+') as cf:
+with open(sys.argv[1], "w+") as cf:
     cf.write(vcard.serialize())

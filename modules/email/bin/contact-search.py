@@ -19,7 +19,6 @@ from typing import List
 
 import tabulate
 import vobject
-
 from fuzzywuzzy import fuzz, process
 
 query = " ".join(sys.argv[1:])
@@ -38,9 +37,15 @@ def parse_type(typestrs: List[str]):
     if len(typestrs) == 0:
         return ""
     typestr = typestrs[0]
-    return "(" + (
-        (typestr[2:] if typestr.startswith("x-") else typestr).replace("_", " ").lower()
-    ) + ")"
+    return (
+        "("
+        + (
+            (typestr[2:] if typestr.startswith("x-") else typestr)
+            .replace("_", " ")
+            .lower()
+        )
+        + ")"
+    )
 
 
 def pluralize(word: str, items: int):
