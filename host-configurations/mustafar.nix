@@ -8,6 +8,14 @@ rec {
 
   mdf.port = 1024;
 
+  home.symlinks = {
+    "Documents" = "/mnt/data/Documents";
+    "Pictures" = "/mnt/data/Pictures";
+    "Screenshots" = "/mnt/data/Screenshots";
+    "Syncthing" = "/mnt/data/Syncthing";
+    "Videos" = "/mnt/data/Videos";
+  };
+
   wayland.extraSwayConfig.config = {
     # Scale to 1.8 instead of 2.
     output.eDP-1.scale = "1.75";
