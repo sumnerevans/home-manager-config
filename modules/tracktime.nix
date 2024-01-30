@@ -45,6 +45,8 @@ in {
         TTD = 51.92;
       };
 
+      project_rates."teaching/tutoring" = 50;
+
       customer_addresses = {
         Beeper = ''
           207 High Street
@@ -67,6 +69,7 @@ in {
   programs.zsh.shellAliases = {
     tt-be = "tt start -t linear -c Beeper -p BE";
     tt-beeper = "tt start -c Beeper";
+    tt-bleep = "tt start -t linear -c Beeper -p BLEEP";
     tt-boop = "tt start -t linear -c Beeper -p BOOP";
     tt-element = "tt start -c Beeper 'Element catchup'";
     tt-hspc = "tt start -t gh -p ColoradoSchoolOfMines/hspc-problems";
@@ -74,6 +77,6 @@ in {
     tt-nevarro = "tt start -c Nevarro";
     tt-standup = "tt start -c Beeper 'Standup'";
     tt-tea = "tt start -p teaching/algo";
-    tt-tut = "tt start -p teaching/tutoring";
+    tt-tut = "tt start -c Nevarro -p teaching/tutoring";
   };
 }
