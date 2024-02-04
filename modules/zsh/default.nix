@@ -47,7 +47,7 @@ with lib; {
         extended = true;
         path = "${config.home.homeDirectory}/.histfile";
 
-        ignorePatterns = [ "gl" "gs" "tt" "l" "ll" ];
+        ignorePatterns = [ "gl" "gs" "tt" "l" "ll" "clear" ];
       };
 
       initExtraFirst = ''
