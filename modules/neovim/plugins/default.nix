@@ -15,6 +15,7 @@
     ./gitsigns-nvim.nix
     ./vim-lightline.nix
     ./nvim-tree-lua.nix
+    ./virtcolumn.nvim.nix
 
     # Editor
     ./copilot.nix

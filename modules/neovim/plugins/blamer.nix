@@ -1,20 +1,7 @@
 # Enable git blame on the line.
-{ pkgs, ... }:
-let
-  blamer = pkgs.vimUtils.buildVimPlugin rec {
-    pname = "blamer";
-    version = "1.3.0";
-    src = pkgs.fetchFromGitHub {
-      owner = "APZelos";
-      repo = "blamer.nvim";
-      rev = "v${version}";
-      sha256 = "sha256-uIrbnoS2llGjn/mLMftO4F6gss0xnPCE39yICd0N51Y=";
-    };
-    meta.homepage = "https://github.com/APZelos/blamer.nvim";
-  };
-in {
+{ pkgs, ... }: {
   programs.neovim.plugins = [{
-    plugin = blamer;
+    plugin = pkgs.vimPlugins.blamer-nvim;
     config = ''
       let g:blamer_enabled = 1
       let g:blamer_date_format = '%Y-%m-%d'
