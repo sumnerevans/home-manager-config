@@ -8,7 +8,7 @@ set modeline " allow stuff like vim: set spelllang=en_us at the top of files
 autocmd BufNewFile,BufRead *.tex,*.md,*.txt,*.rst setlocal tw=80
 autocmd BufNewFile,BufRead *.tex,*.md,*.txt,*.rst setlocal linebreak breakindent
 autocmd BufNewFile,BufRead *.tex,*.md,*.txt,*.rst setlocal spell spelllang=en_gb
-autocmd BufNewFile,BufRead *.tex,*.md,*.txt,*.rst match Over100Length /\%81v.\+/
+autocmd BufNewFile,BufRead *.tex,*.md,*.txt,*.rst setlocal colorcolumn=80
 
 " Automatically break lines at 100 characters when writing HTML files
 " Enable spell check on HTML files
@@ -20,7 +20,6 @@ autocmd BufNewFile,BufRead *.html setlocal spell spelllang=en_gb
 autocmd BufRead *.email,$HOME/tmp/mutt-*,$HOME/tmp/neomutt-*,$HOME/.config/home-manager/modules/email/quotes setlocal tw=72
 autocmd BufRead *.email,$HOME/tmp/mutt-*,$HOME/tmp/neomutt-*,$HOME/.config/home-manager/modules/email/quotes setlocal spell spelllang=en_gb
 autocmd BufRead *.email,$HOME/tmp/mutt-*,$HOME/tmp/neomutt-*,$HOME/.config/home-manager/modules/email/quotes setlocal colorcolumn=72,80
-autocmd BufRead *.email,$HOME/tmp/mutt-*,$HOME/tmp/neomutt-*,$HOME/.config/home-manager/modules/email/quotes match Over100Length /\%73v.\+/
 
 " Use TAB = 2 spaces for a few file types
 autocmd FileType javascript,json,xhtml,html,htmldjango,scss,less,yaml,css,markdown,rst,lisp,nix setlocal shiftwidth=2
