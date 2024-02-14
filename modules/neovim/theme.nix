@@ -10,10 +10,6 @@ with lib; {
 
       colorscheme carbonfox
       set background=dark
-
-      " Highlight past 100 characters
-      highlight Over100Length ctermbg=red ctermfg=white guibg=#BD4F4F guifg=#cccccc
-      match Over100Length /\%101v.\+/
     '';
   };
 }
