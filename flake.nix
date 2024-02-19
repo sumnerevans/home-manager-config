@@ -34,6 +34,10 @@
                 inherit (templ.packages.${system}) templ;
                 inherit (menucalc.packages.${system}) menucalc;
               })
+              (final: prev: {
+                element-desktop =
+                  prev.element-desktop.override { electron = prev.electron; };
+              })
             ];
           };
 
@@ -46,7 +50,8 @@
         mkConfig ./host-configurations/tatooine.nix;
       homeConfigurations."coruscant" = mkConfig ./host-configurations/coruscant;
       homeConfigurations."scarif" = mkConfig ./host-configurations/scarif.nix;
-      homeConfigurations."mustafar" = mkConfig ./host-configurations/mustafar.nix;
+      homeConfigurations."mustafar" =
+        mkConfig ./host-configurations/mustafar.nix;
     } // (flake-utils.lib.eachDefaultSystem (system:
       let pkgs = import nixpkgs { system = system; };
       in {
