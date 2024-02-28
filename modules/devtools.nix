@@ -27,6 +27,7 @@ in {
         watchexec
 
         # SQL Terminal GUI
+        postgresql
         litecli
         pgcli
 
