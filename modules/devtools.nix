@@ -40,7 +40,7 @@ in {
         # GUI Tools
         optionals hasGui [
           android-studio
-          dfeet
+          d-spy
           jetbrains.idea-community
           openjdk11
           rars

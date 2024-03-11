@@ -62,7 +62,6 @@
             git-crypt
             nixfmt
             pre-commit
-            rnix-lsp
           ];
         };
       }));
