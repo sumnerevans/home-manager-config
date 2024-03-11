@@ -21,13 +21,17 @@ let
     };
     DellP2421D = {
       criteria = "Dell Inc. DELL P2421D D643X53";
-      mode = "2560x1440@59.951Hz";
+      mode = "2560x1440@60Hz";
       position = "2560,0";
     };
     DellS2417DG = {
       criteria = "Dell Inc. Dell S2417DG #ASNmc/dFujvd";
       mode = "2560x1440@143.998Hz";
       position = "0,0";
+    };
+    ScarifInternal = {
+      criteria =
+        "InfoVision Optoelectronics (Kunshan) Co.,Ltd China 0x8C44 Unknown";
     };
   };
 
@@ -61,17 +65,32 @@ in {
             (configs.ThinkVision // { position = "1920,0"; })
           ];
         };
-        ThinkPad_MZ108 = {
+        DoubleDell = { outputs = [ configs.DellP2421D configs.DellS2417DG ]; };
+
+        ScarifUndocked = {
           outputs = [
-            configs.ThinkPadInternal
-            {
-              criteria = "Unknown Extron HDMI";
-              mode = "1920x1080@60Hz";
-              position = "1920,0";
-            }
+            (configs.ScarifInternal // {
+              mode = "1920x1200@60Hz";
+              position = "0,0";
+            })
           ];
         };
-        DoubleDell = { outputs = [ configs.DellP2421D configs.DellS2417DG ]; };
+        ScarifDockedBoth = {
+          outputs = [
+            (configs.ScarifInternal // { status = "disable"; })
+            configs.DellS2417DG
+            configs.DellP2421D
+          ];
+        };
+        ScarifDockedOne = {
+          outputs = [
+            {
+              criteria = "Dell Inc. Dell S2417DG #ASNmc/dFujvd";
+              mode = "2560x1440@143.998Hz";
+            }
+            configs.ScarifInternal
+          ];
+        };
       };
     };
   };
