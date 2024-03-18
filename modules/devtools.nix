@@ -4,9 +4,6 @@ let
   tomlFormat = pkgs.formats.toml { };
   iniFormat = pkgs.formats.ini { };
   hasGui = config.wayland.enable || config.xorg.enable;
-  exposePort = pkgs.writeShellScriptBin "exposeport" ''
-    sudo ssh -L $2:localhost:$2 $1
-  '';
 in {
   options = {
     devTools.enable = mkEnableOption "developer tools and applications" // {
@@ -20,7 +17,6 @@ in {
         # Shell Utilities
         delta
         eternal-terminal
-        exposePort
         nodePackages.jsonlint
         mosh
         tree-sitter
