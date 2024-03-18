@@ -1,6 +1,6 @@
 { config, ... }: {
   programs.zsh = {
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     enableCompletion = true;
     completionInit = ''
       # add custom completion scripts

@@ -11,7 +11,7 @@ in {
     enable = true;
     defaultCacheTtl = agentTTL;
     maxCacheTtl = agentTTL;
-    pinentryFlavor = "curses";
+    pinentryPackage = pkgs.pinentry-curses;
     verbose = true;
   };
 
