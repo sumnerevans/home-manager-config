@@ -35,7 +35,7 @@ with lib; {
           ${ls} --color -Fa
 
           if [ -f .pre-commit-config.yaml ]; then
-            pre-commit install --install-hooks
+            ${pkgs.pre-commit}/bin/pre-commit install --install-hooks
           fi
         fi
         unset ${chpwd_just_happened}
