@@ -14,7 +14,6 @@ in {
     userName = "Sumner Evans";
 
     attributes = [ "*.pdf diff=pdf" ];
-    delta.enable = true;
 
     signing = {
       key = "8904527AB50022FD";
@@ -34,8 +33,9 @@ in {
       tag.gpgsign = true;
       status.submoduleSummary = true;
       rebase.autoSquash = true;
+      rerere.enabled = true;
 
-      gitget = { root = "${config.home.homeDirectory}/projects"; };
+      gitget.root = "${config.home.homeDirectory}/projects";
 
       sendemail = {
         annotate = "yes";
