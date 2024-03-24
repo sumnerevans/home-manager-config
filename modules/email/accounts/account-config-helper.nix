@@ -34,6 +34,7 @@ in {
       enable = true;
       create = "both";
       remove = "both";
+      expunge = "both";
     };
 
     msmtp.enable = true;
