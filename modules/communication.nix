@@ -10,6 +10,7 @@ in {
       mumble
       neochat
       nheko
+      slack
       zoom-us
     ];
 }
