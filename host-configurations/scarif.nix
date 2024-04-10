@@ -23,7 +23,7 @@ let
 in {
   wayland.enable = true;
   laptop.enable = true;
-  networking.interfaces = [ "wlp1s0" ];
+  networking.interfaces = [ "enp52s0f4u1u1" "wlp1s0" ];
 
   mdf.port = 1024;
 
