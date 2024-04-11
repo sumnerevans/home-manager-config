@@ -6,7 +6,11 @@ let
       isort
       mypy
       pyls-isort
-      python-lsp-black
+      # Fix until https://github.com/NixOS/nixpkgs/pull/303044 is merged
+      (python-lsp-black.overrideAttrs (old: {
+        doInstallCheck = false;
+        doCheck = false;
+      }))
       python-lsp-server
     ]);
 in {
