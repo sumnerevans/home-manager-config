@@ -1,30 +1,60 @@
 { config, pkgs, lib, ... }:
 with lib;
 let
-  accountConfig = {
-    address = "sumner@beeper.com";
-    name = "Work";
+  automatticConfig = {
+    address = "sumner.evans@automattic.com";
+    name = "Automattic";
     color = "blue";
-    signatureLines = ''
-      Sumner Evans | Software Engineer at Beeper
-      https://sumnerevans.com | @sumner:nevarro.space | GPG: B50022FD
-    '';
+  };
+  beeperConfig = {
+    address = "sumner@beeper.com";
+    name = "Beeper";
+    color = "green";
   };
 
   helper = import ./account-config-helper.nix { inherit config pkgs lib; };
 in {
-  accounts.email.accounts.Work = mkMerge [
-    (helper.commonConfig accountConfig)
-    (helper.imapnotifyConfig accountConfig)
-    (helper.signatureConfig accountConfig)
-    helper.gpgConfig
-    {
-      flavor = "gmail.com";
-      folders = {
-        drafts = "[Gmail]/Drafts";
-        sent = "[Gmail]/Sent Mail";
-        trash = "[Gmail]/Trash";
-      };
-    }
-  ];
+  accounts.email.accounts = mkIf (config.work.enable) {
+    Automattic = mkMerge [
+      (helper.commonConfig automatticConfig)
+      (helper.imapnotifyConfig automatticConfig)
+      {
+        primary = true;
+        flavor = "gmail.com";
+        folders = {
+          drafts = "[Gmail]/Drafts";
+          sent = "[Gmail]/Sent Mail";
+          trash = "[Gmail]/Trash";
+        };
+        signature = {
+          showSignature = "append";
+          text = ''
+            Sumner Evans
+            Software Engineer at Beeper (part of Automattic)
+            https://sumnerevans.com | @sumner:nevarro.space
+          '';
+        };
+      }
+    ];
+    Beeper = mkMerge [
+      (helper.commonConfig beeperConfig)
+      (helper.imapnotifyConfig beeperConfig)
+      {
+        flavor = "gmail.com";
+        folders = {
+          drafts = "[Gmail]/Drafts";
+          sent = "[Gmail]/Sent Mail";
+          trash = "[Gmail]/Trash";
+        };
+        signature = {
+          showSignature = "append";
+          text = ''
+            Sumner Evans
+            Software Engineer at Beeper (part of Automattic)
+            https://sumnerevans.com | @sumner:nevarro.space
+          '';
+        };
+      }
+    ];
+  };
 }

@@ -89,24 +89,6 @@ in {
           map = [ "index" ];
         }
         {
-          action =
-            "<change-folder>${config.accounts.email.accounts.Personal.maildir.absPath}/INBOX<enter>";
-          key = "P";
-          map = [ "index" ];
-        }
-        {
-          action =
-            "<change-folder>${config.accounts.email.accounts.Work.maildir.absPath}/INBOX<enter>";
-          key = "W";
-          map = [ "index" ];
-        }
-        {
-          action =
-            "<change-folder>${config.accounts.email.accounts.Gmail.maildir.absPath}/INBOX<enter>";
-          key = "A";
-          map = [ "index" ];
-        }
-        {
           action = "<change-folder>?<change-dir><home>^K=<enter><tab>";
           key = "c";
           map = [ "index" ];
@@ -116,7 +98,33 @@ in {
           key = "s";
           map = [ "index" ];
         }
-      ];
+      ] ++ (if config.work.enable then [
+        {
+          action =
+            "<change-folder>${config.accounts.email.accounts.Automattic.maildir.absPath}/INBOX<enter>";
+          key = "A";
+          map = [ "index" ];
+        }
+        {
+          action =
+            "<change-folder>${config.accounts.email.accounts.Beeper.maildir.absPath}/INBOX<enter>";
+          key = "B";
+          map = [ "index" ];
+        }
+      ] else [
+        {
+          action =
+            "<change-folder>${config.accounts.email.accounts.Personal.maildir.absPath}/INBOX<enter>";
+          key = "P";
+          map = [ "index" ];
+        }
+        {
+          action =
+            "<change-folder>${config.accounts.email.accounts.Gmail.maildir.absPath}/INBOX<enter>";
+          key = "A";
+          map = [ "index" ];
+        }
+      ]);
 
       sidebar = {
         enable = true;

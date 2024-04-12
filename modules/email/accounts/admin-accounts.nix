@@ -39,7 +39,7 @@ let
 
   helper = import ./account-config-helper.nix { inherit config pkgs lib; };
 in {
-  accounts.email.accounts = {
+  accounts.email.accounts = mkIf (!config.work.enable) {
     Admin = mkMerge [
       (helper.commonConfig adminConfig)
       (helper.imapnotifyConfig adminConfig)
