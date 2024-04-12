@@ -5,11 +5,9 @@ let
   hasGui = config.wayland.enable || config.xorg.enable;
 in {
   home.packages = with pkgs;
-    [ elinks w3m ] ++ optionals hasGui [
+    [ elinks w3m ] ++ (optionals hasGui [
       (google-chrome.override { commandLineArgs = chromeCommandLineArgs; })
-
-      nyxt
-    ];
+    ]);
 
   programs.chromium.enable = hasGui;
   programs.firefox.enable = hasGui;
