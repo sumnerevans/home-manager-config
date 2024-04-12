@@ -15,7 +15,6 @@ in {
     home.packages = with pkgs;
       [
         # Shell Utilities
-        delta
         eternal-terminal
         nodePackages.jsonlint
         mosh
@@ -34,20 +33,21 @@ in {
         go
       ] ++ (
         # GUI Tools
-        optionals hasGui [
-          android-studio
+        optionals hasGui ([
           d-spy
-          jetbrains.idea-community
-          openjdk11
           rars
           remmina
           sqlitebrowser
-          visualvm
           wireshark
 
           # GTK Development
           icon-library
-        ]);
+        ] ++ (optionals config.work.enable [
+          android-studio
+          jetbrains.idea-community
+          openjdk11
+          visualvm
+        ])));
 
     # Enable developer programs
     programs.direnv.enable = true;
