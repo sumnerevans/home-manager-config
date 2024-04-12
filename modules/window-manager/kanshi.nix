@@ -27,7 +27,6 @@ let
     DellS2417DG = {
       criteria = "Dell Inc. Dell S2417DG #ASNmc/dFujvd";
       mode = "2560x1440@143.998Hz";
-      position = "0,0";
     };
     ScarifInternal = {
       criteria =
@@ -38,7 +37,7 @@ let
     AutomatticInternal = {
       criteria = "Samsung Display Corp. 0x4193 Unknown";
       mode = "2880x1800@90Hz";
-      scale = 1.5;
+      scale = 1.6;
       position = "0,0";
     };
   };
@@ -78,10 +77,7 @@ in {
         ScarifUndocked = { outputs = [ configs.ScarifInternal ]; };
         ScarifDockedOne = {
           outputs = [
-            {
-              criteria = "Dell Inc. Dell S2417DG #ASNmc/dFujvd";
-              mode = "2560x1440@143.998Hz";
-            }
+            (configs.DellS2417DG // { position = "1920,0"; })
             configs.ScarifInternal
           ];
         };
@@ -89,10 +85,7 @@ in {
         AutomatticUndocked = { outputs = [ configs.AutomatticInternal ]; };
         AutomatticDockedOne = {
           outputs = [
-            {
-              criteria = "Dell Inc. Dell S2417DG #ASNmc/dFujvd";
-              mode = "2560x1440@143.998Hz";
-            }
+            (configs.DellS2417DG // { position = "2880,0"; })
             configs.AutomatticInternal
           ];
         };
