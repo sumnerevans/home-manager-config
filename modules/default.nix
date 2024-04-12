@@ -15,7 +15,6 @@ in {
     ./neovim
     ./nix.nix
     ./newsboat.nix
-    ./scripts
     ./ssh.nix
     ./symlinks.nix
     ./syncthing.nix
