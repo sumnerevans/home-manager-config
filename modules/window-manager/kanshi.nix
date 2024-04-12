@@ -32,6 +32,14 @@ let
     ScarifInternal = {
       criteria =
         "InfoVision Optoelectronics (Kunshan) Co.,Ltd China 0x8C44 Unknown";
+      mode = "1920x1200@60Hz";
+      position = "0,0";
+    };
+    AutomatticInternal = {
+      criteria = "Samsung Display Corp. 0x4193 Unknown";
+      mode = "2880x1800@90Hz";
+      scale = 1.5;
+      position = "0,0";
     };
   };
 
@@ -67,21 +75,7 @@ in {
         };
         DoubleDell = { outputs = [ configs.DellP2421D configs.DellS2417DG ]; };
 
-        ScarifUndocked = {
-          outputs = [
-            (configs.ScarifInternal // {
-              mode = "1920x1200@60Hz";
-              position = "0,0";
-            })
-          ];
-        };
-        ScarifDockedBoth = {
-          outputs = [
-            (configs.ScarifInternal // { status = "disable"; })
-            configs.DellS2417DG
-            configs.DellP2421D
-          ];
-        };
+        ScarifUndocked = { outputs = [ configs.ScarifInternal ]; };
         ScarifDockedOne = {
           outputs = [
             {
@@ -89,6 +83,17 @@ in {
               mode = "2560x1440@143.998Hz";
             }
             configs.ScarifInternal
+          ];
+        };
+
+        AutomatticUndocked = { outputs = [ configs.AutomatticInternal ]; };
+        AutomatticDockedOne = {
+          outputs = [
+            {
+              criteria = "Dell Inc. Dell S2417DG #ASNmc/dFujvd";
+              mode = "2560x1440@143.998Hz";
+            }
+            configs.AutomatticInternal
           ];
         };
       };
