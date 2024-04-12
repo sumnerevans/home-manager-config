@@ -96,12 +96,6 @@ with lib; {
 
           echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
 
-          # Notify me if I haven't written in my journal for the day.
-          if [[ ! -f ${config.home.homeDirectory}/Documents/journal/$(${pkgs.coreutils}/bin/date +%Y-%m-%d).rst ]]; then
-              echo "\n$(${tput} bold)>>>> Make sure to write in your journal today. <<<<$(${tput} sgr 0)"
-              echo
-          fi
-
           # Show a quote
           ${pkgs.fortune}/bin/fortune ${config.xdg.dataHome}/fortune/quotes
 
