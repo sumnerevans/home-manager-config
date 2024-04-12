@@ -16,7 +16,10 @@ in {
     attributes = [ "*.pdf diff=pdf" ];
 
     signing = {
-      key = "8904527AB50022FD";
+      key = if config.work.enable then
+        "${config.home.homeDirectory}/.ssh/id_ed25519"
+      else
+        "8904527AB50022FD";
       signByDefault = true;
     };
 
@@ -30,7 +33,7 @@ in {
       };
       init.defaultBranch = "master";
       pull.ff = "only";
-      tag.gpgsign = true;
+      gpg.format = lib.mkIf config.work.enable "ssh";
       status.submoduleSummary = true;
       rebase.autoSquash = true;
       rerere.enabled = true;
@@ -88,7 +91,7 @@ in {
     gdc = "git diff --cached";
     gfetch = "git fetch";
     gl =
-      "git log --pretty=format:'%C(auto)%h %ad %C(green)%s%Creset %C(auto)%d [%an (%G? %GK)]' --graph --date=format:'%Y-%m-%d %H:%M' --all";
+      "git log --pretty=format:'%C(auto)%h %ad %C(green)%s%Creset %C(auto)%d [%an]' --graph --date=format:'%Y-%m-%d %H:%M' --all";
     gpull = "git pull";
     gpush = "git push";
     grhh = "git reset --hard HEAD";
