@@ -6,7 +6,6 @@ in {
     ./communication.nix
     ./devtools.nix
     ./email
-    ./foot.nix
     ./fzf.nix
     ./git.nix
     ./gpg.nix
