@@ -2,9 +2,10 @@
 with lib;
 let
   automatticConfig = {
-    address = "sumner.evans@automattic.com";
+    address = "sumner.evans@a8c.com";
     name = "Automattic";
     color = "blue";
+    aliases = [ "sumner.evans@automattic.com" ];
   };
   beeperConfig = {
     address = "sumner@beeper.com";

@@ -31,7 +31,9 @@ in {
       };
 
     home.symlinks."${aliasfile}" = "${syncthingdir}/.config/neomutt/aliases";
-    home.symlinks."${mailboxfile}" =
+    home.symlinks."${mailboxfile}" = if config.work.enable then
+      "${syncthingdir}/.config/neomutt/work-mailboxes"
+    else
       "${syncthingdir}/.config/neomutt/mailboxes";
 
     systemd.user.services.mdf = {
