@@ -22,6 +22,7 @@ in {
     ./tracktime.nix
     ./ttchat.nix
     ./udiskie.nix
+    ./work.nix
     ./window-manager
     ./xdg.nix
     ./zsh
