@@ -3,7 +3,6 @@ let quotesPath = "${config.xdg.dataHome}/fortune/quotes";
 in {
   imports = [
     ./accounts
-    ./contact-query.nix
     ./mailcap.nix
     ./mailnotify.nix
     ./mbsync.nix

@@ -3,7 +3,6 @@ in {
   imports = [
     ./alacritty.nix
     ./browsers.nix
-    ./calendar
     ./communication.nix
     ./devtools.nix
     ./email
