@@ -40,41 +40,16 @@ in {
 
       day_worked_min_threshold = 120;
 
-      customer_rates = {
-        Beeper = 57.5;
-        TTD = 51.92;
-      };
-
       project_rates."teaching/tutoring" = 50;
-
-      customer_addresses = {
-        Beeper = ''
-          207 High Street
-          Palo Alto, CA 94301
-        '';
-        TTD = ''
-          42 N. Chestnut St
-          Ventura, CA 93001
-          United States of America
-        '';
-      };
-
-      customer_aliases = {
-        Beeper = "Beeper Inc.";
-        TTD = "The Trade Desk";
-      };
     };
 
   # Aliases
   programs.zsh.shellAliases = {
-    tt-be = "tt start -t linear -c Beeper -p BE";
     tt-beeper = "tt start -c Beeper";
-    tt-bleep = "tt start -t linear -c Beeper -p BLEEP";
-    tt-boop = "tt start -t linear -c Beeper -p BOOP";
     tt-element = "tt start -c Beeper 'Element catchup'";
     tt-hspc = "tt start -t gh -p ColoradoSchoolOfMines/hspc-problems";
-    tt-issues = "tt start -t gl -p 'beeper/issues' -c Beeper";
     tt-nevarro = "tt start -c Nevarro";
+    tt-plat = "tt start -t linear -c Beeper -p PLAT";
     tt-standup = "tt start -c Beeper 'Standup'";
     tt-tea = "tt start -p teaching/algo";
     tt-tut = "tt start -c Nevarro -p teaching/tutoring";
