@@ -10,7 +10,10 @@ in {
     package = pkgs.gitAndTools.gitFull;
     lfs.enable = true;
 
-    userEmail = "me@sumnerevans.com";
+    userEmail = if config.work.enable then
+      "sumner.evans@automattic.com"
+    else
+      "me@sumnerevans.com";
     userName = "Sumner Evans";
 
     attributes = [ "*.pdf diff=pdf" ];
