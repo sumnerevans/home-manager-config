@@ -24,7 +24,7 @@ in {
   wayland.enable = true;
   laptop.enable = true;
   work.enable = true;
-  networking.interfaces = [ "enp52s0f4u1u1" "wlp1s0" ];
+  networking.interfaces = [ "enp197s0f4u1u1" "wlp1s0" ];
 
   mdf.port = 1024;
 
