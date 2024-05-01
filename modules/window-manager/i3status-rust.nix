@@ -132,6 +132,23 @@ with lib; {
                 {
                   block = "maildir";
                   interval = 10;
+                  inboxes = map (f: "${home}/Mail/${f}/INBOX") [ "Automattic" ];
+                  threshold_warning = 1;
+                  threshold_critical = 5;
+                  priority = 10;
+                }
+                {
+                  block = "maildir";
+                  interval = 10;
+                  inboxes = map (f: "${home}/Mail/${f}/INBOX") [ "Beeper" ];
+                  threshold_warning = 1;
+                  threshold_critical = 5;
+                  priority = 11;
+                }
+              ] else [
+                {
+                  block = "maildir";
+                  interval = 10;
                   inboxes = map (f: "${home}/Mail/${f}/INBOX") [
                     "Personal"
                     "Financial"
@@ -146,23 +163,6 @@ with lib; {
                   inboxes = map (f: "${home}/Mail/${f}/INBOX") [ "Teaching" ];
                   threshold_warning = 25;
                   threshold_critical = 50;
-                  priority = 11;
-                }
-              ] else [
-                {
-                  block = "maildir";
-                  interval = 10;
-                  inboxes = map (f: "${home}/Mail/${f}/INBOX") [ "Automattic" ];
-                  threshold_warning = 1;
-                  threshold_critical = 5;
-                  priority = 10;
-                }
-                {
-                  block = "maildir";
-                  interval = 10;
-                  inboxes = map (f: "${home}/Mail/${f}/INBOX") [ "Beeper" ];
-                  threshold_warning = 1;
-                  threshold_critical = 5;
                   priority = 11;
                 }
               ]) ++ (
