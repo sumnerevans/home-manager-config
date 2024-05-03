@@ -122,7 +122,8 @@ with lib; {
           "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -show run";
           "${modifier}+space" =
             "exec ${pkgs.rofi}/bin/rofi -show drun -show-icons";
-          "${modifier}+F4" = "exec ${pkgs.menucalc}/bin/= -- -lines 3"; # menu-calc
+          "${modifier}+F4" =
+            "exec ${pkgs.menucalc}/bin/= -- -lines 3"; # menu-calc
 
           # FOCUS
           "${modifier}+${left}" = "focus left";
@@ -135,6 +136,10 @@ with lib; {
           "${modifier}+Shift+${down}" = "move down";
           "${modifier}+Shift+${up}" = "move up";
           "${modifier}+Shift+${right}" = "move right";
+
+          # WORKSPACE MOVEMENT
+          "${modifier}+greater" = "move workspace to output right";
+          "${modifier}+less" = "move workspace to output left";
 
           # SPLIT IN HORIZONTAL/VERTICAL ORIENTATION
           "${modifier}+semicolon" = "split h";
