@@ -45,12 +45,12 @@ in {
 
   # Aliases
   programs.zsh.shellAliases = {
-    tt-beeper = "tt start -c Beeper";
-    tt-element = "tt start -c Beeper 'Element catchup'";
+    tt-automattic = "tt start -c Automattic";
+    tt-element = "tt start -c Automattic 'Element catchup'";
     tt-hspc = "tt start -t gh -p ColoradoSchoolOfMines/hspc-problems";
     tt-nevarro = "tt start -c Nevarro";
-    tt-plat = "tt start -t linear -c Beeper -p PLAT";
-    tt-standup = "tt start -c Beeper 'Standup'";
+    tt-plat = "tt start -t linear -c Automattic -p PLAT";
+    tt-standup = "tt start -c Automattic 'Standup'";
     tt-tea = "tt start -p teaching/algo";
     tt-tut = "tt start -c Nevarro -p teaching/tutoring";
   };
