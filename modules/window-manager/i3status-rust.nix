@@ -34,11 +34,9 @@ with lib; {
             ls ${home}/.offlinemsmtp-outbox | ${cu}/wc -l | jq '{icon: "mail", text: .|tostring, state: (if (. > 0) then "Critical" else "Idle" end)}'
           '';
         in {
-          # icons = "awesome";
-          # theme = "nord-dark";
           settings = {
             icons.icons = "awesome4";
-            theme.theme = "nord-dark";
+            theme.theme = "slick";
           };
 
           blocks = map (x: builtins.removeAttrs x [ "priority" ])
@@ -88,7 +86,7 @@ with lib; {
               }
               {
                 block = "sound";
-                format = " $icon {$volume.eng(w:2) |}";
+                format = " $icon {$volume.eng(w:2)|}";
                 step_width = 2;
                 priority = 90;
               }
