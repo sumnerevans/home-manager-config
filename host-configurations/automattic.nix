@@ -30,16 +30,34 @@ in {
 
   home.packages = [ pkgs.pulseaudio ];
 
-  programs.i3status-rust.extraBlocks = let
-    cmd =
-      "${toggleAudio} && kill -USR1 $(${pkgs.procps}/bin/pgrep i3status-rs)";
-  in [{
-    block = "toggle";
-    format = "  $icon  ";
-    command_state = "[[ $(${currentAudioDevice}) =~ '${speakers}' ]] || echo 1";
-    interval = 3;
-    priority = 89;
-    command_on = cmd;
-    command_off = cmd;
-  }];
+  programs.i3status-rust.extraBlocks = [
+    (let
+      cmd =
+        "${toggleAudio} && kill -USR1 $(${pkgs.procps}/bin/pgrep i3status-rs)";
+    in {
+      block = "toggle";
+      format = "  $icon  ";
+      command_state =
+        "[[ $(${currentAudioDevice}) =~ '${speakers}' ]] || echo 1";
+      interval = 3;
+      priority = 89;
+      command_on = cmd;
+      command_off = cmd;
+    })
+
+    (let
+      commandState = pkgs.writeShellScript "command-state" ''
+        systemctl status --user autossh@a8c-proxy.service > /dev/null
+        [ $? -eq 0 ] && echo 1
+      '';
+    in {
+      block = "toggle";
+      format = " $icon";
+      command_state = commandState;
+      interval = 3;
+      priority = 88;
+      command_on = "systemctl start --user autossh@a8c-proxy.service";
+      command_off = "systemctl stop --user autossh@a8c-proxy.service";
+    })
+  ];
 }
