@@ -69,11 +69,8 @@ with lib; {
               }
               {
                 block = "music";
-                player = "sublimemusic";
-                format = if config.laptop.enable then
-                  " $icon {$combo.str(max_w:20) $play $next |} "
-                else
-                  " $icon {$combo.str(max_w:20) $prev $play $next |} ";
+                format =
+                  " $icon {$combo.str(max_w:25,rot_interval:0.5) $prev $play $next |}";
                 priority = 40;
               }
               {
