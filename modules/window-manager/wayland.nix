@@ -123,6 +123,11 @@ in {
             "12951:18806:ZSA_Technology_Labs_Inc_ErgoDox_EZ_Glow_Consumer_Control"
             "12951:18806:ZSA_Technology_Labs_Inc_ErgoDox_EZ_Glow_Keyboard"
             "12951:18806:ZSA_Technology_Labs_Inc_ErgoDox_EZ_Glow_System_Control"
+            # My Voyager has a hardware 3l implementation.
+            "12951:6519:ZSA_Technology_Labs_Voyager"
+            "12951:6519:ZSA_Technology_Labs_Voyager_Consumer_Control"
+            "12951:6519:ZSA_Technology_Labs_Voyager_System_Control"
+            "12951:6519:ZSA_Technology_Labs_Voyager_Keyboard"
             # Use normal layout for Yubikey
             "4176:1031:Yubico_YubiKey_OTP+FIDO+CCID"
           ];
