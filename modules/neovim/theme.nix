@@ -6,6 +6,8 @@ with lib; {
     extraConfig = ''
       colorscheme carbonfox
       set background=dark
+
+      highlight LspInlayHint ctermbg=0 cterm=italic guibg=transparent gui=italic
     '';
   };
 }

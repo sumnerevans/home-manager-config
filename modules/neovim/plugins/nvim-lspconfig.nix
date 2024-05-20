@@ -62,6 +62,15 @@ in {
                   unusedwrite = true,
                   useany = true,
                 },
+                hints = {
+                  assignVariableTypes = true,
+                  compositeLiteralFields = true,
+                  compositeLiteralTypes = true,
+                  constantValues = true,
+                  functionTypeParameters = true,
+                  parameterNames = true,
+                  rangeVariableTypes = true,
+                },
                 staticcheck = true,
               },
             },
@@ -140,6 +149,11 @@ in {
             group = vim.api.nvim_create_augroup('UserLspConfig', {}),
             callback = function(ev)
               local telescope_builtin = require('telescope.builtin')
+
+              local client = vim.lsp.get_client_by_id(ev.data.client_id)
+              if client.server_capabilities.inlayHintProvider then
+                vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+              end
 
               -- Buffer local mappings.
               -- See `:help vim.lsp.*` for documentation on any of the below functions
