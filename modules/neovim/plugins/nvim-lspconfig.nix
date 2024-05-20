@@ -147,7 +147,6 @@ in {
               vim.keymap.set('n', 'gd', telescope_builtin.lsp_definitions, {})
               vim.keymap.set('n', 'gi', telescope_builtin.lsp_implementations, {})
               vim.keymap.set('n', 'gr', telescope_builtin.lsp_references, {})
-              vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
               vim.keymap.set('n', 'S', telescope_builtin.lsp_dynamic_workspace_symbols, {})
               vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
               vim.keymap.set('n', '<F6>', vim.lsp.buf.rename, opts)
