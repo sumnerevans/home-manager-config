@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  terminal = "${pkgs.alacritty}/bin/alacritty";
+  terminal = "${pkgs.kitty}/bin/kitty";
   waylandCfg = config.wayland;
   xorgCfg = config.xorg;
 in {
@@ -9,6 +9,7 @@ in {
     ./autorandr.nix
     ./i3status-rust.nix
     ./kanshi.nix
+    ./kitty.nix
     ./rofi.nix
     ./wallpaper.nix
     ./wayland.nix

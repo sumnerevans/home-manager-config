@@ -20,10 +20,10 @@ in {
           #!/usr/bin/env sh
           set -xe
           if [[ $# == 0 ]]; then
-            ${config.home.sessionVariables.TERMINAL} -t Mutt -e \
+            ${pkgs.kitty}/bin/kitty -T Mutt \
               zsh -c "export FOR_MUTT_HELPER=1 && source ${config.home.homeDirectory}/.zshrc && neomutt"
           else
-            ${config.home.sessionVariables.TERMINAL} -t Mutt -e \
+            ${pkgs.kitty}/bin/kitty -T Mutt \
               zsh -c "export FOR_MUTT_HELPER=1 && source ${config.home.homeDirectory}/.zshrc && neomutt \"$@\""
           fi
         '';

@@ -3,7 +3,7 @@
     enable = true;
     font = "pango:Iosevka 12";
     location = "top";
-    terminal = "${pkgs.alacritty}/bin/alacritty";
+    terminal = "${pkgs.kitty}/bin/kitty";
     yoffset = 80;
     extraConfig = { matching = "fuzzy"; };
 
