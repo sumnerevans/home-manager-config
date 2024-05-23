@@ -231,17 +231,6 @@ in {
 
     services.mako = {
       enable = true;
-      package = pkgs.mako.overrideAttrs (old: rec {
-        pname = "mako";
-        version = "1.7";
-
-        src = pkgs.fetchFromGitHub {
-          owner = "emersion";
-          repo = pname;
-          rev = "v${version}";
-          sha256 = "sha256-CT4J7PDmTapQPi2OjXrnS6zqJwkVJTBtmwlZ2lp6f0I=";
-        };
-      });
 
       borderRadius = 5;
       borderSize = 2;
