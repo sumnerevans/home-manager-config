@@ -111,7 +111,7 @@ in {
             },
           }
           lspconfig.templ.setup {
-            cmd = { "${pkgs.templ}/bin/templ", "lsp" },
+            cmd = { "templ", "lsp" },
             capabilities = capabilities,
           }
           lspconfig.texlab.setup {

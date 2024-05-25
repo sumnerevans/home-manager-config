@@ -10,18 +10,14 @@
     };
     flake-utils.url = "github:numtide/flake-utils";
     declarative-cachix.url = "github:jonascarpay/declarative-cachix";
-    templ = {
-      url = "github:a-h/templ/v0.2.697";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     menucalc = {
       url = "github:sumnerevans/menu-calc";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, declarative-cachix, flake-utils
-    , templ, menucalc }:
+  outputs =
+    { self, nixpkgs, home-manager, declarative-cachix, flake-utils, menucalc }:
     let
       system = "x86_64-linux";
       mkConfig = hostModule:
@@ -30,10 +26,7 @@
             inherit system;
             config.allowUnfree = true;
             overlays = [
-              (final: prev: {
-                inherit (templ.packages.${system}) templ;
-                inherit (menucalc.packages.${system}) menucalc;
-              })
+              (final: prev: { inherit (menucalc.packages.${system}) menucalc; })
               (final: prev: {
                 element-desktop =
                   prev.element-desktop.override { electron = prev.electron; };
