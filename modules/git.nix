@@ -17,6 +17,7 @@ in {
     userName = "Sumner Evans";
 
     attributes = [ "*.pdf diff=pdf" ];
+    delta.enable = true;
 
     signing = {
       key = if config.work.enable then
