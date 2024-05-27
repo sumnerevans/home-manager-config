@@ -23,9 +23,9 @@ in {
     # NixOS config
     cfg = "/etc/nixos";
 
-    # Projects
-    proj = "${home}/projects";
-    gh = "${proj}/github.com";
+    # Repositories
+    repo = "${home}/repositories";
+    gh = "${repo}/github.com";
 
     beep = "${gh}/sumnerevans/beeper";
 

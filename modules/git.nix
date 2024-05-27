@@ -42,8 +42,6 @@ in {
       rebase.autoSquash = true;
       rerere.enabled = true;
 
-      gitget.root = "${config.home.homeDirectory}/projects";
-
       sendemail = {
         annotate = "yes";
         smtpserver = "${offlinemsmtp}/bin/offlinemsmtp";
