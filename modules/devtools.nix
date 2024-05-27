@@ -31,6 +31,9 @@ in {
 
         # Languages
         go
+
+        # Libraries
+        olm
       ] ++ (
         # GUI Tools
         optionals hasGui ([
