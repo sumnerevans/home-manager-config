@@ -5,7 +5,6 @@ let
   libreoffice = "${pkgs.libreoffice}/bin/libreoffice";
   icalviewScript =
     pkgs.writeScript "icalview" (builtins.readFile ./icalview.py);
-  mdf = pkgs.callPackage ../../pkgs/mdf.nix { };
   hasGui = config.wayland.enable || config.xorg.enable;
 
   programSection = executable: items:
@@ -21,7 +20,7 @@ let
     # Patch files
     "text/x-patch" = [
       ''
-        ${mdf}/bin/mdf --root-uri "http://localhost:${
+        ${pkgs.mdf}/bin/mdf --root-uri "http://localhost:${
           toString config.mdf.port
         }"''
       "copiousoutput"

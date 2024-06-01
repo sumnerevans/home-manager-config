@@ -4,7 +4,6 @@ with lib;
 let
   aliasfile = "${config.xdg.configHome}/neomutt/aliases";
   mailboxfile = "${config.xdg.configHome}/neomutt/mailboxes";
-  mdf = pkgs.callPackage ../../pkgs/mdf.nix { };
 
   syncthingdir = "${config.home.homeDirectory}/Syncthing";
 in {
@@ -42,7 +41,7 @@ in {
 
       Service = {
         ExecStart = ''
-          ${mdf}/bin/mdf \
+          ${pkgs.mdf}/bin/mdf \
             --daemon \
             --port ${toString config.mdf.port} \
             --root-uri "http://localhost:${toString config.mdf.port}/"
@@ -161,7 +160,7 @@ in {
         source ${mailboxfile}
 
         set allow_ansi
-        set display_filter="${mdf}/bin/mdf --root-uri 'http://localhost:${
+        set display_filter="${pkgs.mdf}/bin/mdf --root-uri 'http://localhost:${
           toString config.mdf.port
         }/'"
 

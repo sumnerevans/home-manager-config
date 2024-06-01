@@ -14,10 +14,14 @@
       url = "github:sumnerevans/menu-calc";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mdf = {
+      url = "github:sumnerevans/mdf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs =
-    { self, nixpkgs, home-manager, declarative-cachix, flake-utils, menucalc }:
+  outputs = { self, nixpkgs, home-manager, declarative-cachix, flake-utils
+    , menucalc, mdf }:
     let
       system = "x86_64-linux";
       mkConfig = hostModule:
@@ -27,6 +31,7 @@
             config.allowUnfree = true;
             overlays = [
               (final: prev: { inherit (menucalc.packages.${system}) menucalc; })
+              (final: prev: { inherit (mdf.packages.${system}) mdf; })
               (final: prev: {
                 element-desktop =
                   prev.element-desktop.override { electron = prev.electron; };
