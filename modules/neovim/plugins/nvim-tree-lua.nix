@@ -56,11 +56,6 @@
         filters = {
           git_ignored = false,
         },
-        actions = {
-          open_file = {
-            quit_on_open = true,
-          },
-        },
       }
 
       vim.keymap.set('n', '<S-T>', function()
