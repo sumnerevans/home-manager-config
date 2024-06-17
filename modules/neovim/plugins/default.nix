@@ -17,7 +17,7 @@
     ./nvim-tree-lua.nix
 
     # Editor
-    ./copilot.nix
+    # ./copilot.nix
     ./nvim-neoclip.nix
     ./vim-template.nix
 
