@@ -89,6 +89,13 @@ in {
             configs.AutomatticInternal
           ];
         };
+        Automattic_ThinkVision = {
+          exec = arrangeWorkspaces;
+          outputs = [
+            configs.AutomatticInternal
+            (configs.ThinkVision // { position = "1920,0"; })
+          ];
+        };
       };
     };
   };
