@@ -41,15 +41,6 @@ let
       position = "0,0";
     };
   };
-
-  arrangeWorkspaces = [
-    ''
-      ${pkgs.sway}/bin/swaymsg '[workspace="10"]' move workspace to output right''
-    ''
-      ${pkgs.sway}/bin/swaymsg '[workspace="11: "]' move workspace to output right''
-    ''
-      ${pkgs.sway}/bin/swaymsg '[workspace="12: "]' move workspace to output right''
-  ];
 in {
   config = mkIf cfg.enable {
     home.packages = [ pkgs.kanshi ];
@@ -59,14 +50,12 @@ in {
         Kohaku_Undocked = { outputs = [ configs.KohakuInternal ]; };
         ThinkPad_Undocked = { outputs = [ configs.ThinkPadInternal ]; };
         Kohaku_ThinkVision = {
-          exec = arrangeWorkspaces;
           outputs = [
             configs.KohakuInternal
             (configs.ThinkVision // { position = "2194,0"; })
           ];
         };
         ThinkPad_ThinkVision = {
-          exec = arrangeWorkspaces;
           outputs = [
             configs.ThinkPadInternal
             (configs.ThinkVision // { position = "1920,0"; })
@@ -90,7 +79,6 @@ in {
           ];
         };
         Automattic_ThinkVision = {
-          exec = arrangeWorkspaces;
           outputs = [
             configs.AutomatticInternal
             (configs.ThinkVision // { position = "1920,0"; })
