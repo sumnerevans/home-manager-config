@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   imports = [
     # Project Navigation
+    ./gitlinker.nix
     ./telescope.nix
 
     # Local Environment Configuration and Integration
@@ -17,7 +18,7 @@
     ./nvim-tree-lua.nix
 
     # Editor
-    # ./copilot.nix
+    ./copilot.nix
     ./nvim-neoclip.nix
     ./vim-template.nix
 
