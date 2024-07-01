@@ -7,10 +7,10 @@ let
     color = "green";
     signatureLines = ''
       Sumner Evans
-      Software Engineer at Beeper
+      Software Engineer at Automattic working on Beeper
       2 Chronicles 7:14
 
-      https://sumnerevans.com | @sumner:nevarro.space | GPG: B50022FD
+      https://sumnerevans.com | @sumner:nevarro.space
     '';
   };
 
@@ -20,7 +20,7 @@ let
     color = "green";
     signatureLines = ''
       Sumner Evans
-      Software Engineer at Beeper
+      Software Engineer at Automattic working on Beeper
       2 Chronicles 7:14
 
       https://sumnerevans.com | @sumner:nevarro.space
@@ -33,7 +33,7 @@ let
     color = "green";
     signatureLines = ''
       Jonathan Sumner Evans
-      Software Engineer at Beeper
+      Software Engineer at Automattic working on Beeper
       2 Chronicles 7:14
 
       https://sumnerevans.com | @sumner:nevarro.space
@@ -47,9 +47,9 @@ let
     signatureLines = ''
       Sumner Evans
       Adjunct Professor, Colorado School of Mines
-      Software Engineer at Beeper
+      Software Engineer at Automattic working on Beeper
 
-      https://sumnerevans.com | @sumner:nevarro.space | GPG: B50022FD
+      https://sumnerevans.com | @sumner:nevarro.space
     '';
   };
 
