@@ -57,11 +57,6 @@ in {
           timeout = 300;
           command = swaylockCmd;
         }
-        {
-          timeout = 360;
-          command = ''${pkgs.sway}/bin/swaymsg "output * dpms off"'';
-          resumeCommand = ''${pkgs.sway}/bin/swaymsg "output * dpms on"'';
-        }
       ];
       events = [
         {
