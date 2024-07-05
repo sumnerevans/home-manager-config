@@ -49,10 +49,10 @@ in {
         version = "2024-05-23";
 
         src = fetchFromGitHub {
-          owner = "yanskun";
+          owner = "nvim-treesitter";
           repo = pname;
-          rev = "477ee06e3f907f76c58b37f61d0f7c2582237bd1";
-          sha256 = "sha256-hS8p3COq4PsY2pMksFmmLa3DdhEjXSF74yHmjFx8LCc=";
+          rev = "7f695420543e5f1a1ca55c7f95c73df259491ec0";
+          sha256 = "sha256-LQjto1CIa+oV4KRlHyfg3BKZDEOTwCQvumceg1lRlFA=";
         };
       })))
       {
