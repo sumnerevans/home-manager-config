@@ -14,7 +14,7 @@ in {
     home.packages = [
       # Shell Utilities
       ffmpeg-full
-      youtube-dl
+      yt-dlp
     ] ++ (
       # GUI Tools
       optionals hasGui [
