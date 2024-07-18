@@ -122,6 +122,10 @@ in {
             cmd = { "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server", "--stdio" },
             capabilities = capabilities,
           }
+          lspconfig.vale_ls.setup {
+            cmd = { "${pkgs.vale-ls}/bin/vale-ls" },
+            capabilities = capabilities,
+          }
           lspconfig.yamlls.setup {
             cmd = { "${pkgs.nodePackages.yaml-language-server}/bin/yaml-language-server", "--stdio" },
             capabilities = capabilities,
