@@ -52,12 +52,10 @@ in {
     # Lock screen & screen off
     services.swayidle = {
       enable = true;
-      timeouts = [
-        {
-          timeout = 300;
-          command = swaylockCmd;
-        }
-      ];
+      timeouts = [{
+        timeout = 300;
+        command = swaylockCmd;
+      }];
       events = [
         {
           event = "before-sleep";
