@@ -44,17 +44,23 @@ in {
       (luaPlugin nvim-treesitter-parsers.yaml)
 
       (luaPlugin vim-matchup)
-      (luaPlugin (nvim-treesitter-context.overrideAttrs (old: rec {
-        pname = "nvim-treesitter-context";
-        version = "2024-05-23";
+      {
+        type = "lua";
+        plugin = (nvim-treesitter-context.overrideAttrs (old: rec {
+          pname = "nvim-treesitter-context";
+          version = "2024-05-23";
 
-        src = fetchFromGitHub {
-          owner = "nvim-treesitter";
-          repo = pname;
-          rev = "7f695420543e5f1a1ca55c7f95c73df259491ec0";
-          sha256 = "sha256-LQjto1CIa+oV4KRlHyfg3BKZDEOTwCQvumceg1lRlFA=";
-        };
-      })))
+          src = fetchFromGitHub {
+            owner = "nvim-treesitter";
+            repo = pname;
+            rev = "0f3332788e0bd37716fbd25f39120dcfd557c90f";
+            sha256 = "sha256-WkikzAwxUij6n9OhXnfNll3mKW0HLYTr3lyNOpBhP3Q=";
+          };
+        }));
+        config = ''
+          require'treesitter-context'.setup{mode = 'topline'}
+        '';
+      }
       {
         type = "lua";
         plugin = nvim-treesitter;
