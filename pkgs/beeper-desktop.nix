@@ -5,8 +5,8 @@ appimageTools.wrapType2 rec {
 
   src = fetchurl {
     url =
-      "https://dl.todesktop.com/201202u1n7yn5b0/builds/240321b3cmsxzxu/linux/appimage/x64";
-    sha256 = "sha256-6bevofkkb5+W54/7YR+ODlObbON00GPIxkSEwyIx59c=";
+      "https://dl.todesktop.com/201202u1n7yn5b0/builds/240718yzzvhsrxn/linux/appimage/x64";
+    sha256 = "sha256-vOtOamhSTpmB0hYOp5TNBHa3ZMezU58gV08La25zCyA=";
   };
 
   extraInstallCommands = let
