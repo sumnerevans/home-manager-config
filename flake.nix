@@ -28,14 +28,13 @@
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             inherit system;
-            config.allowUnfree = true;
+            config = {
+              allowUnfree = true;
+              permittedInsecurePackages = [ "olm-3.2.16" ];
+            };
             overlays = [
               (final: prev: { inherit (menucalc.packages.${system}) menucalc; })
               (final: prev: { inherit (mdf.packages.${system}) mdf; })
-              (final: prev: {
-                element-desktop =
-                  prev.element-desktop.override { electron = prev.electron; };
-              })
             ];
           };
 

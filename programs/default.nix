@@ -70,7 +70,7 @@ in {
       ]))
   ] ++ lib.optionals hasGui [
     # Configuration GUIs
-    gnome.gnome-power-manager
+    gnome-power-manager
     networkmanagerapplet
 
     # GUI Tools
