@@ -21,4 +21,6 @@
     preExec = "${checkNetworkOrAlreadyRunningScript}";
     frequency = "*:0/10";
   };
+
+  systemd.user.timers.mbsync.Time.Persistent = true;
 }
