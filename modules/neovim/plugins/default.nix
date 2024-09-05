@@ -19,7 +19,7 @@
 
     # Editor
     ./copilot.nix
-    ./nvim-neoclip.nix
+    # ./nvim-neoclip.nix
     ./vim-template.nix
 
     # Language Server, Completion, and Formatting
