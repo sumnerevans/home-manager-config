@@ -30,10 +30,7 @@ in {
         python3Packages.ptpython
 
         # Languages
-        go
-
-        # Libraries
-        olm
+        go_1_23
       ] ++ (
         # GUI Tools
         optionals hasGui ([

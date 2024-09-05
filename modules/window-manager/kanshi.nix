@@ -4,11 +4,6 @@ let
   cfg = config.wayland;
 
   configs = {
-    ThinkPadInternal = {
-      criteria = "Lenovo Group Limited 0x40BA";
-      mode = "1920x1080@60Hz";
-      position = "0,0";
-    };
     KohakuInternal = {
       criteria = "Unknown 0x4142";
       mode = "3840x2160@60Hz";
@@ -46,45 +41,63 @@ in {
     home.packages = [ pkgs.kanshi ];
     services.kanshi = {
       enable = true;
-      profiles = {
-        Kohaku_Undocked = { outputs = [ configs.KohakuInternal ]; };
-        ThinkPad_Undocked = { outputs = [ configs.ThinkPadInternal ]; };
-        Kohaku_ThinkVision = {
-          outputs = [
+      settings = [
+        {
+          output = {
+            criteria = "*";
+            status = "enable";
+          };
+        }
+
+        {
+          profile.name = "Kohaku_Undocked";
+          profile.outputs = [ configs.KohakuInternal ];
+        }
+
+        {
+          profile.name = "Kohaku_ThinkVision";
+          profile.outputs = [
             configs.KohakuInternal
             (configs.ThinkVision // { position = "2194,0"; })
           ];
-        };
-        ThinkPad_ThinkVision = {
-          outputs = [
-            configs.ThinkPadInternal
-            (configs.ThinkVision // { position = "1920,0"; })
-          ];
-        };
-        DoubleDell = { outputs = [ configs.DellP2421D configs.DellS2417DG ]; };
+        }
 
-        ScarifUndocked = { outputs = [ configs.ScarifInternal ]; };
-        ScarifDockedOne = {
-          outputs = [
+        {
+          profile.name = "DoubleDell";
+          profile.outputs = [ configs.DellP2421D configs.DellS2417DG ];
+        }
+
+        {
+          profile.name = "ScarifUndocked";
+          profile.outputs = [ configs.ScarifInternal ];
+        }
+        {
+          profile.name = "ScarifDockedOne";
+          profile.outputs = [
             (configs.DellS2417DG // { position = "1920,0"; })
             configs.ScarifInternal
           ];
-        };
+        }
 
-        AutomatticUndocked = { outputs = [ configs.AutomatticInternal ]; };
-        AutomatticDockedOne = {
-          outputs = [
+        {
+          profile.name = "AutomatticUndocked";
+          profile.outputs = [ configs.AutomatticInternal ];
+        }
+        {
+          profile.name = "AutomatticDockedOne";
+          profile.outputs = [
             (configs.DellS2417DG // { position = "2880,0"; })
             configs.AutomatticInternal
           ];
-        };
-        Automattic_ThinkVision = {
-          outputs = [
+        }
+        {
+          profile.name = "Automattic_ThinkVision";
+          profile.outputs = [
             configs.AutomatticInternal
             (configs.ThinkVision // { position = "1920,0"; })
           ];
-        };
-      };
+        }
+      ];
     };
   };
 }
