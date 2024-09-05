@@ -43,13 +43,6 @@ in {
       enable = true;
       settings = [
         {
-          output = {
-            criteria = "*";
-            status = "enable";
-          };
-        }
-
-        {
           profile.name = "Kohaku_Undocked";
           profile.outputs = [ configs.KohakuInternal ];
         }
