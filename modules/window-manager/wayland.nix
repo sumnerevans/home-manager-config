@@ -213,7 +213,6 @@ in {
       v4l-utils
       wf-recorder
       wl-clipboard # clipboard management
-      capitaine-cursors
       # TODO use wofi?
     ];
 
