@@ -118,8 +118,8 @@ in {
             cmd = { "${pkgs.texlab}/bin/texlab" },
             capabilities = capabilities,
           }
-          lspconfig.tsserver.setup {
-            cmd = { "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server", "--stdio" },
+          lspconfig.ts_ls.setup {
+            cmd = { "${pkgs.typescript-language-server}/bin/typescript-language-server", "--stdio" },
             capabilities = capabilities,
           }
           lspconfig.vale_ls.setup {
