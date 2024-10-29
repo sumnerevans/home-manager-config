@@ -31,6 +31,7 @@ in {
         libreoffice
         spotify
         sublime-music
+        youtube-music
       ]);
 
     programs.feh.enable = true;
