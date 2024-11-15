@@ -53,6 +53,16 @@ let
     '';
   };
 
+  travelConfig = {
+    name = "Travel";
+    address = "travel@sumnerevans.com";
+    color = "green";
+    signatureLines = ''
+      Sumner Evans
+      Software Engineer at Automattic working on Beeper
+    '';
+  };
+
   helper = import ./account-config-helper.nix { inherit config pkgs lib; };
 in {
   accounts.email.accounts = mkIf (!config.work.enable) {
@@ -87,6 +97,13 @@ in {
       (helper.imapnotifyConfig teachingConfig)
       (helper.signatureConfig teachingConfig)
       helper.gpgConfig
+      helper.migaduConfig
+    ];
+
+    Travel = mkMerge [
+      (helper.commonConfig travelConfig)
+      (helper.imapnotifyConfig travelConfig)
+      (helper.signatureConfig travelConfig)
       helper.migaduConfig
     ];
   };
