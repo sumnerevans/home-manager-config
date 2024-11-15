@@ -29,6 +29,7 @@ in {
         inkscape
         kdenlive
         libreoffice
+        pocket-casts
         spotify
         sublime-music
         youtube-music
