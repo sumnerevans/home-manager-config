@@ -6,26 +6,8 @@ let
   clipmanHistpath = ''--histpath="${config.xdg.cacheHome}/clipman.json"'';
   clipmanCmd = "${pkgs.clipman}/bin/clipman";
 
-  swaylock-effects = pkgs.swaylock-effects.overrideAttrs (old: rec {
-    pname = "swaylock-effects";
-    version = "unstable-2022-03-05";
-
-    src = pkgs.fetchFromGitHub {
-      owner = "mortie";
-      repo = "swaylock-effects";
-      rev = "a8fc557b86e70f2f7a30ca9ff9b3124f89e7f204";
-      sha256 = "sha256-GN+cxzC11Dk1nN9wVWIyv+rCrg4yaHnCePRYS1c4JTk=";
-    };
-
-    patches = [ ];
-
-    postPatch = ''
-      sed -iE "s/version: '1\.3',/version: '${version}',/" meson.build
-    '';
-  });
-
   swaylockCmd = concatStringsSep " " [
-    "${swaylock-effects}/bin/swaylock"
+    "${pkgs.swaylock-effects}/bin/swaylock"
     "--daemonize"
     "--screenshots"
     "--color 000000"
@@ -36,7 +18,6 @@ let
     "--indicator-thickness 7"
     "--effect-blur 7x5"
     "--effect-vignette 0.7:0.7"
-    "--fade-in 0.5"
   ];
 in {
   options = {
