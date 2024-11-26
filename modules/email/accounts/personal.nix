@@ -65,7 +65,7 @@ let
 
   helper = import ./account-config-helper.nix { inherit config pkgs lib; };
 in {
-  accounts.email.accounts = mkIf (!config.work.enable) {
+  accounts.email.accounts = {
     Personal = mkMerge [
       (helper.commonConfig personalAccountConfig)
       (helper.imapnotifyConfig personalAccountConfig)
@@ -73,7 +73,7 @@ in {
       helper.gpgConfig
       helper.migaduConfig
       {
-        primary = true;
+        primary = !config.work.enable;
         aliases = [ "alerts@sumnerevans.com" ];
       }
     ];
