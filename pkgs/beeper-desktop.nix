@@ -1,6 +1,6 @@
 { lib, fetchurl, appimageTools }:
 appimageTools.wrapType2 rec {
-  name = "beeper";
+  pname = "beeper";
   version = "unstable-2024-03-21";
 
   src = fetchurl {
@@ -10,15 +10,15 @@ appimageTools.wrapType2 rec {
   };
 
   extraInstallCommands = let
-    appimageContents = appimageTools.extractType2 { inherit name src; };
+    appimageContents = appimageTools.extractType2 { inherit pname version src; };
     installIcon = size: ''
-      install -m 444 -D ${appimageContents}/usr/share/icons/hicolor/${size}x${size}/apps/${name}.png \
-        $out/share/icons/hicolor/${size}x${size}/apps/${name}.png
+      install -m 444 -D ${appimageContents}/usr/share/icons/hicolor/${size}x${size}/apps/${pname}.png \
+        $out/share/icons/hicolor/${size}x${size}/apps/${pname}.png
     '';
   in ''
-    install -Dm444 ${appimageContents}/${name}.desktop -t $out/share/applications
-    substituteInPlace $out/share/applications/${name}.desktop \
-      --replace 'Exec=AppRun --no-sandbox' 'Exec=${name}'
+    install -Dm444 ${appimageContents}/${pname}.desktop -t $out/share/applications
+    substituteInPlace $out/share/applications/${pname}.desktop \
+      --replace 'Exec=AppRun --no-sandbox' 'Exec=${pname}'
     ${lib.concatMapStringsSep "\n" installIcon
     (map toString [ 16 32 48 64 128 256 512 1024 ])}
   '';

@@ -77,7 +77,7 @@ in {
     # Disabled until https://nixpk.gs/pr-tracker.html?pr=230971 hits unstable
     # bitwarden
     write_stylus
-    xournal
+    xournalpp
 
     # Virtual Machine Client
     virt-manager
