@@ -28,9 +28,6 @@ in {
 
         # Better Python REPL
         python3Packages.ptpython
-
-        # Languages
-        go_1_23
       ] ++ (
         # GUI Tools
         optionals hasGui ([
@@ -48,6 +45,12 @@ in {
           openjdk11
           visualvm
         ])));
+
+    # Go
+    programs.go = {
+      enable = true;
+      telemetry.mode = "on";
+    };
 
     # Enable developer programs
     programs.direnv.enable = true;
