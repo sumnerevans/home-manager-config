@@ -71,6 +71,10 @@ in {
               },
             },
           }
+          lspconfig.harper_ls.setup {
+            cmd = { "${pkgs.harper}/bin/harper-ls", "--stdio" },
+            capabilities = capabilities,
+          }
           lspconfig.html.setup {
             cmd = { "${pkgs.vscode-langservers-extracted}/bin/vscode-html-language-server", "--stdio" },
             capabilities = capabilities,
