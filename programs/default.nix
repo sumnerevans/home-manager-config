@@ -39,7 +39,6 @@ in {
     screenfetch
     tokei
     tree
-    trickle
     unzip
     usbutils
     wget
