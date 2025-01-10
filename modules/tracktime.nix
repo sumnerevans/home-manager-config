@@ -47,8 +47,8 @@ in {
   programs.zsh.shellAliases = {
     tt-automattic = "tt start -c Automattic";
     tt-bleep = "tt start -c Automattic -t linear -p BLEEP";
-    tt-element = "tt start -c Automattic 'Element catchup'";
     tt-hspc = "tt start -t gh -p ColoradoSchoolOfMines/hspc-problems";
+    tt-matrix = "tt start -c Automattic 'Matrix catchup'";
     tt-nevarro = "tt start -c Nevarro";
     tt-plat = "tt start -t linear -c Automattic -p PLAT";
     tt-standup = "tt start -c Automattic 'Standup'";
