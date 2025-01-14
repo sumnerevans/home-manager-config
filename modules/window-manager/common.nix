@@ -77,9 +77,6 @@ with lib; {
           { class = "Telegram"; }
           { title = "Mutt"; }
         ];
-
-        # Music
-        ${(elemAt extraWorkspaces 1).name} = [{ class = "sublime-music"; }];
       };
 
       bars = [{

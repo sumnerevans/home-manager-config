@@ -34,7 +34,6 @@ in {
     hspc = "${gh}/ColoradoSchoolOfMines/hspc-problems";
     kattis = "${gh}/sumnerevans/kattis";
     res = "${gh}/sumnerevans/resume";
-    sub = "${gh}/sublime-music/sublime-music";
     sws = "${gh}/sumnerevans/sumnerevans.com";
     tt = "${gh}/sumnerevans/tracktime";
     yt = "${gh}/sumnerevans/youtube-content";

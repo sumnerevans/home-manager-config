@@ -2,10 +2,6 @@
 with lib;
 with pkgs;
 let
-  sublime-music = callPackage ../pkgs/sublime-music.nix {
-    chromecastSupport = true;
-    serverSupport = true;
-  };
   hasGui = config.wayland.enable || config.xorg.enable;
 in {
   options.gaming.enable = mkEnableOption "gaming programs";
@@ -31,7 +27,6 @@ in {
         libreoffice
         pocket-casts
         spotify
-        sublime-music
         youtube-music
       ]);
 
