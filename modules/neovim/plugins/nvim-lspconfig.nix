@@ -10,6 +10,9 @@ let
       python-lsp-server
     ]);
 in {
+  # Make a default vale config file so the LSP doesn't explode
+  xdg.configFile."vale/.vale.ini".text = "";
+
   programs.neovim = {
     extraPackages = with pkgs; [
       ocamlPackages.ocamlformat
@@ -74,6 +77,11 @@ in {
           lspconfig.harper_ls.setup {
             cmd = { "${pkgs.harper}/bin/harper-ls", "--stdio" },
             capabilities = capabilities,
+            settings = {
+              ["harper-ls"] = {
+                userDictPath = vim.fn.stdpath("config") .. "/spell/en.utf-8.add",
+              }
+            },
           }
           lspconfig.html.setup {
             cmd = { "${pkgs.vscode-langservers-extracted}/bin/vscode-html-language-server", "--stdio" },
