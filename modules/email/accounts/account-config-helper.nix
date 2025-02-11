@@ -39,10 +39,7 @@ in {
 
     msmtp.enable = true;
 
-    smtp = {
-      port = 587;
-      tls.useStartTls = true;
-    };
+    smtp.tls.useStartTls = true;
 
     neomutt = {
       enable = true;
@@ -69,11 +66,6 @@ in {
       boxes = [ "INBOX" ];
       onNotify = "${pkgs.isync}/bin/mbsync ${name}:%s";
     };
-  };
-
-  migaduConfig = {
-    imap.host = "imap.migadu.com";
-    smtp.host = "smtp.migadu.com";
   };
 
   signatureConfig = { signatureLines, ... }: {

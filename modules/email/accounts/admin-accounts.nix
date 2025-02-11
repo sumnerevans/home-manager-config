@@ -43,8 +43,8 @@ in {
     Admin = mkMerge [
       (helper.commonConfig adminConfig)
       (helper.imapnotifyConfig adminConfig)
-      helper.migaduConfig
       {
+        flavor = "migadu.com";
         aliases = [
           "abuse@sumnerevans.com"
           "hostmaster@sumnerevans.com"
@@ -53,24 +53,29 @@ in {
       }
     ];
 
-    Comments =
-      mkMerge [ (helper.commonConfig commentsConfig) helper.migaduConfig ];
+    Comments = mkMerge [
+      (helper.commonConfig commentsConfig)
+      { flavor = "migadu.com"; }
+    ];
 
-    Junk = mkMerge [ (helper.commonConfig junkConfig) helper.migaduConfig ];
+    Junk =
+      mkMerge [ (helper.commonConfig junkConfig) { flavor = "migadu.com"; } ];
 
-    BMT-Admin =
-      mkMerge [ (helper.commonConfig bookMyTimeAdmin) helper.migaduConfig ];
+    BMT-Admin = mkMerge [
+      (helper.commonConfig bookMyTimeAdmin)
+      { flavor = "migadu.com"; }
+    ];
 
     MinesHSPC-Admin = mkMerge [
       (helper.commonConfig mineshspcAdmin)
       (helper.imapnotifyConfig mineshspcAdmin)
-      helper.migaduConfig
+      { flavor = "migadu.com"; }
     ];
 
     Nevarro-Admin = mkMerge [
       (helper.commonConfig nevarroAdmin)
       (helper.imapnotifyConfig nevarroAdmin)
-      helper.migaduConfig
+      { flavor = "migadu.com"; }
     ];
   };
 }

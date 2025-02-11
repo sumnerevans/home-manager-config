@@ -71,8 +71,8 @@ in {
       (helper.imapnotifyConfig personalAccountConfig)
       (helper.signatureConfig personalAccountConfig)
       helper.gpgConfig
-      helper.migaduConfig
       {
+        flavor = "migadu.com";
         primary = !config.work.enable;
         aliases = [ "alerts@sumnerevans.com" ];
       }
@@ -82,14 +82,16 @@ in {
       (helper.commonConfig inquiriesConfig)
       (helper.imapnotifyConfig inquiriesConfig)
       (helper.signatureConfig personalAccountConfig)
-      helper.migaduConfig
-      { aliases = [ "resume@sumnerevans.com" ]; }
+      {
+        flavor = "migadu.com";
+        aliases = [ "resume@sumnerevans.com" ];
+      }
     ];
 
     Financial = mkMerge [
       (helper.commonConfig financialConfig)
       (helper.signatureConfig financialConfig)
-      helper.migaduConfig
+      { flavor = "migadu.com"; }
     ];
 
     Teaching = mkMerge [
@@ -97,14 +99,14 @@ in {
       (helper.imapnotifyConfig teachingConfig)
       (helper.signatureConfig teachingConfig)
       helper.gpgConfig
-      helper.migaduConfig
+      { flavor = "migadu.com"; }
     ];
 
     Travel = mkMerge [
       (helper.commonConfig travelConfig)
       (helper.imapnotifyConfig travelConfig)
       (helper.signatureConfig travelConfig)
-      helper.migaduConfig
+      { flavor = "migadu.com"; }
     ];
   };
 }
