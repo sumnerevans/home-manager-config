@@ -10,7 +10,6 @@ in {
     aspell
     aspellDicts.en
     bind
-    bitwarden-cli
     czkawka
     fd
     file
@@ -73,8 +72,7 @@ in {
 
     # GUI Tools
     baobab
-    # Disabled until https://nixpk.gs/pr-tracker.html?pr=230971 hits unstable
-    # bitwarden
+    bitwarden
     write_stylus
     xournalpp
 
