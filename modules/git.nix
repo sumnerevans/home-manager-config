@@ -25,6 +25,7 @@ in {
       else
         "8904527AB50022FD";
       signByDefault = true;
+      format = if config.work.enable then "ssh" else "openpgp";
     };
 
     aliases = { "s" = "show --ext-diff"; };
@@ -37,7 +38,6 @@ in {
       };
       init.defaultBranch = "master";
       pull.ff = "only";
-      gpg.format = lib.mkIf config.work.enable "ssh";
       status.submoduleSummary = true;
       rebase.autoSquash = true;
       rerere.enabled = true;
