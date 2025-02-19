@@ -35,6 +35,27 @@
             overlays = [
               (final: prev: { inherit (menucalc.packages.${system}) menucalc; })
               (final: prev: { inherit (mdf.packages.${system}) mdf; })
+              (final: prev: {
+                harper = prev.rustPlatform.buildRustPackage rec {
+                  pname = "harper";
+                  version = "0.22.0";
+
+                  src = prev.fetchFromGitHub {
+                    owner = "Automattic";
+                    repo = "harper";
+                    rev = "v${version}";
+                    hash =
+                      "sha256-MwShWO1XXV2Ln70+w5KGPDChtnAOhsa2fENTNql3bo4=";
+                  };
+
+                  buildAndTestSubdir = "harper-ls";
+                  useFetchCargoVendor = true;
+                  cargoHash =
+                    "sha256-+rtFGD/go5W+RCpE0+3Tkb2TbwzH8J2nl0/VkipSjI0=";
+                };
+
+                meta.mainProgram = "harper-ls";
+              })
             ];
           };
 
