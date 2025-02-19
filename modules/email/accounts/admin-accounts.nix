@@ -1,12 +1,6 @@
 { config, pkgs, lib, ... }:
 with lib;
 let
-  adminConfig = {
-    name = "Admin";
-    address = "admin@sumnerevans.com";
-    color = "green";
-  };
-
   commentsConfig = {
     name = "Comments";
     address = "comments@sumnerevans.com";
@@ -40,19 +34,6 @@ let
   helper = import ./account-config-helper.nix { inherit config pkgs lib; };
 in {
   accounts.email.accounts = {
-    Admin = mkMerge [
-      (helper.commonConfig adminConfig)
-      (helper.imapnotifyConfig adminConfig)
-      {
-        flavor = "migadu.com";
-        aliases = [
-          "abuse@sumnerevans.com"
-          "hostmaster@sumnerevans.com"
-          "postmaster@sumnerevans.com"
-        ];
-      }
-    ];
-
     Comments = mkMerge [
       (helper.commonConfig commentsConfig)
       { flavor = "migadu.com"; }
