@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 let
   offlinemsmtp = pkgs.callPackage ../pkgs/offlinemsmtp.nix { };
   git-get = pkgs.callPackage ../pkgs/git-get.nix { };
@@ -10,22 +10,16 @@ in {
     package = pkgs.gitAndTools.gitFull;
     lfs.enable = true;
 
-    userEmail = if config.work.enable then
-      "sumner.evans@automattic.com"
-    else
-      "me@sumnerevans.com";
+    userEmail = "me@sumnerevans.com";
     userName = "Sumner Evans";
 
     attributes = [ "*.pdf diff=pdf" ];
     delta.enable = true;
 
     signing = {
-      key = if config.work.enable then
-        "${config.home.homeDirectory}/.ssh/id_ed25519"
-      else
-        "8904527AB50022FD";
+      key = "8904527AB50022FD";
       signByDefault = true;
-      format = if config.work.enable then "ssh" else "openpgp";
+      format = "openpgp";
     };
 
     aliases = { "s" = "show --ext-diff"; };
