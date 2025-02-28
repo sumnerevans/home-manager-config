@@ -39,8 +39,6 @@ in {
 
     msmtp.enable = true;
 
-    smtp.tls.useStartTls = true;
-
     neomutt = {
       enable = true;
       sendMailCommand = "${offlinemsmtp}/bin/offlinemsmtp -a ${name}";
