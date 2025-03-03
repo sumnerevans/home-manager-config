@@ -30,8 +30,8 @@ let
       position = "0,0";
     };
     AutomatticInternal = {
-      criteria = "Samsung Display Corp. 0x4193 Unknown";
-      mode = "2880x1800@90Hz";
+      criteria = "Lenovo Group Limited 0x4149 Unknown";
+      mode = "2880x1800@60Hz";
       scale = 1.6;
       position = "0,0";
     };
