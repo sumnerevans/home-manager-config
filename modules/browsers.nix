@@ -9,6 +9,7 @@ in {
       (google-chrome.override { commandLineArgs = chromeCommandLineArgs; })
     ]);
 
+  programs.brave.enable = hasGui;
   programs.chromium.enable = hasGui;
   programs.firefox.enable = hasGui;
 
