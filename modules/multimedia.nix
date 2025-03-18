@@ -1,8 +1,7 @@
 { config, lib, pkgs, ... }:
 with lib;
 with pkgs;
-let
-  hasGui = config.wayland.enable || config.xorg.enable;
+let hasGui = config.wayland.enable || config.xorg.enable;
 in {
   options.gaming.enable = mkEnableOption "gaming programs";
 
@@ -23,7 +22,7 @@ in {
         guvcview
         imagemagick
         inkscape
-        kdenlive
+        kdePackages.kdenlive
         libreoffice
         pocket-casts
         spotify
