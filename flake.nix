@@ -38,19 +38,20 @@
               (final: prev: {
                 harper = prev.rustPlatform.buildRustPackage rec {
                   pname = "harper";
-                  version = "0.25.1";
+                  version = "0.26.0";
 
                   src = prev.fetchFromGitHub {
                     owner = "Automattic";
                     repo = "harper";
                     rev = "v${version}";
                     hash =
-                      "sha256-nH1DyWGJMYiisdS4YRw+kUIJLX4twB9ZJ7OWH+QLlIA=";
+                      "sha256-lPxmcBQxiCGLeF0TZ8wui/MmGWE/IgqwGI44zMs2+V8=";
                   };
 
+                  buildAndTestSubdir = "harper-ls";
                   useFetchCargoVendor = true;
                   cargoHash =
-                    "sha256-C5+5cxsnyM6cZ724C2czuoCfmIE0nQJXCwYCjfW7sgE=";
+                    "sha256-F0WMeUhXVgLkCIaGR5s5zcPWGySoCQXcdVXLmRbs4Ac=";
                 };
               })
             ];
