@@ -34,8 +34,8 @@ python3Packages.buildPythonApplication rec {
   src = fetchFromGitHub {
     owner = "sumnerevans";
     repo = pname;
-    rev = "bb965fb84c649ce1c57e5549dbdd69ffc3644014";
-    sha256 = "sha256-1kwmBlZya71jFPS4G7lkVo7iwxrKv2W0GbP4onciBps=";
+    rev = "36da64c101be1ba9838fba4e61bae6efc55b0cc0";
+    sha256 = "sha256-1QIgdcGojNl1EPP51kaeNVF5Ll7pfbP9y1VLtqtmi8Q=";
   };
 
   meta = with lib; {
