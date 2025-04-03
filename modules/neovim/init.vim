@@ -5,7 +5,6 @@ set hidden                                              " Don't close when switc
 set list listchars=tab:\▶\ ,trail:·,nbsp:·,space:·      " Highlight whitespace
 set mouse=a                                             " Enable mouse scrolling
 set number                                              " Show the current line number
-set pastetoggle=<F2>                                    " Make C-S-V paste work better
 set scrolloff=5                                         " Always have 5 lines above/below the current line
 set showbreak=↩\ 
 set signcolumn=yes                                      " Always show the sign column for git gutter

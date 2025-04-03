@@ -48,13 +48,13 @@ in {
         type = "lua";
         plugin = (nvim-treesitter-context.overrideAttrs (old: rec {
           pname = "nvim-treesitter-context";
-          version = "2024-05-23";
+          version = "2024-04-03";
 
           src = fetchFromGitHub {
             owner = "nvim-treesitter";
             repo = pname;
-            rev = "0f3332788e0bd37716fbd25f39120dcfd557c90f";
-            sha256 = "sha256-WkikzAwxUij6n9OhXnfNll3mKW0HLYTr3lyNOpBhP3Q=";
+            rev = "93b29a32d5f4be10e39226c6b796f28d68a8b483";
+            sha256 = "sha256-D4i4ChXK9yWCd/uBIkZaWq5hoYcBRfznHPbIRRaOPYo=";
           };
         }));
         config = ''
