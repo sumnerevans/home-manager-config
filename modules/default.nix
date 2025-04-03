@@ -19,7 +19,6 @@ in {
     ./tmux.nix
     ./tracktime.nix
     ./udiskie.nix
-    ./work.nix
     ./window-manager
     ./xdg.nix
     ./zsh

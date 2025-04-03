@@ -70,13 +70,8 @@ with lib; {
         ${elemAt workspaces 0} = [{ class = "Firefox"; }];
 
         # Chat Clients
-        ${(elemAt extraWorkspaces 0).name} = [
-          { class = "discord"; }
-          { class = "Element"; }
-          { class = "Slack"; }
-          { class = "Telegram"; }
-          { title = "Mutt"; }
-        ];
+        ${(elemAt extraWorkspaces 0).name} =
+          [ { class = "discord"; } { class = "Element"; } { title = "Mutt"; } ];
       };
 
       bars = [{

@@ -22,12 +22,6 @@ in {
         api_key = "${pkgs.coreutils}/bin/cat ${secretsDir}/gitlab-api-key|";
       };
 
-      linear = {
-        default_org = "beeper";
-        api_key =
-          "${pkgs.coreutils}/bin/cat ${secretsDir}/linear-personal-api-key|";
-      };
-
       sourcehut = {
         api_root = "https://todo.sr.ht/api/";
         access_token =
@@ -45,14 +39,8 @@ in {
 
   # Aliases
   programs.zsh.shellAliases = {
-    tt-automattic = "tt start -c Automattic";
-    tt-bleep = "tt start -c Automattic -t linear -p BLEEP";
     tt-hspc = "tt start -t gh -p ColoradoSchoolOfMines/hspc-problems";
-    tt-matrix = "tt start -c Automattic 'Matrix catchup'";
     tt-nevarro = "tt start -c Nevarro";
-    tt-plat = "tt start -t linear -c Automattic -p PLAT";
-    tt-standup = "tt start -c Automattic 'Standup'";
-    tt-tea = "tt start -p teaching/algo";
     tt-tut = "tt start -c Nevarro -p teaching/tutoring";
   };
 }

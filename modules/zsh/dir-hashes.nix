@@ -27,8 +27,6 @@ in {
     repo = "${home}/repositories";
     gh = "${repo}/github.com";
 
-    beep = "${gh}/sumnerevans/beeper";
-
     aoc = "${gh}/sumnerevans/advent-of-code";
     hm = "${gh}/nix-community/home-manager";
     hspc = "${gh}/ColoradoSchoolOfMines/hspc-problems";

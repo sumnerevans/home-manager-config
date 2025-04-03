@@ -68,8 +68,6 @@
       homeConfigurations."scarif" = mkConfig ./host-configurations/scarif.nix;
       homeConfigurations."mustafar" =
         mkConfig ./host-configurations/mustafar.nix;
-      homeConfigurations."automattic" =
-        mkConfig ./host-configurations/automattic.nix;
     } // (flake-utils.lib.eachDefaultSystem (system:
       let pkgs = import nixpkgs { system = system; };
       in {
