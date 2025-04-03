@@ -30,7 +30,7 @@ in {
         python3Packages.ptpython
       ] ++ (
         # GUI Tools
-        optionals hasGui ([
+        optionals hasGui [
           d-spy
           rars
           remmina
@@ -39,12 +39,7 @@ in {
 
           # GTK Development
           icon-library
-        ] ++ (optionals config.work.enable [
-          android-studio
-          jetbrains.idea-community
-          openjdk11
-          visualvm
-        ])));
+        ]);
 
     # Go
     programs.go = {

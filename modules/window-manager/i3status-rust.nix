@@ -123,24 +123,7 @@ with lib; {
                   device = "BAT0";
                   priority = 110;
                 }
-              ]) ++ (if config.work.enable then [
-                {
-                  block = "maildir";
-                  interval = 10;
-                  inboxes = map (f: "${home}/Mail/${f}/INBOX") [ "Automattic" ];
-                  threshold_warning = 1;
-                  threshold_critical = 5;
-                  priority = 10;
-                }
-                {
-                  block = "maildir";
-                  interval = 10;
-                  inboxes = map (f: "${home}/Mail/${f}/INBOX") [ "Beeper" ];
-                  threshold_warning = 1;
-                  threshold_critical = 5;
-                  priority = 11;
-                }
-              ] else [
+              ]) ++ [
                 {
                   block = "maildir";
                   interval = 10;
@@ -160,7 +143,7 @@ with lib; {
                   threshold_critical = 50;
                   priority = 11;
                 }
-              ]) ++ (
+              ] ++ (
                 # TODO need to figure out how to do this for Sway
                 optionals config.xorg.enable [{
                   block = "toggle";

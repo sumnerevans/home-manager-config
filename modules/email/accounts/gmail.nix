@@ -7,10 +7,9 @@ let
     color = "yellow";
     signatureLines = ''
       Sumner Evans
-      Software Engineer at Beeper
-      2 Chronicles 7:14
+      Senior Implementation Tech Lead at Can/Am Technologies
 
-      https://sumnerevans.com | @sumner:nevarro.space | GPG: B50022FD
+      https://sumnerevans.com | @sumner:nevarro.space
 
       Note, this is not my main email, please update your contact information
       for me to my new email: me@sumnerevans.com.

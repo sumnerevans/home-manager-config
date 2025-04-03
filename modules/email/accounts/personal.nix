@@ -7,8 +7,7 @@ let
     color = "green";
     signatureLines = ''
       Sumner Evans
-      Software Engineer at Automattic working on Beeper
-      2 Chronicles 7:14
+      Senior Implementation Tech Lead at Can/Am Technologies
 
       https://sumnerevans.com | @sumner:nevarro.space
     '';
@@ -20,8 +19,7 @@ let
     color = "green";
     signatureLines = ''
       Sumner Evans
-      Software Engineer at Automattic working on Beeper
-      2 Chronicles 7:14
+      Senior Implementation Tech Lead at Can/Am Technologies
 
       https://sumnerevans.com | @sumner:nevarro.space
     '';
@@ -33,8 +31,7 @@ let
     color = "green";
     signatureLines = ''
       Jonathan Sumner Evans
-      Software Engineer at Automattic working on Beeper
-      2 Chronicles 7:14
+      Senior Implementation Tech Lead at Can/Am Technologies
 
       https://sumnerevans.com | @sumner:nevarro.space
     '';
@@ -47,7 +44,7 @@ let
     signatureLines = ''
       Sumner Evans
       Adjunct Professor, Colorado School of Mines
-      Software Engineer at Automattic working on Beeper
+      Senior Implementation Tech Lead at Can/Am Technologies
 
       https://sumnerevans.com | @sumner:nevarro.space
     '';
@@ -59,7 +56,9 @@ let
     color = "green";
     signatureLines = ''
       Sumner Evans
-      Software Engineer at Automattic working on Beeper
+      Senior Implementation Tech Lead at Can/Am Technologies
+
+      https://sumnerevans.com | @sumner:nevarro.space
     '';
   };
 
@@ -73,7 +72,7 @@ in {
       helper.gpgConfig
       {
         flavor = "migadu.com";
-        primary = !config.work.enable;
+        primary = true;
         aliases = [ "alerts@sumnerevans.com" ];
       }
     ];

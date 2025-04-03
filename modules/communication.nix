@@ -1,9 +1,4 @@
-{ config, lib, pkgs, ... }:
-with lib;
-let beeper-desktop = pkgs.callPackage ../pkgs/beeper-desktop.nix { };
-in {
-  home.packages = with pkgs;
-    (optionals (config.wayland.enable || config.xorg.enable)
-      ([ beeper-desktop discord element-desktop mumble zoom-us ]
-        ++ optionals config.work.enable [ slack ]));
+{ config, lib, pkgs, ... }: {
+  home.packages = (lib.optionals (config.wayland.enable || config.xorg.enable)
+    (with pkgs; [ discord element-desktop mumble zoom-us ]));
 }
