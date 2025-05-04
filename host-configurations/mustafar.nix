@@ -8,13 +8,13 @@ rec {
 
   mdf.port = 1024;
 
-  home.symlinks = {
-    "Documents" = "/mnt/data/Documents";
-    "Pictures" = "/mnt/data/Pictures";
-    "Screenshots" = "/mnt/data/Screenshots";
-    "Syncthing" = "/mnt/data/Syncthing";
-    "Videos" = "/mnt/data/Videos";
-  };
+  home.symlinks =
+    let links = [ "Documents" "Pictures" "Screenshots" "Syncthing" "Videos" ];
+    in builtins.listToAttrs (map (dirName: {
+      name = dirName;
+      value =
+        "/run/media/sumner/da9b8ec9-6432-4e40-b621-433c1634b728/${dirName}";
+    }) links);
 
   wayland.extraSwayConfig.config = {
     # Scale to 1.8 instead of 2.
