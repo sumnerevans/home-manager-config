@@ -205,37 +205,37 @@ in {
     services.mako = {
       enable = true;
 
-      borderRadius = 5;
-      borderSize = 2;
-      defaultTimeout = 8000;
-      font = "Iosevka 12";
-      groupBy = "app-name,summary";
-      sort = "-priority";
-      width = 400;
-      backgroundColor = common.notificationColorConfig.urgency_normal.background
-        + "CC";
-      borderColor = common.notificationColorConfig.urgency_normal.frame_color;
-      textColor = common.notificationColorConfig.urgency_normal.foreground;
-
-      extraConfig = generators.toINI { } (mapAttrs' (name: val:
-        nameValuePair
-        (builtins.replaceStrings [ "_" "critical" ] [ "=" "high" ] name)
-        (mapAttrs' (k: v:
-          nameValuePair (if k == "timeout" then
-            "default-timeout"
-          else if k == "frame_color" then
-            "border-color"
-          else if k == "foreground" then
-            "text-color"
-          else if k == "background" then
-            "background-color"
-          else
-            k) (if k == "timeout" then
-              v * 1000
-            else if k == "background" then
-              v + "CC"
-            else
-              v)) val)) common.notificationColorConfig);
+      settings = {
+        borderRadius = "5";
+        borderSize = "2";
+        defaultTimeout = "8000";
+        font = "Iosevka 12";
+        groupBy = "app-name,summary";
+        sort = "-priority";
+        width = "400";
+        backgroundColor = "#191311CC";
+        borderColor = "#5B8234";
+        textColor = "#5B8234";
+      };
+      #     extraConfig = generators.toINI { } (mapAttrs' (name: val:
+      #       nameValuePair
+      #       (builtins.replaceStrings [ "_" "critical" ] [ "=" "high" ] name)
+      #       (mapAttrs' (k: v:
+      #         nameValuePair (if k == "timeout" then
+      #           "default-timeout"
+      #         else if k == "frame_color" then
+      #           "border-color"
+      #         else if k == "foreground" then
+      #           "text-color"
+      #         else if k == "background" then
+      #           "background-color"
+      #         else
+      #           k) (if k == "timeout" then
+      #             v * 1000
+      #           else if k == "background" then
+      #             v + "CC"
+      #           else
+      #             v)) val)) common.notificationColorConfig);
     };
   };
 }
