@@ -9,7 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils.url = "github:numtide/flake-utils";
-    declarative-cachix.url = "github:jonascarpay/declarative-cachix";
     menucalc = {
       url = "github:sumnerevans/menu-calc";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,7 +19,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, declarative-cachix, flake-utils
+  outputs = { self, nixpkgs, home-manager, flake-utils
     , menucalc, mdf }:
     let
       system = "x86_64-linux";
@@ -58,8 +57,6 @@
           };
 
           modules = [ ./home.nix hostModule ];
-
-          extraSpecialArgs = { inherit declarative-cachix; };
         };
     in {
       homeConfigurations."tatooine" =
