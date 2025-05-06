@@ -51,7 +51,7 @@ in {
       realvim = "command vim";
     };
 
-    initExtra = ''
+    initContent = ''
       # File Type Associations
       alias -s cpp=$EDITOR
       alias -s doc=$OFFICE

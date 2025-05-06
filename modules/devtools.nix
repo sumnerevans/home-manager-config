@@ -54,7 +54,8 @@ in {
     programs.jq.enable = true;
     programs.opam.enable = true;
     programs.vscode.enable = hasGui;
-    programs.vscode.extensions = with pkgs.vscode-extensions; [ golang.go ];
+    programs.vscode.profiles.default.extensions = with pkgs.vscode-extensions;
+      [ golang.go ];
 
     xdg.configFile."pypoetry/config.toml".source =
       tomlFormat.generate "config.toml" { virtualenvs.in-project = true; };

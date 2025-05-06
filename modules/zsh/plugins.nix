@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   programs.zsh = {
-    initExtra = ''
+    initContent = ''
       source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
       source ${pkgs.zsh-you-should-use}/share/zsh/plugins/you-should-use/you-should-use.plugin.zsh
       fpath+=(${pkgs.zsh-completions}/share/zsh/site-functions)

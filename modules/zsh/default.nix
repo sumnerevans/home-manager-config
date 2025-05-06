@@ -50,22 +50,7 @@ with lib; {
         ignorePatterns = [ "gl" "gs" "tt" "l" "ll" "clear" ];
       };
 
-      initExtraFirst = ''
-        # If inside of an SSH session, run tmux.
-        if [[ -n $SSH_CONNECTION ]]; then
-            if command -v tmux &> /dev/null &&
-                    [ -n "$PS1" ] &&
-                    [[ ! "$TERM" =~ screen ]] &&
-                    [[ ! "$TERM" =~ tmux ]] &&
-                    [ -z "$TMUX" ]; then
-                exec tmux attach && exit
-            fi
-        fi
-
-        export TERM=xterm-256color
-      '';
-
-      initExtra = let
+      initContent = let
         tput = "${pkgs.ncurses}/bin/tput";
         opensshAdd = optionalString config.autoAddSSHKeysToAgent ''
           # Add my key to the ssh-agent if necessary
@@ -73,7 +58,20 @@ with lib; {
             ${pkgs.gnugrep}/bin/grep "The agent has no identities" && \
             ${pkgs.openssh}/bin/ssh-add
         '';
-      in ''
+      in lib.mkBefore ''
+        # If inside of an SSH session, run tmux.
+        if [[ -n $SSH_CONNECTION ]]; then
+          if command -v tmux &> /dev/null &&
+             [ -n "$PS1" ] &&
+             [[ ! "$TERM" =~ screen ]] &&
+             [[ ! "$TERM" =~ tmux ]] &&
+             [ -z "$TMUX" ]; then
+            exec tmux attach && exit
+          fi
+        fi
+
+        export TERM=xterm-256color
+
         # TODO a lot of this stuff has to be after all of the aliases
         if [[ $FOR_MUTT_HELPER != 1 ]]; then
 
@@ -100,7 +98,6 @@ with lib; {
           ${pkgs.fortune}/bin/fortune ${config.xdg.dataHome}/fortune/quotes
 
           echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
-
         fi
       '';
     };

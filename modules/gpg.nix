@@ -11,7 +11,7 @@ in {
     enable = true;
     defaultCacheTtl = agentTTL;
     maxCacheTtl = agentTTL;
-    pinentryPackage = pkgs.pinentry-curses;
+    pinentry.package = pkgs.pinentry-curses;
     verbose = true;
   };
 

@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 with lib; {
-  programs.zsh.initExtra = let
+  programs.zsh.initContent = let
     fnToStr = name: body: ''
       function ${name}() {
       ${body}
