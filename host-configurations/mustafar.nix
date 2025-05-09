@@ -12,8 +12,7 @@ rec {
     let links = [ "Documents" "Pictures" "Screenshots" "Syncthing" "Videos" ];
     in builtins.listToAttrs (map (dirName: {
       name = dirName;
-      value =
-        "/run/media/sumner/da9b8ec9-6432-4e40-b621-433c1634b728/${dirName}";
+      value = "/mnt/data/${dirName}";
     }) links);
 
   wayland.extraSwayConfig.config = {

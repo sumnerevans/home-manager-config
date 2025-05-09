@@ -206,36 +206,30 @@ in {
       enable = true;
 
       settings = {
-        borderRadius = "5";
-        borderSize = "2";
-        defaultTimeout = "8000";
+        border-radius = "5";
+        border-size = "2";
+        default-timeout = "8000";
         font = "Iosevka 12";
-        groupBy = "app-name,summary";
+        group-by = "app-name,summary";
         sort = "-priority";
         width = "400";
-        backgroundColor = "#191311CC";
-        borderColor = "#5B8234";
-        textColor = "#5B8234";
+        background-color = "#191311";
+        border-color = "#5B8234";
+        text-color = "#5B8234";
       };
-      #     extraConfig = generators.toINI { } (mapAttrs' (name: val:
-      #       nameValuePair
-      #       (builtins.replaceStrings [ "_" "critical" ] [ "=" "high" ] name)
-      #       (mapAttrs' (k: v:
-      #         nameValuePair (if k == "timeout" then
-      #           "default-timeout"
-      #         else if k == "frame_color" then
-      #           "border-color"
-      #         else if k == "foreground" then
-      #           "text-color"
-      #         else if k == "background" then
-      #           "background-color"
-      #         else
-      #           k) (if k == "timeout" then
-      #             v * 1000
-      #           else if k == "background" then
-      #             v + "CC"
-      #           else
-      #             v)) val)) common.notificationColorConfig);
+      criteria = {
+        "urgency=critical" = {
+          border-color = "#B7472A";
+          text-color = "#B7472A";
+          background-color = "#191311";
+          default-timeout = "60000";
+        };
+        "urgency=low" = {
+          border-color = "#777777";
+          text-color = "#777777";
+          background-color = "#191311";
+        };
+      };
     };
   };
 }
