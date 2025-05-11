@@ -19,8 +19,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils
-    , menucalc, mdf }:
+  outputs = { self, nixpkgs, home-manager, flake-utils, menucalc, mdf }:
     let
       system = "x86_64-linux";
       mkConfig = hostModule:
@@ -37,20 +36,20 @@
               (final: prev: {
                 harper = prev.rustPlatform.buildRustPackage rec {
                   pname = "harper";
-                  version = "0.28.0";
+                  version = "0.34.1";
 
                   src = prev.fetchFromGitHub {
                     owner = "Automattic";
                     repo = "harper";
                     rev = "v${version}";
                     hash =
-                      "sha256-g+noAc+vKli2T8C2EAK4ejw/2DWZPhtKbezyt53iHYg=";
+                      "sha256-fBAPJhB+x8cIFs6rp1nDvrtVkAKx2wuFCO7FwHOwLRM=";
                   };
 
                   buildAndTestSubdir = "harper-ls";
                   useFetchCargoVendor = true;
                   cargoHash =
-                    "sha256-Ql1WdwDnXBC4JHO/uzJJlacQC44bOaHo2i3M9atjf3I=";
+                    "sha256-XVC2xgUwazYXVp5sx6kA+aopd9m38XlbgsLnb0D92kg=";
                 };
               })
             ];
