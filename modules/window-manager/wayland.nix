@@ -216,14 +216,14 @@ in {
         background-color = "#191311";
         border-color = "#5B8234";
         text-color = "#5B8234";
-      };
-      criteria = {
+
         "urgency=critical" = {
           border-color = "#B7472A";
           text-color = "#B7472A";
           background-color = "#191311";
           default-timeout = "60000";
         };
+
         "urgency=low" = {
           border-color = "#777777";
           text-color = "#777777";
