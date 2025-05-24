@@ -39,6 +39,9 @@ in {
 
           # GTK Development
           icon-library
+
+          # Android
+          android-studio
         ]);
 
     # Go
