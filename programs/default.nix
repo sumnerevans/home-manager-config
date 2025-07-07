@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 with pkgs;
 let
-  python-csmdirsearch = callPackage ../pkgs/python-csmdirsearch.nix { };
   python-gitlab = callPackage ../pkgs/python-gitlab.nix { };
   hasGui = config.wayland.enable || config.xorg.enable;
 in {
@@ -58,7 +57,6 @@ in {
         pygobject3
         pynvim
         python-Levenshtein
-        python-csmdirsearch
         python-gitlab
         pytz
         tabulate
