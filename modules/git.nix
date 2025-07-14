@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 let
   offlinemsmtp = pkgs.callPackage ../pkgs/offlinemsmtp.nix { };
   git-get = pkgs.callPackage ../pkgs/git-get.nix { };
@@ -59,19 +59,6 @@ in {
       ".direnv"
     ];
   };
-
-  home.file.".python-gitlab.cfg".text = ''
-    [global]
-    default = gitlab
-    ssl_verify = true
-    timeout = 5
-
-    [gitlab]
-    url = https://gitlab.com
-    private_token = ${
-      lib.removeSuffix "\n" (builtins.readFile ../secrets/gitlab-api-key)
-    }
-  '';
 
   programs.zsh.shellAliases = {
     ga = "git add";
