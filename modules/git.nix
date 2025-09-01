@@ -1,7 +1,6 @@
 { pkgs, ... }:
 let
   offlinemsmtp = pkgs.callPackage ../pkgs/offlinemsmtp.nix { };
-  git-get = pkgs.callPackage ../pkgs/git-get.nix { };
 in {
   home.packages = with pkgs.gitAndTools; [ gh hub lab git-get ];
 
