@@ -48,7 +48,6 @@ in {
         python-dateutil
         fuzzywuzzy
         html2text
-        i3ipc
         icalendar
         pillow
         pip

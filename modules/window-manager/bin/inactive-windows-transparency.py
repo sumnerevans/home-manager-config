@@ -1,9 +1,9 @@
-#!/usr/bin/env python3
-
-# This script requires i3ipc-python package (install it from a system package manager
-# or pip).
-# It makes inactive windows transparent. Use `transparency_val` variable to control
-# transparency strength in range of 0…1 or use the command line argument -o.
+# This script requires i3ipc-python package (install it from a system package
+# manager or pip).
+#
+# It makes inactive windows transparent. Use `transparency_val` variable to
+# control transparency strength in range of 0…1 or use the command line
+# argument -o.
 
 import argparse
 import signal
@@ -18,7 +18,8 @@ def on_window_focus(inactive_opacity, ipc, event):
 
     focused = event.container
 
-    if focused.id != prev_focused.id:  # https://github.com/swaywm/sway/issues/2859
+    # https://github.com/swaywm/sway/issues/2859
+    if focused.id != prev_focused.id:
         focused.command("opacity 1")
         prev_focused.command("opacity " + inactive_opacity)
         prev_focused = focused
@@ -36,7 +37,8 @@ if __name__ == "__main__":
     transparency_val = "0.85"
 
     parser = argparse.ArgumentParser(
-        description="This script allows you to set the transparency of unfocused windows in sway."
+        description="This script allows you to set the transparency of "
+        "unfocused windows in sway."
     )
     parser.add_argument(
         "--opacity",
