@@ -31,26 +31,25 @@ in {
         type = "lua";
         plugin = nvim-lspconfig;
         config = ''
-          local lspconfig = require('lspconfig')
           local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-          lspconfig.bashls.setup {
+          vim.lsp.config("bashls", {
             cmd = { "${pkgs.nodePackages.bash-language-server}/bin/bash-language-server", "start" },
             capabilities = capabilities,
-          }
-          lspconfig.clangd.setup {
+          })
+          vim.lsp.config("clangd", {
             cmd = { "${pkgs.clang-tools}/bin/clangd" },
             capabilities = capabilities,
-          }
-          lspconfig.cssls.setup {
+          })
+          vim.lsp.config("cssls", {
             cmd = { "${pkgs.vscode-langservers-extracted}/bin/vscode-css-language-server", "--stdio" },
             capabilities = capabilities,
-          }
-          lspconfig.eslint.setup {
+          })
+          vim.lsp.config("eslint", {
             cmd = { "${pkgs.vscode-langservers-extracted}/bin/vscode-eslint-language-server", "--stdio" },
             capabilities = capabilities,
-          }
-          lspconfig.gopls.setup {
+          })
+          vim.lsp.config("gopls", {
             cmd = { "${pkgs.gopls}/bin/gopls" },
             capabilities = capabilities,
             settings = {
@@ -73,8 +72,8 @@ in {
                 staticcheck = true,
               },
             },
-          }
-          lspconfig.harper_ls.setup {
+          })
+          vim.lsp.config("harper_ls", {
             cmd = { "${pkgs.harper}/bin/harper-ls", "--stdio" },
             capabilities = capabilities,
             settings = {
@@ -82,20 +81,20 @@ in {
                 userDictPath = vim.fn.stdpath("config") .. "/spell/en.utf-8.add",
               }
             },
-          }
-          lspconfig.html.setup {
+          })
+          vim.lsp.config("html", {
             cmd = { "${pkgs.vscode-langservers-extracted}/bin/vscode-html-language-server", "--stdio" },
             capabilities = capabilities,
-          }
-          lspconfig.jsonls.setup {
+          })
+          vim.lsp.config("jsonls", {
             cmd = { "${pkgs.vscode-langservers-extracted}/bin/vscode-json-language-server", "--stdio" },
             capabilities = capabilities,
-          }
-          lspconfig.kotlin_language_server.setup {
+          })
+          vim.lsp.config("kotlin_language_server", {
             cmd = { "${pkgs.kotlin-language-server}/bin/kotlin-language-server" },
             capabilities = capabilities,
-          }
-          lspconfig.nil_ls.setup {
+          })
+          vim.lsp.config("nil_ls", {
             cmd = { "${pkgs.nil}/bin/nil" },
             capabilities = capabilities,
             settings = {
@@ -105,12 +104,12 @@ in {
                 },
               },
             },
-          }
-          lspconfig.ocamllsp.setup {
+          })
+          vim.lsp.config("ocamllsp", {
             cmd = { "${pkgs.ocamlPackages.ocaml-lsp}/bin/ocamllsp" },
             capabilities = capabilities,
-          }
-          lspconfig.pylsp.setup {
+          })
+          vim.lsp.config("pylsp", {
             cmd = { "${pylspPython}/bin/pylsp" },
             capabilities = capabilities,
             settings = {
@@ -121,28 +120,28 @@ in {
                 },
               },
             },
-          }
-          lspconfig.templ.setup {
+          })
+          vim.lsp.config("templ", {
             cmd = { "templ", "lsp" },
             capabilities = capabilities,
-          }
-          lspconfig.texlab.setup {
+          })
+          vim.lsp.config("texlab", {
             cmd = { "${pkgs.texlab}/bin/texlab" },
             capabilities = capabilities,
-          }
-          lspconfig.tinymist.setup {
+          })
+          vim.lsp.config("tinymist", {
             cmd = { "${pkgs.tinymist}/bin/tinymist" },
             capabilities = capabilities,
-          }
-          lspconfig.ts_ls.setup {
+          })
+          vim.lsp.config("ts_ls", {
             cmd = { "${pkgs.typescript-language-server}/bin/typescript-language-server", "--stdio" },
             capabilities = capabilities,
-          }
-          lspconfig.vale_ls.setup {
+          })
+          vim.lsp.config("vale_ls", {
             cmd = { "${pkgs.vale-ls}/bin/vale-ls" },
             capabilities = capabilities,
-          }
-          lspconfig.yamlls.setup {
+          })
+          vim.lsp.config("yamlls", {
             cmd = { "${pkgs.nodePackages.yaml-language-server}/bin/yaml-language-server", "--stdio" },
             capabilities = capabilities,
             settings = {
@@ -152,7 +151,7 @@ in {
                 },
               },
             },
-          }
+          })
           -- F#
           require('ionide').setup {
             autostart = true,
