@@ -24,7 +24,6 @@ in {
         inkscape
         kdePackages.kdenlive
         libreoffice
-        pocket-casts
         spotify
         youtube-music
       ]);
