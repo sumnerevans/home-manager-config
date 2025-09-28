@@ -130,6 +130,10 @@ in {
             cmd = { "${pkgs.texlab}/bin/texlab" },
             capabilities = capabilities,
           }
+          lspconfig.tinymist.setup {
+            cmd = { "${pkgs.tinymist}/bin/tinymist" },
+            capabilities = capabilities,
+          }
           lspconfig.ts_ls.setup {
             cmd = { "${pkgs.typescript-language-server}/bin/typescript-language-server", "--stdio" },
             capabilities = capabilities,
