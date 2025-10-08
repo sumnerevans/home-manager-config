@@ -152,6 +152,26 @@ in {
               },
             },
           })
+
+          vim.lsp.enable("bashls")
+          vim.lsp.enable("clangd")
+          vim.lsp.enable("cssls")
+          vim.lsp.enable("eslint")
+          vim.lsp.enable("gopls")
+          vim.lsp.enable("harper_ls")
+          vim.lsp.enable("html")
+          vim.lsp.enable("jsonls")
+          vim.lsp.enable("kotlin_language_server")
+          vim.lsp.enable("nil_ls")
+          vim.lsp.enable("ocamllsp")
+          vim.lsp.enable("pylsp")
+          vim.lsp.enable("templ")
+          vim.lsp.enable("texlab")
+          vim.lsp.enable("tinymist")
+          vim.lsp.enable("ts_ls")
+          vim.lsp.enable("vale_ls")
+          vim.lsp.enable("yamlls")
+
           -- F#
           require('ionide').setup {
             autostart = true,
