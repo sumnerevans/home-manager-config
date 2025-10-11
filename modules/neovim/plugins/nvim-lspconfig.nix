@@ -132,6 +132,10 @@ in {
           vim.lsp.config("tinymist", {
             cmd = { "${pkgs.tinymist}/bin/tinymist" },
             capabilities = capabilities,
+            settings = {
+              formatterMode = "typstyle",
+              exportPdf = "onType",
+            },
           })
           vim.lsp.config("ts_ls", {
             cmd = { "${pkgs.typescript-language-server}/bin/typescript-language-server", "--stdio" },
