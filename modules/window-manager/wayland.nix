@@ -57,7 +57,7 @@ in {
         config.startup = let
           wlpaste = "${pkgs.wl-clipboard}/bin/wl-paste";
           inactive-windows-transparency =
-            pkgs.writers.writePyPy3Bin "inactive-windows-transparency" {
+            pkgs.writers.writePython3Bin "inactive-windows-transparency" {
               libraries = [ pkgs.python3Packages.i3ipc ];
             } (builtins.readFile ./bin/inactive-windows-transparency.py);
         in [
