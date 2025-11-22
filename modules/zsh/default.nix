@@ -47,7 +47,23 @@ with lib; {
         extended = true;
         path = "${config.home.homeDirectory}/.histfile";
 
-        ignorePatterns = [ "gl" "gs" "tt" "l" "ll" "clear" ];
+        ignorePatterns = [
+          "clear"
+          "exit"
+
+          # Ignore the git commands I use a lot
+          "gaa"
+          "gd"
+          "gl"
+          "gs"
+
+          # Ignore directory listing commands
+          "l"
+          "ll"
+
+          # Ignore showing current time tracking status
+          "tt"
+        ];
       };
 
       initContent = let
@@ -72,7 +88,6 @@ with lib; {
 
         export TERM=xterm-256color
 
-        # TODO a lot of this stuff has to be after all of the aliases
         if [[ $FOR_MUTT_HELPER != 1 ]]; then
 
           ${builtins.readFile ./key-widgets.zsh}

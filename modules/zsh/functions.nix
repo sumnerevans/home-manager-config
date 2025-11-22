@@ -10,9 +10,9 @@ with lib; {
     git = "${pkgs.git}/bin/git";
     ls = "${pkgs.coreutils}/bin/ls";
     mv = "${pkgs.coreutils}/bin/mv";
-    chpwd_just_happened = "__zsh_chpwd_just_happened";
 
-    fns = {
+    fns = let chpwd_just_happened = "__zsh_chpwd_just_happened";
+    in {
       # Things to perform after a directory change.
       chpwd = ''
         emulate -L zsh
