@@ -1,12 +1,8 @@
-{ config, ... }: {
+{
   programs.zsh = {
     autosuggestion.enable = true;
     enableCompletion = true;
     completionInit = ''
-      # add custom completion scripts
-      # TODO: get this working
-      fpath+=(${config.home.homeDirectory}/.zsh/completion)
-
       # Auto-Correction
       setopt correct
 
