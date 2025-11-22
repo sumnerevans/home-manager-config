@@ -19,7 +19,6 @@ in {
         # Multimedia
         fbida
         gimp
-        guvcview
         imagemagick
         inkscape
         kdePackages.kdenlive
