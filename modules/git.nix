@@ -1,19 +1,14 @@
 { pkgs, ... }:
-let
-  offlinemsmtp = pkgs.callPackage ../pkgs/offlinemsmtp.nix { };
+let offlinemsmtp = pkgs.callPackage ../pkgs/offlinemsmtp.nix { };
 in {
-  home.packages = with pkgs.gitAndTools; [ gh hub lab git-get ];
+  home.packages = with pkgs; [ gh hub lab git-get ];
 
   programs.git = {
     enable = true;
-    package = pkgs.gitAndTools.gitFull;
+    package = pkgs.gitFull;
     lfs.enable = true;
 
-    userEmail = "me@sumnerevans.com";
-    userName = "Sumner Evans";
-
     attributes = [ "*.pdf diff=pdf" ];
-    delta.enable = true;
 
     signing = {
       key = "8904527AB50022FD";
@@ -21,9 +16,11 @@ in {
       format = "openpgp";
     };
 
-    aliases = { "s" = "show --ext-diff"; };
+    settings = {
+      alias = { "s" = "show --ext-diff"; };
+      user.name = "Sumner Evans";
+      user.email = "me@sumnerevans.com";
 
-    extraConfig = {
       core.editor = "nvim";
       diff = {
         colorMoved = "default";
@@ -57,6 +54,11 @@ in {
       "__pycache__"
       ".direnv"
     ];
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
   };
 
   programs.zsh.shellAliases = {

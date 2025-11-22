@@ -54,7 +54,7 @@ in {
         pycairo
         pygobject3
         pynvim
-        python-Levenshtein
+        levenshtein
         pytz
         tabulate
         vobject
@@ -67,8 +67,8 @@ in {
 
     # GUI Tools
     baobab
-    bitwarden
-    write_stylus
+    bitwarden-desktop
+    styluslabs-write-bin
     xournalpp
 
     # Virtual Machine Client

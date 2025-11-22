@@ -16,7 +16,6 @@ in {
       [
         # Shell Utilities
         eternal-terminal
-        nodePackages.jsonlint
         mosh
         tree-sitter
         watchexec
