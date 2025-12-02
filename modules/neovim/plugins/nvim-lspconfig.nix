@@ -41,6 +41,10 @@ in {
             cmd = { "${pkgs.clang-tools}/bin/clangd" },
             capabilities = capabilities,
           })
+          vim.lsp.config("csharp_ls", {
+            cmd = { "${pkgs.csharp-ls}/bin/csharp-ls" },
+            capabilities = capabilities,
+          })
           vim.lsp.config("cssls", {
             cmd = { "${pkgs.vscode-langservers-extracted}/bin/vscode-css-language-server", "--stdio" },
             capabilities = capabilities,
@@ -159,6 +163,7 @@ in {
 
           vim.lsp.enable("bashls")
           vim.lsp.enable("clangd")
+          vim.lsp.enable('csharp_ls')
           vim.lsp.enable("cssls")
           vim.lsp.enable("eslint")
           vim.lsp.enable("gopls")
