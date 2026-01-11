@@ -17,13 +17,21 @@
       url = "github:sumnerevans/mdf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, menucalc, mdf }:
+  outputs = { nixpkgs, home-manager, flake-utils, menucalc, mdf, ... }@inputs:
     let
       system = "x86_64-linux";
       mkConfig = hostModule:
         home-manager.lib.homeManagerConfiguration {
+          extraSpecialArgs = { inherit inputs; };
           pkgs = import nixpkgs {
             inherit system;
             config = {
