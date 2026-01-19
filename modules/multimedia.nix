@@ -24,7 +24,7 @@ in {
         kdePackages.kdenlive
         libreoffice
         spotify
-        youtube-music
+        pear-desktop
       ]);
 
     programs.feh.enable = true;

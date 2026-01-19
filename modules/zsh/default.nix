@@ -21,6 +21,7 @@ with lib; {
     programs.zsh = {
       enable = true;
       defaultKeymap = "viins";
+      dotDir = "${config.xdg.configHome}/zsh";
 
       localVariables = {
         OFFICE = "libreoffice";

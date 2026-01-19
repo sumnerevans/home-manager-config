@@ -104,7 +104,7 @@ in {
             settings = {
               ["nil"] = {
                 formatting = {
-                  command = { "${pkgs.nixfmt-classic}/bin/nixfmt" },
+                  command = { "${pkgs.nixfmt}/bin/nixfmt" },
                 },
               },
             },

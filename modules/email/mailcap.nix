@@ -25,10 +25,6 @@ let
         }"''
       "copiousoutput"
     ];
-
-    # Microsoft LookOut
-    "application/ms-tnef" =
-      [ "${pkgs.tnef}/bin/tnef -w -C /home/sumner/tmp %s" ];
   }
 
     // (optionalAttrs hasGui {

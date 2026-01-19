@@ -15,7 +15,7 @@
           csharpier = { command = "${pkgs.csharpier}/bin/csharpier" },
           deno_fmt = { command = "${pkgs.deno}/bin/deno" },
           goimports = { command = "${pkgs.gotools}/bin/goimports" },
-          nixfmt = { command = "${pkgs.nixfmt-classic}/bin/nixfmt" },
+          nixfmt = { command = "${pkgs.nixfmt}/bin/nixfmt" },
           prettier = {
             command = "${pkgs.nodePackages.prettier}/bin/prettier",
             prepend_args = { "--trailing-comma", "es5" },

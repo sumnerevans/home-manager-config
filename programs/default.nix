@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 with pkgs;
-let
-  hasGui = config.wayland.enable || config.xorg.enable;
+let hasGui = config.wayland.enable || config.xorg.enable;
 in {
   home.packages = [
     # Shell Utilities
@@ -67,15 +66,15 @@ in {
 
     # GUI Tools
     baobab
-    bitwarden-desktop
+    # bitwarden-desktop
     styluslabs-write-bin
     xournalpp
 
     # Virtual Machine Client
     virt-manager
 
-    (xfce.thunar.override {
-      thunarPlugins = [ xfce.thunar-archive-plugin xfce.thunar-volman ];
+    (thunar.override {
+      thunarPlugins = [ thunar-archive-plugin thunar-volman ];
     })
   ];
 

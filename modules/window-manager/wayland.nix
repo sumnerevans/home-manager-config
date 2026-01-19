@@ -37,16 +37,10 @@ in {
         timeout = 300;
         command = swaylockCmd;
       }];
-      events = [
-        {
-          event = "before-sleep";
-          command = "${pkgs.playerctl}/bin/playerctl pause";
-        }
-        {
-          event = "before-sleep";
-          command = swaylockCmd;
-        }
-      ];
+      events = {
+        "before-sleep" =
+          "${pkgs.playerctl}/bin/playerctl pause && ${swaylockCmd}";
+      };
     };
 
     wayland.windowManager.sway = mkMerge [

@@ -20,10 +20,10 @@ in {
           set -xe
           if [[ $# == 0 ]]; then
             ${pkgs.kitty}/bin/kitty -T Mutt \
-              zsh -c "export FOR_MUTT_HELPER=1 && source ${config.home.homeDirectory}/.zshrc && neomutt"
+              zsh -c "export FOR_MUTT_HELPER=1 && source ${config.programs.zsh.dotDir}/.zshrc && neomutt"
           else
             ${pkgs.kitty}/bin/kitty -T Mutt \
-              zsh -c "export FOR_MUTT_HELPER=1 && source ${config.home.homeDirectory}/.zshrc && neomutt \"$@\""
+              zsh -c "export FOR_MUTT_HELPER=1 && source ${config.programs.zsh.dotDir}/.zshrc && neomutt \"$@\""
           fi
         '';
         executable = true;

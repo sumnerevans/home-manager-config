@@ -65,7 +65,7 @@ in {
         type = "lua";
         plugin = nvim-treesitter;
         config = ''
-          require('nvim-treesitter.configs').setup({
+          require('nvim-treesitter').setup({
             highlight = {
               enable = true,
               additional_vim_regex_highlighting = false,
