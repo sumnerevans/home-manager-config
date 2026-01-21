@@ -39,7 +39,7 @@ in {
       }];
       events = {
         "before-sleep" =
-          "${pkgs.playerctl}/bin/playerctl pause && ${swaylockCmd}";
+          "${pkgs.playerctl}/bin/playerctl pause & ${swaylockCmd}";
       };
     };
 
