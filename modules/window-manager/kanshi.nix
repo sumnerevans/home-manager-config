@@ -1,8 +1,6 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  cfg = config.wayland;
-
   configs = {
     KohakuInternal = {
       criteria = "Unknown 0x4142";
@@ -37,7 +35,7 @@ let
     };
   };
 in {
-  config = mkIf cfg.enable {
+  config = mkIf config.wayland.windowManager.sway.enable {
     home.packages = [ pkgs.kanshi ];
     services.kanshi = {
       enable = true;

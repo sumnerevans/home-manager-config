@@ -58,7 +58,6 @@ with lib; {
       size = 10.0;
     };
   in {
-    enable = true;
     config = rec {
       inherit fonts;
       gaps.inner = gapSize;

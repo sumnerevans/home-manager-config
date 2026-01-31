@@ -6,7 +6,7 @@ let
   xorgCfg = config.xorg;
 
   doSetWallpaperScriptPart = if waylandCfg.enable then
-    ''${pkgs.sway}/bin/swaymsg -s $SWAYSOCK output "*" bg $f1 fill''
+    ''exec ${pkgs.swaybg}/bin/swaybg -i $f1 -m fill''
   else
     "${pkgs.feh}/bin/feh --bg-fill $f1 $f2";
 
@@ -312,7 +312,7 @@ in {
       };
 
       Service = {
-        Type = "oneshot";
+        Type = "exec";
         ExecStart = "${setWallpaperScript}";
         Environment = "DISPLAY=:0";
       };

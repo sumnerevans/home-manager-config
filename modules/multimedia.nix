@@ -21,9 +21,9 @@ in {
         gimp
         imagemagick
         inkscape
-        kdePackages.kdenlive
-        libreoffice
-        spotify
+        # kdePackages.kdenlive
+        # libreoffice
+        # spotify
         pear-desktop
       ]);
 

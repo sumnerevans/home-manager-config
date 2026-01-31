@@ -14,7 +14,7 @@ with lib; {
     };
   };
 
-  config = mkIf (config.wayland.enable || config.xorg.enable) {
+  config = lib.mkIf (config.wayland.windowManager.sway.enable || config.xorg.enable) {
     programs.i3status-rust = {
       enable = true;
 
