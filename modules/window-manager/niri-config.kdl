@@ -199,6 +199,7 @@ binds {
     Mod+D hotkey-overlay-title="Open Launcher" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
     Mod+Shift+X hotkey-overlay-title="Lock Screen" { spawn "dms" "ipc" "call" "lock" "lock"; }
     Mod+C hotkey-overlay-title="Open Clipboard Manager" { spawn "dms" "ipc" "call" "clipboard" "open"; }
+    Mod+Backslash { spawn "~/bin/mutt_helper"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
