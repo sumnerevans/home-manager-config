@@ -7,12 +7,13 @@
 with lib;
 let
   cfg = config.wallpaper;
-  waylandCfg = config.wayland;
   xorgCfg = config.xorg;
 
   doSetWallpaperScriptPart =
-    if waylandCfg.enable then
-      "exec ${pkgs.swaybg}/bin/swaybg -i $f1 -m fill"
+    if config.wayland.windowManager.sway.enable then
+      ''${pkgs.sway}/bin/swaymsg -s $SWAYSOCK output "*" bg $f1 fill''
+    else if config.niri.enable then
+      "${pkgs.dms-shell}/bin/dms ipc call wallpaper set $f1"
     else
       "${pkgs.feh}/bin/feh --bg-fill $f1 $f2";
 
@@ -396,7 +397,7 @@ in
     };
   };
 
-  config = mkIf (waylandCfg.enable || xorgCfg.enable) {
+  config = mkIf (config.wayland.windowManager.sway.enable || config.niri.enable || xorgCfg.enable) {
     systemd.user.services.wallpaper = {
       Unit = {
         Description = "Set the wallpaper.";
