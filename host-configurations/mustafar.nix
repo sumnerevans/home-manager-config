@@ -9,11 +9,21 @@ rec {
   mdf.port = 1024;
 
   home.symlinks =
-    let links = [ "Documents" "Pictures" "Screenshots" "Syncthing" "Videos" ];
-    in builtins.listToAttrs (map (dirName: {
-      name = dirName;
-      value = "/mnt/data/${dirName}";
-    }) links);
+    let
+      links = [
+        "Documents"
+        "Pictures"
+        "Screenshots"
+        "Syncthing"
+        "Videos"
+      ];
+    in
+    builtins.listToAttrs (
+      map (dirName: {
+        name = dirName;
+        value = "/mnt/data/${dirName}";
+      }) links
+    );
 
   wayland.extraSwayConfig.config = {
     # Scale to 1.8 instead of 2.
@@ -37,10 +47,8 @@ rec {
       # brightness. With mod, change the keyboard.
       "${windowManager.modKey}+F6" = "exec brightnessctl s 5%-";
       "${windowManager.modKey}+F7" = "exec brightnessctl s 5%+";
-      "${windowManager.modKey}+Shift+F6" =
-        "exec brightnessctl -d chromeos::kbd_backlight s 1%-";
-      "${windowManager.modKey}+Shift+F7" =
-        "exec brightnessctl -d chromeos::kbd_backlight s 1%+";
+      "${windowManager.modKey}+Shift+F6" = "exec brightnessctl -d chromeos::kbd_backlight s 1%-";
+      "${windowManager.modKey}+Shift+F7" = "exec brightnessctl -d chromeos::kbd_backlight s 1%+";
     };
   };
 }

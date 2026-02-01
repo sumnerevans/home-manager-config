@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with pkgs;
 let
   pgrep = "${procps}/bin/pgrep";
@@ -45,4 +50,5 @@ let
       ${sleep} 1
     done
   '';
-in fuzzy-lock
+in
+fuzzy-lock

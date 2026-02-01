@@ -1,5 +1,8 @@
 {
-  imports = [ ./modules ./programs ];
+  imports = [
+    ./modules
+    ./programs
+  ];
 
   home = {
     stateVersion = "21.03";

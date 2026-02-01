@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   configs = {
@@ -22,8 +27,7 @@ let
       mode = "2560x1440@143.998Hz";
     };
     ScarifInternal = {
-      criteria =
-        "InfoVision Optoelectronics (Kunshan) Co.,Ltd China 0x8C44 Unknown";
+      criteria = "InfoVision Optoelectronics (Kunshan) Co.,Ltd China 0x8C44 Unknown";
       mode = "1920x1200@60Hz";
       position = "0,0";
     };
@@ -34,7 +38,8 @@ let
       position = "0,0";
     };
   };
-in {
+in
+{
   config = mkIf config.wayland.windowManager.sway.enable {
     home.packages = [ pkgs.kanshi ];
     services.kanshi = {
@@ -55,7 +60,10 @@ in {
 
         {
           profile.name = "DoubleDell";
-          profile.outputs = [ configs.DellP2421D configs.DellS2417DG ];
+          profile.outputs = [
+            configs.DellP2421D
+            configs.DellS2417DG
+          ];
         }
 
         {

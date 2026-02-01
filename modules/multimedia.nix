@@ -1,8 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 with pkgs;
-let hasGui = config.wayland.enable || config.xorg.enable;
-in {
+let
+  hasGui = config.wayland.enable || config.xorg.enable;
+in
+{
   options.gaming.enable = mkEnableOption "gaming programs";
 
   config = {
@@ -10,7 +17,8 @@ in {
       # Shell Utilities
       ffmpeg-full
       yt-dlp
-    ] ++ (
+    ]
+    ++ (
       # GUI Tools
       optionals hasGui [
         pavucontrol
@@ -25,7 +33,8 @@ in {
         # libreoffice
         # spotify
         pear-desktop
-      ]);
+      ]
+    );
 
     programs.feh.enable = true;
 

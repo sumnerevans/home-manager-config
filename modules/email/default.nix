@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
-let quotesPath = "${config.xdg.dataHome}/fortune/quotes";
-in {
+let
+  quotesPath = "${config.xdg.dataHome}/fortune/quotes";
+in
+{
   imports = [
     ./accounts
     ./mailcap.nix

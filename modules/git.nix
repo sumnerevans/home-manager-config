@@ -1,7 +1,14 @@
 { pkgs, ... }:
-let offlinemsmtp = pkgs.callPackage ../pkgs/offlinemsmtp.nix { };
-in {
-  home.packages = with pkgs; [ gh hub lab git-get ];
+let
+  offlinemsmtp = pkgs.callPackage ../pkgs/offlinemsmtp.nix { };
+in
+{
+  home.packages = with pkgs; [
+    gh
+    hub
+    lab
+    git-get
+  ];
 
   programs.git = {
     enable = true;
@@ -17,7 +24,9 @@ in {
     };
 
     settings = {
-      alias = { "s" = "show --ext-diff"; };
+      alias = {
+        "s" = "show --ext-diff";
+      };
       user.name = "Sumner Evans";
       user.email = "me@sumnerevans.com";
 
@@ -35,7 +44,11 @@ in {
       sendemail = {
         annotate = "yes";
         smtpserver = "${offlinemsmtp}/bin/offlinemsmtp";
-        smtpserveroption = [ "-a" "Personal" "--" ];
+        smtpserveroption = [
+          "-a"
+          "Personal"
+          "--"
+        ];
       };
     };
 
@@ -74,8 +87,7 @@ in {
     gd = "git diff";
     gdc = "git diff --cached";
     gfetch = "git fetch";
-    gl =
-      "git log --pretty=format:'%C(auto)%h %ad %C(green)%s%Creset %C(auto)%d [%an]' --graph --date=format:'%Y-%m-%d %H:%M' --all";
+    gl = "git log --pretty=format:'%C(auto)%h %ad %C(green)%s%Creset %C(auto)%d [%an]' --graph --date=format:'%Y-%m-%d %H:%M' --all";
     gpull = "git pull";
     gpush = "git push";
     grhh = "git reset --hard HEAD";

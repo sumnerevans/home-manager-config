@@ -1,5 +1,11 @@
-{ config, lib, pkgs, ... }:
-with lib; {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib;
+{
   imports = [
     ./aliases.nix
     ./completion.nix
@@ -9,12 +15,13 @@ with lib; {
   ];
 
   options = {
-    isLinux = mkEnableOption "Linux support" // { default = true; };
+    isLinux = mkEnableOption "Linux support" // {
+      default = true;
+    };
     isMacOS = mkEnableOption "macOS support";
-    autoAddSSHKeysToAgent =
-      mkEnableOption "automatically add SSH keys to the SSH agent" // {
-        default = true;
-      };
+    autoAddSSHKeysToAgent = mkEnableOption "automatically add SSH keys to the SSH agent" // {
+      default = true;
+    };
   };
 
   config = {
@@ -35,8 +42,7 @@ with lib; {
 
         # Pipenv
         PIPENV_MAX_DEPTH = 10000; # basically infinite
-        PIPENV_VENV_IN_PROJECT =
-          1; # store the virtual environment in .venv in the project directory
+        PIPENV_VENV_IN_PROJECT = 1; # store the virtual environment in .venv in the project directory
 
         # Use colors!
         TERM = "xterm-256color";
@@ -67,55 +73,57 @@ with lib; {
         ];
       };
 
-      initContent = let
-        tput = "${pkgs.ncurses}/bin/tput";
-        opensshAdd = optionalString config.autoAddSSHKeysToAgent ''
-          # Add my key to the ssh-agent if necessary
-          ${pkgs.openssh}/bin/ssh-add -l | \
-            ${pkgs.gnugrep}/bin/grep "The agent has no identities" && \
-            ${pkgs.openssh}/bin/ssh-add
-        '';
-      in lib.mkBefore ''
-        # If inside of an SSH session, run tmux.
-        if [[ -n $SSH_CONNECTION ]]; then
-          if command -v tmux &> /dev/null &&
-             [ -n "$PS1" ] &&
-             [[ ! "$TERM" =~ screen ]] &&
-             [[ ! "$TERM" =~ tmux ]] &&
-             [ -z "$TMUX" ]; then
-            exec tmux attach && exit
+      initContent =
+        let
+          tput = "${pkgs.ncurses}/bin/tput";
+          opensshAdd = optionalString config.autoAddSSHKeysToAgent ''
+            # Add my key to the ssh-agent if necessary
+            ${pkgs.openssh}/bin/ssh-add -l | \
+              ${pkgs.gnugrep}/bin/grep "The agent has no identities" && \
+              ${pkgs.openssh}/bin/ssh-add
+          '';
+        in
+        lib.mkBefore ''
+          # If inside of an SSH session, run tmux.
+          if [[ -n $SSH_CONNECTION ]]; then
+            if command -v tmux &> /dev/null &&
+               [ -n "$PS1" ] &&
+               [[ ! "$TERM" =~ screen ]] &&
+               [[ ! "$TERM" =~ tmux ]] &&
+               [ -z "$TMUX" ]; then
+              exec tmux attach && exit
+            fi
           fi
-        fi
 
-        export TERM=xterm-256color
+          export TERM=xterm-256color
 
-        if [[ $FOR_MUTT_HELPER != 1 ]]; then
+          if [[ $FOR_MUTT_HELPER != 1 ]]; then
 
-          ${builtins.readFile ./key-widgets.zsh}
-          ${builtins.readFile ./prompt.zsh}
-          ${builtins.readFile ./git-repo-nav.zsh}
+            ${builtins.readFile ./key-widgets.zsh}
+            ${builtins.readFile ./prompt.zsh}
+            ${builtins.readFile ./git-repo-nav.zsh}
 
-          # Colors
-          autoload colors zsh/terminfo
-          colors
-          ${optionalString config.isLinux "eval $(dircolors -b)"}
-          ${optionalString config.isMacOS "export CLICOLOR=1"}
+            # Colors
+            autoload colors zsh/terminfo
+            colors
+            ${optionalString config.isLinux "eval $(dircolors -b)"}
+            ${optionalString config.isMacOS "export CLICOLOR=1"}
 
-          setopt appendhistory
-          setopt extendedglob
-          setopt autopushd
-          setopt nobeep  # Don't beep ever
+            setopt appendhistory
+            setopt extendedglob
+            setopt autopushd
+            setopt nobeep  # Don't beep ever
 
-          ${opensshAdd}
+            ${opensshAdd}
 
-          echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
+            echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
 
-          # Show a quote
-          ${pkgs.fortune}/bin/fortune ${config.xdg.dataHome}/fortune/quotes
+            # Show a quote
+            ${pkgs.fortune}/bin/fortune ${config.xdg.dataHome}/fortune/quotes
 
-          echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
-        fi
-      '';
+            echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
+          fi
+        '';
     };
 
     programs.direnv.enableZshIntegration = true;

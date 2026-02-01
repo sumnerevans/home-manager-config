@@ -1,15 +1,25 @@
-{ config, lib, inputs, pkgs, ... }:
-let hasGui = config.wayland.enable || config.xorg.enable;
-in {
+{
+  config,
+  lib,
+  inputs,
+  pkgs,
+  ...
+}:
+let
+  hasGui = config.wayland.enable || config.xorg.enable;
+in
+{
   imports = [ inputs.zen-browser.homeModules.beta ];
 
-  home.packages = with pkgs; [ elinks w3m ];
+  home.packages = with pkgs; [
+    elinks
+    w3m
+  ];
 
   programs.google-chrome.enable = hasGui;
   programs.brave = {
     enable = hasGui;
-    commandLineArgs =
-      [ "--enable-features=TouchpadOverscrollHistoryNavigation" ];
+    commandLineArgs = [ "--enable-features=TouchpadOverscrollHistoryNavigation" ];
   };
   programs.chromium.enable = hasGui;
   programs.firefox.enable = hasGui;

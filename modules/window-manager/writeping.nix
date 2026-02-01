@@ -21,10 +21,10 @@ let
     # Only keep the last 10 values.
     echo "$(${pkgs.coreutils}/bin/tail ${rollingPingFile})" > ${rollingPingFile}
   '';
-in {
+in
+{
   systemd.user.services.writeping = {
-    Unit.Description =
-      "Write the new ping value for rolling ping average calculation";
+    Unit.Description = "Write the new ping value for rolling ping average calculation";
 
     Service = {
       Type = "oneshot";
@@ -33,8 +33,7 @@ in {
   };
 
   systemd.user.timers.writeping = {
-    Unit.Description =
-      "Write the new ping value for rolling ping average calculation";
+    Unit.Description = "Write the new ping value for rolling ping average calculation";
 
     Timer = {
       OnCalendar = "*:*:0/10"; # Every 10 seconds

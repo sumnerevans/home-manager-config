@@ -1,10 +1,16 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   tomlFormat = pkgs.formats.toml { };
   iniFormat = pkgs.formats.ini { };
   hasGui = config.wayland.enable || config.xorg.enable;
-in {
+in
+{
   options = {
     devTools.enable = mkEnableOption "developer tools and applications" // {
       default = true;
@@ -12,7 +18,8 @@ in {
   };
 
   config = mkIf config.devTools.enable {
-    home.packages = with pkgs;
+    home.packages =
+      with pkgs;
       [
         # Shell Utilities
         eternal-terminal
@@ -27,7 +34,8 @@ in {
 
         # Better Python REPL
         python3Packages.ptpython
-      ] ++ (
+      ]
+      ++ (
         # GUI Tools
         optionals hasGui [
           d-spy
@@ -41,7 +49,8 @@ in {
 
           # Android
           android-studio
-        ]);
+        ]
+      );
 
     # Go
     programs.go = {
@@ -77,11 +86,11 @@ in {
     programs.jq.enable = true;
     programs.opam.enable = true;
     programs.vscode.enable = hasGui;
-    programs.vscode.profiles.default.extensions =
-      [ pkgs.vscode-extensions.golang.go ];
+    programs.vscode.profiles.default.extensions = [ pkgs.vscode-extensions.golang.go ];
 
-    xdg.configFile."pypoetry/config.toml".source =
-      tomlFormat.generate "config.toml" { virtualenvs.in-project = true; };
+    xdg.configFile."pypoetry/config.toml".source = tomlFormat.generate "config.toml" {
+      virtualenvs.in-project = true;
+    };
 
     home.file.".ideavimrc".text = ''
       set clipboard+=unnamed

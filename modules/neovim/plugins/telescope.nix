@@ -1,7 +1,13 @@
 { pkgs, ... }:
-with pkgs; {
+with pkgs;
+{
   programs.neovim = {
-    extraPackages = [ delta fd fzy ripgrep ];
+    extraPackages = [
+      delta
+      fd
+      fzy
+      ripgrep
+    ];
     plugins = [
       {
         type = "lua";

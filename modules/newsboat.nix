@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   # See other configs:
   # * https://github.com/gpakosz/.newsboat/blob/master/config
   programs.newsboat = {

@@ -1,16 +1,24 @@
 { lib, ... }:
 with lib;
 let
-  mkAuGroup = { name, commands, filetype }: ''
-    augroup ${name}
-      autocmd!
-      ${
-        concatMapStringsSep "\n  " mkAutocmd
-        (map (c: { filetype = filetype; } // c) commands)
-      }
-    augroup END
-  '';
-  mkAutocmd = { filetype, shortcut, action }:
+  mkAuGroup =
+    {
+      name,
+      commands,
+      filetype,
+    }:
+    ''
+      augroup ${name}
+        autocmd!
+        ${concatMapStringsSep "\n  " mkAutocmd (map (c: { filetype = filetype; } // c) commands)}
+      augroup END
+    '';
+  mkAutocmd =
+    {
+      filetype,
+      shortcut,
+      action,
+    }:
     "autocmd FileType ${filetype} inoremap ;${shortcut} ${action}";
 
   groups = [
@@ -36,18 +44,15 @@ let
         }
         {
           shortcut = "ta";
-          action =
-            "\\begin{tabular}<Enter>(<>)<Enter>\\end{tabular}<Esc>2kA{}<Esc>i";
+          action = "\\begin{tabular}<Enter>(<>)<Enter>\\end{tabular}<Esc>2kA{}<Esc>i";
         }
         {
           shortcut = "ol";
-          action =
-            "\\begin{enumerate}<Enter><Enter>\\end{enumerate}<Esc>kA\\item<Space>";
+          action = "\\begin{enumerate}<Enter><Enter>\\end{enumerate}<Esc>kA\\item<Space>";
         }
         {
           shortcut = "ul";
-          action =
-            "\\begin{itemize}<Enter><Enter>\\end{itemize}<Esc>kA\\item<Space>";
+          action = "\\begin{itemize}<Enter><Enter>\\end{itemize}<Esc>kA\\item<Space>";
         }
         {
           shortcut = "li";
@@ -67,13 +72,11 @@ let
         }
         {
           shortcut = "be";
-          action =
-            "\\begin{DELRN}(<>)<Enter>(<>)<Enter>\\end{DELRN}<Esc>2k0fR:call vm#commands#find_under(0,0)<Enter>:call vm#commands#find_next(0,0)<Enter>c";
+          action = "\\begin{DELRN}(<>)<Enter>(<>)<Enter>\\end{DELRN}<Esc>2k0fR:call vm#commands#find_under(0,0)<Enter>:call vm#commands#find_next(0,0)<Enter>c";
         }
         {
           shortcut = "min";
-          action =
-            "\\begin{minted}{(<>)}<Enter>(<>)<Enter>\\end{minted}<Esc>2kA{}<Esc>i";
+          action = "\\begin{minted}{(<>)}<Enter>(<>)<Enter>\\end{minted}<Esc>2kA{}<Esc>i";
         }
         {
           shortcut = "int";
@@ -244,29 +247,36 @@ let
     {
       name = "Rust";
       filetype = "rust";
-      commands = [{
-        shortcut = "pr";
-        action = ''println!("{}", );<Esc>hi'';
-      }];
+      commands = [
+        {
+          shortcut = "pr";
+          action = ''println!("{}", );<Esc>hi'';
+        }
+      ];
     }
     {
       name = "CPP";
       filetype = "cpp";
-      commands = [{
-        shortcut = "pr";
-        action = "cout <<  << endl;<Esc>2bhi";
-      }];
+      commands = [
+        {
+          shortcut = "pr";
+          action = "cout <<  << endl;<Esc>2bhi";
+        }
+      ];
     }
     {
       name = "C_CUDA";
       filetype = "c,cuda";
-      commands = [{
-        shortcut = "pr";
-        action = "printf();<Esc>hi";
-      }];
+      commands = [
+        {
+          shortcut = "pr";
+          action = "printf();<Esc>hi";
+        }
+      ];
     }
   ];
-in {
+in
+{
   programs.neovim.extraConfig = ''
     inoremap ;g (<>)
 

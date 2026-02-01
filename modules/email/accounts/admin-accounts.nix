@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
 let
   commentsConfig = {
@@ -32,15 +37,18 @@ let
   };
 
   helper = import ./account-config-helper.nix { inherit config pkgs lib; };
-in {
+in
+{
   accounts.email.accounts = {
     Comments = mkMerge [
       (helper.commonConfig commentsConfig)
       { flavor = "migadu.com"; }
     ];
 
-    Junk =
-      mkMerge [ (helper.commonConfig junkConfig) { flavor = "migadu.com"; } ];
+    Junk = mkMerge [
+      (helper.commonConfig junkConfig)
+      { flavor = "migadu.com"; }
+    ];
 
     BMT-Admin = mkMerge [
       (helper.commonConfig bookMyTimeAdmin)

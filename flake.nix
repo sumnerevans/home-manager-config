@@ -26,10 +26,19 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, flake-utils, menucalc, mdf, ... }@inputs:
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      flake-utils,
+      menucalc,
+      mdf,
+      ...
+    }@inputs:
     let
       system = "x86_64-linux";
-      mkConfig = hostModule:
+      mkConfig =
+        hostModule:
         home-manager.lib.homeManagerConfiguration {
           extraSpecialArgs = { inherit inputs; };
           pkgs = import nixpkgs {
@@ -44,18 +53,26 @@
             ];
           };
 
-          modules = [ ./home.nix hostModule ];
+          modules = [
+            ./home.nix
+            hostModule
+          ];
         };
-    in {
-      homeConfigurations."tatooine" =
-        mkConfig ./host-configurations/tatooine.nix;
+    in
+    {
+      homeConfigurations."tatooine" = mkConfig ./host-configurations/tatooine.nix;
       homeConfigurations."coruscant" = mkConfig ./host-configurations/coruscant;
       homeConfigurations."scarif" = mkConfig ./host-configurations/scarif.nix;
-      homeConfigurations."mustafar" =
-        mkConfig ./host-configurations/mustafar.nix;
-    } // (flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = import nixpkgs { system = system; };
-      in {
+      homeConfigurations."mustafar" = mkConfig ./host-configurations/mustafar.nix;
+    }
+    // (flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { system = system; };
+      in
+      {
+        formatter = pkgs.nixfmt-tree;
+
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             black
@@ -64,5 +81,6 @@
             pre-commit
           ];
         };
-      }));
+      }
+    ));
 }

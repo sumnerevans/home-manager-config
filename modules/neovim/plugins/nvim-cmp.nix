@@ -5,7 +5,8 @@ let
     type = "lua";
     plugin = pkg;
   };
-in {
+in
+{
   programs.neovim = {
     plugins = with pkgs.vimPlugins; [
       (luaPlugin cmp-async-path)

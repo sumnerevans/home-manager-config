@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with pkgs;
-let hasGui = config.wayland.enable || config.xorg.enable;
-in {
+let
+  hasGui = config.wayland.enable || config.xorg.enable;
+in
+{
   home.packages = [
     # Shell Utilities
     aspell
@@ -42,8 +49,8 @@ in {
     zip
 
     # Python
-    (python3.withPackages (ps:
-      with ps; [
+    (python3.withPackages (
+      ps: with ps; [
         python-dateutil
         fuzzywuzzy
         html2text
@@ -58,8 +65,10 @@ in {
         tabulate
         vobject
         watchdog
-      ]))
-  ] ++ lib.optionals hasGui [
+      ]
+    ))
+  ]
+  ++ lib.optionals hasGui [
     # Configuration GUIs
     gnome-power-manager
     networkmanagerapplet
@@ -74,7 +83,10 @@ in {
     virt-manager
 
     (thunar.override {
-      thunarPlugins = [ thunar-archive-plugin thunar-volman ];
+      thunarPlugins = [
+        thunar-archive-plugin
+        thunar-volman
+      ];
     })
   ];
 

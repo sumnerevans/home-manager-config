@@ -12,14 +12,17 @@ let
     };
     meta.homepage = "https://github.com/aperezdc/vim-template";
   };
-in {
-  programs.neovim.plugins = [{
-    plugin = vim-template;
-    config = ''
-      let g:templates_no_builtin_templates = 1
-      let g:templates_directory = [
-          \'${config.xdg.configHome}/nvim/templates',
-          \]
-    '';
-  }];
+in
+{
+  programs.neovim.plugins = [
+    {
+      plugin = vim-template;
+      config = ''
+        let g:templates_no_builtin_templates = 1
+        let g:templates_directory = [
+            \'${config.xdg.configHome}/nvim/templates',
+            \]
+      '';
+    }
+  ];
 }

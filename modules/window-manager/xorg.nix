@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.xorg;
@@ -9,7 +14,8 @@ let
   tmpdir = "${config.home.homeDirectory}/tmp";
   mvTmp = "${pkgs.coreutils}/bin/mv $f ${tmpdir}";
   scrotCmd = "${pkgs.scrot}/bin/scrot '%Y-%m-%d-%T.png'";
-in {
+in
+{
   options.xorg = {
     enable = mkEnableOption "the Xorg stack";
     extrai3wmConfig = mkOption {
@@ -32,10 +38,12 @@ in {
       windowManager.i3 = mkMerge [
         common.i3SwayConfig
         {
-          config.startup = [{
-            command = "${pkgs.autorandr}/bin/autorandr --change";
-            always = true;
-          }];
+          config.startup = [
+            {
+              command = "${pkgs.autorandr}/bin/autorandr --change";
+              always = true;
+            }
+          ];
 
           config.keybindings = {
             # Popup Clipboard Manager
@@ -45,15 +53,13 @@ in {
             "${modifier}+Shift+x" = "exec ${fuzzy-lock}/bin/fuzzy-lock";
 
             # exit i3wm (logs you out of your session)
-            "${modifier}+Shift+e" = ''
-              exec "${pkgs.i3-gaps}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"'';
+            "${modifier}+Shift+e" =
+              ''exec "${pkgs.i3-gaps}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"'';
 
             # Screenshots
             "${modifier}+shift+ctrl+c" = ''exec "${scrotCmd} -e '${mvTmp}'"'';
-            "${modifier}+shift+c" =
-              ''exec "${pkgs.flameshot}/bin/flameshot gui -p ${tmpdir}"'';
-            "${modifier}+shift+f" =
-              ''exec "${pkgs.flameshot}/bin/flameshot gui -p ${tmpdir}"'';
+            "${modifier}+shift+c" = ''exec "${pkgs.flameshot}/bin/flameshot gui -p ${tmpdir}"'';
+            "${modifier}+shift+f" = ''exec "${pkgs.flameshot}/bin/flameshot gui -p ${tmpdir}"'';
             Print = ''exec "${scrotCmd} -e '${mvTmp}'"'';
           };
         }
@@ -122,7 +128,8 @@ in {
           format = "<b>%s</b>\\n%b\\n%p";
           line_height = 3;
         };
-      } // common.notificationColorConfig;
+      }
+      // common.notificationColorConfig;
     };
 
     services.picom = {
@@ -150,25 +157,28 @@ in {
       ];
     };
 
-    systemd.user.services = let
-      xmodmapConfig = pkgs.writeText "Xmodmap.conf" ''
-        ! Reverse scrolling
-        ! pointer = 1 2 3 5 4 6 7 8 9 10 11 12
-        keycode 9 = Caps_Lock Caps_Lock Caps_Lock
-      '';
-      startupServices = {
-        xbanish = "${pkgs.xbanish}/bin/xbanish";
-      } // (optionalAttrs cfg.remapEscToCaps {
-        xmodmap = "${pkgs.xorg.xmodmap}/bin/xmodmap ${xmodmapConfig}";
-      });
-    in mapAttrs (name: value: {
-      Unit = {
-        Description = "Run ${name} on startup.";
-        PartOf = [ "graphical-session.target" ];
-      };
-      Service.ExecStart = value;
-      Service.Restart = "always";
-      Install.WantedBy = [ "graphical-session.target" ];
-    }) startupServices;
+    systemd.user.services =
+      let
+        xmodmapConfig = pkgs.writeText "Xmodmap.conf" ''
+          ! Reverse scrolling
+          ! pointer = 1 2 3 5 4 6 7 8 9 10 11 12
+          keycode 9 = Caps_Lock Caps_Lock Caps_Lock
+        '';
+        startupServices = {
+          xbanish = "${pkgs.xbanish}/bin/xbanish";
+        }
+        // (optionalAttrs cfg.remapEscToCaps {
+          xmodmap = "${pkgs.xorg.xmodmap}/bin/xmodmap ${xmodmapConfig}";
+        });
+      in
+      mapAttrs (name: value: {
+        Unit = {
+          Description = "Run ${name} on startup.";
+          PartOf = [ "graphical-session.target" ];
+        };
+        Service.ExecStart = value;
+        Service.Restart = "always";
+        Install.WantedBy = [ "graphical-session.target" ];
+      }) startupServices;
   };
 }

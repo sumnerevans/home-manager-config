@@ -1,22 +1,27 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
-let pdfviewer = "zathura --fork";
-in {
+let
+  pdfviewer = "zathura --fork";
+in
+{
   programs.zsh = {
     shellAliases = {
       ##### Command Shortcuts #####
       # Printing
       alpr = "ssh isengard lpr -P bb136-printer -o coallate=true";
-      alprd =
-        "ssh isengard lpr -P bb136-printer -o coallate=true -o Duplex=DuplexNoTumble";
+      alprd = "ssh isengard lpr -P bb136-printer -o coallate=true -o Duplex=DuplexNoTumble";
       lpr = "lpr -o coallate=true";
       hlpr = "lpr -P HP_ENVY_4500_series";
       hlprd = "hlpr -o Duplex=DuplexNoTumble";
 
       # Config
       projectlist = "vim ~st/projectlist && projectsync";
-      quotesfile =
-        "vim ${config.xdg.configHome}/home-manager/modules/email/quotes";
+      quotesfile = "vim ${config.xdg.configHome}/home-manager/modules/email/quotes";
       reload = ". ~/.zshrc && echo 'ZSH Config Reloaded from ~/.zshrc'";
       sshconf = "vim ~/.ssh/config";
       vimrc = "realvim ~/.vim/vimrc";
@@ -28,8 +33,7 @@ in {
       grep = "grep --color -n";
       hostdir = "python -m http.server";
       iftop = "sudo iftop -i any";
-      journal =
-        "vim ${config.home.homeDirectory}/Documents/journal/$(date +%Y-%m-%d).rst";
+      journal = "vim ${config.home.homeDirectory}/Documents/journal/$(date +%Y-%m-%d).rst";
       la = "ls -a";
       ll = "ls -lah";
       ls = mkIf config.isLinux "ls --color -F";
@@ -40,8 +44,7 @@ in {
       pdflatex = "pdflatex -shell-escape";
       sbcl = "rlwrap sbcl";
       screen = "screen -DR";
-      soviet =
-        "${pkgs.pamixer}/bin/pamixer --set-volume 50 && mpv --quiet -vo caca 'https://www.youtube.com/watch?v=U06jlgpMtQs'";
+      soviet = "${pkgs.pamixer}/bin/pamixer --set-volume 50 && mpv --quiet -vo caca 'https://www.youtube.com/watch?v=U06jlgpMtQs'";
       tar = "${pkgs.libarchive}/bin/bsdtar";
       wdir = "watch --color -n .5 'ls -lha --color=always'";
       xelatex = "xelatex -shell-escape";

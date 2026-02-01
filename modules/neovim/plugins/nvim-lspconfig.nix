@@ -1,15 +1,17 @@
 { pkgs, ... }:
 let
-  pylspPython = pkgs.python3.withPackages (ps:
-    with ps; [
+  pylspPython = pkgs.python3.withPackages (
+    ps: with ps; [
       black
       isort
       mypy
       pyls-isort
       python-lsp-black
       python-lsp-server
-    ]);
-in {
+    ]
+  );
+in
+{
   # Make a default vale config file so the LSP doesn't explode
   xdg.configFile."vale/.vale.ini".text = "";
 

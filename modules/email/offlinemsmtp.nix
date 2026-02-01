@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   offlinemsmtp = pkgs.callPackage ../../pkgs/offlinemsmtp.nix { };
@@ -10,15 +15,14 @@ let
     "--file ${config.xdg.configHome}/msmtp/config"
   ]
   # If headless, don't do notifications.
-    ++ (optional cfg.headless "--silent")
-    # Add sendmail file if it exists
-    ++ (optional (cfg.sendmailFile != null)
-      "--send-mail-file ${cfg.sendmailFile}");
-in {
+  ++ (optional cfg.headless "--silent")
+  # Add sendmail file if it exists
+  ++ (optional (cfg.sendmailFile != null) "--send-mail-file ${cfg.sendmailFile}");
+in
+{
   options = {
     offlinemsmtp = {
-      headless = mkEnableOption
-        "headless version of offlinemsmtp that doesn't do any notifications";
+      headless = mkEnableOption "headless version of offlinemsmtp that doesn't do any notifications";
       enableSendmailFile = mkEnableOption "a sendmail file";
 
       sendmailFile = mkOption {
@@ -33,10 +37,7 @@ in {
     systemd.user.services.offlinemsmtp = {
       Unit = {
         Description = "offlinemsmtp daemon";
-        PartOf = if cfg.headless then
-          [ "graphical-session.target" ]
-        else
-          [ "default.target" ];
+        PartOf = if cfg.headless then [ "graphical-session.target" ] else [ "default.target" ];
       };
 
       Service = {
@@ -47,10 +48,7 @@ in {
         RestartSec = 5;
       };
 
-      Install.WantedBy = if cfg.headless then
-        [ "graphical-session.target" ]
-      else
-        [ "default.target" ];
+      Install.WantedBy = if cfg.headless then [ "graphical-session.target" ] else [ "default.target" ];
     };
   };
 }

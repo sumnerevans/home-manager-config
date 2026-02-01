@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with pkgs;
 with lib;
 let
@@ -6,36 +11,34 @@ let
   mailboxfile = "${config.xdg.configHome}/neomutt/mailboxes";
 
   syncthingdir = "${config.home.homeDirectory}/Syncthing";
-in {
+in
+{
   options.mdf.port = mkOption {
     type = types.int;
     description = "The port for the mdf daemon to use";
   };
 
   config = {
-    home.file."bin/mutt_helper" =
-      lib.mkIf (config.wayland.enable || config.xorg.enable) {
-        text = ''
-          #!/usr/bin/env sh
-          set -xe
-          if [[ $# == 0 ]]; then
-            ${pkgs.kitty}/bin/kitty -T Mutt \
-              zsh -c "export FOR_MUTT_HELPER=1 && source ${config.programs.zsh.dotDir}/.zshrc && neomutt"
-          else
-            ${pkgs.kitty}/bin/kitty -T Mutt \
-              zsh -c "export FOR_MUTT_HELPER=1 && source ${config.programs.zsh.dotDir}/.zshrc && neomutt \"$@\""
-          fi
-        '';
-        executable = true;
-      };
+    home.file."bin/mutt_helper" = lib.mkIf (config.wayland.enable || config.xorg.enable) {
+      text = ''
+        #!/usr/bin/env sh
+        set -xe
+        if [[ $# == 0 ]]; then
+          ${pkgs.kitty}/bin/kitty -T Mutt \
+            zsh -c "export FOR_MUTT_HELPER=1 && source ${config.programs.zsh.dotDir}/.zshrc && neomutt"
+        else
+          ${pkgs.kitty}/bin/kitty -T Mutt \
+            zsh -c "export FOR_MUTT_HELPER=1 && source ${config.programs.zsh.dotDir}/.zshrc && neomutt \"$@\""
+        fi
+      '';
+      executable = true;
+    };
 
     home.symlinks."${aliasfile}" = "${syncthingdir}/.config/neomutt/aliases";
-    home.symlinks."${mailboxfile}" =
-      "${syncthingdir}/.config/neomutt/mailboxes";
+    home.symlinks."${mailboxfile}" = "${syncthingdir}/.config/neomutt/mailboxes";
 
     systemd.user.services.mdf = {
-      Unit.Description =
-        "Run the mut display filter daemon for serving redirect pages.";
+      Unit.Description = "Run the mut display filter daemon for serving redirect pages.";
 
       Service = {
         ExecStart = ''
@@ -63,22 +66,34 @@ in {
         {
           action = "group-reply";
           key = "R";
-          map = [ "index" "pager" ];
+          map = [
+            "index"
+            "pager"
+          ];
         }
         {
           action = "sidebar-prev";
           key = "\\Cp";
-          map = [ "index" "pager" ];
+          map = [
+            "index"
+            "pager"
+          ];
         }
         {
           action = "sidebar-next";
           key = "\\Cn";
-          map = [ "index" "pager" ];
+          map = [
+            "index"
+            "pager"
+          ];
         }
         {
           action = "sidebar-open";
           key = "\\Co";
-          map = [ "index" "pager" ];
+          map = [
+            "index"
+            "pager"
+          ];
         }
       ];
       macros = [
@@ -98,14 +113,12 @@ in {
           map = [ "index" ];
         }
         {
-          action =
-            "<change-folder>${config.accounts.email.accounts.Personal.maildir.absPath}/INBOX<enter>";
+          action = "<change-folder>${config.accounts.email.accounts.Personal.maildir.absPath}/INBOX<enter>";
           key = "P";
           map = [ "index" ];
         }
         {
-          action =
-            "<change-folder>${config.accounts.email.accounts.Gmail.maildir.absPath}/INBOX<enter>";
+          action = "<change-folder>${config.accounts.email.accounts.Gmail.maildir.absPath}/INBOX<enter>";
           key = "A";
           map = [ "index" ];
         }
@@ -144,9 +157,7 @@ in {
         source ${mailboxfile}
 
         set allow_ansi
-        set display_filter="${pkgs.mdf}/bin/mdf --root-uri 'http://localhost:${
-          toString config.mdf.port
-        }/'"
+        set display_filter="${pkgs.mdf}/bin/mdf --root-uri 'http://localhost:${toString config.mdf.port}/'"
 
         # Use return to open message because I'm not a savage
         unbind index <return>

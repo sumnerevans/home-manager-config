@@ -1,8 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   mailnotify = pkgs.callPackage ../../pkgs/mailnotify.nix { };
   hasGui = config.wayland.enable || config.xorg.enable;
-in {
+in
+{
   systemd.user.services.mailnotify = lib.mkIf hasGui {
     Unit = {
       Description = "mailnotify daemon";
@@ -17,6 +23,8 @@ in {
       RestartSec = 5;
     };
 
-    Install = { WantedBy = [ "graphical-session.target" ]; };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
   };
 }

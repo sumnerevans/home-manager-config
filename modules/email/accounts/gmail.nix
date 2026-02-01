@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
 let
   accountConfig = {
@@ -17,7 +22,8 @@ let
   };
 
   helper = import ./account-config-helper.nix { inherit config pkgs lib; };
-in {
+in
+{
   accounts.email.accounts = {
     Gmail = mkMerge [
       (helper.commonConfig accountConfig)

@@ -11,9 +11,20 @@
 # - wmctrl
 # - probably others
 
-{ config, pkgs, lib, ... }:
-with lib; {
-  imports = [ ./clipboard.nix ./plugins ./shortcuts.nix ./theme.nix ];
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+with lib;
+{
+  imports = [
+    ./clipboard.nix
+    ./plugins
+    ./shortcuts.nix
+    ./theme.nix
+  ];
 
   programs.neovim = {
     enable = true;
@@ -22,9 +33,18 @@ with lib; {
       ./filetype-specific-configs.vim
     ];
 
-    extraPackages = with pkgs; [ bat ripgrep texlab ];
+    extraPackages = with pkgs; [
+      bat
+      ripgrep
+      texlab
+    ];
 
-    extraPython3Packages = (ps: with ps; [ pynvim setuptools ]);
+    extraPython3Packages = (
+      ps: with ps; [
+        pynvim
+        setuptools
+      ]
+    );
 
     viAlias = true;
     vimAlias = true;

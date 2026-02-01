@@ -6,7 +6,8 @@ let
     type = "lua";
     plugin = pkg;
   };
-in {
+in
+{
   programs.neovim = {
     plugins = with pkgs.vimPlugins; [
       (luaPlugin nvim-treesitter-parsers.bash)
@@ -46,17 +47,19 @@ in {
       (luaPlugin vim-matchup)
       {
         type = "lua";
-        plugin = (nvim-treesitter-context.overrideAttrs (old: rec {
-          pname = "nvim-treesitter-context";
-          version = "2024-04-03";
+        plugin = (
+          nvim-treesitter-context.overrideAttrs (old: rec {
+            pname = "nvim-treesitter-context";
+            version = "2024-04-03";
 
-          src = fetchFromGitHub {
-            owner = "nvim-treesitter";
-            repo = pname;
-            rev = "93b29a32d5f4be10e39226c6b796f28d68a8b483";
-            sha256 = "sha256-D4i4ChXK9yWCd/uBIkZaWq5hoYcBRfznHPbIRRaOPYo=";
-          };
-        }));
+            src = fetchFromGitHub {
+              owner = "nvim-treesitter";
+              repo = pname;
+              rev = "93b29a32d5f4be10e39226c6b796f28d68a8b483";
+              sha256 = "sha256-D4i4ChXK9yWCd/uBIkZaWq5hoYcBRfznHPbIRRaOPYo=";
+            };
+          })
+        );
         config = ''
           require'treesitter-context'.setup{mode = 'topline'}
         '';

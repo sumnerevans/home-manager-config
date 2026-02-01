@@ -1,5 +1,7 @@
-let editor = "nvim";
-in {
+let
+  editor = "nvim";
+in
+{
   imports = [
     ./alacritty.nix
     ./browsers.nix
