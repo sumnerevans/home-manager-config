@@ -319,8 +319,8 @@ binds {
     // rather than stacked on top of each other.
     Mod+W { toggle-column-tabbed-display; }
 
-    Print { screenshot-screen; }
-    Ctrl+Print { screenshot; }
+    Print { screenshot; }
+    Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
 
     // Applications such as remote-desktop clients and software KVM switches may
