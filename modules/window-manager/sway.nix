@@ -13,6 +13,9 @@ let
 in
 {
   config = mkIf config.wayland.windowManager.sway.enable {
+    services.blueman-applet.enable = true;
+    services.network-manager-applet.enable = true;
+
     wayland.windowManager.sway = mkMerge [
       common.i3SwayConfig
       {

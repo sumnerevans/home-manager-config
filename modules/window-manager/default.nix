@@ -92,12 +92,10 @@ in
       ];
 
       # Enable GUI services
-      services.blueman-applet.enable = true;
       services.kdeconnect = {
         enable = true;
         indicator = true;
       };
-      services.network-manager-applet.enable = true;
     })
   ];
 }
