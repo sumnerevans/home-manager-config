@@ -9,8 +9,6 @@ let
   hasGui = config.wayland.enable || config.xorg.enable;
 in
 {
-  imports = [ inputs.zen-browser.homeModules.beta ];
-
   home.packages = with pkgs; [
     elinks
     w3m
@@ -29,6 +27,4 @@ in
     MOZ_USE_XINPUT2 = "1";
     MOZ_DBUS_REMOTE = "1";
   };
-
-  programs.zen-browser.enable = true;
 }
