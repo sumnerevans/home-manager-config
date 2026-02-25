@@ -28,6 +28,7 @@
     ./nvim-cmp.nix
     ./nvim-lspconfig.nix
     ./trouble.nvim.nix
+    ./typst-preview.nix
 
     # Synatx Highlighting
     ./rainbow-delimiters.nix
