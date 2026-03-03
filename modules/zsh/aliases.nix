@@ -5,9 +5,6 @@
   ...
 }:
 with lib;
-let
-  pdfviewer = "zathura --fork";
-in
 {
   programs.zsh = {
     shellAliases = {
@@ -48,7 +45,7 @@ in
       tar = "${pkgs.libarchive}/bin/bsdtar";
       wdir = "watch --color -n .5 'ls -lha --color=always'";
       xelatex = "xelatex -shell-escape";
-      zathura = pdfviewer;
+      zathura = "zathura --fork";
 
       # Use nvim by default if it exists
       realvim = "command vim";
@@ -66,7 +63,7 @@ in
       alias -s mkv=$VIDEOVIEWER
       alias -s ods=$OFFICE
       alias -s odt=$OFFICE
-      alias -s pdf=${pdfviewer}
+      alias -s pdf=zathura
       alias -s ppt=$OFFICE
       alias -s pptx=$OFFICE
       alias -s tex=$EDITOR
