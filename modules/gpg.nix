@@ -17,7 +17,7 @@ in
     enable = true;
     defaultCacheTtl = agentTTL;
     maxCacheTtl = agentTTL;
-    pinentry.package = pkgs.pinentry-curses;
+    pinentry.package = pkgs.pinentry-gnome3;
     verbose = true;
   };
 
