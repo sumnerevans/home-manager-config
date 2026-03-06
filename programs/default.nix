@@ -15,20 +15,18 @@ in
     aspellDicts.en
     bind
     czkawka
+    fastfetch
     fd
     file
     fortune
     iftop
-    kbdlight
     libarchive
     libheif
     libnotify
     libxml2
-    light
     lsof
     mkpasswd
     ncdu
-    neofetch
     nodejs
     nox
     openssl
